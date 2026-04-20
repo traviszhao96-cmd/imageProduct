@@ -1,0 +1,2 @@
+name: server-camera-analytics
+description: Query the shared remote camera analytics SQLite service using the local client script.

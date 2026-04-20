@@ -1,0 +1,47 @@
+.DS_Store
+.env
+.env.*
+*.log
+*.sqlite
+*.db
+*.db-*
+*.pdf
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.svg
+*.zip
+*.tar
+*.gz
+
+# Keep generated outputs out of Git by default, except portable skill assets.
+/outputs/*
+!/outputs/README.md
+!/outputs/skills/
+!/outputs/skills/**
+
+# Product docs are often sensitive and are not required for cross-machine skill sync.
+/docs/*
+!/docs/.gitkeep
+
+# Local analytics and exported reports stay machine-local.
+/outputs/local_analytics/
+/outputs/*dashboard*
+/outputs/*report*
+/outputs/*metric_matrix*
+/outputs/*guide*
+/outputs/*email.html
+/outputs/*payload.json
+/outputs/*scatter*
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Local editor and tooling state
+.idea/
+.vscode/
+
+# Never store machine-local OpenClaw secrets in this repo.
+openclaw.json
