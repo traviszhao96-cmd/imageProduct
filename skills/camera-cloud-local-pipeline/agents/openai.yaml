@@ -1,0 +1,4 @@
+interface:
+  display_name: "Camera Cloud Pipeline"
+  short_description: "Fetch camera exports and prepare local analytics DB."
+  default_prompt: "Use $camera-cloud-local-pipeline to fetch camera exports from cloud storage and prepare a local analytics database."

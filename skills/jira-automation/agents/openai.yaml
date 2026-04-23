@@ -1,0 +1,2 @@
+name: jira-automation
+description: Manage Jira issues from the local workspace using a token-backed Jira REST CLI.

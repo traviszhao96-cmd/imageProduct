@@ -1,0 +1,4 @@
+interface:
+  display_name: "AWS Camera SQL"
+  short_description: "Write Athena SQL for camera telemetry."
+  default_prompt: "Use $aws-athena-camera-sql to write Athena SQL for camera telemetry questions."

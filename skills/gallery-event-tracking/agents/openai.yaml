@@ -1,0 +1,7 @@
+interface:
+  display_name: "Gallery Event Tracking"
+  short_description: "Gallery埋点设计 aligned with current workbook"
+  default_prompt: "Use $gallery-event-tracking to draft Gallery event tracking that follows the current NTGallery workbook style."
+
+policy:
+  allow_implicit_invocation: true

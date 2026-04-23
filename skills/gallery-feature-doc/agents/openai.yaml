@@ -1,0 +1,7 @@
+interface:
+  display_name: "Gallery Feature Doc"
+  short_description: "Chinese PRDs for Gallery software features"
+  default_prompt: "Use $gallery-feature-doc to draft or review a Chinese PRD for a Gallery software feature like Text or Draw."
+
+policy:
+  allow_implicit_invocation: true

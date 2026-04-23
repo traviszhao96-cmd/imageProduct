@@ -1,0 +1,7 @@
+interface:
+  display_name: "Google Play What's New"
+  short_description: "English Play Store update copy from docs"
+  default_prompt: "Use $google-play-whats-new to draft concise English Google Play What's New copy from my product document."
+
+policy:
+  allow_implicit_invocation: true
