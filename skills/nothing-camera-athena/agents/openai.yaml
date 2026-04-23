@@ -1,0 +1,4 @@
+interface:
+  display_name: "Nothing Camera SQL"
+  short_description: "Query camera telemetry and generate Athena reports"
+  default_prompt: "Use $nothing-camera-athena to either answer a natural-language camera analytics question with Athena SQL or generate a concise report from an Athena query."
