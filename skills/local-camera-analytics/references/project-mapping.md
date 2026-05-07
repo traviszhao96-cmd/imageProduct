@@ -79,7 +79,7 @@ When the user asks by whole-device project:
 Example answer pattern:
 
 - 用户提到 `Nothing Phone (4a)`，本地库中对应 `model_name = 'Frogger'`
-- 本次查询基于 `/Users/travis.zhao/imageProduct/outputs/local_analytics/india_4_1_4_7.db`
+- 本次查询基于 `/Users/travis.zhao/imageProduct/outputs/local_analytics/db/NTCamera0415-0421.db`
 
 ## Special Note
 

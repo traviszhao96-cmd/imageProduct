@@ -5,9 +5,11 @@
 - Local raw export directory:
   - `/Users/travis.zhao/imageProduct/docs/00_inbox/shared/raw_data/`
 - Local SQLite DB directory:
-  - `/Users/travis.zhao/imageProduct/outputs/local_analytics/`
+  - `/Users/travis.zhao/imageProduct/outputs/local_analytics/db/`
+- Latest local parsed DB:
+  - `/Users/travis.zhao/imageProduct/outputs/local_analytics/db/NTCamera0415-0421.db`
 - Local parsed India DB:
-  - `/Users/travis.zhao/imageProduct/outputs/local_analytics/india_4_1_4_7.db`
+  - `/Users/travis.zhao/imageProduct/outputs/local_analytics/db/india_4_1_4_7.db`
 - Import/query helper:
   - `/Users/travis.zhao/imageProduct/scripts/local_sql_analytics.py`
 - DB catalog helper:
@@ -30,7 +32,9 @@ This is especially important when the request mentions:
 
 Default preference:
 
-1. local parsed DB on `/Users/travis.zhao/imageProduct/outputs/local_analytics/`
+1. local parsed DB on `/Users/travis.zhao/imageProduct/outputs/local_analytics/db/`
+2. ignore any `0B` DB file
+3. never use `.db` files placed beside the skill files themselves
 
 ## Import Command
 

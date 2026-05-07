@@ -51,8 +51,15 @@ python3 /Users/travis.zhao/imageProduct/scripts/list_local_camera_dbs.py
 - Raw downloaded exports usually live in:
   - `/Users/travis.zhao/imageProduct/docs/00_inbox/shared/raw_data/`
 - Local DBs commonly include:
-  - `/Users/travis.zhao/imageProduct/outputs/local_analytics/india_4_1_4_7.db`
+  - `/Users/travis.zhao/imageProduct/outputs/local_analytics/db/NTCamera0415-0421.db`
   - `/Users/travis.zhao/imageProduct/outputs/local_analytics/db/analytics.db`
+  - `/Users/travis.zhao/imageProduct/outputs/local_analytics/db/india_4_1_4_7.db`
+
+Hard rules:
+
+- never use any `.db` file stored inside the skill directory itself as a query source
+- only use DBs discovered by `/Users/travis.zhao/imageProduct/scripts/list_local_camera_dbs.py`
+- if a `.db` file is `0B`, treat it as invalid and ignore it
 
 Routing rule:
 
@@ -80,7 +87,7 @@ Use:
 
 ```bash
 python3 /Users/travis.zhao/imageProduct/scripts/local_sql_analytics.py query \
-  --db /Users/travis.zhao/imageProduct/outputs/local_analytics/db/analytics.db \
+  --db /Users/travis.zhao/imageProduct/outputs/local_analytics/db/NTCamera0415-0421.db \
   --sql "SELECT photo_mode, COUNT(*) FROM photo_events_raw GROUP BY 1;"
 ```
 
@@ -88,7 +95,7 @@ For country / project / date specific questions, prefer a parsed DB when availab
 
 ```bash
 python3 /Users/travis.zhao/imageProduct/scripts/local_sql_analytics.py query \
-  --db /Users/travis.zhao/imageProduct/outputs/local_analytics/india_4_1_4_7.db \
+  --db /Users/travis.zhao/imageProduct/outputs/local_analytics/db/NTCamera0415-0421.db \
   --sql "SELECT event_date, model_name, country, COUNT(*) FROM photo_events_parsed GROUP BY 1,2,3 LIMIT 20;"
 ```
 

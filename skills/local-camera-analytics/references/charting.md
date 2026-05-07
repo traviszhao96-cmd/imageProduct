@@ -6,7 +6,7 @@ Use:
 
 ```bash
 python3 /Users/travis.zhao/imageProduct/scripts/plot_lux_cct_adrc_scatter.py \
-  --db /Users/travis.zhao/imageProduct/outputs/local_analytics/db/analytics.db \
+  --db /Users/travis.zhao/imageProduct/outputs/local_analytics/db/NTCamera0415-0421.db \
   --output /Users/travis.zhao/imageProduct/outputs/lux_cct_adrc_scatter.svg
 ```
 

@@ -17,6 +17,8 @@ OPENCLAW_CONFIG = Path.home() / ".openclaw" / "openclaw.json"
 OPENCLAW_SKILL_PACK = Path.home() / ".openclaw" / "skills-image-product"
 
 SHARED_SKILL_ROOT = Path.home() / ".codex" / "skills"
+PROJECT_SKILL_ROOT = PROJECT_ROOT / "skills"
+PROJECT_OUTPUT_SKILL_ROOT = PROJECT_ROOT / "outputs" / "skills"
 SHARED_SKILLS = [
     "camera-cloud-local-pipeline",
     "doc",
@@ -46,12 +48,27 @@ def copy_skill(src: Path, dst_root: Path) -> str:
     return src.name
 
 
+def resolve_skill_source(skill_name: str) -> Path | None:
+    for root in (SHARED_SKILL_ROOT, PROJECT_SKILL_ROOT, PROJECT_OUTPUT_SKILL_ROOT):
+        path = root / skill_name
+        if path.exists():
+            return path
+    return None
+
+
 def sync_skill_pack() -> list[str]:
     OPENCLAW_SKILL_PACK.mkdir(parents=True, exist_ok=True)
     synced: list[str] = []
     for skill_name in SHARED_SKILLS:
-        synced.append(copy_skill(SHARED_SKILL_ROOT / skill_name, OPENCLAW_SKILL_PACK))
+        src = resolve_skill_source(skill_name)
+        if src is None:
+            print(f"skip missing skill: {skill_name}")
+            continue
+        synced.append(copy_skill(src, OPENCLAW_SKILL_PACK))
     for src in PROJECT_SKILL_ROOTS:
+        if not src.exists():
+            print(f"skip missing skill: {src.name}")
+            continue
         synced.append(copy_skill(src, OPENCLAW_SKILL_PACK))
     manifest = {
         "root": str(OPENCLAW_SKILL_PACK),

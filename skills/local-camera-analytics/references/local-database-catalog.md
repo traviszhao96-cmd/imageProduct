@@ -21,7 +21,30 @@ This tells you:
 
 ## Current Important Databases
 
-### `/Users/travis.zhao/imageProduct/outputs/local_analytics/india_4_1_4_7.db`
+### `/Users/travis.zhao/imageProduct/outputs/local_analytics/db/NTCamera0415-0421.db`
+
+- Preferred local analytics source for the latest weekly camera data
+- Current local tables:
+  - `photo_events_parsed`
+  - `video_events_parsed`
+  - `camera_events_raw`
+- Date range:
+  - `2026-04-15` to `2026-04-21`
+- Main projects/models:
+  - `Frogger`
+  - `FroggerPro`
+- Main country:
+  - India-dominant with small ROW samples
+
+Use this DB first when the request mentions:
+
+- latest local analytics
+- local video analysis
+- `2026-04-15` to `2026-04-21`
+- `4a / 4a Pro`
+- 横竖屏视频、视频规格、视频时长、HLG、视频模式
+
+### `/Users/travis.zhao/imageProduct/outputs/local_analytics/db/india_4_1_4_7.db`
 
 - Preferred local analytics source
 - Current local tables:
@@ -61,7 +84,7 @@ Do not treat this as the default answer source for date-specific business questi
 
 When the user says “查一下数据”, default order is:
 
-1. local parsed DB with `photo_events_parsed` / `video_events_parsed`
+1. latest local parsed DB with `photo_events_parsed` / `video_events_parsed`
 2. local raw DB if parsed DB is unavailable
 3. shared server DB
 4. Athena / Presto
@@ -95,6 +118,12 @@ If the local DB does not cover the requested date:
 - recommend the next best source
 
 Do not silently substitute another week or month.
+
+### Rule 5: Ignore invalid DB artifacts
+
+- If a `.db` file is `0B`, ignore it.
+- Never use `.db` files stored inside the skill directory itself.
+- Only trust DBs surfaced by `list_local_camera_dbs.py` from the configured local roots.
 
 ## Query Tips
 

@@ -10,12 +10,14 @@ from pathlib import Path
 
 
 DEFAULT_ROOTS = [
+    Path(__file__).resolve().parents[1] / "outputs" / "local_analytics" / "db",
     Path(__file__).resolve().parents[1] / "outputs" / "local_analytics",
     Path("/Users/travis.zhao/nt_cam_pulse/data"),
 ]
 
 SUMMARY_TABLES = [
     "photo_events_parsed",
+    "video_events_parsed",
     "photo_events_raw",
     "camera_events_raw",
 ]
@@ -42,6 +44,11 @@ def get_db_files(extra_roots: list[str]) -> list[Path]:
         if not root.exists():
             continue
         for path in sorted(root.rglob("*.db")):
+            try:
+                if path.stat().st_size == 0:
+                    continue
+            except OSError:
+                continue
             if path in seen:
                 continue
             seen.add(path)
@@ -91,6 +98,32 @@ def summarize_db(path: Path) -> dict:
             if row:
                 table_summary["row_count"] = row[0]
             if table == "photo_events_parsed":
+                date_row = fetchone(
+                    cur,
+                    f"select min(event_date), max(event_date) from {table}",
+                )
+                if date_row:
+                    table_summary["date_range"] = {
+                        "min": date_row[0],
+                        "max": date_row[1],
+                    }
+                table_summary["models"] = [
+                    {"value": value, "count": count}
+                    for value, count in fetchall(
+                        cur,
+                        f"select model_name, count(*) c from {table} "
+                        "group by 1 order by c desc limit 10",
+                    )
+                ]
+                table_summary["countries"] = [
+                    {"value": value, "count": count}
+                    for value, count in fetchall(
+                        cur,
+                        f"select country, count(*) c from {table} "
+                        "group by 1 order by c desc limit 10",
+                    )
+                ]
+            if table == "video_events_parsed":
                 date_row = fetchone(
                     cur,
                     f"select min(event_date), max(event_date) from {table}",
