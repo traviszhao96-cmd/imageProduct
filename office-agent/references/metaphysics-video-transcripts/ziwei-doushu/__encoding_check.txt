@@ -1,0 +1,9 @@
+=== chen-xiaofei/advanced-series: 12 files ===
+  [utf-8] 11.陈小飞紫微斗数第十二课-自化(6)平衡.md: 9718 CJK, 11637 total, preview: '11.陈小飞高级紫微斗数第十二课   自化（6）平衡\r\n\r\n**视频链接**: https://www.bilibili.com/video/BV1V54HzqEeU?\r\n\r\n**提示词**: f'
+  [utf-8] 12.陈小飞紫微斗数高阶第十三课-自化(7)平衡.md: 10423 CJK, 12523 total, preview: '12.陈小飞紫微斗数高阶第十三课   自化（7）平衡\r\n\r\n**视频链接**: https://www.bilibili.com/video/BV1GJ4HzPEWn?\r\n\r\n**提示词**: f'
+=== chen-xiaofei/beipai-qintian-75: 55 files ===
+  [utf-8] p01-01-钦天门紫微斗数开营直播.md: 6428 CJK, 7719 total, preview: '【转载】北派钦天门四化紫薇斗数初级＋进阶＋高阶共75集视频课程（推荐 原价8888） p01 01、钦天门紫微斗数开营直播\r\n\r\n**视频链接**: https://www.bilibili.co'
+  [utf-8] p02-02-第一课-进入帝王之学紫微斗数学习之路.md: 14040 CJK, 16539 total, preview: '【转载】北派钦天门四化紫薇斗数初级＋进阶＋高阶共75集视频课程（推荐 原价8888） p02 02、第一课  进入帝王之学紫微斗数学习之路\r\n\r\n**视频链接**: https://www.bil'
+=== xu-quanren/foundation-series: 24 files ===
+  [utf-8] p01-许铨仁-钦天四化紫薇斗数命理学A01.md: 9065 CJK, 10474 total, preview: '许铨仁-钦天四化紫微斗数命理学初中级班全集 p01 许铨仁-钦天四化紫薇斗数命理学A01\r\n\r\n**视频链接**: https://www.bilibili.com/video/BV1zTXyYh'
+  [utf-8] p02-许铨仁-钦天四化紫薇斗数命理学A02.md: 9101 CJK, 10620 total, preview: '许铨仁-钦天四化紫微斗数命理学初中级班全集 p02 许铨仁-钦天四化紫薇斗数命理学A02\r\n\r\n**视频链接**: https://www.bilibili.com/video/BV1zTXyYh'
