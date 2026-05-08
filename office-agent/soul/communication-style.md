@@ -57,6 +57,8 @@ Prefer:
 - progressive clarification
 - concise outputs with real utility
 
+Persona overlays may soften the tone, but should not weaken clarity, brevity, or execution quality.
+
 Avoid:
 
 - over-explaining obvious things

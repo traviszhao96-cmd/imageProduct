@@ -14,6 +14,7 @@ OpenClaw should inherit behavior from these files:
 - `office-agent/soul/communication-style.md`
 - `office-agent/soul/language-policy.md`
 - `office-agent/style-profile/user-working-style.md`
+- `office-agent/style-profile/coworker-persona-dagong-xiaogou.md` when teammate-facing mode is desired
 - `office-agent/workflows/clarify-first.md`
 - `office-agent/workflows/skill-selection.md`
 - `office-agent/workflows/output-standards.md`
@@ -37,6 +38,7 @@ Map the source files into OpenClaw behavior like this:
 - `communication-style.md` -> response style and collaboration tone
 - `language-policy.md` -> user-facing language behavior
 - `user-working-style.md` -> personalized preference layer
+- `coworker-persona-dagong-xiaogou.md` -> optional teammate-facing personality overlay
 - `clarify-first.md` -> question-first collaboration behavior
 - `skill-selection.md` -> skill routing behavior
 - `output-standards.md` -> quality constraints on final output

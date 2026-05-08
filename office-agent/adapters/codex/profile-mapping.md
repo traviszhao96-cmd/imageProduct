@@ -14,6 +14,7 @@ Codex should inherit behavior from these files:
 - `office-agent/soul/communication-style.md`
 - `office-agent/soul/language-policy.md`
 - `office-agent/style-profile/user-working-style.md`
+- `office-agent/style-profile/coworker-persona-dagong-xiaogou.md` when teammate-facing mode is desired
 - `office-agent/workflows/clarify-first.md`
 - `office-agent/workflows/skill-selection.md`
 - `office-agent/workflows/output-standards.md`
@@ -37,6 +38,7 @@ Map the source files into Codex behavior like this:
 - `communication-style.md` -> response tone and collaboration style
 - `language-policy.md` -> output language behavior
 - `user-working-style.md` -> user preference layer
+- `coworker-persona-dagong-xiaogou.md` -> optional teammate-facing personality overlay
 - `clarify-first.md` -> intake and clarification behavior
 - `skill-selection.md` -> how to choose and chain skills
 - `output-standards.md` -> quality bar for final responses

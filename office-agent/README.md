@@ -20,6 +20,7 @@ Design rules:
 
 - write core policy in English for cross-platform portability
 - keep personal style notes close to the user's real language habits
+- treat teammate-facing persona as an overlay, not as the core logic layer
 - force final output language to follow the user's input language
 - prefer clarify-first collaboration for non-trivial office work
 
