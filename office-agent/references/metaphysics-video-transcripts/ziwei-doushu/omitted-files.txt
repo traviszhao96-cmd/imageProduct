@@ -1,19 +1,19 @@
-[chen-xiaofei-advanced] evaluation | 11.陈小飞高级紫微斗数第十二课   自化（6）平衡 | RAW/260302_11陈小飞高级紫微斗数第十二课   自化6平衡_evaluation.md
-[chen-xiaofei-advanced] raw | 11.陈小飞高级紫微斗数第十二课   自化（6）平衡 | RAW/260302_11陈小飞高级紫微斗数第十二课   自化6平衡_raw.md
-[chen-xiaofei-advanced] evaluation | 12.陈小飞紫微斗数高阶第十三课   自化（7）平衡 | RAW/260302_12陈小飞紫微斗数高阶第十三课   自化7平衡_evaluation.md
-[chen-xiaofei-advanced] raw | 12.陈小飞紫微斗数高阶第十三课   自化（7）平衡 | RAW/260302_12陈小飞紫微斗数高阶第十三课   自化7平衡_raw.md
-[chen-xiaofei-advanced] evaluation | 13.陈小飞紫微斗数高阶直播答疑 | RAW/260302_13陈小飞紫微斗数高阶直播答疑_evaluation.md
-[chen-xiaofei-advanced] raw | 13.陈小飞紫微斗数高阶直播答疑 | RAW/260302_13陈小飞紫微斗数高阶直播答疑_raw.md
-[chen-xiaofei-advanced] evaluation | 14.陈小飞紫微斗数高阶第十四课   大限.流年.流月论断金法诀 | RAW/260302_14陈小飞紫微斗数高阶第十四课   大限流年流月论断金法诀_evaluation.md
-[chen-xiaofei-advanced] raw | 14.陈小飞紫微斗数高阶第十四课   大限.流年.流月论断金法诀 | RAW/260302_14陈小飞紫微斗数高阶第十四课   大限流年流月论断金法诀_raw.md
-[chen-xiaofei-advanced] evaluation | 15.紫微斗数陈小飞高阶第十五课   大限.流年.流月论断金法诀（2）_1_iris3 | RAW/260302_15紫微斗数陈小飞高阶第十五课   大限流年流月论断金法诀2_1_iris3_evaluation.md
-[chen-xiaofei-advanced] raw | 15.紫微斗数陈小飞高阶第十五课   大限.流年.流月论断金法诀（2）_1_iris3 | RAW/260302_15紫微斗数陈小飞高阶第十五课   大限流年流月论断金法诀2_1_iris3_raw.md
-[chen-xiaofei-advanced] evaluation | 16.陈小飞紫微斗数高阶第十六课    专题讨论及流年推运实战 — 意外专题 | RAW/260302_16陈小飞紫微斗数高阶第十六课    专题讨论及流年推运实战  意外专题_evaluation.md
-[chen-xiaofei-advanced] raw | 16.陈小飞紫微斗数高阶第十六课    专题讨论及流年推运实战 — 意外专题 | RAW/260302_16陈小飞紫微斗数高阶第十六课    专题讨论及流年推运实战  意外专题_raw.md
-[chen-xiaofei-advanced] evaluation | 17.陈小飞紫微斗数高阶第十七课 秘传解盘心法：双胞胎排盘 | RAW/260302_17陈小飞紫微斗数高阶第十七课 秘传解盘心法双胞胎排盘_evaluation.md
-[chen-xiaofei-advanced] raw | 17.陈小飞紫微斗数高阶第十七课 秘传解盘心法：双胞胎排盘 | RAW/260302_17陈小飞紫微斗数高阶第十七课 秘传解盘心法双胞胎排盘_raw.md
-[chen-xiaofei-advanced] evaluation | 18.直播答疑5 | RAW/260302_18直播答疑5_evaluation.md
-[chen-xiaofei-advanced] raw | 18.直播答疑5 | RAW/260302_18直播答疑5_raw.md
-[chen-xiaofei-advanced] evaluation | 19-直播答疑6 | RAW/260302_19-直播答疑6_evaluation.md
-[chen-xiaofei-advanced] raw | 19-直播答疑6 | RAW/260302_19-直播答疑6_raw.md
-[misc] summary | 视频总结 | RAW/260227_北派钦天门四化紫薇斗数进阶 第四课--双象_summary..md
+[chen-xiaofei/advanced-series] evaluation | 11.陈小飞高级紫微斗数第十二课   自化（6）平衡 | RAW/260302_11陈小飞高级紫微斗数第十二课   自化6平衡_evaluation.md
+[chen-xiaofei/advanced-series] raw | 11.陈小飞高级紫微斗数第十二课   自化（6）平衡 | RAW/260302_11陈小飞高级紫微斗数第十二课   自化6平衡_raw.md
+[chen-xiaofei/advanced-series] evaluation | 12.陈小飞紫微斗数高阶第十三课   自化（7）平衡 | RAW/260302_12陈小飞紫微斗数高阶第十三课   自化7平衡_evaluation.md
+[chen-xiaofei/advanced-series] raw | 12.陈小飞紫微斗数高阶第十三课   自化（7）平衡 | RAW/260302_12陈小飞紫微斗数高阶第十三课   自化7平衡_raw.md
+[chen-xiaofei/advanced-series] evaluation | 13.陈小飞紫微斗数高阶直播答疑 | RAW/260302_13陈小飞紫微斗数高阶直播答疑_evaluation.md
+[chen-xiaofei/advanced-series] raw | 13.陈小飞紫微斗数高阶直播答疑 | RAW/260302_13陈小飞紫微斗数高阶直播答疑_raw.md
+[chen-xiaofei/advanced-series] evaluation | 14.陈小飞紫微斗数高阶第十四课   大限.流年.流月论断金法诀 | RAW/260302_14陈小飞紫微斗数高阶第十四课   大限流年流月论断金法诀_evaluation.md
+[chen-xiaofei/advanced-series] raw | 14.陈小飞紫微斗数高阶第十四课   大限.流年.流月论断金法诀 | RAW/260302_14陈小飞紫微斗数高阶第十四课   大限流年流月论断金法诀_raw.md
+[chen-xiaofei/advanced-series] evaluation | 15.紫微斗数陈小飞高阶第十五课   大限.流年.流月论断金法诀（2）_1_iris3 | RAW/260302_15紫微斗数陈小飞高阶第十五课   大限流年流月论断金法诀2_1_iris3_evaluation.md
+[chen-xiaofei/advanced-series] raw | 15.紫微斗数陈小飞高阶第十五课   大限.流年.流月论断金法诀（2）_1_iris3 | RAW/260302_15紫微斗数陈小飞高阶第十五课   大限流年流月论断金法诀2_1_iris3_raw.md
+[chen-xiaofei/advanced-series] evaluation | 16.陈小飞紫微斗数高阶第十六课    专题讨论及流年推运实战 — 意外专题 | RAW/260302_16陈小飞紫微斗数高阶第十六课    专题讨论及流年推运实战  意外专题_evaluation.md
+[chen-xiaofei/advanced-series] raw | 16.陈小飞紫微斗数高阶第十六课    专题讨论及流年推运实战 — 意外专题 | RAW/260302_16陈小飞紫微斗数高阶第十六课    专题讨论及流年推运实战  意外专题_raw.md
+[chen-xiaofei/advanced-series] evaluation | 17.陈小飞紫微斗数高阶第十七课 秘传解盘心法：双胞胎排盘 | RAW/260302_17陈小飞紫微斗数高阶第十七课 秘传解盘心法双胞胎排盘_evaluation.md
+[chen-xiaofei/advanced-series] raw | 17.陈小飞紫微斗数高阶第十七课 秘传解盘心法：双胞胎排盘 | RAW/260302_17陈小飞紫微斗数高阶第十七课 秘传解盘心法双胞胎排盘_raw.md
+[chen-xiaofei/advanced-series] evaluation | 18.直播答疑5 | RAW/260302_18直播答疑5_evaluation.md
+[chen-xiaofei/advanced-series] raw | 18.直播答疑5 | RAW/260302_18直播答疑5_raw.md
+[chen-xiaofei/advanced-series] evaluation | 19-直播答疑6 | RAW/260302_19-直播答疑6_evaluation.md
+[chen-xiaofei/advanced-series] raw | 19-直播答疑6 | RAW/260302_19-直播答疑6_raw.md
+[chen-xiaofei/beipai-qintian-75] summary | 视频总结 | RAW/260227_北派钦天门四化紫薇斗数进阶 第四课--双象_summary..md
