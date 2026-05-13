@@ -1,0 +1,4 @@
+interface:
+  display_name: "Local Camera Analytics"
+  short_description: "Analyze local camera exports with SQL and charts."
+  default_prompt: "Use $local-camera-analytics to import local camera exports, analyze them with SQL, and generate charts or reports."
