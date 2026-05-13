@@ -1,13 +1,15 @@
 ---
 name: nothing-camera-athena
-description: Use when the user wants Athena/Presto SQL, telemetry interpretation, or analysis reports for Nothing/CMF camera data, especially when requests mention `data_mobile_behavior`, `event_params`, `photo_info`, `video_info`, `pef_info`, project mapping such as `Frogger`/`PacmanPro`, or the Camera App SW埋点 workbook.
+description: Use when the user wants Athena/Presto SQL, telemetry interpretation, or analysis reports for Nothing/CMF camera data. For Bitable management, event tracking design, or PRD writing, use camera-tracking-manage instead.
 ---
 
 # Nothing Camera Athena
 
 ## Overview
 
-This skill is for Nothing camera telemetry analysis in Athena. It combines three things that Codex would not reliably infer on its own: the Camera App SW埋点 workbook schema, the project-to-model mapping used in reporting, and the SQL/reporting rules the team wants applied consistently.
+This skill handles Athena/Presto SQL generation and telemetry analysis for Nothing/CMF camera data. For Bitable document management, event tracking design, and PRD writing, see the `camera-tracking-manage` skill.
+
+Key inputs: the `data_mobile_behavior` table schema, the Camera App SW埋点 workbook, and the project-to-model mapping.
 
 ## Core Capabilities
 
@@ -27,6 +29,14 @@ Use this mode when the user wants a concise business report from an Athena link,
 - Also load [references/sql-playbook.md](references/sql-playbook.md) and the relevant sheet reference when validating SQL semantics.
 - If the environment provides an Athena fetch helper, use it. Otherwise analyze the SQL and result payload the user already supplied.
 
+### 3. 埋点文档与 PRD 管理
+
+When the user needs to read/sync the Bitable, design new event tracking specs, or write tracking sections into PRDs, **delegate to the `camera-tracking-manage` skill**. This skill only handles Athena SQL and telemetry analysis — do not mix document management into the query workflow.
+
+Key reference files for Athena queries:
+- `camera-event-tracking-bitable-v5.json` / `.md` — field names, allowed key/label values, historical error notes
+- The historical spelling compatibility table and Bitable table IDs are maintained in the `camera-tracking-manage` skill
+
 ## Quick Start
 
 - For SQL/query-writing rules and report output rules, read [references/sql-playbook.md](references/sql-playbook.md).
@@ -36,6 +46,24 @@ Use this mode when the user wants a concise business report from an Athena link,
   - [references/video.md](references/video.md)
   - [references/performance.md](references/performance.md)
   - [references/workbook-overview.md](references/workbook-overview.md)
+- [references/camera-event-tracking-bitable-v5.md](references/camera-event-tracking-bitable-v5.md) — 完整埋点参考（204条，含历史备注）
+- [references/camera-event-tracking-bitable-v5.json](references/camera-event-tracking-bitable-v5.json) — JSON 原始数据
+
+## 历史埋点拼写兼容（查询时注意）
+
+以下拼写问题在 `camera-tracking-manage` skill 中维护。Athena 查询时需兼容，**不要用"正确"拼写过滤**（会漏掉历史数据）：
+
+| 原值 | 影响 | Athena 查询建议 |
+| --- | --- | --- |
+| `pef_info` | key 字段名（9条） | `param.key = 'pef_info'` |
+| `protrait` | photoMode string_value | `WHERE string_value = 'protrait'` |
+| `tuning_shapen` | label 字段 | `WHERE label = 'tuning_shapen'` |
+
+## Bitable 表参考
+
+- 主表: `tbl3eedJjHPyCEf3` (数据表)
+- 完整表结构、视图配置、历史拼写兼容表 → 见 `camera-tracking-manage` skill
+- Bitable 数据快照: [references/camera-event-tracking-bitable-v5.json](references/camera-event-tracking-bitable-v5.json)
 - For model aliasing and `project_name` / `model_code` mapping, read [references/project-mapping.md](references/project-mapping.md).
 
 ## Workflow
