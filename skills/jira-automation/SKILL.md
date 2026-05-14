@@ -131,3 +131,42 @@ python3 outputs/skills/jira-automation/scripts/jira_cli.py transition \
 - Prefer environment variables over inline command arguments for secrets.
 - Echo only necessary issue data back to the user.
 - If the API returns validation errors, surface them clearly instead of guessing hidden field values.
+
+## NOS Project 已知陷阱
+
+### Issue Type 差异
+
+| Type | 额外必填字段 |
+|------|------------|
+| Story | `customfield_10101` (Device), `components`, `assignee` |
+| Task | 上述全部 + `customfield_10041` (Severity) |
+
+建议 Gallery 功能需求统一用 Story。
+
+### 必需字段速查
+
+| 字段 | ID | 格式 | 示例值 |
+|------|-----|------|-------|
+| Device | `customfield_10101` | 多选数组 | `[{"value": "all_phones"}]` |
+| Components | `components` | 对象数组 | `[{"name": "NTGallery"}]` |
+| Assignee | `assignee` | accountId 对象 | `{"accountId": "712020:3b...dff"}` |
+| Epic Link | `customfield_10014` | 字符串 | `"NOS-10644"` |
+
+**常见错误：**
+- Epic Link 误用 `parent` 字段 → 静默失败，parent 始终为 null
+- Device 误用 `{"value": "all_phones"}`（单选格式）→ 需要数组 `[{...}]`
+- Components 空数组 `[]` → API 拒绝，必须选已有组件名
+- 不指定 assignee → "默认经办人没有分配权限"
+- Task 类型不填 Severity → 创建失败
+
+### CLI update 命令陷阱
+
+`jira_cli.py update --fields-json` 在 HTTP 204 (成功但无返回体) 时返回 `{}`，与静默失败无法区分。**关联 Epic Link 建议直接用 REST API PUT**：
+
+```python
+# 可靠方式
+PUT /rest/api/3/issue/{key}
+{"fields": {"customfield_10014": "NOS-10644"}}
+```
+
+`jira_cli.py create --fields-json` 同理，不可靠的字段（如 parent）会静默丢弃不报错。创建后必须 `get` 验证关键字段。
