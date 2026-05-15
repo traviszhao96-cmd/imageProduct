@@ -123,9 +123,9 @@
 
 > 由 `camera-tracking-manage` skill 产出完整设计。此处简列关键事件。必须附 JSON 代码块示例。
 
-| event_name | key | parameter | 说明 |
-|------------|-----|-----------|------|
-| NTCamera | [TBD] | [TBD] | [TBD] |
+| event_name | key | key_description | parameter | 说明 |
+|------------|-----|-----------------|-----------|------|
+| NTCamera | [TBD] | [TBD] | [TBD] | [TBD] |
 
 ```json
 { "event_name": "NTCamera", "key": "[TBD]", "[param]": "[TBD]" }
