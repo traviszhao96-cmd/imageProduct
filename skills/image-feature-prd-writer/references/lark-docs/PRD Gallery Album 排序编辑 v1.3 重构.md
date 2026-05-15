@@ -1,6 +1,6 @@
 # 【PRD】Gallery v3.0 - Album 页面排序编辑
 
-> 文档状态: `Draft` | 版本: v1.3 | 更新: 2026-05-14 | 作者: Travis | 审核: [TBD]
+> 文档状态: `Draft` | 版本: v1.4 | 更新: 2026-05-14 | 作者: Travis | 审核: [TBD]
 
 ---
 
@@ -11,6 +11,7 @@
 | 2026-05-07 | 1.0 | Travis | 创建文档 |
 | 2026-05-13 | 1.2 | Travis | 统一 500ms、调整默认图集、新增 Edit 模式、拖拽态中等尺寸、空列表占位图 |
 | 2026-05-14 | 1.3 | Travis | 对齐 gallery-feature-doc 模板：新增假设章节、User Story + Gherkin、Out of Scope 表格、关键依赖、指标与验收、干系人 RACI、全文评审 |
+| 2026-05-14 | 1.4 | Travis | 开发反馈：In Scope 明确排除 Hide/Recently Deleted、系统相册均可自由移出大图区域、系统相册始终保留在 Album 页面 |
 
 ---
 
@@ -65,7 +66,7 @@
 ### In Scope
 
 - 单个图集长按并滑动 → 进入拖拽状态（途径一）
-- 所有图集支持拖拽排序
+- 所有图集（除 Hide / Recently Deleted 外）支持拖拽排序
 - 所有图集支持大图/小图区域间移动
 - 拖拽态下显示分割线
 - 拖拽过程中支持自动滚动
@@ -185,7 +186,8 @@ Scenario 4: 空区域占位
 - **默认大图图集**：Camera / Videos / Screenshots / Favourite（共 4 个）
 - **默认小图图集**：其余所有图集
 - **「更多」区域**（折叠在小图区域下方）：Maps（第一）、Recent（第二），及用户自定义相册
-- 以上为默认布局，用户后续可自由调整
+- 以上为默认布局，用户后续可自由调整（包括 Camera / Favourite 等系统相册均可移出大图区域）
+- 系统相册（Camera / Videos / Screenshots / Favourite / Maps / Recent）始终保留在 Album 页面。即使被取消 Pin，也会进入「更多」区域，不会从页面消失
 - 大图区域无固定数量上限
 
 ### 2. 长按拖拽排序（不进编辑态）
