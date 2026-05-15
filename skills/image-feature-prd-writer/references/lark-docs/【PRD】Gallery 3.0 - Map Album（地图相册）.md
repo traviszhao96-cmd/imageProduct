@@ -46,27 +46,39 @@
 
 ### 十一、埋点设计
 
-> 一行一个参数 key。同一次上报涉及多个 key 时拆为多行。不上报经纬度、地点名、media_id、精确照片数量等敏感信息。
+> 一行一个 parameter。同一次上报涉及多个 label 时拆为多行。不上报经纬度、地点名、media_id、精确照片数量等敏感信息。`map_album_view` 为地图相册专属新增 event。
 
-| event_name | parameter | parameter_description | parameter_value | 说明 |
-|------------|-----------|----------------------|-----------------|------|
-| gallery_view | tab_name | 当前 Tab 名称 | map | 进入 Map Album 时上报 |
-| gallery_view | entry_source | 上一级入口 | albums / photo_details | 同上 |
-| gallery_view | has_location_media | 是否有可展示的 GPS 媒体 | true / false | 不包含数量 |
-| gallery_view | locate_action | 主动触发定位 | click | 点击定位按钮 |
-| gallery_view | locate_result | 定位结果 | success | 定位成功，不上报坐标 |
-| gallery_view | locate_result | 定位结果 | fail | 定位失败 |
-| gallery_view | fail_reason | 失败原因 | permission_denied / no_signal / timeout / other | 与 `locate_result=fail` 同一条 |
-| gallery_view | marker_type | 标记类型 | single / cluster | 点击地图标记，不上报精确数量 |
-| gallery_view | map_load_result | 加载结果 | success | 地图加载成功 |
-| gallery_view | map_load_result | 加载结果 | fail | 地图加载失败 |
-| gallery_view | fail_reason | 失败原因 | network / tile_load_failed / other | 与 `map_load_result=fail` 同一条 |
-| gallery_view | duration | 停留时长 | number | 退出地图相册，单位秒 |
-| media_manage | action | 管理动作 | favorite / share / delete / edit / hide | 适用于照片和视频 |
-| media_manage | source_view | 操作来源 | map_album | 同上 |
+| event_name | key | key_description | parameter_value | 说明 |
+|------------|-----|-----------------|-----------------|------|
+| gallery_view | album_type | 当前进入的相册/视图类型 | map_album | 进入地图相册 |
+| gallery_view | entry_source | 进入来源 | albums / photo_details | 进入地图相册 |
+| gallery_view | has_location_media | 是否有可展示GPS媒体 | true / false | 进入地图相册，不包含数量 |
+| gallery_view | album_type | 当前退出的相册/视图类型 | map_album | 离开地图相册 |
+| gallery_view | duration | 停留时长 | int | 离开地图相册，单位秒 |
+| map_album_view | action | 地图行为类型 | map_load / locate | 地图相册内地图相关行为 |
+| map_album_view | trigger | 触发方式 | click | 点击定位按钮，action=locate 时上报 |
+| map_album_view | result | 执行结果 | success / fail | 地图加载 / 定位完成 |
+| map_album_view | fail_reason | 失败原因 | permission_denied / no_signal / timeout / network / tile_load_failed / other | action=locate/map_load 且 result=fail 时上报 |
+| media_manage | action | 具体管理动作 | favorite / share / delete / edit / hide | 地图相册中操作媒体，复用已有 event |
+| media_manage | source_view | 操作来源 | map_album | 标识操作发生在地图相册 |
+| media_manage | select_count | 本次操作包含的媒体数量 | int | 地图相册中操作媒体 |
+| media_manage | media_type | 本次操作包含的媒体类型 | photo / video / mixed | 地图相册中操作媒体 |
 
 ```json
-{ "event_name": "gallery_view", "tab_name": "map", "entry_source": "albums", "has_location_media": true }
+// 进入地图相册
+{ "event_name": "gallery_view", "album_type": "map_album", "entry_source": "albums", "has_location_media": true }
+
+// 地图加载成功
+{ "event_name": "map_album_view", "action": "map_load", "result": "success" }
+
+// 点击定位成功
+{ "event_name": "map_album_view", "action": "locate", "trigger": "click", "result": "success" }
+
+// 定位失败
+{ "event_name": "map_album_view", "action": "locate", "trigger": "click", "result": "fail", "fail_reason": "permission_denied" }
+
+// 媒体操作
+{ "event_name": "media_manage", "action": "favorite", "source_view": "map_album", "select_count": 1, "media_type": "photo" }
 ```
 
 ### 十二、干系人

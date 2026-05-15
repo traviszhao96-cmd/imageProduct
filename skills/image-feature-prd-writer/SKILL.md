@@ -154,12 +154,20 @@ Both share the same core structure including 需求词条; domain differences ar
 
 #### 埋点表格格式（Camera & Gallery 统一）
 
-| event_name | parameter | parameter_description | parameter_value | 说明 |
-|------------|-----------|----------------------|-----------------|------|
+| event_name | key | key_description | parameter_value | 说明 |
+|------------|-----|-----------------|-----------------|------|
 
-一行一个 parameter，同一次上报涉及多个 parameter 时拆为多行。事件就是 event + 多 parameter，不额外造 `key` 字段。
+一行一个 parameter，与 Bitable 结构对齐。同一次上报涉及多个 parameter 时拆为多行，`event_name` + `说明` 保持一致表示同一次上报。列映射：
 
-Camera 用单一 `NTCamera`，Gallery 按模块拆 `event_name`（`gallery_view`、`media_manage` 等），但表格格式相同。
+| Bitable 列 | PRD 列 |
+|-----------|--------|
+| `event` | `event_name` |
+| `label` | `key` |
+| `label_note` | `key_description` |
+| `value` | `parameter_value` |
+| `value_note` / `操作场景说明` | `说明` |
+
+Camera 用单一 `NTCamera`，Gallery 用多个 `event_name`（`gallery_view`、`media_manage` 等），但表格格式相同。
 
 ### 护栏指标处理
 

@@ -121,14 +121,14 @@
 
 ## 9. 埋点设计
 
-> 由 `camera-tracking-manage` skill 产出完整设计。一行一个 parameter，同一次上报多 parameter 拆多行。必须附 JSON 代码块示例。
+> 由 `camera-tracking-manage` skill 产出完整设计。一行一个 parameter，与 Bitable 对齐。同一次上报多个 parameter 拆多行。必须附 JSON 代码块示例。
 
-| event_name | parameter | parameter_description | parameter_value | 说明 |
-|------------|-----------|----------------------|-----------------|------|
+| event_name | key | key_description | parameter_value | 说明 |
+|------------|-----|-----------------|-----------------|------|
 | NTCamera | [TBD] | [TBD] | [TBD] | [TBD] |
 
 ```json
-{ "event_name": "NTCamera", "[parameter]": "[value]" }
+{ "event_name": "NTCamera", "[key]": "[value]" }
 ```
 
 ---

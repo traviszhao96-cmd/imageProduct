@@ -12,13 +12,15 @@ Source workbook:
 
 ## Common Columns
 
-| column | meaning |
-| --- | --- |
-| `event_name` | real event name |
-| `parameter` | parameter name |
-| `parameter_description` | parameter 的中文说明 |
-| `parameter_value` | parameter 的可选值 |
-| `说明` | 触发场景/备注 |
+Bitable 列名与 PRD 列名映射：
+
+| Bitable 列 | PRD 列 | 含义 |
+| --- | --- | --- |
+| `event` | `event_name` | 事件名 |
+| `label` | `key` | 参数名 |
+| `label_note` | `key_description` | 参数的中文说明 |
+| `value` | `parameter_value` | 参数可选值 |
+| `value_note` / `操作场景说明` | `说明` | 触发场景/备注 |
 
 ## Edit Sheet Pattern
 
