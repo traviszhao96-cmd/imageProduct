@@ -44,21 +44,21 @@
 ### 十、指标与验收
 - 验收条件以有序列表列出（block_type=12）
 
-### 十一、埋点设计（v2 — 按模板格式）
+### 十一、埋点设计
 
-> 同一次行为只上报一条 event，多个参数随同一条 event 上报，不上报经纬度、地点名、media_id、精确照片数量等敏感信息。
+> 同一次行为只上报一条 event，多参数随同一条 event 上报。不上报经纬度、地点名、media_id、精确照片数量等敏感信息。
 
 | event_name | key | parameter | 说明 |
 |------------|-----|-----------|------|
-| gallery_view | enter_map_album | `tab_name=map`；`entry_source=albums / photo_details`；`has_location_media=true / false` | 进入 Map Album 页面时上报。`has_location_media` 仅表示是否有可展示的 GPS 媒体，不包含数量 |
-| gallery_view | click_locate | `locate_action=click` | 用户点击定位按钮 |
-| gallery_view | locate_success | `locate_result=success` | 定位成功，不上报坐标 |
-| gallery_view | locate_fail | `locate_result=fail`；`fail_reason=permission_denied / no_signal / timeout / other` | 定位失败，`fail_reason` 与 `locate_result=fail` 同一条上报 |
-| gallery_view | marker_click | `enter_from=map_marker`；`marker_type=single / cluster` | 点击地图标记进入媒体浏览；不上报精确媒体数量 |
-| gallery_view | map_load_success | `map_load_result=success` | 地图资源加载成功 |
-| gallery_view | map_load_fail | `map_load_result=fail`；`fail_reason=network / tile_load_failed / other` | 地图资源加载失败 |
-| gallery_view | exit_map_album | `duration=number` | 离开 Map Album 页面时上报，单位秒 |
-| media_manage | map_album_action | `action=favorite / share / delete / edit / hide`；`source_view=map_album` | 在 Map Album 来源的媒体浏览中执行管理操作 |
+| gallery_view | enter_map_album（进入地图相册） | tab_name=map（当前视图）；entry_source=albums / photo_details（进入来源）；has_location_media=true / false（是否有可展示的GPS媒体） | 不包含数量 |
+| gallery_view | click_locate（点击定位按钮） | locate_action=click（主动触发定位） | — |
+| gallery_view | locate_success（定位成功） | locate_result=success（定位结果） | 不上报坐标 |
+| gallery_view | locate_fail（定位失败） | locate_result=fail（定位结果）；fail_reason=permission_denied / no_signal / timeout / other（失败原因） | 同一条 event 上报 |
+| gallery_view | marker_click（点击地图标记） | enter_from=map_marker（进入来源）；marker_type=single / cluster（标记类型） | 不上报精确媒体数量 |
+| gallery_view | map_load_success（地图加载成功） | map_load_result=success（加载结果） | — |
+| gallery_view | map_load_fail（地图加载失败） | map_load_result=fail（加载结果）；fail_reason=network / tile_load_failed / other（失败原因） | — |
+| gallery_view | exit_map_album（退出地图相册） | duration=number（停留时长，单位秒） | — |
+| media_manage | map_album_action（地图相册媒体管理） | action=favorite / share / delete / edit / hide（管理动作）；source_view=map_album（操作来源） | 适用于照片和视频 |
 
 ```json
 { "event_name": "gallery_view", "key": "enter_map_album", "tab_name": "map", "entry_source": "albums", "has_location_media": true }
