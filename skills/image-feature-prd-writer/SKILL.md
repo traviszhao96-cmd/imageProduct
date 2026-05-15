@@ -102,10 +102,10 @@ Before drafting, check domain-specific requirements:
 
 Choose template by domain:
 
-- **Camera**: [assets/camera-prd-template.md](assets/camera-prd-template.md) — 12 sections + 附录
+- **Camera**: [assets/camera-prd-template.md](assets/camera-prd-template.md) — 13 sections + 附录
 - **Gallery**: [assets/gallery-feature-template.md](assets/gallery-feature-template.md) — 13 sections + 附录
 
-Both share the same core structure; domain differences are in domain-specific sections (词条表 for Gallery, 方案说明 for Camera, etc.).
+Both share the same core structure including 需求词条; domain differences are in domain-specific sections (产品流程 for Gallery, 方案说明 for Camera, etc.).
 
 ### PRD Writing Standards
 
