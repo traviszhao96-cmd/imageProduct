@@ -154,14 +154,14 @@ Both share the same core structure including 需求词条; domain differences ar
 
 #### Camera vs Gallery 事件模型差异
 
-Camera 和 Gallery 的 `event_name` 粒度不同，但均使用统一的 6 列表格：
+两者使用相同的 6 列表头，但 `key` 列的语义不同：
 
-| 领域 | event_name 策略 | 示例 |
-|------|----------------|------|
-| Camera | 单一 `NTCamera`，靠 `key` 区分行为 | `NTCamera` + `front_auto_wide_switch` |
-| Gallery | 多个 `event_name` 按模块分组，各带 `key` | `gallery_view`、`media_manage`、`album_reorder` |
+| 领域 | event_name | key 含义 | 粒度 | 示例 |
+|------|-----------|---------|------|------|
+| Camera | 单一 `NTCamera` | 行为标识（事件子类型） | 一行一次行为 | `NTCamera` / `front_auto_wide_switch` |
+| Gallery | 多个按模块分组 | 参数名（与埋点总表对齐） | 一行一个参数 key | `gallery_view` / `tab_name` |
 
-Camera 功能少、事件少，一个 `NTCamera` 兜底足够；Gallery 功能模块多，按模块拆 `event_name` 避免单事件膨胀。
+Camera 功能少，一行一次行为，多参数合并到 `parameter` 列。Gallery 对齐埋点总表，一行一个 `key`，同一次上报多 key 拆多行。
 
 ### 护栏指标处理
 

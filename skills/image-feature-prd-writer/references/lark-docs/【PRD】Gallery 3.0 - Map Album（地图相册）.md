@@ -46,22 +46,27 @@
 
 ### 十一、埋点设计
 
-> 同一次行为只上报一条 event，多参数随同一条 event 上报。不上报经纬度、地点名、media_id、精确照片数量等敏感信息。
+> 一行一个参数 key。同一次上报涉及多个 key 时拆为多行。不上报经纬度、地点名、media_id、精确照片数量等敏感信息。
 
 | event_name | key | key_description | parameter | parameter_description | 说明 |
 |------------|-----|-----------------|-----------|----------------------|------|
-| gallery_view | enter_map_album | 进入地图相册 | tab_name=map；entry_source=albums / photo_details；has_location_media=true / false | 当前视图；进入来源；是否有可展示的GPS媒体 | 不包含数量 |
-| gallery_view | click_locate | 点击定位按钮 | locate_action=click | 主动触发定位 | — |
-| gallery_view | locate_success | 定位成功 | locate_result=success | 定位结果 | 不上报坐标 |
-| gallery_view | locate_fail | 定位失败 | locate_result=fail；fail_reason=permission_denied / no_signal / timeout / other | 定位结果；失败原因 | 同一条 event 上报 |
-| gallery_view | marker_click | 点击地图标记 | marker_type=single / cluster | 标记类型 | 不上报精确媒体数量 |
-| gallery_view | map_load_success | 地图加载成功 | map_load_result=success | 加载结果 | — |
-| gallery_view | map_load_fail | 地图加载失败 | map_load_result=fail；fail_reason=network / tile_load_failed / other | 加载结果；失败原因 | — |
-| gallery_view | exit_map_album | 退出地图相册 | duration=number | 停留时长，单位秒 | — |
-| media_manage | map_album_action | 地图相册媒体管理 | action=favorite / share / delete / edit / hide；source_view=map_album | 管理动作；操作来源 | 适用于照片和视频 |
+| gallery_view | tab_name | 进入地图相册视图 | map | 当前 Tab 名称 | 进入 Map Album 时上报 |
+| gallery_view | entry_source | 进入地图相册的来源 | albums / photo_details | 上一级入口 | 同上 |
+| gallery_view | has_location_media | 是否有可展示的 GPS 媒体 | true / false | 不包含数量 | 同上 |
+| gallery_view | locate_action | 点击定位按钮 | click | 主动触发定位 | — |
+| gallery_view | locate_result | 定位结果 | success | 定位成功 | 不上报坐标 |
+| gallery_view | locate_result | 定位结果 | fail | 定位失败 | — |
+| gallery_view | fail_reason | 定位失败原因 | permission_denied / no_signal / timeout / other | 与 `locate_result=fail` 同一条上报 | 同上 |
+| gallery_view | marker_type | 点击地图标记 | single / cluster | 标记类型（单张/聚合） | 不上报精确数量 |
+| gallery_view | map_load_result | 地图资源加载结果 | success | 加载成功 | — |
+| gallery_view | map_load_result | 地图资源加载结果 | fail | 加载失败 | — |
+| gallery_view | fail_reason | 地图加载失败原因 | network / tile_load_failed / other | 与 `map_load_result=fail` 同一条上报 | 同上 |
+| gallery_view | duration | 退出地图相册 | number | 停留时长，单位秒 | — |
+| media_manage | action | 地图相册中管理操作 | favorite / share / delete / edit / hide | 具体管理动作 | 适用于照片和视频 |
+| media_manage | source_view | 管理操作来源 | map_album | 标识操作发生在 Map Album | 同上 |
 
 ```json
-{ "event_name": "gallery_view", "key": "enter_map_album", "tab_name": "map", "entry_source": "albums", "has_location_media": true }
+{ "event_name": "gallery_view", "tab_name": "map", "entry_source": "albums", "has_location_media": true }
 ```
 
 ### 十二、干系人

@@ -121,7 +121,7 @@
 
 ## 9. 埋点设计
 
-> 由 `camera-tracking-manage` skill 产出完整设计。此处简列关键事件。必须附 JSON 代码块示例。
+> 由 `camera-tracking-manage` skill 产出完整设计。一行一次行为，`key` 为行为标识，多参数合并到 `parameter` 列，用 `；` 分隔。必须附 JSON 代码块示例。
 
 | event_name | key | key_description | parameter | parameter_description | 说明 |
 |------------|-----|-----------------|-----------|----------------------|------|

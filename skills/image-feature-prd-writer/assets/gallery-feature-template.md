@@ -135,7 +135,7 @@
 
 ## 十一、埋点设计
 
-> 由 `gallery-event-tracking` skill 产出完整设计。此处简列关键事件。必须附 JSON 代码块示例。
+> 由 `gallery-event-tracking` skill 产出完整设计。一行一个参数 key，同一次上报涉及多个 key 时拆为多行（`event_name` + `说明` 保持一致）。必须附 JSON 代码块示例。
 
 | event_name | key | key_description | parameter | parameter_description | 说明 |
 |------------|-----|-----------------|-----------|----------------------|------|

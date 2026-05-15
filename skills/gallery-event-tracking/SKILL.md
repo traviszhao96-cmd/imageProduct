@@ -20,10 +20,23 @@ If the user provides a newer workbook or a different source of truth, use that f
 
 ## Existing Pattern
 
-Gallery 使用多 `event_name` 按模块分组（不同于 Camera 的单 `NTCamera`），各 `event_name` 内靠 `key` 区分具体行为：
+Gallery 使用多 `event_name` 按模块分组（不同于 Camera 的单 `NTCamera`）。埋点总表（Bitable）为一行一个参数，PRD 中同样一行一个 key：
 
 | event_name | key | key_description | parameter | parameter_description | 说明 |
 |------------|-----|-----------------|-----------|----------------------|------|
+
+与埋点总表（Bitable）列名映射：
+
+| 总表列 | PRD 列 | 含义 |
+|--------|--------|------|
+| `event` | `event_name` | 事件名 |
+| `key` | `key` | 参数名 |
+| `key_note` | `key_description` | 参数的中文说明 |
+| `value` | `parameter` | 参数可选值（不写 `key=` 前缀） |
+| `value_note` | `parameter_description` | 值的说明 |
+| `操作场景说明` | `说明` | 触发场景/备注 |
+
+同一个上报场景涉及多个参数时，拆为多行，`event_name` + `说明` 保持一致表示同一次上报。
 
 常见 `event_name` 分组：
 - `gallery_view` — 浏览/导航行为
