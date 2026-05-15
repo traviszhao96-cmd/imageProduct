@@ -20,13 +20,10 @@ If the user provides a newer workbook or a different source of truth, use that f
 
 ## Existing Pattern
 
-The current Gallery workbook uses:
+The current Gallery tracking table uses:
 
-- `event_name`
-- `event_description`
-- `parameter_name`
-- `parameter_value`
-- `value_note`
+| event_name | key | key_description | parameter | parameter_description | 说明 |
+|------------|-----|-----------------|-----------|----------------------|------|
 
 For Edit features, the pattern is usually:
 
@@ -61,10 +58,10 @@ For Edit features, the pattern is usually:
 
 Default to this table:
 
-| event_name | event_description | parameter_name | parameter_value | value_note |
-| --- | --- | --- | --- | --- |
+| event_name | key | key_description | parameter | parameter_description | 说明 |
+| --- | --- | --- | --- | --- | --- |
 
-If the user asks for PRD-ready text, you may additionally provide a short explanation below the table.
+If the user asks for PRD-ready text, you may additionally provide a short JSON example below the table.
 
 ## Review Focus
 

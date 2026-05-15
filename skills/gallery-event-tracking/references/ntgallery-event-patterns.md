@@ -15,10 +15,11 @@ Source workbook:
 | column | meaning |
 | --- | --- |
 | `event_name` | real event name |
-| `event_description` | trigger timing and behavior summary |
-| `parameter_name` | parameter key |
-| `parameter_value` | enum or value range |
-| `value_note` | explanation and constraints |
+| `key` | event key |
+| `key_description` | key 的中文描述 |
+| `parameter` | parameter key=value，多个用 `；` 分隔 |
+| `parameter_description` | parameter 的中文描述，与 parameter 一一对应 |
+| `说明` | 额外备注（隐私、行为约束等） |
 
 ## Edit Sheet Pattern
 

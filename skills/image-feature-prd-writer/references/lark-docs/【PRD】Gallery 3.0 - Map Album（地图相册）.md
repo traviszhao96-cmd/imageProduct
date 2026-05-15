@@ -54,7 +54,7 @@
 | gallery_view | click_locate | 点击定位按钮 | locate_action=click | 主动触发定位 | — |
 | gallery_view | locate_success | 定位成功 | locate_result=success | 定位结果 | 不上报坐标 |
 | gallery_view | locate_fail | 定位失败 | locate_result=fail；fail_reason=permission_denied / no_signal / timeout / other | 定位结果；失败原因 | 同一条 event 上报 |
-| gallery_view | marker_click | 点击地图标记 | enter_from=map_marker；marker_type=single / cluster | 进入来源；标记类型 | 不上报精确媒体数量 |
+| gallery_view | marker_click | 点击地图标记 | marker_type=single / cluster | 标记类型 | 不上报精确媒体数量 |
 | gallery_view | map_load_success | 地图加载成功 | map_load_result=success | 加载结果 | — |
 | gallery_view | map_load_fail | 地图加载失败 | map_load_result=fail；fail_reason=network / tile_load_failed / other | 加载结果；失败原因 | — |
 | gallery_view | exit_map_album | 退出地图相册 | duration=number | 停留时长，单位秒 | — |
