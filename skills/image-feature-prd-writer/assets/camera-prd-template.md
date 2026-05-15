@@ -122,25 +122,14 @@
 ## 9. 埋点设计
 
 > 由 `camera-tracking-manage` skill 产出完整设计。此处简列关键事件。必须附 JSON 代码块示例。
->
-> 说明：
-> - 同一次行为只上报一条 event。
-> - 多个 parameters 随同一条 event 一起上报，用 `；` 分隔。
-> - 不上报经纬度、media_id 等敏感信息。
 
-| event_name | key | event_description | 触发时机 | parameters | 备注 |
-|------------|-----|-------------------|---------|-----------|------|
-| NTCamera | [TBD] | [TBD] | [TBD] | `[TBD]` | [TBD] |
+| event_name | key | parameter | 说明 |
+|------------|-----|-----------|------|
+| NTCamera | [TBD] | [TBD] | [TBD] |
 
 ```json
 { "event_name": "NTCamera", "key": "[TBD]", "[param]": "[TBD]" }
 ```
-
-### 字段说明
-
-| parameter_name | parameter_value | 说明 |
-|---|---|---|
-| `[TBD]` | `[TBD]` | [TBD] |
 
 ---
 

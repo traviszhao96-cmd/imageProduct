@@ -44,45 +44,25 @@
 ### 十、指标与验收
 - 验收条件以有序列表列出（block_type=12）
 
-### 十一、埋点设计（v2 — 开发反馈修订版）
+### 十一、埋点设计（v2 — 按模板格式）
 
-说明：
-- 同一次用户行为只上报一条 event。
-- 如果一次行为包含多个参数，多个 parameters 随同一条 event 一起上报。
-- 不上报经纬度、城市、地点名、media_id、精确照片/视频数量等敏感信息。
+> 同一次行为只上报一条 event，多个参数随同一条 event 上报，不上报经纬度、地点名、media_id、精确照片数量等敏感信息。
 
-| event_name | event_description | 触发时机 | parameters | 备注 |
-|---|---|---|---|---|
-| gallery_view | 进入地图相册视图 | 用户进入 Map Album 页面时 | `tab_name=map`；`entry_source=albums / photo_details`；`has_location_media=true / false` | `has_location_media` 仅表示是否有可展示的 GPS 媒体，不包含数量 |
-| gallery_view | 点击定位按钮 | 用户点击地图相册中的定位按钮时 | `locate_action=click` | 仅表示用户主动触发定位 |
-| gallery_view | 定位成功 | 点击定位按钮后，成功获取当前位置时 | `locate_result=success` | 不上报当前位置坐标 |
-| gallery_view | 定位失败 | 点击定位按钮后，定位失败时 | `locate_result=fail`；`fail_reason=permission_denied / no_signal / timeout / other` | `fail_reason` 与 `locate_result=fail` 同一条 event 上报 |
-| gallery_view | 点击地图标记进入媒体浏览 | 用户点击地图上的单张或聚合标记时 | `enter_from=map_marker`；`marker_type=single / cluster` | 点击后进入对应媒体浏览/Grid；不上报精确媒体数量 |
-| gallery_view | 地图加载成功 | 地图资源加载成功时 | `map_load_result=success` | 不包含地图位置、缩放级别等信息 |
-| gallery_view | 地图加载失败 | 地图资源加载失败时 | `map_load_result=fail`；`fail_reason=network / tile_load_failed / other` | 仅在明确加载失败时上报 |
-| gallery_view | 退出地图相册 | 用户离开 Map Album 页面时 | `duration=number` | 单位：秒 |
+| event_name | key | parameter | 说明 |
+|------------|-----|-----------|------|
+| gallery_view | enter_map_album | `tab_name=map`；`entry_source=albums / photo_details`；`has_location_media=true / false` | 进入 Map Album 页面时上报。`has_location_media` 仅表示是否有可展示的 GPS 媒体，不包含数量 |
+| gallery_view | click_locate | `locate_action=click` | 用户点击定位按钮 |
+| gallery_view | locate_success | `locate_result=success` | 定位成功，不上报坐标 |
+| gallery_view | locate_fail | `locate_result=fail`；`fail_reason=permission_denied / no_signal / timeout / other` | 定位失败，`fail_reason` 与 `locate_result=fail` 同一条上报 |
+| gallery_view | marker_click | `enter_from=map_marker`；`marker_type=single / cluster` | 点击地图标记进入媒体浏览；不上报精确媒体数量 |
+| gallery_view | map_load_success | `map_load_result=success` | 地图资源加载成功 |
+| gallery_view | map_load_fail | `map_load_result=fail`；`fail_reason=network / tile_load_failed / other` | 地图资源加载失败 |
+| gallery_view | exit_map_album | `duration=number` | 离开 Map Album 页面时上报，单位秒 |
+| media_manage | map_album_action | `action=favorite / share / delete / edit / hide`；`source_view=map_album` | 在 Map Album 来源的媒体浏览中执行管理操作 |
 
-**地图相册管理**
-
-| event_name | event_description | 触发时机 | parameters | 备注 |
-|---|---|---|---|---|
-| media_manage | 在地图相册中进行媒体管理操作 | 用户在 Map Album 来源的媒体浏览/管理场景中执行操作时 | `action=favorite / share / delete / edit / hide`；`source_view=map_album` | 适用于照片和视频 |
-
-**字段说明**
-
-| parameter_name | parameter_value | 说明 |
-|---|---|---|
-| `tab_name` | `map` | 当前进入的 Gallery 视图为地图相册 |
-| `entry_source` | `albums / photo_details` | 进入 Map Album 的来源 |
-| `has_location_media` | `true / false` | 当前是否存在可在地图展示的带 GPS 媒体 |
-| `locate_action` | `click` | 用户点击定位按钮 |
-| `locate_result` | `success / fail` | 定位结果 |
-| `fail_reason` | `permission_denied / no_signal / timeout / network / tile_load_failed / other` | 失败原因，根据对应事件场景取值 |
-| `enter_from` | `map_marker` | 从地图标记进入媒体浏览 |
-| `marker_type` | `single / cluster` | 地图标记类型 |
-| `map_load_result` | `success / fail` | 地图资源加载结果 |
-| `duration` | number | 地图相册停留时长，单位秒 |
-| `source_view` | `map_album` | 媒体管理操作来源为地图相册 |
+```json
+{ "event_name": "gallery_view", "key": "enter_map_album", "tab_name": "map", "entry_source": "albums", "has_location_media": true }
+```
 
 ### 十二、干系人
 - 有序列表格式（完整内容未渲染）
