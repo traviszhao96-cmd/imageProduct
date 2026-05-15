@@ -152,6 +152,17 @@ Both share the same core structure including 需求词条; domain differences ar
 - **精简** — 能用一个事件说清的不用两个，参数从值对即可推断方向的不额外加 direction 参数
 - **必须附 JSON 代码块示例** — 方便开发直接参考上报格式
 
+#### Camera vs Gallery 事件模型差异
+
+Camera 和 Gallery 的 `event_name` 粒度不同，但均使用统一的 6 列表格：
+
+| 领域 | event_name 策略 | 示例 |
+|------|----------------|------|
+| Camera | 单一 `NTCamera`，靠 `key` 区分行为 | `NTCamera` + `front_auto_wide_switch` |
+| Gallery | 多个 `event_name` 按模块分组，各带 `key` | `gallery_view`、`media_manage`、`album_reorder` |
+
+Camera 功能少、事件少，一个 `NTCamera` 兜底足够；Gallery 功能模块多，按模块拆 `event_name` 避免单事件膨胀。
+
 ### 护栏指标处理
 
 不放入 PRD。手机厂商出厂质量门控（崩溃率、性能）是 release gate，不是 product metric。如有特殊质量担忧，写在风险与兜底章节。

@@ -20,10 +20,15 @@ If the user provides a newer workbook or a different source of truth, use that f
 
 ## Existing Pattern
 
-The current Gallery tracking table uses:
+Gallery 使用多 `event_name` 按模块分组（不同于 Camera 的单 `NTCamera`），各 `event_name` 内靠 `key` 区分具体行为：
 
 | event_name | key | key_description | parameter | parameter_description | 说明 |
 |------------|-----|-----------------|-----------|----------------------|------|
+
+常见 `event_name` 分组：
+- `gallery_view` — 浏览/导航行为
+- `media_manage` — 媒体管理操作
+- `album_reorder` — 相册排序
 
 For Edit features, the pattern is usually:
 
