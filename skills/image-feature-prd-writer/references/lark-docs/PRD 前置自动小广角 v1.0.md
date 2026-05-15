@@ -214,23 +214,21 @@
 
 ## 8. 埋点设计
 
-横竖屏导致焦段切换时，上报一条事件。
+> 一行一个 parameter。`from_zoom` → `to_zoom` 即可推断方向：1x→0.8x 为竖转横，0.8x→1x 为横转竖。
 
-| event_name | key | parameter | value 示例 | 说明 |
-|------------|-----|-----------|-----------|------|
-| NTCamera | front_auto_wide_switch | from_zoom | 1x / 0.8x | 切换前焦段 |
-| | | to_zoom | 0.8x / 1x | 切换后焦段 |
-
-> `from_zoom` → `to_zoom` 即可推断方向：1x→0.8x 为竖转横，0.8x→1x 为横转竖。
+| event_name | parameter | parameter_description | parameter_value | 说明 |
+|------------|-----------|----------------------|-----------------|------|
+| NTCamera | from_zoom | 切换前焦段 | 1x / 0.8x | 横竖屏切换导致自动变焦时上报 |
+| NTCamera | to_zoom | 切换后焦段 | 0.8x / 1x | 同上 |
 
 ### 上报示例
 
 ```json
 // 竖屏→横屏
-{ "event_name": "NTCamera", "key": "front_auto_wide_switch", "from_zoom": "1x", "to_zoom": "0.8x" }
+{ "event_name": "NTCamera", "from_zoom": "1x", "to_zoom": "0.8x" }
 
 // 横屏→竖屏
-{ "event_name": "NTCamera", "key": "front_auto_wide_switch", "from_zoom": "0.8x", "to_zoom": "1x" }
+{ "event_name": "NTCamera", "from_zoom": "0.8x", "to_zoom": "1x" }
 ```
 
 ---

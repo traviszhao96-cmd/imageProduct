@@ -152,17 +152,14 @@ Both share the same core structure including 需求词条; domain differences ar
 - **精简** — 能用一个事件说清的不用两个，参数从值对即可推断方向的不额外加 direction 参数
 - **必须附 JSON 代码块示例** — 方便开发直接参考上报格式
 
-#### Camera vs Gallery 事件模型差异
+#### 埋点表格格式（Camera & Gallery 统一）
 
-两者使用相同的 6 列表头，但 `key` 列的语义不同：
+| event_name | parameter | parameter_description | parameter_value | 说明 |
+|------------|-----------|----------------------|-----------------|------|
 
-| 领域 | event_name | key 含义 | 粒度 | 示例 |
-|------|-----------|---------|------|------|
-| Camera | 单一 `NTCamera` | `key` 为行为标识，有 `key` 字段 | 一行一次行为，参数合并 | `NTCamera` / `front_auto_wide_switch` |
-| Gallery | 多个按模块分组 | 无 `key` 字段，`key` 列改为 `parameter` | 一行一个参数 | `gallery_view` / `tab_name` |
+一行一个 parameter，同一次上报涉及多个 parameter 时拆为多行。事件就是 event + 多 parameter，不额外造 `key` 字段。
 
-Camera: `event_name \| key \| key_description \| parameter \| parameter_description \| 说明`（6 列，有 key）
-Gallery: `event_name \| parameter \| parameter_description \| parameter_value \| 说明`（5 列，无 key）
+Camera 用单一 `NTCamera`，Gallery 按模块拆 `event_name`（`gallery_view`、`media_manage` 等），但表格格式相同。
 
 ### 护栏指标处理
 

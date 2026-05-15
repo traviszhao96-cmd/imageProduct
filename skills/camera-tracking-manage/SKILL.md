@@ -58,6 +58,13 @@ This skill is the single source of truth for Camera App SW 埋点 (event trackin
 
 ### 4. PRD 埋点写入
 
+PRD 中使用简化的 5 列格式（与 Bitable 列名映射见下），一行一个 parameter：
+
+| event_name | parameter | parameter_description | parameter_value | 说明 |
+|------------|-----------|----------------------|-----------------|------|
+
+Bitable → PRD 映射：`event_name` → `event_name`，`key` → `parameter`，`key_note` → `parameter_description`，`string_value` → `parameter_value`。
+
 飞书 Docx API 对嵌套表格 block 的 `descendant` 插入有限制。
 
 - **优先** — 提供可复制粘贴的 9 列表格给用户，让用户手动粘贴到 PRD 对应位置
