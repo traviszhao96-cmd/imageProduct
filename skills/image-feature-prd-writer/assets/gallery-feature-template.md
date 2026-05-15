@@ -137,9 +137,9 @@
 
 > 由 `gallery-event-tracking` skill 产出完整设计。此处简列关键事件。必须附 JSON 代码块示例。
 
-| event_name | key | key_description | parameter | 说明 |
-|------------|-----|-----------------|-----------|------|
-| NTGallery | [TBD] | [TBD] | [TBD] | [TBD] |
+| event_name | key | key_description | parameter | parameter_description | 说明 |
+|------------|-----|-----------------|-----------|----------------------|------|
+| NTGallery | [TBD] | [TBD] | [TBD] | [TBD] | [TBD] |
 
 ```json
 { "event_name": "NTGallery", "key": "[TBD]", "[param]": "[TBD]" }
