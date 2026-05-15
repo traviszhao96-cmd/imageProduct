@@ -15,11 +15,10 @@ Source workbook:
 | column | meaning |
 | --- | --- |
 | `event_name` | real event name |
-| `key` | event key |
-| `key_description` | key 的中文描述 |
-| `parameter` | parameter key=value，多个用 `；` 分隔 |
-| `parameter_description` | parameter 的中文描述，与 parameter 一一对应 |
-| `说明` | 额外备注（隐私、行为约束等） |
+| `parameter` | parameter name |
+| `parameter_description` | parameter 的中文说明 |
+| `parameter_value` | parameter 的可选值 |
+| `说明` | 触发场景/备注 |
 
 ## Edit Sheet Pattern
 

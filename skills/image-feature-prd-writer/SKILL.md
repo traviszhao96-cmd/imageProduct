@@ -158,10 +158,11 @@ Both share the same core structure including 需求词条; domain differences ar
 
 | 领域 | event_name | key 含义 | 粒度 | 示例 |
 |------|-----------|---------|------|------|
-| Camera | 单一 `NTCamera` | 行为标识（事件子类型） | 一行一次行为 | `NTCamera` / `front_auto_wide_switch` |
-| Gallery | 多个按模块分组 | 参数名（与埋点总表对齐） | 一行一个参数 key | `gallery_view` / `tab_name` |
+| Camera | 单一 `NTCamera` | `key` 为行为标识，有 `key` 字段 | 一行一次行为，参数合并 | `NTCamera` / `front_auto_wide_switch` |
+| Gallery | 多个按模块分组 | 无 `key` 字段，`key` 列改为 `parameter` | 一行一个参数 | `gallery_view` / `tab_name` |
 
-Camera 功能少，一行一次行为，多参数合并到 `parameter` 列。Gallery 对齐埋点总表，一行一个 `key`，同一次上报多 key 拆多行。
+Camera: `event_name \| key \| key_description \| parameter \| parameter_description \| 说明`（6 列，有 key）
+Gallery: `event_name \| parameter \| parameter_description \| parameter_value \| 说明`（5 列，无 key）
 
 ### 护栏指标处理
 

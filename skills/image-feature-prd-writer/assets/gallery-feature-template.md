@@ -135,14 +135,14 @@
 
 ## 十一、埋点设计
 
-> 由 `gallery-event-tracking` skill 产出完整设计。一行一个参数 key，同一次上报涉及多个 key 时拆为多行（`event_name` + `说明` 保持一致）。必须附 JSON 代码块示例。
+> 由 `gallery-event-tracking` skill 产出完整设计。一行一个 parameter，同一次上报涉及多个 parameter 时拆为多行（`event_name` + `说明` 保持一致）。Gallery 事件无 `key` 字段，就是 event + 多 parameter。必须附 JSON 代码块示例。
 
-| event_name | key | key_description | parameter | parameter_description | 说明 |
-|------------|-----|-----------------|-----------|----------------------|------|
-| NTGallery | [TBD] | [TBD] | [TBD] | [TBD] | [TBD] |
+| event_name | parameter | parameter_description | parameter_value | 说明 |
+|------------|-----------|----------------------|-----------------|------|
+| NTGallery | [TBD] | [TBD] | [TBD] | [TBD] |
 
 ```json
-{ "event_name": "NTGallery", "key": "[TBD]", "[param]": "[TBD]" }
+{ "event_name": "NTGallery", "[parameter]": "[value]" }
 ```
 
 ---
