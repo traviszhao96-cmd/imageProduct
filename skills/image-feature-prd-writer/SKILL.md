@@ -107,6 +107,15 @@ Choose template by domain:
 
 Both share the same core structure including 需求词条; domain differences are in domain-specific sections (产品流程 for Gallery, 方案说明 for Camera, etc.).
 
+### Document Naming Convention
+
+文档标题和文件名统一加领域前缀，便于区分和检索：
+
+- Camera: `【PRD】Camera <功能名称>`
+- Gallery: `【PRD】Gallery <功能名称>`
+
+飞书文档 title、本地文件名、Jira Story 摘要均遵循此命名。
+
 ### PRD Writing Standards
 
 - 用简洁中文，少用填充词
