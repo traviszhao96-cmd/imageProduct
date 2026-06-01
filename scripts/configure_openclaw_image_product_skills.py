@@ -23,10 +23,9 @@ SHARED_SKILLS = [
     "camera-cloud-local-pipeline",
     "doc",
     "gallery-event-tracking",
-    "gallery-feature-doc",
     "google-play-whats-new",
+    "image-feature-prd-writer",
     "local-camera-analytics",
-    "mobile-imaging-planning-doc",
     "nothing-camera-athena",
 ]
 
@@ -34,7 +33,6 @@ PROJECT_SKILL_ROOTS = [
     PROJECT_ROOT / "outputs" / "skills" / "aws-athena-camera-sql",
     PROJECT_ROOT / "outputs" / "skills" / "server-camera-analytics",
     PROJECT_ROOT / "outputs" / "skills" / "lark-doc-normalizer",
-    PROJECT_ROOT / "outputs" / "skills" / "lark-template-doc-writer",
 ]
 
 

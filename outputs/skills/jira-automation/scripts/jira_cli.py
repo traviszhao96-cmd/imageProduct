@@ -3,6 +3,7 @@ import argparse
 import base64
 import json
 import os
+import re
 import sys
 import urllib.error
 import urllib.parse
@@ -13,18 +14,92 @@ def eprint(message: str) -> None:
     print(message, file=sys.stderr)
 
 
+def _text_with_breaks(text: str) -> list[dict]:
+    content = []
+    lines = text.splitlines() or [""]
+    for index, line in enumerate(lines):
+        if line:
+            content.append({"type": "text", "text": line})
+        if index < len(lines) - 1:
+            content.append({"type": "hardBreak"})
+    return content
+
+
+def _paragraph_node(text: str) -> dict:
+    return {"type": "paragraph", "content": _text_with_breaks(text)}
+
+
+def _list_item_node(text: str) -> dict:
+    return {"type": "listItem", "content": [_paragraph_node(text)]}
+
+
 def build_adf_text(text: str) -> dict:
-    paragraphs = []
-    for block in text.split("\n\n"):
-        lines = block.splitlines() or [""]
-        content = []
-        for index, line in enumerate(lines):
-            if line:
-                content.append({"type": "text", "text": line})
-            if index < len(lines) - 1:
-                content.append({"type": "hardBreak"})
-        paragraphs.append({"type": "paragraph", "content": content or [{"type": "text", "text": ""}]})
-    return {"type": "doc", "version": 1, "content": paragraphs or [{"type": "paragraph", "content": []}]}
+    lines = text.splitlines()
+    nodes = []
+    index = 0
+
+    while index < len(lines):
+        line = lines[index].rstrip()
+        stripped = line.strip()
+
+        if not stripped:
+            index += 1
+            continue
+
+        heading_match = re.match(r"^(#{1,6})\s+(.*)$", stripped)
+        if heading_match:
+            level = min(len(heading_match.group(1)), 6)
+            nodes.append(
+                {
+                    "type": "heading",
+                    "attrs": {"level": level},
+                    "content": [{"type": "text", "text": heading_match.group(2)}],
+                }
+            )
+            index += 1
+            continue
+
+        if re.match(r"^[-*]\s+", stripped):
+            items = []
+            while index < len(lines):
+                candidate = lines[index].strip()
+                if not re.match(r"^[-*]\s+", candidate):
+                    break
+                items.append(_list_item_node(re.sub(r"^[-*]\s+", "", candidate, count=1)))
+                index += 1
+            nodes.append({"type": "bulletList", "content": items})
+            continue
+
+        if re.match(r"^\d+\.\s+", stripped):
+            items = []
+            while index < len(lines):
+                candidate = lines[index].strip()
+                if not re.match(r"^\d+\.\s+", candidate):
+                    break
+                items.append(_list_item_node(re.sub(r"^\d+\.\s+", "", candidate, count=1)))
+                index += 1
+            nodes.append({"type": "orderedList", "content": items})
+            continue
+
+        paragraph_lines = [line]
+        index += 1
+        while index < len(lines):
+            candidate = lines[index].rstrip()
+            candidate_stripped = candidate.strip()
+            if not candidate_stripped:
+                index += 1
+                break
+            if re.match(r"^(#{1,6})\s+", candidate_stripped):
+                break
+            if re.match(r"^[-*]\s+", candidate_stripped):
+                break
+            if re.match(r"^\d+\.\s+", candidate_stripped):
+                break
+            paragraph_lines.append(candidate)
+            index += 1
+        nodes.append(_paragraph_node("\n".join(paragraph_lines)))
+
+    return {"type": "doc", "version": 1, "content": nodes or [{"type": "paragraph", "content": []}]}
 
 
 class JiraClient:

@@ -89,6 +89,14 @@ python3 outputs/skills/jira-automation/scripts/jira_cli.py update \
   --description "Include Draw, Text, Crop, Erase, Export."
 ```
 
+The `--description` and `--body` fields support lightweight markdown-like structure:
+
+- `#` / `##` headings
+- `-` bullet lists
+- `1.` ordered lists
+
+This will be converted into cleaner Jira rich-text blocks instead of plain hard-break paragraphs.
+
 Add a comment:
 
 ```bash

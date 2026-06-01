@@ -9,6 +9,7 @@ import re
 import time
 from pathlib import Path
 from typing import Any
+from urllib.parse import urlparse
 
 import requests
 
@@ -35,6 +36,17 @@ def get_tenant_token(app_id: str, app_secret: str) -> str:
     if payload.get("code") != 0:
         raise RuntimeError(payload)
     return payload["tenant_access_token"]
+
+
+def extract_token_from_url(source_url: str) -> tuple[str, str]:
+    path = urlparse(source_url).path
+    wiki_match = re.search(r"/wiki/([A-Za-z0-9]+)", path)
+    if wiki_match:
+        return "wiki", wiki_match.group(1)
+    doc_match = re.search(r"/docx/([A-Za-z0-9]+)", path)
+    if doc_match:
+        return "docx", doc_match.group(1)
+    raise ValueError(f"Unsupported Lark URL: {source_url}")
 
 
 def api_request(
@@ -72,6 +84,25 @@ def api_request(
             continue
         raise RuntimeError({"path": path, "payload": payload, "response": body})
     raise RuntimeError(f"Failed after retries: {path}")
+
+
+def resolve_document_id(token: str, *, document_id: str | None, source_url: str | None) -> str:
+    if document_id:
+        return document_id
+    assert source_url is not None
+    source_type, source_token = extract_token_from_url(source_url)
+    if source_type == "docx":
+        return source_token
+    payload = api_request(
+        "GET",
+        "/open-apis/wiki/v2/spaces/get_node",
+        token,
+        params={"token": source_token},
+    )
+    node = payload["data"]["node"]
+    if node.get("obj_type") != "docx":
+        raise RuntimeError(f"Wiki node is not docx: {node.get('obj_type')}")
+    return node["obj_token"]
 
 
 def split_sections(markdown: str) -> list[dict[str, Any]]:
@@ -273,7 +304,9 @@ def write_document(token: str, document_id: str, markdown: str) -> dict[str, int
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Write Markdown into an existing Lark docx.")
-    parser.add_argument("--document-id", required=True, help="Target docx document id.")
+    source_group = parser.add_mutually_exclusive_group(required=True)
+    source_group.add_argument("--document-id", help="Target docx document id.")
+    source_group.add_argument("--source-url", help="Target Lark wiki/docx URL.")
     parser.add_argument("--markdown-file", required=True, help="Local Markdown source.")
     parser.add_argument(
         "--clear-first",
@@ -287,12 +320,13 @@ def main() -> int:
     args = parse_args()
     app_id, app_secret = load_app_credentials()
     token = get_tenant_token(app_id, app_secret)
+    document_id = resolve_document_id(token, document_id=args.document_id, source_url=args.source_url)
     markdown = Path(args.markdown_file).read_text(encoding="utf-8")
-    removed = clear_document(token, args.document_id) if args.clear_first else 0
-    stats = write_document(token, args.document_id, markdown)
+    removed = clear_document(token, document_id) if args.clear_first else 0
+    stats = write_document(token, document_id, markdown)
     result = {
-        "document_id": args.document_id,
-        "url": f"https://nothing-tech.sg.larksuite.com/docx/{args.document_id}",
+        "document_id": document_id,
+        "url": f"https://nothing-tech.sg.larksuite.com/docx/{document_id}",
         "removed_root_children": removed,
         **stats,
     }
