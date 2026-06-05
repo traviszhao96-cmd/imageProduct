@@ -45,3 +45,7 @@ __pycache__/
 
 # Never store machine-local OpenClaw secrets in this repo.
 openclaw.json
+
+# Temporary / build artifacts
+.tmp-gerrit-skills/
+dist/

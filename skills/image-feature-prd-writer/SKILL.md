@@ -102,10 +102,10 @@ Before drafting, check domain-specific requirements:
 
 Choose template by domain:
 
-- **Camera**: [assets/camera-prd-template.md](assets/camera-prd-template.md) — 13 sections + 附录
-- **Gallery**: [assets/gallery-feature-template.md](assets/gallery-feature-template.md) — 13 sections + 附录
+- **Camera**: [assets/camera-prd-template.md](assets/camera-prd-template.md) — camera-specific structure
+- **Gallery**: [assets/gallery-feature-template.md](assets/gallery-feature-template.md) — 10 sections
 
-Both share the same core structure including 需求词条; domain differences are in domain-specific sections (产品流程 for Gallery, 方案说明 for Camera, etc.).
+For Gallery PRDs, always follow the current Gallery template. Historical reference docs may use older chapter structures; do not copy their standalone process, design-page, stakeholder, or review chapters unless the user explicitly asks.
 
 ### Document Naming Convention
 
@@ -124,14 +124,34 @@ Both share the same core structure including 需求词条; domain differences ar
 - 已确认 vs 待确认明确区分
 - 存在权衡时直接陈述
 - 不重复相同观点
+- PRD 只呈现最终产品需求状态，不写互相叠加的 addendum、中间决策表或页面清单
+- 不生成独立的中间规则章节或页面/状态清单；设计稿和页面状态写入对应功能点
+- 词条与埋点保持独立章节；功能词条只收录真实 UI 文案、label、icon/tooltip/accessibility 名称，不收录 API 名称或内部技术术语
+
+### Gallery PRD 章节结构
+
+Gallery PRD 默认使用精简结构：
+
+1. 变更日志
+2. 需求背景与目标
+3. 需求范围
+4. 核心需求说明
+5. 词条与文案规范
+6. 待确认问题
+7. 验收标准
+8. 非功能需求
+9. 埋点
+10. 附录
+
+第四章根据用户核心使用路径展开。每个功能点按这个顺序写：
+
+1. Nothing 方案
+2. 待 Google Review 项（仅外部 review 需要时）
+3. 内部待确认项（仅产品/设计/研发仍未定时）
 
 ### §4 需求章节写作规范
 
-需求描述用 **叙事格式**，不用代码块和僵硬的属性表。每条需求包含：
-- 功能名 + 一句话定义
-- 优先级
-- 行为描述（自然语言）
-- 正常路径 + 边界情况（自然语言，不用 Gherkin 代码块）
+需求描述用 **叙事格式**，不用代码块和僵硬的属性表。每条需求包含功能名、一句话定义、优先级、行为描述、正常路径和边界情况。若是 Gallery API / Google 协作类 PRD，优先使用「Nothing 方案 / 待 Google Review 项 / 内部待确认项」结构。
 
 格式示例：
 ```
@@ -309,7 +329,7 @@ PRD 撰写完成后创建 Jira Story 关联父 Epic：
 ## Reference Files
 
 - [assets/camera-prd-template.md](assets/camera-prd-template.md) — Camera PRD template (11 sections)
-- [assets/gallery-feature-template.md](assets/gallery-feature-template.md) — Gallery PRD template (12 sections + 附录)
+- [assets/gallery-feature-template.md](assets/gallery-feature-template.md) — Gallery PRD template (10 sections)
 - [references/camera-required-info-checklist.md](references/camera-required-info-checklist.md) — Camera completeness checklist
 - [references/gallery-required-info-checklist.md](references/gallery-required-info-checklist.md) — Gallery completeness checklist
 - [references/review-rubric.md](references/review-rubric.md) — Dev/test review rubric
