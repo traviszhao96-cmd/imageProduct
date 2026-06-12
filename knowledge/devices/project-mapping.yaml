@@ -1,11 +1,11 @@
 # Nothing Product Line — Device Project Mapping
-# Source: OS project information table + camera spec sheets
-# 项目代号 → 小精灵名(Pokémon codename) → 市场名 → SW代号 → Model → SoC → Camera
+# Source: OS project information table + PM table (camera specs / PM assignments)
+# 项目代号 → 小精灵名 → 市场名 → SW代号 → Model → SoC → Camera → PM
 # Last updated: 2026-06-12
 
 devices:
   # ═══════════════════════════════════════════════════════════════
-  # Phone (1) Series
+  # Phone (1)
   # ═══════════════════════════════════════════════════════════════
   - project_code: "20111"
     codename: Abra
@@ -14,14 +14,21 @@ devices:
     model_code: A063
     colours: [white, black]
     resolution: "1080 x 2400"
+    launch: 2022-07
+    phase: "LMT — 15V 升级"
     soc: SM7435  # Snapdragon 778G+
     camera:
       rear_main: 50M IMX766 (OIS)
       rear_uw: 50M JN1
       front: 16M IMX471
+    pm:
+      spt: Galen
+      pdt: Galen
+      lmt: Huanhua
+      algorithm: null
 
   # ═══════════════════════════════════════════════════════════════
-  # Phone (2) Series
+  # Phone (2)
   # ═══════════════════════════════════════════════════════════════
   - project_code: "22111"
     codename: Alakazam
@@ -32,14 +39,21 @@ devices:
       india: AIN065
     colours: [white, gray]
     resolution: "1080 x 2412"
+    launch: 2023-07
+    phase: "LMT — 16B 升级"
     soc: SM8475  # Snapdragon 8+ Gen1
     camera:
       rear_main: 50M IMX890 (OIS)
       rear_uw: 50M JN1
       front: 32M IMX615
+    pm:
+      spt: Galen
+      pdt: Galen
+      lmt: Kiky
+      algorithm: null
 
   # ═══════════════════════════════════════════════════════════════
-  # Phone (2a) Series
+  # Phone (2a)
   # ═══════════════════════════════════════════════════════════════
   - project_code: "23111"
     codename: Aerodactyl
@@ -48,12 +62,22 @@ devices:
     model_code: A142
     colours: [white, black, milk, blue, "Community Edition"]
     resolution: "1084 x 2412"
+    launch: 2024-03
+    phase: "LMT — 16B 升级"
     soc: D7200  # MediaTek Dimensity 7200
     camera:
       rear_main: 50M GN9 (OIS)
       rear_uw: 50M JN1
       front: 32M IMX615
+    pm:
+      spt: Galen
+      pdt: Galen
+      lmt: Kiky
+      algorithm: null
 
+  # ═══════════════════════════════════════════════════════════════
+  # Phone (2a) Plus
+  # ═══════════════════════════════════════════════════════════════
   - project_code: "23113"
     codename: Aerodactyl Plus
     market_name: Nothing Phone (2a) Plus
@@ -61,11 +85,18 @@ devices:
     model_code: A142P
     colours: [grey, black, "Community Edition"]
     resolution: "1084 x 2412"
+    launch: 2024-07
+    phase: "LMT — 16B 升级"
     soc: D7200  # MediaTek Dimensity 7200
     camera:
       rear_main: 50M GN9 (OIS)
       rear_uw: 50M JN1
       front: 50M JN1
+    pm:
+      spt: Galen
+      pdt: Galen
+      lmt: Kiky
+      algorithm: null
 
   # ═══════════════════════════════════════════════════════════════
   # CMF Phone 1
@@ -77,32 +108,49 @@ devices:
     model_code: A015
     colours: [black, light green, blue, orange]
     resolution: "1080 x 2400"
-    soc: SM7635  # [待确认] Snapdragon 7s Gen3
-    camera: {}  # TBD
+    launch: 2024-07
+    phase: "LMT — 16B 升级"
+    soc: null  # "24M" in PM table — TBD, possibly placeholder
+    camera:
+      rear_main: 50M IMX882
+      rear_uw: 2M SC202
+      front: 16M GC16B
+    pm:
+      spt: Galen
+      pdt: Xiao Fan
+      lmt: Kiky
+      algorithm: null
 
   # ═══════════════════════════════════════════════════════════════
   # Phone (3) — 旗舰
   # ═══════════════════════════════════════════════════════════════
   - project_code: "23112"
-    codename: Arbok
+    codename: Arbok  # OS table: Arbok; PM table OCR: Abrok
     market_name: Nothing Phone (3)
     sw_codename: Metroid
     model_code: A024
     colours: [White, Black]
     resolution: "1260 x 2800"
-    soc: SM8735  # [待确认] Snapdragon 8s Gen3
-    camera: {}  # TBD
+    launch: 2025-07
+    phase: PDT
+    soc: SM8735  # Snapdragon 8s Gen3
+    camera:
+      rear_main: 50M OV05H (OIS)
+      rear_uw: 50M JN1
+      rear_tele: 50M JN5 (OIS)
+      front: 50M JN1
+    pm:
+      spt: Galen
+      pdt: Dorian
+      lmt: null
+      algorithm: null
 
   # ═══════════════════════════════════════════════════════════════
-  # Phone (3a) Series
+  # Phone (3a) / (3a) Pro — 同项目代号，不同型号
   # ═══════════════════════════════════════════════════════════════
   - project_code: "24111"
-    codename:
-      base: Arcanine
-      pro: Arcanine Pro
-    market_name:
-      base: Nothing Phone (3a)
-      pro: Nothing Phone (3a) Pro
+    codename: Arcanine        # Pro: Arcanine Pro
+    market_name: Nothing Phone (3a)   # Pro: Nothing Phone (3a) Pro
     sw_codename: Asteroids
     model_code:
       base: A059
@@ -111,9 +159,29 @@ devices:
       base: [Black, White, Blue, "Community Edition"]
       pro: [Black, Grey]
     resolution: "1080 x 2392"
-    soc: SM7635  # [待确认] Snapdragon 7s Gen3
-    camera: {}  # TBD
+    launch: 2025-03
+    phase: "LMT — 16B 升级"
+    soc: SM7635  # Snapdragon 7s Gen3 (both base & pro)
+    camera:
+      base:
+        rear_main: 50M GN9 (OIS)
+        rear_uw: 8M IMX355
+        rear_tele: 50M JN5
+        front: 32M KD1
+      pro:
+        rear_main: 50M GNJ (OIS)
+        rear_uw: 8M IMX355
+        rear_tele: 50M IMX882 (OIS)
+        front: 50M JN1
+    pm:
+      spt: Galen
+      pdt: Vivian
+      lmt: Kiky
+      algorithm: null
 
+  # ═══════════════════════════════════════════════════════════════
+  # Phone (3a) Lite
+  # ═══════════════════════════════════════════════════════════════
   - project_code: "24121T"
     codename: Bulbasaur T
     market_name: Nothing Phone (3a) Lite
@@ -121,11 +189,22 @@ devices:
     model_code: A001T
     colours: [Black, White]
     resolution: "1080 x 2392"
-    soc: null  # TBD
-    camera: {}  # TBD
+    launch: 2025-10
+    phase: PDT
+    soc: null  # "24M" in PM table — TBD
+    camera:
+      rear_main: 50M GN9
+      rear_depth: 2M GC02M1
+      rear_uw: 8M GC08A
+      front: 16M GC16B
+    pm:
+      spt: Xiao Fan
+      pdt: Xiao Fan
+      lmt: null
+      algorithm: null
 
   # ═══════════════════════════════════════════════════════════════
-  # CMF Phone 2 Series
+  # CMF Phone 2 Pro
   # ═══════════════════════════════════════════════════════════════
   - project_code: "24121"
     codename: Bulbasaur
@@ -134,9 +213,23 @@ devices:
     model_code: A001
     colours: [black, light green, orange, white]
     resolution: "1080 x 2392"
-    soc: SM7750  # [待确认] Snapdragon 7 Gen4
-    camera: {}  # TBD
+    launch: 2025-05
+    phase: "LMT — 16B 升级"
+    soc: null  # "24M" in PM table — TBD
+    camera:
+      rear_main: 50M GN9
+      rear_uw: 50M OV50D
+      rear_tele: 8M GC08A
+      front: 16M GC16B
+    pm:
+      spt: Xiao Fan
+      pdt: Xiao Fan
+      lmt: "Kiky / Wonne"
+      algorithm: null
 
+  # ═══════════════════════════════════════════════════════════════
+  # CMF Phone 2 Air
+  # ═══════════════════════════════════════════════════════════════
   - project_code: "24131"
     codename: Bulbasaur Lite
     market_name: CMF by Nothing Phone 2 Air
@@ -144,17 +237,18 @@ devices:
     model_code: A001L
     colours: []  # TBD
     resolution: null  # TBD
+    launch: null  # TBD
+    phase: null  # not in PM table
     soc: null  # TBD
     camera: {}  # TBD
+    pm: {}  # TBD
 
   # ═══════════════════════════════════════════════════════════════
-  # Phone (4a) Series
+  # Phone (4a) / (4a) Pro
   # ═══════════════════════════════════════════════════════════════
   - project_code: "25111"
-    codename: Bellsprout
-    market_name:
-      base: Nothing Phone (4a)
-      pro: Nothing Phone (4a) Pro
+    codename: Bellsprout        # Pro: Bellsprout pro
+    market_name: Nothing Phone (4a)   # Pro: Nothing Phone (4a) Pro
     sw_codename: Frogger
     model_code:
       base: A069
@@ -165,18 +259,29 @@ devices:
     screen:
       base: 6.78" 1224x2720
       pro: 6.83" 1260x2800
-    soc: null  # TBD
-    camera: {}  # TBD
-
-  - project_code: "25141"
-    codename: Blastoise
-    market_name: Nothing Phone (4a) Lite  # 暂定
-    sw_codename: Contra
-    model_code: A009
-    colours: []  # TBD
-    screen: 6.77" 1080x2344
-    soc: null  # TBD
-    camera: {}  # TBD
+    launch: 2026-03
+    phase: PDT
+    soc:
+      base: SM7635   # Snapdragon 7s Gen3
+      pro: SM7750    # Snapdragon 7 Gen4
+    camera:
+      base:
+        rear_main: 50M GN9 (OIS)
+        rear_uw: 8M IMX355
+        rear_tele: 50M JN5 (OIS)
+        front: 32M KD1
+      pro:
+        rear_main: 50M IMX896 (OIS)    # ← IMX896 在这里！
+        rear_uw: 8M IMX355
+        rear_tele: 50M JN5 (OIS)
+        front: 32M KD1
+    pm:
+      spt: Vivian
+      pdt:
+        base: "Vivian / Galen(代)"
+        pro: Vivian
+      lmt: null
+      algorithm: null
 
   # ═══════════════════════════════════════════════════════════════
   # Phone (4b)
@@ -188,11 +293,38 @@ devices:
     model_code: A009P
     colours: []  # TBD
     screen: 6.77" 1080x2344
-    soc: null  # TBD
+    launch: null  # TBD
+    phase: null  # TBD
+    soc: null  # TBD — PM table listed as SM6650 but that was old CMF 3 Pro assignment
     camera:
       rear_main: 50M JN1 (OIS)       # S5KJNSSQ33, 1/2.76", 0.64μm, f/1.8
       rear_uw: 8M GC08A8             # 1/4", 1.12μm, f/2.2, FF
       front: 16M GC16B3C             # 1/3.1", 1.0μm, f/2.45
+    pm:
+      spt: Xiao Fan   # from PM table (old CMF 3 Pro)
+      pdt: Xiao Fan
+      lmt: null
+      algorithm: null
+
+  # ═══════════════════════════════════════════════════════════════
+  # Phone (4a) Lite（暂定）
+  # ═══════════════════════════════════════════════════════════════
+  - project_code: "25141"
+    codename: Blastoise
+    market_name: Nothing Phone (4a) Lite  # 暂定
+    sw_codename: Contra
+    model_code: A009
+    colours: []  # TBD
+    screen: 6.77" 1080x2344
+    launch: 2026-05  # from PM table (was CMF 3)
+    phase: SPT
+    soc: 25MS  # TBD
+    camera: {}  # TBD
+    pm:
+      spt: Huanhua  # from PM table
+      pdt: Huanhua
+      lmt: null
+      algorithm: null
 
   # ═══════════════════════════════════════════════════════════════
   # CMF Phone 3
@@ -204,11 +336,14 @@ devices:
     model_code: A009C
     colours: []  # TBD
     resolution: null  # TBD
-    soc: null  # TBD
+    launch: 2026-05  # inherited from old PM table 25141
+    phase: SPT
+    soc: 25MS  # TBD — PM table had this on old 25141 (CMF 3)
     camera: {}  # TBD
+    pm: {}  # TBD
 
   # ═══════════════════════════════════════════════════════════════
-  # Phone (5a) Series — 下一代
+  # Phone (5a) / (5a) Pro — 下一代
   # ═══════════════════════════════════════════════════════════════
   - project_code: "26111"
     codename: Caterpie
@@ -219,12 +354,14 @@ devices:
     model_code: null  # TBD
     colours: []  # TBD
     screen: null  # TBD
-    soc: null  # TBD — platform TBD
+    launch: null  # TBD
+    phase: null  # TBD
+    soc: null  # platform TBD
     camera:
       base:
         rear_main: 50M OV51A (OIS)   # 1/1.95"
         rear_uw: 8M IMX355           # 1/4", FF
-        rear_tele: null              # Flicker Sensor only
+        rear_tele: null              # Flicker Sensor only (no telephoto)
         front: 32M OV32D
       pro:
         rear_main: 50M OV51A (OIS)   # 1/1.95"
@@ -232,34 +369,55 @@ devices:
         rear_tele: 50M KN1 (OIS)     # 1/3.1", 3.9x L型潜望, 舜宇
         front: 32M OV32D
     software_baseline: "25111 Pro + NOS5.0"
-    note: |
-      继承 25111/25131 所有功能。关键变化 vs 25131:
-      - 主摄 JN1→OV51A, 超广角 GC08A8→IMX355, 前置 GC16B3C→OV32D
-      - Pro 新增 3.9x 潜望长焦 (KN1), Base 无长焦
-      - 新增: 运动抓拍, HDR运动场景, 成像预览一致性(2DOL), AIGC/SR, 4K60FPS, Preset 3.0, 照片风格, 专业模式2.0, 双摄同录v2
-      - 移除: TF 50MP Raw HDR, TF 25MP, 聚会模式, 视频 Log, 视频录制红框
+    key_changes_from_25131:
+      - "主摄 JN1 → OV51A"
+      - "超广角 GC08A8 → IMX355"
+      - "前置 GC16B3C → OV32D"
+      - "Base 无长焦（仅 Flicker Sensor）"
+      - "Pro 新增 3.9x 潜望长焦 KN1"
+    new_features_p0:
+      - 运动抓拍（普通模式引导入口）
+      - HDR 运动场景升级 + 影调升级 + 智能分区
+      - 成像预览一致性（2DOL 优先）
+      - 自然质感人像（美颜升级）
+      - AIGC/SR 效果优化
+      - 4K 60FPS (Pro SAT / Ultra 主摄&长焦)
+      - 前置/广角 4K (upscale)
+      - Preset 3.0 + AI Preset
+      - 照片风格（自然 & 鲜明）
+      - 专业模式 2.0
+      - 双摄同录 v2
+      - 录制中前后镜头切换
+      - 视频专业参数调节
+    removed_features:
+      - "TF 50MP QuadBayer Raw HDR"
+      - "TF 25MP"
+      - "聚会模式"
+      - "视频 Log 模式"
+      - "视频录制红框提示"
+    pm: {}  # TBD
 
 # ═══════════════════════════════════════════════════════════════
 # Model Code Quick Index
 # ═══════════════════════════════════════════════════════════════
 model_index:
-  A001:  CMF Phone 2 Pro (Bulbasaur)
-  A001L: CMF Phone 2 Air (Bulbasaur Lite)
-  A001T: Phone (3a) Lite (Bulbasaur T)
-  A009:  Phone (4a) Lite (Blastoise)
-  A009C: CMF Phone 3 (Blastoise C)
-  A009P: Phone (4b) (Blastoise Pro)
-  A015:  CMF Phone 1 (Beedrill)
-  A024:  Phone (3) (Arbok)
-  A059:  Phone (3a) (Arcanine)
-  A059P: Phone (3a) Pro (Arcanine Pro)
-  A063:  Phone (1) (Abra)
-  A065:  Phone (2) global (Alakazam)
-  AIN065: Phone (2) India (Alakazam)
-  A069:  Phone (4a) (Bellsprout)
-  A069P: Phone (4a) Pro (Bellsprout)
-  A142:  Phone (2a) (Aerodactyl)
-  A142P: Phone (2a) Plus (Aerodactyl Plus)
+  A001:  CMF Phone 2 Pro (Bulbasaur / Galaga)
+  A001L: CMF Phone 2 Air (Bulbasaur Lite / Bomberman)
+  A001T: Phone (3a) Lite (Bulbasaur T / Galaxian)
+  A009:  Phone (4a) Lite (Blastoise / Contra)
+  A009C: CMF Phone 3 (Blastoise C / Arkanoid)
+  A009P: Phone (4b) (Blastoise Pro / SuperContra)
+  A015:  CMF Phone 1 (Beedrill / Tetris)
+  A024:  Phone (3) (Arbok / Metroid)
+  A059:  Phone (3a) (Arcanine / Asteroids)
+  A059P: Phone (3a) Pro (Arcanine Pro / Asteroids)
+  A063:  Phone (1) (Abra / Spacewar)
+  A065:  Phone (2) global (Alakazam / Pong)
+  AIN065: Phone (2) India (Alakazam / Pong)
+  A069:  Phone (4a) (Bellsprout / Frogger)
+  A069P: Phone (4a) Pro (Bellsprout / Frogger)
+  A142:  Phone (2a) (Aerodactyl / Pacman)
+  A142P: Phone (2a) Plus (Aerodactyl Plus / PacmanPro)
 
 # ═══════════════════════════════════════════════════════════════
 # SW Codename Quick Index
@@ -281,22 +439,10 @@ sw_index:
   Arkanoid:    CMF Phone 3
 
 # ═══════════════════════════════════════════════════════════════
-# SoC Reference
-# ═══════════════════════════════════════════════════════════════
-soc_reference:
-  SM7435:  Snapdragon 778G+ (6nm)
-  SM8475:  Snapdragon 8+ Gen1 (4nm)
-  D7200:   MediaTek Dimensity 7200 (4nm)
-  SM7635:  Snapdragon 7s Gen3 (4nm)
-  SM7750:  Snapdragon 7 Gen4 (4nm)
-  SM8735:  Snapdragon 8s Gen3 (4nm)
-  SM6650:  Snapdragon 6 Gen1 (4nm)
-
-# ═══════════════════════════════════════════════════════════════
 # Sensor Datasheet Index
 # ═══════════════════════════════════════════════════════════════
 # See knowledge/devices/sensors/:
 #   S5KJNSSQ33.yaml  — JN1 (50MP, 0.64μm, 1/2.76")
 #   GC08A8.yaml      — GC08A (8MP, 1.12μm, 1/4")
-#   IMX896-AJH5-C.yaml — IMX896 (50MP)
+#   IMX896-AJH5-C.yaml — IMX896 (50MP, OIS-capable)
 #   OS08A10.yaml     — OS08A10
