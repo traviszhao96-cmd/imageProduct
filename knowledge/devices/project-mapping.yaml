@@ -1,0 +1,210 @@
+# Nothing Product Line — Device Project Mapping
+# 项目代号 → 小精灵名(Pokémon codename) → 市场名 → SoC → Camera Spec
+# Last updated: 2026-06-12
+
+devices:
+  - project_code: "20111"
+    codename: Abra
+    market_name: Nothing Phone (1)
+    soc: SM7435  # Snapdragon 778G+
+    camera:
+      rear_main: 50M IMX766 (OIS)
+      rear_uw: 50M JN1
+      front: 16M IMX471
+
+  - project_code: null  # TBD
+    codename: Alakazam
+    market_name: Nothing Phone (2)
+    soc: SM8475  # Snapdragon 8+ Gen1
+    camera:
+      rear_main: 50M IMX890 (OIS)
+      rear_uw: 50M JN1
+      front: 32M IMX615
+
+  - project_code: null  # TBD
+    codename: Aerodactyl
+    market_name: Nothing Phone (2a)
+    soc: D7200  # MediaTek Dimensity 7200
+    camera:
+      rear_main: 50M GN9 (OIS)
+      rear_uw: 50M JN1
+      front: 32M IMX615
+
+  - project_code: null  # TBD
+    codename: Aerodactyl Plus
+    market_name: Nothing Phone (2a) Plus
+    soc: D7200  # MediaTek Dimensity 7200
+    camera:
+      rear_main: 50M GN9 (OIS)
+      rear_uw: 50M JN1
+      front: 50M JN1
+
+  - project_code: null  # TBD
+    codename: null
+    market_name: null
+    soc: SM7635  # Snapdragon 7s Gen3
+    camera:
+      rear_main: 50M IMX882
+      rear_uw: 2M SC202
+      front: 16M GC16B
+
+  # ── CMF & Phone (3a) Series ──
+
+  - project_code: "22111"
+    codename: Beedrill
+    market_name: CMF Phone 1
+    soc: SM7635  # Snapdragon 7s Gen3
+    camera:
+      rear_main: 50M GN9 (OIS)
+      rear_uw: 8M IMX355
+      rear_tele: 50M JN5
+      front: 32M KD1
+
+  - project_code: "23111"
+    codename: Arcanine
+    market_name: Nothing Phone (3a)
+    soc: SM7635  # Snapdragon 7s Gen3
+    camera:
+      rear_main: 50M IMX882
+      rear_uw: 2M SC202
+      front: 16M GC16B
+
+  - project_code: "23113"
+    codename: Arcanine Pro
+    market_name: Nothing Phone (3a) Pro
+    soc: SM7635
+    camera: {}  # TBD
+
+  - project_code: "23114"
+    codename: Bulbasaur
+    market_name: Nothing Phone (3a) lite
+    soc: SM7635
+    camera: {}  # TBD
+
+  # ── Phone (3) / CMF Phone 2 Series ──
+
+  - project_code: "24111"
+    codename: null  # TBD
+    market_name: CMF Phone 2 Pro
+    soc: SM7750  # Snapdragon 7 Gen4
+    camera:
+      rear_main: 50M GN9
+      rear_uw: 50M OV50D
+      rear_tele: 8M GC08A
+      front: 16M GC16B
+
+  - project_code: "24111 Pro"
+    codename: null
+    market_name: null
+    soc: SM7750  # Snapdragon 7 Gen4
+    camera:
+      rear_main: 50M GNJ (OIS)
+      rear_uw: 8M IMX355
+      rear_tele: 50M IMX882 (OIS)
+      front: 50M JN1
+
+  - project_code: "24121"
+    codename: null  # TBD
+    market_name: Nothing Phone (3)
+    soc: SM8735  # Snapdragon 8s Gen3
+    camera:
+      rear_main: 50M OV05H (OIS)
+      rear_uw: 50M JN1
+      rear_tele: 50M JN5 (OIS)
+      front: 50M JN1
+
+  # ── Phone (4a) Series ──
+
+  - project_code: null  # TBD
+    codename: null
+    market_name: Nothing Phone (4a)
+    soc: SM7635  # Snapdragon 7s Gen3
+    camera:
+      rear_main: 50M GN9
+      rear_depth: 2M GC02M1
+      rear_uw: 8M GC08A
+      front: 16M GC16B
+
+  - project_code: null  # TBD
+    codename: null
+    market_name: Nothing Phone (4a) Pro
+    soc: SM7750  # Snapdragon 7 Gen4
+    camera:
+      rear_main: 50M GN9 (OIS)
+      rear_uw: 8M IMX355
+      rear_tele: 50M JN5 (OIS)
+      front: 32M KD1
+
+  - project_code: null  # TBD
+    codename: null
+    market_name: null
+    soc: SM8735  # Snapdragon 8s Gen3
+    camera:
+      rear_main: 50M IMX896 (OIS)
+      rear_uw: 8M IMX355
+      rear_tele: 50M JN5 (OIS)
+      front: null  # TBD
+
+  # ── Variants & Ti ──
+
+  - project_code: "23112"
+    codename: Abrok
+    market_name: null  # TBD
+    soc: null  # TBD
+    camera: {}  # TBD
+
+  - project_code: null
+    codename: Bulbasaur-Ti
+    market_name: null  # TBD
+    soc: null
+    camera: {}
+
+  - project_code: "24121T"
+    codename: null
+    market_name: null  # TBD
+    soc: null
+    camera: {}
+
+  # ── CMF Phone 3 Series ──
+
+  - project_code: "25111"
+    codename: Bellsprout
+    market_name: CMF Phone 3
+    soc: null  # TBD
+    camera: {}  # TBD
+
+  - project_code: "25111 Pro"
+    codename: Bellsprout pro
+    market_name: CMF Phone 3 Pro
+    soc: 25MS  # TBD
+    camera: {}  # TBD
+
+  - project_code: "25141"
+    codename: Blastoise
+    market_name: null  # TBD
+    soc: null
+    camera: {}
+
+  - project_code: "25131"
+    codename: null
+    market_name: TBD
+    soc: SM6650  # Snapdragon 6 Gen1
+    camera: {}  # TBD
+
+# ── SoC Reference ──
+soc_reference:
+  SM7435:  Snapdragon 778G+ (6nm)
+  SM8475:  Snapdragon 8+ Gen1 (4nm)
+  D7200:   MediaTek Dimensity 7200 (4nm)
+  SM7635:  Snapdragon 7s Gen3 (4nm)
+  SM7750:  Snapdragon 7 Gen4 (4nm)
+  SM8735:  Snapdragon 8s Gen3 (4nm)
+  SM6650:  Snapdragon 6 Gen1 (4nm)
+  25MS:    null  # TBD — possibly MediaTek
+
+# ── Sensor Reference ──
+# See knowledge/devices/sensors/ for detailed datasheets:
+#   S5KJNSSQ33.yaml  — JN1 (50MP, 0.64μm)
+#   GC08A8.yaml      — GC08A (8MP)
+#   IMX896-AJH5-C.yaml — IMX896 (50MP, OIS-capable)
+#   OS08A10.yaml     — OS08A10
