@@ -1,0 +1,2073 @@
+{
+  "meta": {
+    "project": "25131",
+    "source": "Feature List V2.8 sheet3",
+    "converted": "2026-06-09",
+    "cameras": {
+      "ultrawide": "GC08A8 8MP 0.6x",
+      "main": "JNS 50MP 1x"
+    }
+  },
+  "features": [
+    {
+      "mode": "拍照",
+      "category": "预览",
+      "group": "底层通用",
+      "name": "普通场景检测",
+      "support": {
+        "ultrawide": "supported",
+        "main": "supported"
+      },
+      "verify": "切换不同场景时，预览是否可以检测到HDR、夜景等场景",
+      "interaction": "预览框"
+    },
+    {
+      "mode": "拍照",
+      "category": "预览",
+      "group": "底层通用",
+      "name": "AI场景检测",
+      "support": {
+        "ultrawide": "supported",
+        "main": "supported"
+      },
+      "verify": "可以检测到AI场景检测算法定义中的场景",
+      "interaction": "预览框"
+    },
+    {
+      "mode": "拍照",
+      "category": "预览",
+      "group": "底层通用",
+      "name": "脏污检测",
+      "support": {
+        "ultrawide": "supported",
+        "main": "supported"
+      },
+      "verify": "手机镜头脏污时，UI上是否有脏污提示",
+      "interaction": "预览框"
+    },
+    {
+      "mode": "拍照",
+      "category": "预览",
+      "group": "底层通用",
+      "name": "人脸检测",
+      "support": {
+        "ultrawide": "supported",
+        "main": "supported"
+      },
+      "verify": "拍摄人物时，人脸是否会出现人脸对焦框；算法：关注大逆光/口罩/墨镜",
+      "interaction": "预览框"
+    },
+    {
+      "mode": "拍照",
+      "category": "预览",
+      "group": "底层通用",
+      "name": "数码变焦",
+      "support": {
+        "ultrawide": "supported",
+        "main": "supported"
+      },
+      "verify": "双指缩放时，预览是否会显示变焦倍数",
+      "interaction": "Zoom"
+    },
+    {
+      "mode": "拍照",
+      "category": "预览",
+      "group": "底层通用",
+      "name": "运动检测",
+      "support": {
+        "ultrawide": "supported",
+        "main": "supported"
+      },
+      "verify": "不支持运动抓拍",
+      "reason": "product:4.1 Action Mode PRD已立项",
+      "interaction": "Top Toolbar"
+    },
+    {
+      "mode": "拍照",
+      "category": "预览",
+      "group": "底层通用",
+      "name": "SAT",
+      "support": {
+        "ultrawide": "supported",
+        "main": "supported"
+      },
+      "verify": "广角、主摄之间可以平滑切换",
+      "interaction": "Zoom"
+    },
+    {
+      "mode": "拍照",
+      "category": "预览",
+      "group": "底层通用",
+      "name": "OIS",
+      "support": {
+        "ultrawide": "unsupported",
+        "main": "supported"
+      },
+      "interaction": "Zoom"
+    },
+    {
+      "mode": "拍照",
+      "category": "预览",
+      "group": "底层通用",
+      "name": "EIS",
+      "support": {
+        "ultrawide": "unsupported",
+        "main": "supported"
+      },
+      "verify": "Zoom到高倍率预览需要支持EIS；4x以上支持",
+      "interaction": "Zoom"
+    },
+    {
+      "mode": "拍照",
+      "category": "预览",
+      "group": "底层通用",
+      "name": "TouchAE&AF、FaceAE&AF、TouchAE&AF Lock、CAF、EV+-",
+      "support": {
+        "ultrawide": "supported",
+        "main": "supported"
+      },
+      "verify": "短按预览区域，预览是否有AE调节UI；长按预览区域，是否有AE&AF锁定功能",
+      "interaction": "Top Toolbar"
+    },
+    {
+      "mode": "拍照",
+      "category": "预览",
+      "group": "滤镜",
+      "name": "滤镜+普通场景检测+AI场景检测",
+      "support": {
+        "ultrawide": "supported",
+        "main": "supported"
+      },
+      "verify": "单击滤镜图标，选择一种滤镜效果，查看是否有滤镜效果",
+      "interaction": "Top Toolbar"
+    },
+    {
+      "mode": "拍照",
+      "category": "预览",
+      "group": "曝光调节",
+      "name": "EV",
+      "support": {
+        "ultrawide": "supported",
+        "main": "supported"
+      },
+      "verify": "单独EV调节功能，支持-2 ~ 2 范围EV调节。支持HDR/夜景",
+      "interaction": "Top Toolbar"
+    },
+    {
+      "mode": "拍照",
+      "category": "预览",
+      "group": "畸变矫正",
+      "name": "镜头畸变矫正",
+      "support": {
+        "ultrawide": "supported",
+        "main": "unsupported"
+      },
+      "verify": "切到超广角镜头，检查预览是否有畸变矫正功能",
+      "interaction": "Zoom"
+    },
+    {
+      "mode": "拍照",
+      "category": "预览",
+      "group": "无交互息屏",
+      "name": "长时间无交互息屏以节约电量",
+      "support": {
+        "ultrawide": "supported",
+        "main": "supported"
+      },
+      "verify": "PRD-相机息屏交互",
+      "interaction": "预览框"
+    },
+    {
+      "mode": "拍照",
+      "category": "交互",
+      "group": "闪光灯",
+      "name": "多帧",
+      "support": {
+        "ultrawide": "supported",
+        "main": "supported"
+      },
+      "interaction": "Top Toolbar"
+    },
+    {
+      "mode": "拍照",
+      "category": "交互",
+      "group": "闪光灯",
+      "name": "多帧 + 滤镜",
+      "support": {
+        "ultrawide": "supported",
+        "main": "supported"
+      },
+      "interaction": "Top Toolbar"
+    },
+    {
+      "mode": "拍照",
+      "category": "交互",
+      "group": "倒计时",
+      "name": "支持 3s 5s 10s 倒计时",
+      "support": {
+        "ultrawide": "supported",
+        "main": "supported"
+      },
+      "interaction": "Top Toolbar"
+    },
+    {
+      "mode": "拍照",
+      "category": "交互",
+      "group": "Glyph灯",
+      "name": "多帧 + 滤镜",
+      "support": {
+        "ultrawide": "unsupported",
+        "main": "unsupported"
+      },
+      "verify": "更新为 nothing 项目，支持 glyph",
+      "interaction": "Top Toolbar"
+    },
+    {
+      "mode": "拍照",
+      "category": "交互",
+      "group": "AI Zoom",
+      "name": "Hyper Zoom",
+      "support": {
+        "ultrawide": "unsupported",
+        "main": "unsupported"
+      },
+      "verify": "平台不支持",
+      "interaction": "Top Toolbar"
+    },
+    {
+      "mode": "拍照",
+      "category": "交互",
+      "group": "HDR",
+      "name": "Auto HDR",
+      "support": {
+        "ultrawide": "supported",
+        "main": "supported"
+      },
+      "verify": "HDR 算法",
+      "interaction": "Top Toolbar"
+    },
+    {
+      "mode": "拍照",
+      "category": "交互",
+      "group": "HDR",
+      "name": "HDR关",
+      "support": {
+        "ultrawide": "supported",
+        "main": "supported"
+      },
+      "verify": "走轻量化 MFNR 算法 @Maico Ma",
+      "interaction": "Top Toolbar"
+    },
+    {
+      "mode": "拍照",
+      "category": "交互",
+      "group": "滤镜",
+      "name": "延展 光韵 映迹 琥珀 硬朗 自然 复古 鲜明 菲林 暖调 冷调 质感 黑白 默片 负片 玻璃",
+      "support": {
+        "ultrawide": "supported",
+        "main": "supported"
+      },
+      "verify": "选择一种滤镜，拍照是否有滤镜效果",
+      "interaction": "Top Toolbar"
+    },
+    {
+      "mode": "拍照",
+      "category": "交互",
+      "group": "滤镜",
+      "name": "自定义滤镜，支持用户导入lut",
+      "support": {
+        "ultrawide": "supported",
+        "main": "supported"
+      },
+      "interaction": "Top Toolbar"
+    },
+    {
+      "mode": "拍照",
+      "category": "交互",
+      "group": "滤镜",
+      "name": "滤镜强度调节，支持 0-10.0 共100级的滤镜强度调节",
+      "support": {
+        "ultrawide": "supported",
+        "main": "supported"
+      },
+      "interaction": "Top Toolbar"
+    },
+    {
+      "mode": "拍照",
+      "category": "交互",
+      "group": "风格",
+      "name": "支持 曝光 对比度 饱和度 色温 色调 清晰度 颗粒，每个小项 支持 0-10.0 共100级的强度调节",
+      "support": {
+        "ultrawide": "supported",
+        "main": "supported"
+      },
+      "interaction": "Top Toolbar"
+    },
+    {
+      "mode": "拍照",
+      "category": "交互",
+      "group": "Preset",
+      "name": "顶部快捷保存入口",
+      "support": {
+        "ultrawide": "supported",
+        "main": "supported"
+      },
+      "interaction": "Preset"
+    },
+    {
+      "mode": "拍照",
+      "category": "交互",
+      "group": "色彩模式",
+      "name": "Auto tone",
+      "support": {
+        "ultrawide": "supported",
+        "main": "supported"
+      },
+      "interaction": "Top Toolbar"
+    },
+    {
+      "mode": "拍照",
+      "category": "交互",
+      "group": "动态照片",
+      "name": "无效信息截取",
+      "support": {
+        "ultrawide": "supported",
+        "main": "supported"
+      },
+      "verify": "按下快门后快速撤手，视频中截取掉无效信息",
+      "interaction": "Shutter"
+    },
+    {
+      "mode": "拍照",
+      "category": "交互",
+      "group": "动态照片",
+      "name": "视频支持录制声音",
+      "support": {
+        "ultrawide": "supported",
+        "main": "supported"
+      },
+      "interaction": "Shutter"
+    },
+    {
+      "mode": "拍照",
+      "category": "交互",
+      "group": "高像素",
+      "name": "开启后输出为50MP",
+      "support": {
+        "ultrawide": "unsupported",
+        "main": "supported"
+      },
+      "interaction": "Top Toolbar"
+    },
+    {
+      "mode": "拍照",
+      "category": "交互",
+      "group": "网格线",
+      "name": "选择开启和关闭网格线",
+      "support": {
+        "ultrawide": "supported",
+        "main": "supported"
+      },
+      "interaction": "Top Toolbar"
+    },
+    {
+      "mode": "拍照",
+      "category": "交互",
+      "group": "比例",
+      "name": "支持选择 1:1 4:3 16:9 FULL 四种画幅比例",
+      "support": {
+        "ultrawide": "supported",
+        "main": "supported"
+      },
+      "interaction": "Top Toolbar"
+    },
+    {
+      "mode": "拍照",
+      "category": "交互",
+      "group": "水印",
+      "name": "点击选择开启和关闭水印，长按进入水印设置界面",
+      "support": {
+        "ultrawide": "supported",
+        "main": "supported"
+      },
+      "interaction": "Settings"
+    },
+    {
+      "mode": "拍照",
+      "category": "交互",
+      "group": "连拍",
+      "name": "在设置中将长按功能改为连拍后，长按即可连拍",
+      "support": {
+        "ultrawide": "supported",
+        "main": "supported"
+      },
+      "verify": "设置长按功能为连拍，长按拍照按钮，查看是否可以连拍",
+      "interaction": "Shutter"
+    },
+    {
+      "mode": "拍照",
+      "category": "交互",
+      "group": "夜景",
+      "name": "自动夜景",
+      "support": {
+        "ultrawide": "supported",
+        "main": "supported"
+      },
+      "verify": "通过夜景检测进入夜景",
+      "interaction": "Top Toolbar"
+    },
+    {
+      "mode": "拍照",
+      "category": "交互",
+      "group": "夜景",
+      "name": "手动关闭自动夜景",
+      "support": {
+        "ultrawide": "supported",
+        "main": "supported"
+      },
+      "verify": "TF HDR & TF SN",
+      "interaction": "Top Toolbar"
+    },
+    {
+      "mode": "拍照",
+      "category": "拍照底层",
+      "group": "通用模块",
+      "name": "Ultra HDR",
+      "support": {
+        "ultrawide": "supported",
+        "main": "supported"
+      },
+      "interaction": "algorithms"
+    },
+    {
+      "mode": "拍照",
+      "category": "拍照底层",
+      "group": "超分",
+      "name": "SR（Zoom）",
+      "support": {
+        "ultrawide": "unsupported",
+        "main": "supported"
+      },
+      "verify": "2x-20x",
+      "interaction": "Zoom"
+    },
+    {
+      "mode": "拍照",
+      "category": "拍照底层",
+      "group": "MFNR",
+      "name": "MFNR",
+      "support": {
+        "ultrawide": "supported",
+        "main": "supported"
+      },
+      "verify": "4x-20x",
+      "interaction": "algorithms"
+    },
+    {
+      "mode": "拍照",
+      "category": "拍照底层",
+      "group": "FRT",
+      "name": "人脸清晰度增强",
+      "support": {
+        "ultrawide": "supported",
+        "main": "supported"
+      },
+      "verify": "在有人脸的情况下全场景叠加；高倍率是否叠加视效果决定",
+      "interaction": "algorithms"
+    },
+    {
+      "mode": "拍照",
+      "category": "拍照底层",
+      "group": "PZS",
+      "name": "拍照变焦防抖",
+      "support": {
+        "ultrawide": "unsupported",
+        "main": "supported"
+      },
+      "verify": "高倍率照片模式防抖，待确认生效倍率@Leaf Zhang",
+      "interaction": "Zoom"
+    },
+    {
+      "mode": "拍照",
+      "category": "拍照底层",
+      "group": "月亮模式",
+      "name": "月亮清晰度增强",
+      "support": {
+        "ultrawide": "unsupported",
+        "main": "unsupported"
+      },
+      "verify": "10x以上支持月亮检测",
+      "interaction": "Zoom"
+    },
+    {
+      "mode": "拍照",
+      "category": "拍照底层",
+      "group": "运动抓拍",
+      "name": "运动检测 + AINR + debanding",
+      "support": {
+        "ultrawide": "supported",
+        "main": "supported"
+      },
+      "verify": "不支持运动抓拍",
+      "reason": "product:4.1 Action Mode PRD已立项",
+      "interaction": "Top Toolbar"
+    },
+    {
+      "mode": "拍照",
+      "category": "拍照底层",
+      "group": "畸变矫正",
+      "name": "光学畸变矫正",
+      "support": {
+        "ultrawide": "supported",
+        "main": "unsupported"
+      },
+      "verify": "切到超广角镜头，检查拍照是否有畸变矫正功能",
+      "interaction": "Zoom"
+    },
+    {
+      "mode": "人像模式",
+      "category": "预览",
+      "group": "底层通用",
+      "name": "普通场景检测",
+      "support": {
+        "ultrawide": "unsupported",
+        "main": "supported"
+      },
+      "verify": "切换不同场景时，预览是否可以检测到HDR、夜景等场景",
+      "interaction": "预览框"
+    },
+    {
+      "mode": "人像模式",
+      "category": "预览",
+      "group": "底层通用",
+      "name": "脏污检测",
+      "support": {
+        "ultrawide": "unsupported",
+        "main": "supported"
+      },
+      "interaction": "预览框"
+    },
+    {
+      "mode": "人像模式",
+      "category": "预览",
+      "group": "底层通用",
+      "name": "人脸检测",
+      "support": {
+        "ultrawide": "unsupported",
+        "main": "supported"
+      },
+      "interaction": "预览框"
+    },
+    {
+      "mode": "人像模式",
+      "category": "预览",
+      "group": "底层通用",
+      "name": "In sensor zoom",
+      "support": {
+        "ultrawide": "unsupported",
+        "main": "unsupported"
+      },
+      "verify": "仅支持 软件remosaic",
+      "interaction": "Zoom"
+    },
+    {
+      "mode": "人像模式",
+      "category": "预览",
+      "group": "底层通用",
+      "name": "1x 2x",
+      "support": {
+        "ultrawide": "unsupported",
+        "main": "supported"
+      },
+      "verify": "支持 1x 2x，详见UI Spec",
+      "interaction": "预览框"
+    },
+    {
+      "mode": "人像模式",
+      "category": "预览",
+      "group": "底层通用",
+      "name": "美颜",
+      "support": {
+        "ultrawide": "unsupported",
+        "main": "supported"
+      },
+      "verify": "141 美颜支持功能待jigan确认，131使用虹软效果升级算法，具体支持美颜功能待确认",
+      "interaction": "Top Toolbar"
+    },
+    {
+      "mode": "人像模式",
+      "category": "预览",
+      "group": "底层通用",
+      "name": "拍照比例16:9/1:1/Full",
+      "support": {
+        "ultrawide": "unsupported",
+        "main": "supported"
+      },
+      "verify": "副摄需要使用crop的小size",
+      "interaction": "Top Toolbar"
+    },
+    {
+      "mode": "人像模式",
+      "category": "预览",
+      "group": "底层通用",
+      "name": "TouchAE&AF、FaceAE&AF、TouchAE&AF Lock、CAF、EV+-",
+      "support": {
+        "ultrawide": "unsupported",
+        "main": "supported"
+      },
+      "interaction": "Top Toolbar"
+    },
+    {
+      "mode": "人像模式",
+      "category": "交互",
+      "group": "虚化",
+      "name": "虚化调节",
+      "support": {
+        "ultrawide": "unsupported",
+        "main": "supported"
+      },
+      "interaction": "Top Toolbar"
+    },
+    {
+      "mode": "人像模式",
+      "category": "交互",
+      "group": "虚化",
+      "name": "定制化光斑",
+      "support": {
+        "ultrawide": "unsupported",
+        "main": "supported"
+      },
+      "verify": "根据性能功耗，待定@Leaf Zhang",
+      "interaction": "Top Toolbar"
+    },
+    {
+      "mode": "人像模式",
+      "category": "交互",
+      "group": "虚化",
+      "name": "美颜",
+      "support": {
+        "ultrawide": "unsupported",
+        "main": "supported"
+      },
+      "interaction": "Top Toolbar"
+    },
+    {
+      "mode": "人像模式",
+      "category": "交互",
+      "group": "倒计时",
+      "name": "支持 3s 5s 10s 倒计时",
+      "support": {
+        "ultrawide": "unsupported",
+        "main": "supported"
+      },
+      "interaction": "Top Toolbar"
+    },
+    {
+      "mode": "人像模式",
+      "category": "交互",
+      "group": "滤镜",
+      "name": "延展 光韵 映迹 琥珀 硬朗 自然 复古 鲜明 菲林 暖调 冷调 质感 黑白 默片 负片 玻璃",
+      "support": {
+        "ultrawide": "unsupported",
+        "main": "supported"
+      },
+      "interaction": "Top Toolbar"
+    },
+    {
+      "mode": "人像模式",
+      "category": "交互",
+      "group": "滤镜",
+      "name": "自定义滤镜，支持用户导入lut",
+      "support": {
+        "ultrawide": "unsupported",
+        "main": "supported"
+      },
+      "interaction": "Top Toolbar"
+    },
+    {
+      "mode": "人像模式",
+      "category": "交互",
+      "group": "滤镜",
+      "name": "滤镜强度调节，支持 0-10.0 共100级的滤镜强度调节",
+      "support": {
+        "ultrawide": "unsupported",
+        "main": "supported"
+      },
+      "interaction": "Top Toolbar"
+    },
+    {
+      "mode": "人像模式",
+      "category": "交互",
+      "group": "风格",
+      "name": "支持 曝光 对比度 饱和度 色温 色调 清晰度 颗粒，每个小项 支持 0-10.0 共100级的强度调节",
+      "support": {
+        "ultrawide": "unsupported",
+        "main": "supported"
+      },
+      "interaction": "Top Toolbar"
+    },
+    {
+      "mode": "人像模式",
+      "category": "交互",
+      "group": "预设快捷保存",
+      "name": "底部预设状态与顶部快捷保存入口",
+      "support": {
+        "ultrawide": "unsupported",
+        "main": "supported"
+      },
+      "verify": "【PRD】Camera 4.0-Preset 2.0",
+      "interaction": "Preset"
+    },
+    {
+      "mode": "人像模式",
+      "category": "交互",
+      "group": "网格线",
+      "name": "选择开启和关闭网格线",
+      "support": {
+        "ultrawide": "unsupported",
+        "main": "supported"
+      },
+      "interaction": "Top Toolbar"
+    },
+    {
+      "mode": "人像模式",
+      "category": "交互",
+      "group": "比例",
+      "name": "支持选择 1:1 4:3 16:9 FULL 四种画幅比例",
+      "support": {
+        "ultrawide": "unsupported",
+        "main": "supported"
+      },
+      "interaction": "Top Toolbar"
+    },
+    {
+      "mode": "人像模式",
+      "category": "交互",
+      "group": "水印",
+      "name": "点击选择开启和关闭水印，长按进入水印设置界面",
+      "support": {
+        "ultrawide": "unsupported",
+        "main": "supported"
+      },
+      "interaction": "Settings"
+    },
+    {
+      "mode": "人像模式",
+      "category": "拍照底层",
+      "group": "通用模块",
+      "name": "拍照比例16:9/1:1/Full",
+      "support": {
+        "ultrawide": "unsupported",
+        "main": "supported"
+      },
+      "interaction": "Top Toolbar"
+    },
+    {
+      "mode": "人像模式",
+      "category": "拍照底层",
+      "group": "通用模块",
+      "name": "Ultra HDR",
+      "support": {
+        "ultrawide": "unsupported",
+        "main": "supported"
+      },
+      "verify": "人像模式需要支持Ultra HDR，依赖RAW域HDR算法",
+      "interaction": "algorithms"
+    },
+    {
+      "mode": "人像模式",
+      "category": "拍照底层",
+      "group": "通用模块",
+      "name": "Glyph灯",
+      "support": {
+        "ultrawide": "unsupported",
+        "main": "unsupported"
+      },
+      "verify": "更新为 nothing 项目，支持 glyph",
+      "interaction": "Top Toolbar"
+    },
+    {
+      "mode": "人像模式",
+      "category": "拍照底层",
+      "group": "虚化+HDR",
+      "name": "普通场景检测+虚化+HDR+美颜+FRT",
+      "support": {
+        "ultrawide": "unsupported",
+        "main": "supported"
+      },
+      "interaction": "Top Toolbar"
+    },
+    {
+      "mode": "人像模式",
+      "category": "拍照底层",
+      "group": "虚化+夜景",
+      "name": "普通场景检测+虚化+夜景+美颜+滤镜+FRT",
+      "support": {
+        "ultrawide": "unsupported",
+        "main": "supported"
+      },
+      "interaction": "Top Toolbar"
+    },
+    {
+      "mode": "人像模式",
+      "category": "拍照底层",
+      "group": "虚化+MFNR",
+      "name": "普通场景检测+虚化+MFNR+美颜+滤镜+FRT",
+      "support": {
+        "ultrawide": "unsupported",
+        "main": "supported"
+      },
+      "verify": "走轻量化 MFNR",
+      "interaction": "Top Toolbar"
+    },
+    {
+      "mode": "人像模式",
+      "category": "拍照底层",
+      "group": "FRT",
+      "name": "人脸清晰度增强",
+      "support": {
+        "ultrawide": "unsupported",
+        "main": "supported"
+      },
+      "verify": "在有人脸的情况下全场景叠加",
+      "interaction": "algorithms"
+    },
+    {
+      "mode": "人像模式",
+      "category": "拍照底层",
+      "group": "数码变焦",
+      "name": "1x 2x",
+      "support": {
+        "ultrawide": "unsupported",
+        "main": "supported"
+      },
+      "interaction": "Zoom"
+    },
+    {
+      "mode": "夜景模式",
+      "category": "预览",
+      "group": "通用模块",
+      "name": "普通场景检测",
+      "support": {
+        "ultrawide": "supported",
+        "main": "supported"
+      },
+      "verify": "lux>320进入夜景",
+      "interaction": "预览框"
+    },
+    {
+      "mode": "夜景模式",
+      "category": "预览",
+      "group": "通用模块",
+      "name": "脏污检测",
+      "support": {
+        "ultrawide": "supported",
+        "main": "supported"
+      },
+      "interaction": "预览框"
+    },
+    {
+      "mode": "夜景模式",
+      "category": "预览",
+      "group": "通用模块",
+      "name": "人脸检测",
+      "support": {
+        "ultrawide": "supported",
+        "main": "supported"
+      },
+      "interaction": "预览框"
+    },
+    {
+      "mode": "夜景模式",
+      "category": "预览",
+      "group": "通用模块",
+      "name": "数码变焦",
+      "support": {
+        "ultrawide": "supported",
+        "main": "supported"
+      },
+      "interaction": "Zoom"
+    },
+    {
+      "mode": "夜景模式",
+      "category": "预览",
+      "group": "通用模块",
+      "name": "Glyph灯",
+      "support": {
+        "ultrawide": "unsupported",
+        "main": "unsupported"
+      },
+      "verify": "更新为 nothing 项目，支持 glyph",
+      "interaction": "Top Toolbar"
+    },
+    {
+      "mode": "夜景模式",
+      "category": "预览",
+      "group": "通用模块",
+      "name": "SAT",
+      "support": {
+        "ultrawide": "supported",
+        "main": "supported"
+      },
+      "interaction": "Zoom"
+    },
+    {
+      "mode": "夜景模式",
+      "category": "预览",
+      "group": "通用模块",
+      "name": "TouchAE&AF、FaceAE&AF、CAF",
+      "support": {
+        "ultrawide": "supported",
+        "main": "supported"
+      },
+      "interaction": "AE/AF Box"
+    },
+    {
+      "mode": "夜景模式",
+      "category": "拍照",
+      "group": "通用模块",
+      "name": "超级夜景",
+      "support": {
+        "ultrawide": "supported",
+        "main": "supported"
+      },
+      "verify": "走TF SN",
+      "interaction": "Top Toolbar"
+    },
+    {
+      "mode": "夜景模式",
+      "category": "拍照",
+      "group": "通用模块",
+      "name": "Ultra HDR",
+      "support": {
+        "ultrawide": "supported",
+        "main": "supported"
+      },
+      "interaction": "algorithms"
+    },
+    {
+      "mode": "夜景模式",
+      "category": "拍照",
+      "group": "通用模块",
+      "name": "SR（Zoom）",
+      "support": {
+        "ultrawide": "unsupported",
+        "main": "supported"
+      },
+      "interaction": "Zoom"
+    },
+    {
+      "mode": "夜景模式",
+      "category": "拍照",
+      "group": "通用模块",
+      "name": "Glyph灯",
+      "support": {
+        "ultrawide": "unsupported",
+        "main": "unsupported"
+      },
+      "verify": "更新为 nothing 项目，支持 glyph",
+      "interaction": "Top Toolbar"
+    },
+    {
+      "mode": "夜景模式",
+      "category": "拍照",
+      "group": "通用模块",
+      "name": "极夜",
+      "support": {
+        "ultrawide": "supported",
+        "main": "supported"
+      },
+      "verify": "没有环境灯光的极暗场景，需要大幅提亮 （走TF SN，input提亮）",
+      "interaction": "预览框"
+    },
+    {
+      "mode": "录像 （默认1080P30fps）",
+      "category": "预览未点击录像",
+      "group": "通用模块（4K、1080P）",
+      "name": "人脸检测",
+      "support": {
+        "ultrawide": "supported",
+        "main": "supported"
+      },
+      "interaction": "预览框"
+    },
+    {
+      "mode": "录像 （默认1080P30fps）",
+      "category": "预览未点击录像",
+      "group": "通用模块（4K、1080P）",
+      "name": "普通场景检测",
+      "support": {
+        "ultrawide": "supported",
+        "main": "supported"
+      },
+      "interaction": "预览框"
+    },
+    {
+      "mode": "录像 （默认1080P30fps）",
+      "category": "预览未点击录像",
+      "group": "通用模块（4K、1080P）",
+      "name": "TouchAE&AF、FaceAE&AF、TouchAE&AF Lock、CAF、EV+-",
+      "support": {
+        "ultrawide": "supported",
+        "main": "supported"
+      },
+      "interaction": "Top Toolbar"
+    },
+    {
+      "mode": "录像 （默认1080P30fps）",
+      "category": "预览未点击录像",
+      "group": "通用模块（4K、1080P）",
+      "name": "数码变焦",
+      "support": {
+        "ultrawide": "supported",
+        "main": "supported"
+      },
+      "interaction": "Zoom"
+    },
+    {
+      "mode": "录像 （默认1080P30fps）",
+      "category": "预览未点击录像",
+      "group": "通用模块（4K、1080P）",
+      "name": "补光 (torchMode)",
+      "support": {
+        "ultrawide": "supported",
+        "main": "supported"
+      },
+      "interaction": "Top Toolbar"
+    },
+    {
+      "mode": "录像 （默认1080P30fps）",
+      "category": "预览未点击录像",
+      "group": "通用模块（4K、1080P）",
+      "name": "Glyph灯",
+      "support": {
+        "ultrawide": "unsupported",
+        "main": "unsupported"
+      },
+      "verify": "更新为 nothing 项目，支持 glyph",
+      "interaction": "Top Toolbar"
+    },
+    {
+      "mode": "录像 （默认1080P30fps）",
+      "category": "预览未点击录像",
+      "group": "通用模块（4K、1080P）",
+      "name": "3 SAT",
+      "support": {
+        "ultrawide": "supported",
+        "main": "supported"
+      },
+      "verify": "支持主摄与广角的 2 SAT，仅支持 1080P30",
+      "interaction": "Zoom"
+    },
+    {
+      "mode": "录像 （默认1080P30fps）",
+      "category": "预览未点击录像",
+      "group": "通用模块（4K、1080P）",
+      "name": "OIS",
+      "support": {
+        "ultrawide": "unsupported",
+        "main": "supported"
+      },
+      "interaction": "Zoom"
+    },
+    {
+      "mode": "录像 （默认1080P30fps）",
+      "category": "预览未点击录像",
+      "group": "通用模块（4K、1080P）",
+      "name": "录制灯（rec.light)",
+      "support": {
+        "ultrawide": "supported",
+        "main": "supported"
+      },
+      "interaction": "Top Toolbar"
+    },
+    {
+      "mode": "录像 （默认1080P30fps）",
+      "category": "预览未点击录像",
+      "group": "通用模块（4K、1080P）",
+      "name": "EIS（普通防抖）",
+      "support": {
+        "ultrawide": "supported",
+        "main": "supported"
+      },
+      "interaction": "Zoom"
+    },
+    {
+      "mode": "录像 （默认1080P30fps）",
+      "category": "预览未点击录像",
+      "group": "HDR算法",
+      "name": "Auto HDR",
+      "support": {
+        "ultrawide": "unsupported",
+        "main": "unsupported"
+      },
+      "verify": "12/30 决策不支持iDCG HDR",
+      "interaction": "Top Toolbar"
+    },
+    {
+      "mode": "录像 （默认1080P30fps）",
+      "category": "预览未点击录像",
+      "group": "HDR（规格）",
+      "name": "HLG 工具栏中的HDR功能，对应视频进行HLG编码",
+      "support": {
+        "ultrawide": "supported",
+        "main": "supported"
+      },
+      "verify": "仅支持 1080P30fps，需关注效果和功耗增量",
+      "interaction": "Top Toolbar"
+    },
+    {
+      "mode": "录像 （默认1080P30fps）",
+      "category": "预览未点击录像",
+      "group": "畸变矫正（1080P30FPS）",
+      "name": "光学畸变矫正",
+      "support": {
+        "ultrawide": "unsupported",
+        "main": "unsupported"
+      },
+      "verify": "因有EIS拆切，不做畸变矫正",
+      "interaction": "Zoom"
+    },
+    {
+      "mode": "录像 （默认1080P30fps）",
+      "category": "预览未点击录像",
+      "group": "滤镜（1080P30FPS）",
+      "name": "滤镜（1080P30FPS）",
+      "support": {
+        "ultrawide": "supported",
+        "main": "supported"
+      },
+      "interaction": "Top Toolbar"
+    },
+    {
+      "mode": "录像 （默认1080P30fps）",
+      "category": "录像",
+      "group": "底层",
+      "name": "其他通用模块子功能同“录像预览”",
+      "support": {
+        "ultrawide": "supported",
+        "main": "supported"
+      },
+      "interaction": "预览框"
+    },
+    {
+      "mode": "录像 （默认1080P30fps）",
+      "category": "录像",
+      "group": "底层",
+      "name": "OIS",
+      "support": {
+        "ultrawide": "unsupported",
+        "main": "supported"
+      },
+      "interaction": "Zoom"
+    },
+    {
+      "mode": "录像 （默认1080P30fps）",
+      "category": "录像",
+      "group": "底层",
+      "name": "SAT",
+      "support": {
+        "ultrawide": "supported",
+        "main": "supported"
+      },
+      "interaction": "Zoom"
+    },
+    {
+      "mode": "录像 （默认1080P30fps）",
+      "category": "录像",
+      "group": "底层",
+      "name": "普通防抖（EIS）",
+      "support": {
+        "ultrawide": "supported",
+        "main": "supported"
+      },
+      "interaction": "Zoom"
+    },
+    {
+      "mode": "录像 （默认1080P30fps）",
+      "category": "录像",
+      "group": "底层",
+      "name": "HDR算法-Auto HDR，提升画面动态范围，明暗信息更加丰富",
+      "support": {
+        "ultrawide": "unsupported",
+        "main": "supported"
+      },
+      "verify": "follow 25111 方案",
+      "interaction": "Top Toolbar"
+    },
+    {
+      "mode": "录像 （默认1080P30fps）",
+      "category": "录像",
+      "group": "底层",
+      "name": "滤镜（1080P30FPS）",
+      "support": {
+        "ultrawide": "supported",
+        "main": "supported"
+      },
+      "interaction": "Top Toolbar"
+    },
+    {
+      "mode": "录像 （默认1080P30fps）",
+      "category": "交互",
+      "group": "闪光灯（补光）",
+      "name": "开启后，常开补光灯",
+      "support": {
+        "ultrawide": "supported",
+        "main": "supported"
+      },
+      "interaction": "Top Toolbar"
+    },
+    {
+      "mode": "录像 （默认1080P30fps）",
+      "category": "交互",
+      "group": "HDR（规格）",
+      "name": "工具栏中的HDR功能，开启后对应视频进行HLG编码，屏幕提亮，对比度提升",
+      "support": {
+        "ultrawide": "unsupported",
+        "main": "supported"
+      },
+      "verify": "最高主摄支持1080P60，basic 平台不支持",
+      "interaction": "Top Toolbar"
+    },
+    {
+      "mode": "录像 （默认1080P30fps）",
+      "category": "交互",
+      "group": "滤镜（1080P 30fps）",
+      "name": "延展 光韵 映迹 琥珀 硬朗 自然 复古 鲜明 菲林 暖调 冷调 质感 黑白 默片 负片 玻璃",
+      "support": {
+        "ultrawide": "supported",
+        "main": "supported"
+      },
+      "verify": "仅支持 1080P30fps，支持所有摄像头",
+      "interaction": "Top Toolbar"
+    },
+    {
+      "mode": "录像 （默认1080P30fps）",
+      "category": "交互",
+      "group": "滤镜（1080P 30fps）",
+      "name": "自定义滤镜，支持用户导入lut",
+      "support": {
+        "ultrawide": "supported",
+        "main": "supported"
+      },
+      "interaction": "Top Toolbar"
+    },
+    {
+      "mode": "录像 （默认1080P30fps）",
+      "category": "交互",
+      "group": "滤镜（1080P 30fps）",
+      "name": "滤镜强度调节，支持 0-10.0 共100级的滤镜强度调节",
+      "support": {
+        "ultrawide": "supported",
+        "main": "supported"
+      },
+      "interaction": "Top Toolbar"
+    },
+    {
+      "mode": "录像 （默认1080P30fps）",
+      "category": "交互",
+      "group": "1080P30",
+      "name": "1080P30fps 规格视频录制",
+      "support": {
+        "ultrawide": "supported",
+        "main": "supported"
+      },
+      "interaction": "Top Toolbar"
+    },
+    {
+      "mode": "录像 （默认1080P30fps）",
+      "category": "交互",
+      "group": "1080P60",
+      "name": "1080P60fps 规格视频录制",
+      "support": {
+        "ultrawide": "unsupported",
+        "main": "supported"
+      },
+      "reason": "硬件:GC08A8 budget sensor,fps limited",
+      "interaction": "Top Toolbar"
+    },
+    {
+      "mode": "录像 （默认1080P30fps）",
+      "category": "交互",
+      "group": "4K30",
+      "name": "4K30fps 规格视频录制",
+      "support": {
+        "ultrawide": "unsupported",
+        "main": "supported"
+      },
+      "interaction": "Top Toolbar"
+    },
+    {
+      "mode": "录像 （默认1080P30fps）",
+      "category": "交互",
+      "group": "网格线",
+      "name": "选择开启和关闭网格线",
+      "support": {
+        "ultrawide": "supported",
+        "main": "supported"
+      },
+      "interaction": "Top Toolbar"
+    },
+    {
+      "mode": "录像 （默认1080P30fps）",
+      "category": "交互",
+      "group": "SDR-录像中拍照",
+      "name": "未开启HDR时，录制时点击右下角按键拍照，效果同“录像”截屏",
+      "support": {
+        "ultrawide": "supported",
+        "main": "supported"
+      },
+      "verify": "仅支持 1080P30fps，支持所有摄像头",
+      "interaction": "Top Toolbar"
+    },
+    {
+      "mode": "录像 （默认1080P30fps）",
+      "category": "交互",
+      "group": "HDR-录像中拍照",
+      "name": "开启HDR时，录制时点击右下角按键拍照，效果同“录像”截屏",
+      "support": {
+        "ultrawide": "unsupported",
+        "main": "unsupported"
+      },
+      "verify": "HDR功能打开时，不支持录像时拍照",
+      "interaction": "Top Toolbar"
+    },
+    {
+      "mode": "慢镜头",
+      "category": "预览/录像",
+      "group": "通用模块",
+      "name": "补光 (torchMode)",
+      "support": {
+        "ultrawide": "unsupported",
+        "main": "supported"
+      },
+      "interaction": "Top Toolbar"
+    },
+    {
+      "mode": "慢镜头",
+      "category": "预览/录像",
+      "group": "通用模块",
+      "name": "Glyph灯",
+      "support": {
+        "ultrawide": "unsupported",
+        "main": "unsupported"
+      },
+      "verify": "更新为 nothing 项目，支持 glyph",
+      "interaction": "Top Toolbar"
+    },
+    {
+      "mode": "慢镜头",
+      "category": "预览/录像",
+      "group": "通用模块",
+      "name": "人脸检测",
+      "support": {
+        "ultrawide": "unsupported",
+        "main": "supported"
+      },
+      "interaction": "预览框"
+    },
+    {
+      "mode": "慢镜头",
+      "category": "预览/录像",
+      "group": "通用模块",
+      "name": "TouchAE&AF，FaceAE&AF, CAF",
+      "support": {
+        "ultrawide": "unsupported",
+        "main": "supported"
+      },
+      "interaction": "AE/AF Box"
+    },
+    {
+      "mode": "慢镜头",
+      "category": "预览/录像",
+      "group": "通用模块",
+      "name": "录影灯",
+      "support": {
+        "ultrawide": "unsupported",
+        "main": "unsupported"
+      },
+      "verify": "打开之后会在开启录像时闪烁红灯",
+      "interaction": "预览框"
+    },
+    {
+      "mode": "慢镜头",
+      "category": "预览/录像",
+      "group": "通用模块",
+      "name": "数码变焦(2x)",
+      "support": {
+        "ultrawide": "unsupported",
+        "main": "unsupported"
+      },
+      "verify": "继承",
+      "interaction": "Zoom"
+    },
+    {
+      "mode": "慢镜头",
+      "category": "预览/录像",
+      "group": "通用模块",
+      "name": "1080P@ 120fps",
+      "support": {
+        "ultrawide": "unsupported",
+        "main": "supported"
+      },
+      "interaction": "预览框"
+    },
+    {
+      "mode": "延时摄影",
+      "category": "预览/录像",
+      "group": "通用模块",
+      "name": "补光 (torchMode)",
+      "support": {
+        "ultrawide": "supported",
+        "main": "supported"
+      },
+      "interaction": "Top Toolbar"
+    },
+    {
+      "mode": "延时摄影",
+      "category": "预览/录像",
+      "group": "通用模块",
+      "name": "Rec. light 录影灯",
+      "support": {
+        "ultrawide": "supported",
+        "main": "supported"
+      },
+      "verify": "更新为 nothing 项目，支持 glyph",
+      "interaction": "预览框"
+    },
+    {
+      "mode": "延时摄影",
+      "category": "预览/录像",
+      "group": "通用模块",
+      "name": "人脸检测",
+      "support": {
+        "ultrawide": "supported",
+        "main": "supported"
+      },
+      "interaction": "预览框"
+    },
+    {
+      "mode": "延时摄影",
+      "category": "预览/录像",
+      "group": "通用模块",
+      "name": "4K",
+      "support": {
+        "ultrawide": "unsupported",
+        "main": "supported"
+      },
+      "verify": "新增主摄支持延时摄影",
+      "interaction": "预览框"
+    },
+    {
+      "mode": "延时摄影",
+      "category": "预览/录像",
+      "group": "通用模块",
+      "name": "1080P",
+      "support": {
+        "ultrawide": "supported",
+        "main": "supported"
+      },
+      "interaction": "预览框"
+    },
+    {
+      "mode": "延时摄影",
+      "category": "预览/录像",
+      "group": "通用模块",
+      "name": "TouchAE&AF，FaceAE&AF, CAF",
+      "support": {
+        "ultrawide": "supported",
+        "main": "supported"
+      },
+      "interaction": "AE/AF Box"
+    },
+    {
+      "mode": "延时摄影",
+      "category": "预览/录像",
+      "group": "通用模块",
+      "name": "数码变焦",
+      "support": {
+        "ultrawide": "supported",
+        "main": "supported"
+      },
+      "interaction": "Zoom"
+    },
+    {
+      "mode": "延时摄影",
+      "category": "预览/录像",
+      "group": "通用模块",
+      "name": "SAT",
+      "support": {
+        "ultrawide": "supported",
+        "main": "supported"
+      },
+      "interaction": "Zoom"
+    },
+    {
+      "mode": "延时摄影",
+      "category": "预览/录像",
+      "group": "延时摄影",
+      "name": "15X、30X、60X、120X、240X、480X、960X",
+      "support": {
+        "ultrawide": "supported",
+        "main": "supported"
+      },
+      "interaction": "Top Toolbar"
+    },
+    {
+      "mode": "专业模式",
+      "category": "预览/拍照",
+      "group": "通用模块",
+      "name": "补光",
+      "support": {
+        "ultrawide": "supported",
+        "main": "supported"
+      },
+      "interaction": "Top Toolbar"
+    },
+    {
+      "mode": "专业模式",
+      "category": "预览/拍照",
+      "group": "通用模块",
+      "name": "Glyph灯",
+      "support": {
+        "ultrawide": "supported",
+        "main": "supported"
+      },
+      "verify": "更新为 nothing 项目，支持 glyph",
+      "interaction": "Top Toolbar"
+    },
+    {
+      "mode": "专业模式",
+      "category": "预览/拍照",
+      "group": "通用模块",
+      "name": "人脸检测",
+      "support": {
+        "ultrawide": "supported",
+        "main": "supported"
+      },
+      "interaction": "预览框"
+    },
+    {
+      "mode": "专业模式",
+      "category": "预览/拍照",
+      "group": "通用模块",
+      "name": "TouchAE&AF，FaceAE&AF, CAF",
+      "support": {
+        "ultrawide": "supported",
+        "main": "supported"
+      },
+      "interaction": "AE/AF Box"
+    },
+    {
+      "mode": "专业模式",
+      "category": "预览/拍照",
+      "group": "通用模块",
+      "name": "数码变焦",
+      "support": {
+        "ultrawide": "supported",
+        "main": "supported"
+      },
+      "interaction": "Zoom"
+    },
+    {
+      "mode": "专业模式",
+      "category": "预览/拍照",
+      "group": "EV/ISO/WB/Shutter/Focus",
+      "name": "各项专业模式参数极值范围",
+      "support": {
+        "ultrawide": "supported",
+        "main": "supported"
+      },
+      "verify": "follow 24111",
+      "interaction": "Top Toolbar"
+    },
+    {
+      "mode": "专业模式",
+      "category": "预览/拍照",
+      "group": "畸变矫正",
+      "name": "光学畸变矫正",
+      "support": {
+        "ultrawide": "supported",
+        "main": "unsupported"
+      },
+      "interaction": "Zoom"
+    },
+    {
+      "mode": "文档矫正",
+      "category": "预览",
+      "group": "通用模块",
+      "name": "补光",
+      "support": {
+        "ultrawide": "supported",
+        "main": "supported"
+      },
+      "interaction": "Top Toolbar"
+    },
+    {
+      "mode": "文档矫正",
+      "category": "预览",
+      "group": "通用模块",
+      "name": "Glyph灯",
+      "support": {
+        "ultrawide": "unsupported",
+        "main": "unsupported"
+      },
+      "verify": "更新为 nothing 项目，支持 glyph",
+      "interaction": "Top Toolbar"
+    },
+    {
+      "mode": "文档矫正",
+      "category": "预览",
+      "group": "通用模块",
+      "name": "TouchAE&AF、FaceAE&AF、TouchAE&AF Lock、CAF、EV+-",
+      "support": {
+        "ultrawide": "supported",
+        "main": "supported"
+      },
+      "interaction": "Top Toolbar"
+    },
+    {
+      "mode": "文档矫正",
+      "category": "预览",
+      "group": "通用模块",
+      "name": "数码变焦",
+      "support": {
+        "ultrawide": "supported",
+        "main": "supported"
+      },
+      "interaction": "Zoom"
+    },
+    {
+      "mode": "文档矫正",
+      "category": "预览",
+      "group": "通用模块",
+      "name": "预览实时矫正",
+      "support": {
+        "ultrawide": "supported",
+        "main": "supported"
+      },
+      "interaction": "预览框"
+    },
+    {
+      "mode": "文档矫正",
+      "category": "预览",
+      "group": "通用模块",
+      "name": "Zoom",
+      "support": {
+        "ultrawide": "unsupported",
+        "main": "supported"
+      },
+      "verify": "最大支持10x，10x以上不支持文档矫正",
+      "interaction": "Zoom"
+    },
+    {
+      "mode": "文档矫正",
+      "category": "预览",
+      "group": "通用模块",
+      "name": "普通场景检测",
+      "support": {
+        "ultrawide": "supported",
+        "main": "supported"
+      },
+      "interaction": "预览框"
+    },
+    {
+      "mode": "文档矫正",
+      "category": "拍照",
+      "group": "闪光灯开/关",
+      "name": "多帧降噪/超分多帧算法",
+      "support": {
+        "ultrawide": "supported",
+        "main": "supported"
+      },
+      "interaction": "Top Toolbar"
+    },
+    {
+      "mode": "全景拍照",
+      "category": "标准全景",
+      "group": "预览、拍照",
+      "name": "人脸检测",
+      "support": {
+        "ultrawide": "unsupported",
+        "main": "supported"
+      },
+      "interaction": "预览框"
+    },
+    {
+      "mode": "全景拍照",
+      "category": "标准全景",
+      "group": "预览、拍照",
+      "name": "TouchAE&AF、CAF",
+      "support": {
+        "ultrawide": "unsupported",
+        "main": "supported"
+      },
+      "interaction": "AE/AF Box"
+    },
+    {
+      "mode": "高像素 50MP",
+      "category": "预览",
+      "group": "通用模块",
+      "name": "普通场景检测",
+      "support": {
+        "ultrawide": "unsupported",
+        "main": "supported"
+      },
+      "interaction": "预览框"
+    },
+    {
+      "mode": "高像素 50MP",
+      "category": "预览",
+      "group": "通用模块",
+      "name": "人脸检测",
+      "support": {
+        "ultrawide": "unsupported",
+        "main": "supported"
+      },
+      "interaction": "预览框"
+    },
+    {
+      "mode": "高像素 50MP",
+      "category": "预览",
+      "group": "通用模块",
+      "name": "TouchAE&AF、FaceAE&AF、TouchAE&AF Lock、CAF、EV+-",
+      "support": {
+        "ultrawide": "unsupported",
+        "main": "supported"
+      },
+      "interaction": "Top Toolbar"
+    },
+    {
+      "mode": "高像素 50MP",
+      "category": "预览",
+      "group": "通用模块",
+      "name": "Glyph灯",
+      "support": {
+        "ultrawide": "unsupported",
+        "main": "unsupported"
+      },
+      "verify": "更新为 nothing 项目，支持 glyph",
+      "interaction": "Top Toolbar"
+    },
+    {
+      "mode": "高像素 50MP",
+      "category": "预览",
+      "group": "通用模块",
+      "name": "色彩模式",
+      "support": {
+        "ultrawide": "unsupported",
+        "main": "supported"
+      },
+      "interaction": "Top Toolbar"
+    },
+    {
+      "mode": "高像素 50MP",
+      "category": "预览",
+      "group": "通用模块",
+      "name": "补光 (torchMode)",
+      "support": {
+        "ultrawide": "unsupported",
+        "main": "supported"
+      },
+      "interaction": "Top Toolbar"
+    },
+    {
+      "mode": "高像素 50MP",
+      "category": "预览",
+      "group": "滤镜",
+      "name": "延展 光韵 映迹 琥珀 硬朗 自然 复古 鲜明 菲林 暖调 冷调 质感 黑白 默片 负片 玻璃",
+      "support": {
+        "ultrawide": "unsupported",
+        "main": "supported"
+      },
+      "interaction": "Top Toolbar"
+    },
+    {
+      "mode": "高像素 50MP",
+      "category": "预览",
+      "group": "滤镜",
+      "name": "自定义滤镜，支持用户导入lut",
+      "support": {
+        "ultrawide": "unsupported",
+        "main": "supported"
+      },
+      "interaction": "Top Toolbar"
+    },
+    {
+      "mode": "高像素 50MP",
+      "category": "预览",
+      "group": "滤镜",
+      "name": "滤镜强度调节，支持 0-10.0 共100级的滤镜强度调节",
+      "support": {
+        "ultrawide": "unsupported",
+        "main": "supported"
+      },
+      "interaction": "Top Toolbar"
+    },
+    {
+      "mode": "高像素 50MP",
+      "category": "预览",
+      "group": "风格",
+      "name": "支持 曝光 对比度 饱和度 色温 色调 清晰度 颗粒，每个小项 支持 0-10.0 共100级的强度调节",
+      "support": {
+        "ultrawide": "unsupported",
+        "main": "supported"
+      },
+      "interaction": "Top Toolbar"
+    },
+    {
+      "mode": "高像素 50MP",
+      "category": "预览",
+      "group": "预设快捷保存",
+      "name": "底部预设状态与顶部快捷保存入口",
+      "support": {
+        "ultrawide": "unsupported",
+        "main": "supported"
+      },
+      "interaction": "Preset"
+    },
+    {
+      "mode": "高像素 50MP",
+      "category": "拍照",
+      "group": "非闪光灯",
+      "name": "Remosaic单帧（高亮环境）",
+      "support": {
+        "ultrawide": "unsupported",
+        "main": "unsupported"
+      },
+      "verify": "remosaic 走单帧，滤镜叠加视性能状态评估",
+      "interaction": "Top Toolbar"
+    },
+    {
+      "mode": "高像素 50MP",
+      "category": "拍照",
+      "group": "非闪光灯",
+      "name": "（binning size upscale）多帧",
+      "support": {
+        "ultrawide": "unsupported",
+        "main": "supported"
+      },
+      "interaction": "Top Toolbar"
+    },
+    {
+      "mode": "高像素 50MP",
+      "category": "拍照",
+      "group": "非闪光灯",
+      "name": "HDR",
+      "support": {
+        "ultrawide": "unsupported",
+        "main": "supported"
+      },
+      "interaction": "Top Toolbar"
+    },
+    {
+      "mode": "高像素 50MP",
+      "category": "拍照",
+      "group": "非闪光灯",
+      "name": "夜景",
+      "support": {
+        "ultrawide": "unsupported",
+        "main": "supported"
+      },
+      "interaction": "Top Toolbar"
+    },
+    {
+      "mode": "高像素 50MP",
+      "category": "拍照",
+      "group": "非闪光灯",
+      "name": "夜景 OFF",
+      "support": {
+        "ultrawide": "unsupported",
+        "main": "supported"
+      },
+      "interaction": "Top Toolbar"
+    },
+    {
+      "mode": "高像素 50MP",
+      "category": "拍照",
+      "group": "非闪光灯",
+      "name": "色彩模式",
+      "support": {
+        "ultrawide": "unsupported",
+        "main": "supported"
+      },
+      "interaction": "Top Toolbar"
+    },
+    {
+      "mode": "高像素 50MP",
+      "category": "拍照",
+      "group": "打闪",
+      "name": "多帧降噪",
+      "support": {
+        "ultrawide": "unsupported",
+        "main": "supported"
+      },
+      "interaction": "Top Toolbar"
+    },
+    {
+      "mode": "设置",
+      "category": "相机设置",
+      "group": "预设",
+      "name": "预设",
+      "support": {
+        "ultrawide": "supported",
+        "main": "supported"
+      },
+      "interaction": "Preset"
+    },
+    {
+      "mode": "设置",
+      "category": "相机设置",
+      "group": "水印",
+      "name": "点击进入水印设置界面，支持文字水印和画框水印",
+      "support": {
+        "ultrawide": "supported",
+        "main": "supported"
+      },
+      "interaction": "Settings"
+    },
+    {
+      "mode": "设置",
+      "category": "相机设置",
+      "group": "位置信息（开/关）",
+      "name": "位置信息（开/关）",
+      "support": {
+        "ultrawide": "supported",
+        "main": "supported"
+      },
+      "interaction": "Settings"
+    },
+    {
+      "mode": "设置",
+      "category": "相机设置",
+      "group": "快门声音",
+      "name": "快门声音",
+      "support": {
+        "ultrawide": "supported",
+        "main": "supported"
+      },
+      "interaction": "Settings"
+    },
+    {
+      "mode": "设置",
+      "category": "相机设置",
+      "group": "自拍镜像",
+      "name": "自拍镜像",
+      "support": {
+        "ultrawide": "supported",
+        "main": "supported"
+      },
+      "interaction": "Settings"
+    },
+    {
+      "mode": "设置",
+      "category": "相机设置",
+      "group": "水平仪",
+      "name": "水平仪",
+      "support": {
+        "ultrawide": "supported",
+        "main": "supported"
+      },
+      "interaction": "Settings"
+    },
+    {
+      "mode": "设置",
+      "category": "相机设置",
+      "group": "Ultra XDR",
+      "name": "Ultra XDR",
+      "support": {
+        "ultrawide": "supported",
+        "main": "supported"
+      },
+      "interaction": "Settings"
+    },
+    {
+      "mode": "设置",
+      "category": "相机设置",
+      "group": "QR Code",
+      "name": "QR Code",
+      "support": {
+        "ultrawide": "supported",
+        "main": "supported"
+      },
+      "interaction": "Settings"
+    },
+    {
+      "mode": "设置",
+      "category": "相机设置",
+      "group": "水平仪",
+      "name": "水平仪",
+      "support": {
+        "ultrawide": "supported",
+        "main": "supported"
+      },
+      "interaction": "Settings"
+    },
+    {
+      "mode": "设置",
+      "category": "相机设置",
+      "group": "色彩模式",
+      "name": "Auto tone",
+      "support": {
+        "ultrawide": "supported",
+        "main": "supported"
+      },
+      "interaction": "Top Toolbar"
+    },
+    {
+      "mode": "设置",
+      "category": "拍照",
+      "group": "触屏拍照",
+      "name": "触屏拍照",
+      "support": {
+        "ultrawide": "supported",
+        "main": "supported"
+      },
+      "interaction": "Shutter"
+    },
+    {
+      "mode": "设置",
+      "category": "拍照",
+      "group": "二维码扫描",
+      "name": "二维码扫描",
+      "support": {
+        "ultrawide": "supported",
+        "main": "supported"
+      },
+      "interaction": "系统级"
+    },
+    {
+      "mode": "设置",
+      "category": "拍照",
+      "group": "长按快门（录像/拍照）",
+      "name": "长按快门（录像/拍照）",
+      "support": {
+        "ultrawide": "supported",
+        "main": "supported"
+      },
+      "interaction": "Shutter"
+    },
+    {
+      "mode": "设置",
+      "category": "拍照",
+      "group": "Ultra XDR（开/关）",
+      "name": "Ultra XDR（开/关）",
+      "support": {
+        "ultrawide": "supported",
+        "main": "supported"
+      },
+      "interaction": "Settings"
+    },
+    {
+      "mode": "设置",
+      "category": "视频",
+      "group": "编码",
+      "name": "支持 H.265/H.264 两种编码方式",
+      "support": {
+        "ultrawide": "supported",
+        "main": "supported"
+      },
+      "interaction": "Settings"
+    }
+  ]
+}

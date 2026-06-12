@@ -1,0 +1,90 @@
+{
+  "model": "Pro (Phone 4a Pro)",
+  "total_respondents": 1935,
+  "questions": [
+    {
+      "feature": "How likely are you to recommend Phone (4a) Pro to your friends and family, from 0 to 10?",
+      "n": 1935,
+      "avg": 8.67,
+      "scale": "0-10",
+      "nps": 56.1
+    },
+    {
+      "feature": "How would you rate Nothing OS from 1 to 5?",
+      "n": 1935,
+      "avg": 4.54,
+      "scale": "1-5",
+      "top2_pct": 94.7
+    },
+    {
+      "feature": "How would you rate the *camera* ?",
+      "n": 1935,
+      "avg": 4.24,
+      "scale": "1-5",
+      "top2_pct": 85.1
+    },
+    {
+      "feature": "How would you rate the *performance or overall smoothness*? Think speed, fluidity, switching between apps, responsiveness, etc.",
+      "n": 1935,
+      "avg": 4.43,
+      "scale": "1-5",
+      "top2_pct": 90.9
+    },
+    {
+      "feature": "How would you rate the *physical design* in terms of look, feel, and build?",
+      "n": 1935,
+      "avg": 4.79,
+      "scale": "1-5",
+      "top2_pct": 97.7
+    },
+    {
+      "feature": "How would you rate the battery life and power consumption / usage?",
+      "n": 1935,
+      "avg": 4.24,
+      "scale": "1-5",
+      "top2_pct": 83.1
+    },
+    {
+      "feature": "How would you rate the charging speed and experience?",
+      "n": 1935,
+      "avg": 4.43,
+      "scale": "1-5",
+      "top2_pct": 88.6
+    },
+    {
+      "feature": "How would you rate the durability or build quality?",
+      "n": 1935,
+      "avg": 4.64,
+      "scale": "1-5",
+      "top2_pct": 96.0
+    },
+    {
+      "feature": "How would you rate the gaming experience?",
+      "n": 1935,
+      "avg": 4.31,
+      "scale": "1-5",
+      "top2_pct": 83.8
+    },
+    {
+      "feature": "How would you rate the network or connection?",
+      "n": 1935,
+      "avg": 4.55,
+      "scale": "1-5",
+      "top2_pct": 91.2
+    },
+    {
+      "feature": "How would you rate the screen?",
+      "n": 1935,
+      "avg": 4.68,
+      "scale": "1-5",
+      "top2_pct": 96.1
+    },
+    {
+      "feature": "How would you rate the thermal control?",
+      "n": 1935,
+      "avg": 4.31,
+      "scale": "1-5",
+      "top2_pct": 84.9
+    }
+  ]
+}

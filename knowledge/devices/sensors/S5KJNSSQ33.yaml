@@ -1,0 +1,65 @@
+# S5KJNSSQ33 — Samsung 50MP Image Sensor (25131 Main Camera)
+# Custom variant of ISOCELL JN1 (S5KJN1)
+# Search sources: Samsung Semiconductor, GoPhotonics, GSMArena, DPReview
+
+sensor:
+  model: S5KJNSSQ33
+  base_model: ISOCELL JN1 (S5KJN1)
+  vendor: Samsung Semiconductor
+  type: CMOS ISOCELL 2.0
+  note: "Custom SKU for Nothing/CMF. Public specs from JN1 base model — verify custom variant differences."
+
+optical:
+  optical_format: 1/2.76"
+  unit_cell_size_um: 0.64
+  cfa: Tetrapixel (Quad Bayer)
+  resolution:
+    active_pixels: "8160×6144"
+    total_mp: 50
+    effective_mp_binned: 12.5  # 4-in-1 → 1.28µm
+
+frame_rates:
+  full_res_10bit: "8160×6144 @10fps"
+  4k_60fps: YES  # Public JN1 spec — verify for SQ33
+  4k_30fps: YES
+  1080p_240fps: YES  # Public JN1 spec — verify for SQ33
+  1080p_60fps: YES
+
+binning:
+  type: Tetrapixel 4-in-1
+  effective_pixel_um: 1.28
+  output_resolution: "4080×3072"
+
+adc:
+  resolution: 10-bit
+
+output_interface:
+  type: MIPI CSI-2
+  lanes: 4
+  rate_gbps_per_lane: 2.15
+
+features:
+  pdaf: "Double Super PDAF"
+  hdr: "Smart ISO + Inter-scene HDR"
+  isocell: "ISOCELL 2.0 (~16% light sensitivity improvement)"
+
+power:
+  analog_v: 2.8
+  io_v: 1.8
+  digital_v: 1.05
+
+temperature:
+  operating: "-20°C to +85°C"
+
+flagship_status: "World's smallest 50MP sensor at launch (2021)"
+
+capability_summary:
+  4k_30fps: YES
+  4k_60fps: "SENSOR_CAPABLE_BUT_PLATFORM_LIMITED"  # JN1 supports 4K60fps, 25131 platform caps at 4K30fps
+  1080p_60fps: YES
+  1080p_120fps: "SENSOR_CAPABLE_BUT_PLATFORM_LIMITED"  # JN1 supports 240fps, platform limited
+  1080p_240fps: "SENSOR_CAPABLE_BUT_PLATFORM_LIMITED"
+  slow_motion_240fps: "SENSOR_CAPABLE_BUT_PLATFORM_LIMITED"
+  hdr_photo: YES
+  pdaf: YES
+  note: "JN1 hardware supports 4K60fps and 1080P240fps, but 25131 platform (ISP/chipset) limits video to 4K30fps and 1080P60fps."

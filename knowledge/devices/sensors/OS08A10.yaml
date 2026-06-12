@@ -1,0 +1,73 @@
+# OS08A10 — Omnivision 8MP Premium Image Sensor
+# Source: https://www.ovt.com/products/os08a10/
+# Extracted: 2026-06-10
+
+sensor:
+  model: OS08A10
+  vendor: Omnivision (OVT)
+  type: CMOS (BSI PureCel)
+  category: "Premium 8MP"
+
+optical:
+  optical_format: 1/1.8"
+  image_area_um: "7736.256 × 4379.616"
+  unit_cell_size_um: 2.0
+  cfa: RGB Bayer
+  cra_deg: 11
+  shutter: Rolling Shutter
+
+resolution:
+  active_pixels: "3840×2160"
+  total_mp: 8
+  supported_sizes:
+    - "4K2K 3840×2160"
+    - "2560×1440"
+    - "1080p 1920×1080"
+    - "720p 1280×720"
+
+frame_rates:
+  full_4k_60fps: "3840×2160 @60fps"
+  full_4k_30fps: "3840×2160 @30fps"
+  binning_2x2: "1920×1080"  # binned from 8MP
+  1080p_120fps: YES
+  1080p_60fps: YES
+
+binning:
+  supports_2x2: YES
+
+hdr:
+  type: "2-exposure staggered HDR"
+  supported: YES
+
+adc:
+  resolution: 12-bit
+
+output_interface:
+  type: "MIPI / LVDS"
+  max_lanes: 4
+  max_rate_mbps: 1500  # per lane
+  raw_formats: ["12-bit RGB RAW", "10-bit RGB RAW"]
+
+features:
+  lsm: "Light Sensing Mode supported"
+  programmable_controls: ["frame rate", "mirror and flip", "cropping", "windowing"]
+  pll: "PLL with SCC support"
+  fsin: YES
+
+power:
+  active_ma: 240
+  xshutdown_ua: "<10"
+
+temperature:
+  operating: "-30°C to +85°C"
+
+package: CSP
+
+capability_summary:
+  4k_30fps: YES
+  4k_60fps: YES
+  1080p_60fps: YES
+  1080p_120fps: YES
+  hdr_video: YES
+  pixel_size_um: 2.0
+  note: "Premium 8MP sensor. 2.0µm pixel = excellent low light. Suitable for ultrawide or telephoto in flagship phones."

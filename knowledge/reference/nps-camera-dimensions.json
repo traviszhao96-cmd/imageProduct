@@ -1,0 +1,11 @@
+{
+  "dimensions": [
+    {
+      "question": "How would you rate the *camera* ?",
+      "base_avg": 4.32,
+      "base_t2b": 88.4,
+      "pro_avg": 4.24,
+      "pro_t2b": 85.1
+    }
+  ]
+}

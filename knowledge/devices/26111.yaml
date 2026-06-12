@@ -1,0 +1,111 @@
+# 26111 Camera 项目概览
+# Source: 26111 Camera Feature List_v1.0.xlsx
+
+project:
+  code: "26111"
+  models: ["Phone 5a (Base)", "Phone 5a Pro"]
+  market: "印度"
+  platform: "[TBD — SoC/芯片平台]"
+  android_version: "[TBD]"
+  software_baseline: "25111 Pro + NOS5.0"
+
+cameras:
+  base:
+    front:
+      sensor: "OV32D"
+      resolution: "32MP"
+      note: "[TBD — specs]"
+
+    main:
+      sensor: "OV51A"
+      resolution: "50MP"
+      optical_format: "1/1.95\""
+      ois: YES
+      note: "No 200MP"
+
+    ultrawide:
+      sensor: "IMX355"
+      resolution: "8MP"
+      optical_format: "1/4\""
+      af: FF (fixed focus)
+      note: ""
+
+    tele: "Flicker Sensor only (no telephoto)"
+
+  pro:
+    front:
+      sensor: "OV32D"
+      resolution: "32MP"
+      note: "[TBD — specs]"
+
+    main:
+      sensor: "OV51A"
+      resolution: "50MP"
+      optical_format: "1/1.95\""
+      ois: YES
+      note: "No 200MP"
+
+    ultrawide:
+      sensor: "IMX355"
+      resolution: "8MP"
+      optical_format: "1/4\""
+      af: FF (fixed focus)
+
+    tele:
+      sensor: "KN1"
+      resolution: "50MP"
+      optical_format: "1/3.1\""
+      zoom: "3.9x"
+      type: "L型潜望"
+      module: "舜宇"
+
+inheritance:
+  baseline: "25111 Pro + NOS5.0"
+  rules:
+    - "所有 25111/25131 功能默认继承，除非 SE 标记不支持"
+    - "新增功能以 26111 PRD 为准"
+    - "算法链路以 SE 确认的 26111 算法列表为准"
+
+key_deltas_from_25131:
+  - "主摄: JN1 50MP → OV51A 50MP"
+  - "Pro 新增 3.9x 长焦 (KN1)"
+  - "超广角: GC08A8 → IMX355"
+  - "前置: GC16B3C → OV32D"
+  - "Base 无长焦（仅 Flicker Sensor）"
+  - "nos5.0 软件基线"
+
+new_features_p0:
+  - "运动抓拍（继承25131交互，新增普通模式引导入口）"
+  - "HDR 运动场景升级 + 影调升级 + 智能分区"
+  - "成像预览一致性（2DOL 优先）"
+  - "自然质感人像（美颜升级）"
+  - "AIGC/SR 效果优化"
+  - "4K 60FPS (Pro SAT / Ultra 主摄&长焦)"
+  - "前置/广角 4K (upscale)"
+  - "Preset 3.0 + AI Preset"
+  - "照片风格（自然 & 鲜明）"
+  - "专业模式 2.0"
+  - "双摄同录 v2"
+  - "录制中前后镜头切换"
+  - "视频专业参数调节"
+
+removed_features:
+  - "TF 50MP QuadBayer Raw HDR"
+  - "TF 25MP"
+  - "聚会模式"
+  - "视频 Log 模式"
+  - "视频录制红框提示"
+
+stakeholders:
+  PM: "Travis Zhao"
+  SE: "[TBD]"
+  ISP: "[TBD]"
+  Camera App: "[TBD]"
+  设计: "[TBD]"
+  测试: "[TBD]"
+
+status:
+  feature_list: "Excel v1.0 已有，需 SE 确认算法后更新"
+  algorithms: "待 SE 提供 26111 算法列表"
+  sensors: "OV51A/KN1/IMX355/OV32D — 需补充完整规格"
+  scope_2亿: "保留 — 主摄 200MP HP5 在范围内，具体落地机型待确认"

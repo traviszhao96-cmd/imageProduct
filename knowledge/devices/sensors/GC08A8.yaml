@@ -1,0 +1,64 @@
+# GC08A8 — GalaxyCore 8MP Budget Image Sensor (25131 Ultrawide)
+# No public datasheet available. Inferred from feature list + similar-class sensors (OV8856, GC8034)
+# Reliability: MEDIUM — specs marked [inferred] should be verified against actual datasheet
+
+sensor:
+  model: GC08A8
+  vendor: GalaxyCore
+  type: CMOS BSI
+  class: Budget 8MP
+  note: "No public datasheet. Specs inferred from feature list support matrix + similar GalaxyCore/OV budget 8MP sensors."
+
+optical:
+  optical_format: 1/4"
+  unit_cell_size_um: 1.12
+  cfa: RGB Bayer
+  resolution:
+    active_pixels: "3264×2448"
+    total_mp: 8
+  fov_deg: 119.5
+  aperture: f/2.2
+  equivalent_focal_mm: 15.53
+
+# [inferred] Budget 8MP sensors typically:
+# - No on-chip HDR (rely on MFNR/software)
+# - 2 MIPI lanes at low speed
+# - Limited frame rates (1080P30fps max)
+# - No binning/remosaic needed (native 8MP)
+# - Fixed focus (no AF motor)
+
+frame_rates:
+  3264x2448_30fps: "[inferred] native resolution"
+  1920x1080_30fps: YES
+  1920x1080_60fps: "UNSUPPORTED — [inferred] budget sensor frame rate limit"
+  4k_30fps: "UNSUPPORTED — [inferred] native 8MP cannot output 4K"
+  4k_60fps: UNSUPPORTED
+
+features:
+  af: "FIXED FOCUS — VCM=NA, no AF motor"
+  ois: "NO — VCM=NA"
+  hdr: "SOFTWARE ONLY — relies on MFNR multi-frame"
+  pdaf: "NO — fixed focus"
+  flash: "NO"
+  distortion_correction: "HARDWARE — optical distortion correction in lens"
+  eis: "NO — fixed focus, no OIS module"
+
+output_interface:
+  type: MIPI CSI-2
+  lanes: "[inferred] 2"
+  rate_mbps_per_lane: "[inferred] low-speed"
+
+power:
+  notes: "[inferred] Budget sensor, < 100mW active"
+
+capability_summary:
+  4k_30fps: "UNSUPPORTED — hardware limit"
+  4k_60fps: "UNSUPPORTED — hardware limit"
+  1080p_30fps: YES
+  1080p_60fps: "UNSUPPORTED — hardware limit (budget sensor)"
+  1080p_120fps: "UNSUPPORTED — hardware limit"
+  hdr_photo: "SOFTWARE ONLY"
+  hdr_video: "UNSUPPORTED"
+  pdaf: NO
+  ois: NO
+  note: "Budget fixed-focus ultrawide. Very limited capabilities. All × in feature list consistent with hardware constraints."

@@ -254,23 +254,50 @@ def clear_cell(token: str, document_id: str, cell_id: str) -> None:
 
 
 def write_cell(token: str, document_id: str, cell_id: str, text: str) -> None:
-    clear_cell(token, document_id, cell_id)
-    content = text if text.strip() else " "
+    # Empty cells: leave the default empty paragraph in place, no-op.
+    if not text or not text.strip():
+        return
+
+    # Get the existing first child (default empty paragraph) and PATCH it.
+    # DELETE + POST leaves a stale empty line because the default paragraph
+    # cannot be removed; updating it in-place avoids the extra blank row.
+    existing = api_request(
+        "GET",
+        f"/open-apis/docx/v1/documents/{document_id}/blocks/{cell_id}/children",
+        token,
+        params={"page_size": 50},
+    )
+    items = existing.get("data", {}).get("items", [])
+    first_child_id = items[0]["block_id"] if items else None
+
     converted = api_request(
         "POST",
         "/open-apis/docx/v1/documents/blocks/convert",
         token,
-        payload={"content_type": "markdown", "content": content},
+        payload={"content_type": "markdown", "content": text},
     )["data"]
-    blocks = converted.get("blocks", [])
-    for block in blocks:
-        block.pop("parent_id", None)
-    api_request(
-        "POST",
-        f"/open-apis/docx/v1/documents/{document_id}/blocks/{cell_id}/children",
-        token,
-        payload={"children": blocks},
-    )
+    source_blocks = converted.get("blocks", [])
+
+    if first_child_id and source_blocks:
+        # PATCH the first text element of the first child
+        source_elements = source_blocks[0].get("text", {}).get("elements", [])
+        if source_elements:
+            api_request(
+                "PATCH",
+                f"/open-apis/docx/v1/documents/{document_id}/blocks/{first_child_id}",
+                token,
+                payload={"update_text_elements": {"elements": source_elements}},
+            )
+    elif source_blocks:
+        # Fallback: no existing child, write new blocks
+        for block in source_blocks:
+            block.pop("parent_id", None)
+        api_request(
+            "POST",
+            f"/open-apis/docx/v1/documents/{document_id}/blocks/{cell_id}/children",
+            token,
+            payload={"children": source_blocks},
+        )
 
 
 def write_table(token: str, document_id: str, values: list[list[str]]) -> int:

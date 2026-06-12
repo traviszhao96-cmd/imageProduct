@@ -1,0 +1,643 @@
+{
+  "stats": {
+    "total": 1307,
+    "with_text": 442,
+    "text_rate": 33.8,
+    "rating_avg": 3.83,
+    "ratings": {
+      "1": {
+        "count": 247,
+        "pct": 18.9
+      },
+      "2": {
+        "count": 61,
+        "pct": 4.7
+      },
+      "3": {
+        "count": 111,
+        "pct": 8.5
+      },
+      "4": {
+        "count": 138,
+        "pct": 10.6
+      },
+      "5": {
+        "count": 750,
+        "pct": 57.4
+      }
+    },
+    "monthly": {
+      "2025-05": {
+        "total": 2,
+        "avg_rating": 4.0,
+        "neg_pct": 0.0
+      },
+      "2025-06": {
+        "total": 4,
+        "avg_rating": 2.25,
+        "neg_pct": 75.0
+      },
+      "2025-07": {
+        "total": 2,
+        "avg_rating": 2.5,
+        "neg_pct": 50.0
+      },
+      "2025-08": {
+        "total": 7,
+        "avg_rating": 1.57,
+        "neg_pct": 71.4
+      },
+      "2025-09": {
+        "total": 3,
+        "avg_rating": 2.0,
+        "neg_pct": 66.7
+      },
+      "2025-10": {
+        "total": 5,
+        "avg_rating": 4.0,
+        "neg_pct": 0.0
+      },
+      "2025-11": {
+        "total": 3,
+        "avg_rating": 1.67,
+        "neg_pct": 66.7
+      },
+      "2025-12": {
+        "total": 8,
+        "avg_rating": 3.25,
+        "neg_pct": 37.5
+      },
+      "2026-01": {
+        "total": 222,
+        "avg_rating": 3.71,
+        "neg_pct": 27.9
+      },
+      "2026-02": {
+        "total": 189,
+        "avg_rating": 3.81,
+        "neg_pct": 23.8
+      },
+      "2026-03": {
+        "total": 269,
+        "avg_rating": 3.94,
+        "neg_pct": 20.4
+      },
+      "2026-04": {
+        "total": 305,
+        "avg_rating": 3.87,
+        "neg_pct": 22.3
+      },
+      "2026-05": {
+        "total": 246,
+        "avg_rating": 3.91,
+        "neg_pct": 21.5
+      },
+      "2026-06": {
+        "total": 42,
+        "avg_rating": 4.0,
+        "neg_pct": 21.4
+      }
+    },
+    "languages": {
+      "en": 1106,
+      "ru": 42,
+      "de": 31,
+      "es": 23,
+      "fr": 15,
+      "tr": 11,
+      "it": 8,
+      "th": 7,
+      "ja": 7,
+      "pl": 6
+    },
+    "devices": {
+      "Asteroids": 455,
+      "Galaga": 204,
+      "Pacman": 150,
+      "Tetris": 130,
+      "Spacewar": 69,
+      "Pong": 64,
+      "PacmanPro": 56,
+      "Galaxian": 55,
+      "Metroid": 54,
+      "Frogger": 45
+    },
+    "versions": {
+      "2.3.55.1222": 487,
+      "2.7.1.0327": 228,
+      "2.8.2.0416": 180,
+      "2.9.1.0514": 156,
+      "2.6.28.0225": 153
+    }
+  },
+  "topics": {
+    "缺少编辑功能": {
+      "kws": [
+        "edit",
+        "eraser",
+        "erase",
+        "draw",
+        "crop",
+        "pen",
+        "tool",
+        "magic",
+        "remove",
+        "text",
+        "typing",
+        "drawing",
+        "editing",
+        "editor",
+        "edit option",
+        "編集",
+        "描き",
+        "描く",
+        "書く",
+        "文字",
+        "ペン",
+        "消しゴム"
+      ],
+      "desc": "用户期望的图片编辑能力：魔术橡皮擦、涂鸦/画笔、文字添加、裁剪等",
+      "neg_count": 76,
+      "neg_examples": [
+        {
+          "rating": 1,
+          "text": "nothing gallery AI future objective remover not available",
+          "lang": "en",
+          "date": "2026-01-03"
+        },
+        {
+          "rating": 1,
+          "text": "no image editing option available.",
+          "lang": "en",
+          "date": "2026-01-06"
+        },
+        {
+          "rating": 1,
+          "text": "Errors were found in the file display and sorting, making searching difficult. The basic image editing functions are too limited and unsuitable for most users, and the inability to select all images f",
+          "lang": "th",
+          "date": "2026-01-11"
+        },
+        {
+          "rating": 1,
+          "text": "please erase option ko bapas laooi...😕😭😭😭😭",
+          "lang": "en",
+          "date": "2026-01-13"
+        },
+        {
+          "rating": 1,
+          "text": "no text editor in this app. photos tak time to appear and sometimes simply don't .",
+          "lang": "en",
+          "date": "2026-01-21"
+        }
+      ],
+      "pos_count": 28
+    },
+    "AI擦除被移除": {
+      "kws": [
+        "ai ",
+        "AI",
+        "objective remover",
+        "magic eraser",
+        "erase option",
+        "remove object",
+        "background",
+        "bg remove",
+        "bg ",
+        "消し",
+        "消す",
+        "smart erase"
+      ],
+      "desc": "AI 物体消除功能在更新后消失，用户专门指出之前有这个功能",
+      "neg_count": 66,
+      "neg_examples": [
+        {
+          "rating": 1,
+          "text": "nothing gallery AI future objective remover not available",
+          "lang": "en",
+          "date": "2026-01-03"
+        },
+        {
+          "rating": 1,
+          "text": "no image editing option available.",
+          "lang": "en",
+          "date": "2026-01-06"
+        },
+        {
+          "rating": 2,
+          "text": "There is not sort option available in album tab.. Albums are showing in random order not in a alphabetical order",
+          "lang": "en",
+          "date": "2026-01-07"
+        },
+        {
+          "rating": 1,
+          "text": "please erase option ko bapas laooi...😕😭😭😭😭",
+          "lang": "en",
+          "date": "2026-01-13"
+        },
+        {
+          "rating": 1,
+          "text": "magic eraser not available.",
+          "lang": "en",
+          "date": "2026-01-22"
+        }
+      ],
+      "pos_count": 22
+    },
+    "照片丢失/隐藏相册Bug": {
+      "kws": [
+        "lost",
+        "disappear",
+        "gone",
+        "missing",
+        "hidden",
+        "hide",
+        "private",
+        "隠",
+        "消え",
+        "なくな",
+        "password",
+        "lock screen"
+      ],
+      "desc": "隐藏相册升级后照片消失、隐私密码和锁屏密码混淆、隐藏文件夹不可访问",
+      "neg_count": 29,
+      "neg_examples": [
+        {
+          "rating": 1,
+          "text": "I am writing to report a critical issue I encountered on my Nothing Phone 2a Plus. Following a recent gallery application update, all my photos stored in the \"Hidden Folder\" have permanently disappear",
+          "lang": "en",
+          "date": "2026-01-01"
+        },
+        {
+          "rating": 1,
+          "text": "i lost all my pictures and videos from the nothing hidden gallery folder I had many important pictures in my hidden gallery and now they're gone, can't find them anywhere in the phone or the gallery p",
+          "lang": "en",
+          "date": "2026-01-19"
+        },
+        {
+          "rating": 2,
+          "text": "plz put the tool option in gallary it has gone from the app and plz fix this bug leaving that experience is good but fix that",
+          "lang": "en",
+          "date": "2026-01-24"
+        },
+        {
+          "rating": 1,
+          "text": "Its missing most basic feature like drawing on images",
+          "lang": "pl",
+          "date": "2026-01-25"
+        },
+        {
+          "rating": 1,
+          "text": "when we want to open private photos from gallery it asks for lock screen password. I just want to say that pls make privacy password required instead of lock screen. It is problem of alot of Nothing p",
+          "lang": "en",
+          "date": "2026-01-26"
+        }
+      ],
+      "pos_count": 5
+    },
+    "相册排序混乱": {
+      "kws": [
+        "sort",
+        "order",
+        "alphabet",
+        "organize",
+        "random",
+        "folder",
+        "arrange",
+        "整理",
+        "並べ",
+        "sorting",
+        "順",
+        "アルバム",
+        "順番",
+        "not in order"
+      ],
+      "desc": "相册无法按字母排序、文件夹随机排列、无拖拽排序功能",
+      "neg_count": 22,
+      "neg_examples": [
+        {
+          "rating": 1,
+          "text": "I am writing to report a critical issue I encountered on my Nothing Phone 2a Plus. Following a recent gallery application update, all my photos stored in the \"Hidden Folder\" have permanently disappear",
+          "lang": "en",
+          "date": "2026-01-01"
+        },
+        {
+          "rating": 2,
+          "text": "There is not sort option available in album tab.. Albums are showing in random order not in a alphabetical order",
+          "lang": "en",
+          "date": "2026-01-07"
+        },
+        {
+          "rating": 1,
+          "text": "app often does not actually save photos when accessing the camera, can't transfer between folders without freezing, it's almost unusable",
+          "lang": "en",
+          "date": "2026-01-08"
+        },
+        {
+          "rating": 1,
+          "text": "Errors were found in the file display and sorting, making searching difficult. The basic image editing functions are too limited and unsuitable for most users, and the inability to select all images f",
+          "lang": "th",
+          "date": "2026-01-11"
+        },
+        {
+          "rating": 1,
+          "text": "i lost all my pictures and videos from the nothing hidden gallery folder I had many important pictures in my hidden gallery and now they're gone, can't find them anywhere in the phone or the gallery p",
+          "lang": "en",
+          "date": "2026-01-19"
+        }
+      ],
+      "pos_count": 5
+    },
+    "加载黑屏/性能差": {
+      "kws": [
+        "slow",
+        "lag",
+        "freeze",
+        "crash",
+        "black screen",
+        "stutter",
+        "error",
+        "bug",
+        "not showing",
+        "not work",
+        "load",
+        "loading",
+        "遅い",
+        "表示され",
+        "not loading",
+        "unusable",
+        "hang"
+      ],
+      "desc": "照片加载黑屏、应用卡顿/崩溃、照片无法显示、性能问题",
+      "neg_count": 39,
+      "neg_examples": [
+        {
+          "rating": 1,
+          "text": "app often does not actually save photos when accessing the camera, can't transfer between folders without freezing, it's almost unusable",
+          "lang": "en",
+          "date": "2026-01-08"
+        },
+        {
+          "rating": 1,
+          "text": "Errors were found in the file display and sorting, making searching difficult. The basic image editing functions are too limited and unsuitable for most users, and the inability to select all images f",
+          "lang": "th",
+          "date": "2026-01-11"
+        },
+        {
+          "rating": 1,
+          "text": "Some photos shows a black screen. I can't even delete them or move to another folder. Then i tried, the inscription says: \"Loading image. Try again later\". Clear cache, data and storage didn't fix it.",
+          "lang": "en",
+          "date": "2026-01-22"
+        },
+        {
+          "rating": 2,
+          "text": "plz put the tool option in gallary it has gone from the app and plz fix this bug leaving that experience is good but fix that",
+          "lang": "en",
+          "date": "2026-01-24"
+        },
+        {
+          "rating": 1,
+          "text": "it's not work on mine just stupid error",
+          "lang": "en",
+          "date": "2026-01-25"
+        }
+      ],
+      "pos_count": 4
+    },
+    "视频播放": {
+      "kws": [
+        "video",
+        "play",
+        "sound",
+        "audio",
+        "mute",
+        "再生",
+        "音",
+        "動画",
+        "iphone video"
+      ],
+      "desc": "视频静音播放、不自动播放声音、iPhone视频不兼容",
+      "neg_count": 24,
+      "neg_examples": [
+        {
+          "rating": 1,
+          "text": "iphone video not playing",
+          "lang": "en",
+          "date": "2026-01-09"
+        },
+        {
+          "rating": 1,
+          "text": "Errors were found in the file display and sorting, making searching difficult. The basic image editing functions are too limited and unsuitable for most users, and the inability to select all images f",
+          "lang": "th",
+          "date": "2026-01-11"
+        },
+        {
+          "rating": 1,
+          "text": "I couldn't see my whatsapp photos & videos and couldn't delete any photos or do anything",
+          "lang": "en",
+          "date": "2026-01-18"
+        },
+        {
+          "rating": 1,
+          "text": "i lost all my pictures and videos from the nothing hidden gallery folder I had many important pictures in my hidden gallery and now they're gone, can't find them anywhere in the phone or the gallery p",
+          "lang": "en",
+          "date": "2026-01-19"
+        },
+        {
+          "rating": 2,
+          "text": "The albums section just has a list of folders. I can't set a cover picture for an album. It would be better if there were an option to get a cover image for every album, like in the UI photos displaye",
+          "lang": "en",
+          "date": "2026-01-25"
+        }
+      ],
+      "pos_count": 6
+    },
+    "应用图标/设计": {
+      "kws": [
+        "icon",
+        "design",
+        "UI",
+        "interface",
+        "look",
+        "old icon",
+        "デザイン",
+        "アイコン",
+        "app icon",
+        "cheap",
+        "ugly"
+      ],
+      "desc": "新图标丑陋、设计倒退、看起来廉价",
+      "neg_count": 22,
+      "neg_examples": [
+        {
+          "rating": 2,
+          "text": "what the gallery design please make a sense who is the designer. who scroll at down every time,why not all photos at one album. and that much of large size don't irritate the users please...",
+          "lang": "en",
+          "date": "2026-01-04"
+        },
+        {
+          "rating": 1,
+          "text": "I want old icon back 😔",
+          "lang": "en",
+          "date": "2026-01-05"
+        },
+        {
+          "rating": 1,
+          "text": "Errors were found in the file display and sorting, making searching difficult. The basic image editing functions are too limited and unsuitable for most users, and the inability to select all images f",
+          "lang": "th",
+          "date": "2026-01-11"
+        },
+        {
+          "rating": 1,
+          "text": "La próxima actualización debería incluir dar permiso para reconocimiento facial, por un tema de privacidad",
+          "lang": "es",
+          "date": "2026-01-17"
+        },
+        {
+          "rating": 2,
+          "text": "The albums section just has a list of folders. I can't set a cover picture for an album. It would be better if there were an option to get a cover image for every album, like in the UI photos displaye",
+          "lang": "en",
+          "date": "2026-01-25"
+        }
+      ],
+      "pos_count": 8
+    },
+    "无全选功能": {
+      "kws": [
+        "select all",
+        "全選択",
+        "全选",
+        "select multiple",
+        "choose all"
+      ],
+      "desc": "缺少全选按钮，多选照片操作繁琐",
+      "neg_count": 3,
+      "neg_examples": [
+        {
+          "rating": 1,
+          "text": "Errors were found in the file display and sorting, making searching difficult. The basic image editing functions are too limited and unsuitable for most users, and the inability to select all images f",
+          "lang": "th",
+          "date": "2026-01-11"
+        },
+        {
+          "rating": 1,
+          "text": "Do something like samsung... I can't change any folder description, Can't select all media at once.. Do something new",
+          "lang": "en",
+          "date": "2026-02-23"
+        },
+        {
+          "rating": 1,
+          "text": "Clean and minimal UI, but lacks basic features. - No “Select All” option in albums, making bulk actions difficult. - Missing zoom-out/grid view to see more photos at once. - No sorting options or prop",
+          "lang": "en",
+          "date": "2026-03-31"
+        }
+      ],
+      "pos_count": 1
+    },
+    "缺少基础整理功能": {
+      "kws": [
+        "cover",
+        "move",
+        "rename",
+        "caption",
+        "save to",
+        "SD card",
+        "copy",
+        "duplicate",
+        "group",
+        "nested",
+        "分類",
+        "移動",
+        "リネーム"
+      ],
+      "desc": "无法设置相册封面、移动照片、添加标题、保存到SD卡等",
+      "neg_count": 23,
+      "neg_examples": [
+        {
+          "rating": 1,
+          "text": "nothing gallery AI future objective remover not available",
+          "lang": "en",
+          "date": "2026-01-03"
+        },
+        {
+          "rating": 1,
+          "text": "Some photos shows a black screen. I can't even delete them or move to another folder. Then i tried, the inscription says: \"Loading image. Try again later\". Clear cache, data and storage didn't fix it.",
+          "lang": "en",
+          "date": "2026-01-22"
+        },
+        {
+          "rating": 2,
+          "text": "The albums section just has a list of folders. I can't set a cover picture for an album. It would be better if there were an option to get a cover image for every album, like in the UI photos displaye",
+          "lang": "en",
+          "date": "2026-01-25"
+        },
+        {
+          "rating": 2,
+          "text": "I really love the UI experience, But I'm facing a major problem in nothing 3a pro gallery, I can't access the eraser tool to remove some unwanted objects. Nothing please consider this and try to solve",
+          "lang": "en",
+          "date": "2026-02-07"
+        },
+        {
+          "rating": 1,
+          "text": "To whom it may concern I'm writing to report an issue with my device's gallery. Upon checking, I've found that all my photos and contents are missing. I've tried restarting the device and checking the",
+          "lang": "en",
+          "date": "2026-02-14"
+        }
+      ],
+      "pos_count": 8
+    },
+    "仅正面反馈": {
+      "kws": [
+        "good",
+        "great",
+        "excellent",
+        "love",
+        "best",
+        "nice",
+        "super",
+        "amazing",
+        "simple",
+        "clean",
+        "useful",
+        "👍",
+        "素晴",
+        "いい",
+        "好き"
+      ],
+      "desc": "表扬UI简洁、干净、好用",
+      "neg_count": 23,
+      "neg_examples": [
+        {
+          "rating": 1,
+          "text": "new gallery not good 😔. nothing gallery 2.0 good 👍",
+          "lang": "en",
+          "date": "2026-01-03"
+        },
+        {
+          "rating": 1,
+          "text": "previous feature is good",
+          "lang": "en",
+          "date": "2025-12-09"
+        },
+        {
+          "rating": 1,
+          "text": "not good work",
+          "lang": "en",
+          "date": "2026-01-07"
+        },
+        {
+          "rating": 2,
+          "text": "plz put the tool option in gallary it has gone from the app and plz fix this bug leaving that experience is good but fix that",
+          "lang": "en",
+          "date": "2026-01-24"
+        },
+        {
+          "rating": 1,
+          "text": "Theres no simple markup, garbage for utility",
+          "lang": "en",
+          "date": "2026-02-05"
+        }
+      ],
+      "pos_count": 75
+    }
+  }
+}

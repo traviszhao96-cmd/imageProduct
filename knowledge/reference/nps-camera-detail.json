@@ -1,0 +1,13 @@
+{
+  "camera_dimensions": [
+    {
+      "question": "How would you rate the *camera* ?",
+      "base_avg": 4.32,
+      "base_score": 88.4,
+      "base_n": 2600,
+      "pro_avg": 4.24,
+      "pro_score": 85.1,
+      "pro_n": 1935
+    }
+  ]
+}

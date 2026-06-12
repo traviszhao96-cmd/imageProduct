@@ -1,0 +1,124 @@
+# IMX896-AJH5-C — Sony 50MP Mobile Image Sensor
+# Source: IMX896-AJH5-C_Datasheet_2.0.0.pdf
+# Extracted: 2026-06-10
+
+sensor:
+  model: IMX896-AJH5-C
+  vendor: Sony Semiconductor Solutions
+  type: CMOS (Back-illuminated, Stacked)
+  generation: 2022-2024
+
+optical:
+  optical_format: 1/1.56" (Type)
+  diagonal_mm: 10.24
+  chip_size_mm:
+    h: 9.214
+    v: 7.270
+  unit_cell_size_um: 1.00
+  cfa: Quad Bayer Coding (QBC)
+  pixel_array:
+    active_h: 8192
+    active_v: 6144
+    total_mp: 50.3
+  lens:
+    cra_tolerance_deg: "±1° for PDAF stability"
+    recommended_cra: see_figure_33
+
+frame_rates:
+  # Full resolution (RMSC = Remosaic)
+  full_res_rmsc_12bit:
+    resolution: "8192×6144"
+    fps: 15
+    interface: both_cphy_dphy
+  # 2x2 Adjacent Pixel Binning (4:3) = 4096×3072, ~12.5MP
+  binning_2x2_12bit:
+    resolution: "4096×3072"
+    fps: 30
+    interface: both_cphy_dphy
+  # 2x2 Binning V2H2 (16:9) = 4096×2304, ~9.4MP
+  binning_v2h2_12bit:
+    resolution: "4096×2304"
+    fps: 60
+    interface: both_cphy_dphy
+  # 2x2 Binning V2H2 (16:9) with 2exp DOL HDR
+  binning_v2h2_dol_hdr:
+    resolution: "4096×2304"
+    fps: 60
+    note: "2exp DOL HDR mode"
+  # Low Noise modes (Full res LN2)
+  full_res_ln2:
+    resolution: "8192×4608" # or 8192×6144 depending on crop
+    fps: 10  # 10fps at 16:9 crop, 8fps at 4:3
+    note: "Reduced frame rate for lower noise"
+
+analog_gain:
+  full_resolution: "0 ~ 24 dB"
+  binning_modes: "0 ~ 36 dB"
+
+digital_gain: "0 ~ 24 dB"
+
+adc:
+  resolution: 12-bit (Fine)
+  type: Column Parallel
+
+output_interface:
+  type: MIPI CSI-2
+  c_phy:
+    trios: "1/2/3"
+    max_rate_gps: 2.4  # per trio
+    spec: "ver. 1.2"
+  d_phy:
+    lanes: "2/4"
+    max_rate_gbps: 2.5  # per lane
+    spec: "ver. 1.2"
+  raw_formats: [RAW10, RAW12, RAW14]
+  remosaic: QBC Re-mosaic supported
+
+hdr:
+  type: Digital Overlap HDR (DOL)
+  exposures: "2exp DOL supported"
+  note: "Available in binning modes only"
+
+pixel_processing:
+  dpc: "Built-in 2D Dynamic Defect Pixel Correction"
+  ltm: "Not mentioned"
+  scaler: "Digital crop + binning"
+
+features:
+  pdaf: "2x2 OCoL (On-Chip Lens) Phase Detection Auto Focus"
+  temperature_sensor: "Built-in, read via I2C or embedded data"
+  dual_sync: "Supported (controller + target modes)"
+  flash_control: "FSTROBE output pin"
+  gyro_interface: "SPI 3/4-wire to load gyro data per frame"
+  long_exposure: "Up to 128× vertical period"
+  test_pattern: "Solid Color, Color Bars, Fade to Gray Bars, PN9"
+  ois_control: "OISEN output pin, OIS pulse via monitor terminal"
+
+power:
+  supplies:
+    analog1_vana1: "2.8V ± 0.1V"
+    analog2_vana2: "1.8V ± 0.1V"
+    digital_vdig: "1.1V ± 0.1V"
+    interface_vif: "1.8V ± 0.1V or 1.2V ± 0.1V"
+
+temperature:
+  operating_tj: "-20 to +85°C"
+  performance_tj: "0 to +60°C"
+  storage_tj: "-30 to +85°C"
+
+command_interface:
+  type: "I2C (standard) / I3C (supported)"
+  address_pins: "SLASEL1, SLASEL2"
+
+# Inferred capability summary for feature list validation:
+capability_summary:
+  max_video_resolution: "4096×3072 @30fps (12.5MP, binned)"
+  4k_video_30fps: "YES (3840×2160 fits within 4096×3072 binning output)"
+  4k_video_60fps: "LIKELY (via V2H2 16:9 crop @60fps = 4096×2304)"
+  1080p_60fps: "YES"
+  1080p_120fps: "UNKNOWN (not listed in modes, may need V2H2 with further crop)"
+  slow_motion_240fps: "NOT SUPPORTED (V2H2 max is 60fps)"
+  hdr_video: "YES (2exp DOL via binning mode)"
+  full_res_capture_fps: 15
+  pixel_binning: "4-in-1 QBC → 12.5MP output"
+  high_res_50mp: "YES (via RMSC remosaic)"

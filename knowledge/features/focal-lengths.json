@@ -1,0 +1,200 @@
+{
+  "meta": {
+    "project": "25131",
+    "source": "Feature List V2.8 sheet5"
+  },
+  "configs": [
+    {
+      "mode": "PHOTO 后",
+      "buttons": [
+        "0.6x——16mm",
+        "1x——28mm",
+        "2x——56mm"
+      ],
+      "slide_zoom": true,
+      "max_zoom": "10x",
+      "preset_focal_lengths": [
+        "16mm",
+        "28mm",
+        "56mm",
+        "100mm"
+      ]
+    },
+    {
+      "mode": "PHOTO 后 + 108/200MP",
+      "buttons": [
+        "1x——28mm"
+      ],
+      "slide_zoom": false,
+      "max_zoom": "——",
+      "preset_focal_lengths": [
+        "28mm"
+      ]
+    },
+    {
+      "mode": "PHOTO 后 + 动态照片",
+      "buttons": [
+        "0.6x——16mm",
+        "1x——28mm",
+        "2x——56mm"
+      ],
+      "slide_zoom": true,
+      "max_zoom": "10x",
+      "preset_focal_lengths": [
+        "16mm",
+        "28mm",
+        "56mm",
+        "100mm"
+      ]
+    },
+    {
+      "mode": "PHOTO 前",
+      "buttons": [
+        "1x——24mm",
+        "1.2x——29mm（默认）"
+      ],
+      "slide_zoom": false,
+      "max_zoom": "——",
+      "preset_focal_lengths": [
+        "24mm",
+        "29mm"
+      ]
+    },
+    {
+      "mode": "PORTRAIT 后",
+      "buttons": [
+        "1x——28mm（默认）",
+        "2x——56mm"
+      ],
+      "slide_zoom": false,
+      "max_zoom": "——",
+      "preset_focal_lengths": [
+        "28mm",
+        "56mm"
+      ]
+    },
+    {
+      "mode": "PORTRAIT 前",
+      "buttons": [
+        "1.2x——29mm"
+      ],
+      "slide_zoom": false,
+      "max_zoom": "——",
+      "preset_focal_lengths": [
+        "29mm"
+      ]
+    },
+    {
+      "mode": "VIDEO 后 1080P30FPS 1080P60FPS 4K30FPS",
+      "buttons": [
+        "0.6x——16mm",
+        "1x——28mm",
+        "2x——56mm"
+      ],
+      "slide_zoom": true,
+      "max_zoom": "10x",
+      "preset_focal_lengths": [
+        "16mm",
+        "28mm",
+        "56mm"
+      ]
+    },
+    {
+      "mode": "VIDEO 前",
+      "buttons": [
+        "1x——24mm"
+      ],
+      "slide_zoom": false,
+      "max_zoom": "——",
+      "preset_focal_lengths": [
+        "24mm"
+      ]
+    },
+    {
+      "mode": "NIGHT 夜景（后）",
+      "buttons": [
+        "0.6x——16mm",
+        "1x——28mm",
+        "2x——56mm"
+      ],
+      "slide_zoom": true,
+      "max_zoom": "10x",
+      "preset_focal_lengths": [
+        "16mm",
+        "28mm",
+        "56mm",
+        "100mm"
+      ]
+    },
+    {
+      "mode": "NIGHT 夜景（前）",
+      "buttons": [
+        "1x——24mm",
+        "1.2x——29mm（默认）"
+      ],
+      "slide_zoom": false,
+      "max_zoom": "——",
+      "preset_focal_lengths": [
+        "24mm",
+        "29mm"
+      ]
+    },
+    {
+      "mode": "TIME-LAPSE 后—— 1080P",
+      "buttons": [
+        "0.6x——16mm",
+        "1x——28mm",
+        "2x——56mm"
+      ],
+      "slide_zoom": true,
+      "max_zoom": "10x",
+      "preset_focal_lengths": [
+        "16mm",
+        "28mm",
+        "56mm"
+      ]
+    },
+    {
+      "mode": "TIME-LAPSE 后—— 4K",
+      "buttons": [
+        "1x——28mm",
+        "2x——56mm"
+      ],
+      "slide_zoom": true,
+      "max_zoom": "10x",
+      "preset_focal_lengths": [
+        "28mm",
+        "56mm"
+      ]
+    },
+    {
+      "mode": "SLO-MO 后 1080P120FPS",
+      "buttons": [
+        "1x——28mm",
+        "2x——56mm"
+      ],
+      "slide_zoom": false,
+      "max_zoom": "2x",
+      "preset_focal_lengths": [
+        "28mm",
+        "56mm"
+      ]
+    },
+    {
+      "mode": "EXPERT 后",
+      "buttons": [
+        "0.6x——16mm",
+        "1x——28mm",
+        "2x——56mm"
+      ],
+      "slide_zoom": true,
+      "max_zoom": "10x",
+      "preset_focal_lengths": [
+        "16mm",
+        "28mm",
+        "56mm",
+        "100mm"
+      ]
+    }
+  ]
+}
