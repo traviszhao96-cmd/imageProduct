@@ -135,16 +135,6 @@ devices:
       rear_tele: 50M JN5 (OIS)
       front: 32M KD1
 
-  - project_code: null  # TBD
-    codename: null
-    market_name: null
-    soc: SM8735  # Snapdragon 8s Gen3
-    camera:
-      rear_main: 50M IMX896 (OIS)
-      rear_uw: 8M IMX355
-      rear_tele: 50M JN5 (OIS)
-      front: null  # TBD
-
   # ── Variants & Ti ──
 
   - project_code: "23112"
