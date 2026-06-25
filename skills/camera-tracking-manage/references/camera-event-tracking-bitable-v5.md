@@ -101,9 +101,14 @@
 | NTCamera | photo_info | 每次按下拍照快门并成功产出一张照片时上报,记录该照片对应参数,包含拍摄前和拍摄中的临时必要操作。 | face_ratio | 人脸占比,横纵方向 | [[heightRatio,widthRatio],[heightRatio,widthRatio]...] | 二维数组记录，heightRatio 为 纵方向在整个预览框占比（0-1， 保留两位小数），widthRatio 同上 | 0 |  | 已上线 |
 | NTCamera | photo_info | 每次按下拍照快门并成功产出一张照片时上报,记录该照片对应参数,包含拍摄前和拍摄中的临时必要操作。 | orientation | 拍摄照片时,手机的方向状态 | 0 | vertical，竖屏状态 | 0 |  | 已上线 |
 | NTCamera | photo_info | 每次按下拍照快门并成功产出一张照片时上报,记录该照片对应参数,包含拍摄前和拍摄中的临时必要操作。 | orientation | 拍摄照片时,手机的方向状态 | 1 | horizontal，横屏状态 | 0 |  | 已上线 |
+| NTCamera | photo_info | 每次按下拍照快门并成功产出一张照片时上报,记录该照片对应参数,包含拍摄前和拍摄中的临时必要操作。 | flicker_sensor_output | 拍照时 Flicker sensor 输出的光源频率值，对应代码变量 m_currentLightFrequency | xxx | Flicker sensor 原始数值，如 0, 100, 120, 240 等 | 0 | 2026-06-17 新增 | 待开发 |
+| NTCamera | photo_info | 每次按下拍照快门并成功产出一张照片时上报,记录该照片对应参数,包含拍摄前和拍摄中的临时必要操作。 | motion_level | 当前场景检测到的运动速度等级，对应代码变量 m_currentMotionLevel。拍照模式下触发运动抓拍时上报 | xxx | 运动速度等级的具体数值 | 0 | 2026-06-17 新增，原计划整合到 shot_algo，经讨论改为独立 key | 待开发 |
 | NTCamera | video_info | 每次停止录制并成功生成一个视频时上报,记录该视频对应参数,包含录制前和录制中的临时必要操作。 | video_mode | 在哪个模式拍摄的视频 | 1 | Video | 无 |  | 已上线 |
 | NTCamera | video_info | 每次停止录制并成功生成一个视频时上报,记录该视频对应参数,包含录制前和录制中的临时必要操作。 | video_mode | 在哪个模式拍摄的视频 | 2 | Slo-mo | 无 |  | 已上线 |
 | NTCamera | video_info | 每次停止录制并成功生成一个视频时上报,记录该视频对应参数,包含录制前和录制中的临时必要操作。 | video_mode | 在哪个模式拍摄的视频 | 3 | Time-lapse | 无 |  | 已上线 |
+| NTCamera | video_info | 每次停止录制并成功生成一个视频时上报,记录该视频对应参数,包含录制前和录制中的临时必要操作。 | video_mode | 在哪个模式拍摄的视频 | 4 | 前后双录 (Dual Recording) | 无 | 2026-06-25 新增 | 待开发 |
+| NTCamera | video_info | 每次停止录制并成功生成一个视频时上报 | dual_split | 前后双录的拼接方式 | top_bottom / pip | 上下分屏 / 画中画 | 0 | 2026-06-25 新增 | 待开发 |
+| NTCamera | video_info | 每次停止录制并成功生成一个视频时上报 | dual_lens | 前后双录的镜头组合（数字编码，见 camera_id） | 1+0 / 1+2 | 前置+主摄 / 前置+超广角 | 0 | 2026-06-25 新增 | 待开发 |
 | NTCamera | video_info | 每次停止录制并成功生成一个视频时上报,记录该视频对应参数,包含录制前和录制中的临时必要操作。 | exposure_adjust | 该视频中,用户是否手动调节曝光 可发生在按下快门前 只要曝光调节对成片产生影响就记录 | 0 | 未调节 | 0 |  | 已上线 |
 | NTCamera | video_info | 每次停止录制并成功生成一个视频时上报,记录该视频对应参数,包含录制前和录制中的临时必要操作。 | exposure_adjust | 该视频中,用户是否手动调节曝光 可发生在按下快门前 只要曝光调节对成片产生影响就记录 | 1 | 调节 | 0 |  | 已上线 |
 | NTCamera | video_info | 每次停止录制并成功生成一个视频时上报,记录该视频对应参数,包含录制前和录制中的临时必要操作。 | video_length | 视频拍摄时长 | xx | 以秒为单位 | 无 |  | 已上线 |
@@ -210,12 +215,21 @@
 | NTCamera | pef_info | 相机性能埋点 | switchCamera | 切换镜头速度 | xx | 以ms为单位 | 无 | 疑似拼写错误，正确应为 perf_info（性能），系历史遗留，实现时保持原值 | 已上线 |
 | NTCamera | photo_info | 每次按下拍照快门并成功产出一张照片时上报,记录该照片对应参数,包含拍摄前和拍摄中的临时必要操作。 | event_timestamp_local | 用户本地时间戳，带时区偏移，用于直接查询用户操作时间。每次按下拍照快门并成功产出一张照片时上报。 | 2026-04-27T15:13:00+08:00 | ISO 8601 格式，如 2026-04-27T15:13:00+08:00 | 无 |  | 已上线 |
 | NTCamera | video_info |  | event_timestamp_local | 用户本地时间戳，带时区偏移，用于直接查询用户操作时间。每次停止录制并成功生成一个视频时上报。 | 2026-04-27T15:13:00+08:00 | ISO 8601 格式，如 2026-04-27T15:13:00+08:00 | 无 |  | 已上线 |
-| NTCamera | auto_fps | 自动帧率——功能开关 |  |  | 0 | Off | 1 | 选择选项时记录 | 待开发 |
-| NTCamera | auto_fps | 自动帧率——功能开关 |  |  | 1 | Auto 30 fps | 1 | 选择选项时记录 | 待开发 |
-| NTCamera | auto_fps | 自动帧率——功能开关 |  |  | 2 | Auto 30 & 60 fps | 1 | 选择选项时记录 | 待开发 |
+| NTCamera | auto_fps | 视频自动帧率——功能开关 |  |  | off | 关 | 1 | 用户更改时记录 | 待开发 |
+| NTCamera | auto_fps | 视频自动帧率——功能开关 |  |  | auto_30 | 自动30fps | 1 | 用户更改时记录 | 待开发 |
+| NTCamera | auto_fps | 视频自动帧率——功能开关 |  |  | auto_30_60 | 自动30&60fps | 1 | 用户更改时记录 | 待开发 |
 | NTCamera | lock_lens | 锁定镜头——功能开关 |   |  | 0 | 关闭 | 0 | 点击开关时记录 | 待开发 |
 | NTCamera | lock_lens | 锁定镜头——功能开关 |   |  | 1 | 打开 | 0 | 点击开关时记录 | 待开发 |
 |  |  |  |  |  |  |  |  |  | 待开发 |
 | NTCamera | photo_info | 每次按下拍照快门并成功产出一张照片时上报,记录该照片对应参数,包含拍摄前和拍摄中的临时必要操作。 | doc_mode | 是否使用文档模式 | 0 | 未检测到，自动关闭 | 0 | 未检测到为 0 | 待开发 |
 | NTCamera | photo_info | 每次按下拍照快门并成功产出一张照片时上报,记录该照片对应参数,包含拍摄前和拍摄中的临时必要操作。 | doc_mode | 是否使用文档模式 | 1 | 自动打开 | 0 | 检测到，并且拍摄 为 1 | 待开发 |
 | NTCamera | photo_info | 每次按下拍照快门并成功产出一张照片时上报,记录该照片对应参数,包含拍摄前和拍摄中的临时必要操作。 | doc_mode | 是否使用文档模式 | 2 | 手动关闭 | 0 | 检测到，但是用户关闭拍摄 为 2 | 待开发 |
+
+---
+
+## 修改记录 (Changelog)
+
+| 日期 | 版本 | 类型 | 变更项 | 变更前 | 变更后 | 影响范围 | 作者 |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| 2026-06-17 | v5.2 | 新增 | photo_info 新增 label `flicker_sensor_output` | 无（此前误命名为 flicker_freq，已废弃） | 新增光源频率字段，对应代码变量 m_currentLightFrequency，值为 Flicker sensor 原始数值（如 0, 100, 120, 240） | photo_info | Maico / Travis / Zhongmin |
+| 2026-06-17 | v5.2 | 新增 | photo_info 新增 label `motion_level` | 无（原计划整合到 shot_algo，经讨论改为独立 key） | 新增运动速度等级字段，对应代码变量 m_currentMotionLevel | photo_info | Maico / Travis / Zhongmin |

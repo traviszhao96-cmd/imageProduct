@@ -1,32 +1,74 @@
 #!/usr/bin/env python3
-"""Generate views from the knowledge base JSON files.
+"""Generate camera feature list for any project from knowledge base.
 
 Usage:
-  python3 knowledge/generate.py markdown  → knowledge/_output/features.md
-  python3 knowledge/generate.py excel     → knowledge/_output/features.xlsx
-  python3 knowledge/generate.py all       → both
+  python3 knowledge/generate.py --project 25131
+  python3 knowledge/generate.py --project 26111 --format markdown
+  python3 knowledge/generate.py --project 25111 --format excel
+  python3 knowledge/generate.py --project 26111 --format all
+
+Supports: 25111, 25131, 26111 (add more by creating devices/{project}.yaml)
 """
 
-import json, os, sys
+import argparse, json, os, sys, copy
 from pathlib import Path
 from collections import defaultdict
 
 KB = Path(__file__).parent
 OUT = KB / '_output'
 
-# ===== Load data =====
 
-def load(name):
-    with open(KB / name) as f:
+# ===== Helpers =====
+
+def load_json(path):
+    with open(path) as f:
         return json.load(f)
 
-# ===== Markdown generator =====
 
-def md_support_table(features, title, cameras):
-    """Generate a markdown table grouped by mode→category→group."""
-    lines = [f'# {title}', '', f'> 项目 25131 | 自动生成 | {len(features)} 项功能', '']
+def load_device_config(project):
+    """Load device config from JSON."""
+    path = KB / 'devices' / f'{project}.json'
+    if not path.exists():
+        raise FileNotFoundError(f"No device config found: {path}")
+    return load_json(path)
 
-    # Group by mode
+
+def load_features(project):
+    """Load baseline feature JSONs. For projects that inherit, load the baseline."""
+    rear = load_json(KB / 'features' / 'rear-camera.json')
+    front = load_json(KB / 'features' / 'front-camera.json')
+    fl = load_json(KB / 'features' / 'focal-lengths.json')
+    return rear, front, fl
+
+
+def apply_feature_deltas(features, device_config, key='rear'):
+    """Apply structured deltas from device config."""
+    result = copy.deepcopy(features)
+    deltas = device_config.get('feature_deltas', {})
+
+    # Remove features
+    removed = deltas.get(f'{key}_removed', [])
+    if removed:
+        result = [f for f in result if f['name'] not in removed and f.get('group', '') not in removed]
+
+    # Update feature names
+    updates = deltas.get(f'{key}_updates', {})
+    for f in result:
+        if f['name'] in updates:
+            f['name'] = updates[f['name']]
+
+    # Add new features
+    additions = deltas.get(f'{key}_additions', [])
+    result.extend(additions)
+
+    return result
+
+
+# ===== Markdown =====
+
+def md_support_table(features, title, project, baseline_label):
+    lines = [f'# {title}', '', f'> 项目 {project} | {baseline_label} | {len(features)} 项功能', '']
+
     by_mode = defaultdict(list)
     for f in features:
         by_mode[f['mode']].append(f)
@@ -47,9 +89,9 @@ def md_support_table(features, title, cameras):
             def ss(v):
                 if v == 'supported': return '✅'
                 if v == 'unsupported': return '❌'
-                return v
+                return str(v)
             support_str = ' | '.join(ss(f['support'].get(c, '')) for c in cam_keys)
-            verify = f.get('verify', '')[:80]
+            verify = str(f.get('verify', ''))[:80]
             lines.append(f'| {f["category"]} | {f["group"]} > {f["name"]} | {support_str} | {verify} |')
 
         lines.append('')
@@ -57,185 +99,242 @@ def md_support_table(features, title, cameras):
     return '\n'.join(lines)
 
 
-def md_focal_lengths(configs):
-    """Generate focal length configuration table."""
-    lines = ['# 焦段配置', '', f'> 项目 25131 | {len(configs)} 个模式/模式组', '']
+def md_device_specs(config, project):
+    """Generate device specs table from device config."""
+    lines = ['# 设备规格', '', f'> 项目 {project}', '']
 
-    for c in configs:
-        lines.append(f'## {c["mode"]}')
+    cameras = config.get('cameras', {})
+    base = cameras.get('base', {})
+    pro = cameras.get('pro', {})
+
+    if base:
+        lines.append(f'## {project} Base')
         lines.append('')
-        lines.append(f'- 焦段按钮: {", ".join(c["buttons"])}')
-        lines.append(f'- 滑动变焦: {"✅" if c["slide_zoom"] else "❌"}')
-        lines.append(f'- 最大变焦: {c["max_zoom"]}')
-        lines.append(f'- Preset 可选: {", ".join(c["preset_focal_lengths"])}')
+        cam_list = [('主摄', base.get('main', {})), ('超广角', base.get('ultrawide', {})), ('前置', base.get('front', {}))]
+        _write_cam_table(lines, cam_list, base)
+
+    if pro:
+        lines.append(f'## {project} Pro')
+        lines.append('')
+        pro_note = pro.get('note', '')
+        if pro_note:
+            lines.append(f'> {pro_note}')
+            lines.append('')
+        cam_list = [('主摄', pro.get('main', {})), ('超广角', pro.get('ultrawide', {})),
+                     ('长焦', pro.get('tele', {})), ('前置', pro.get('front', {}))]
+        _write_cam_table(lines, cam_list, pro)
+
+    # Inheritance / deltas info
+    inheritance = config.get('inheritance', {})
+    if inheritance:
+        baseline = inheritance.get('baseline', '')
+        lines.append('## 继承信息')
+        lines.append('')
+        lines.append(f'- 基线: {baseline}')
+        for rule in inheritance.get('rules', []):
+            lines.append(f'- {rule}')
+        lines.append('')
+
+    # Key deltas
+    deltas_keys = [k for k in config.keys() if k.startswith('key_deltas')]
+    for dk in deltas_keys:
+        lines.append(f'## {dk.replace("_", " ").title()}')
+        lines.append('')
+        for d in config[dk]:
+            lines.append(f'- {d}')
+        lines.append('')
+
+    # New features
+    if config.get('new_features_p0'):
+        lines.append('## P0 新增功能')
+        lines.append('')
+        for f in config['new_features_p0']:
+            lines.append(f'- {f}')
+        lines.append('')
+
+    # Removed features
+    if config.get('removed_features'):
+        lines.append('## 已移除功能')
+        lines.append('')
+        for f in config['removed_features']:
+            lines.append(f'- {f}')
         lines.append('')
 
     return '\n'.join(lines)
 
 
-def md_devices(specs):
-    """Generate device specs markdown."""
-    lines = ['# 设备规格', '', f'> 项目 {specs["project"]}', '']
+def _write_cam_table(lines, cam_list, parent):
+    """Write a camera spec table row."""
+    # Collect all attribute keys
+    all_keys = []
+    for _, cam in cam_list:
+        if isinstance(cam, dict):
+            all_keys.extend(cam.keys())
+    all_keys = list(dict.fromkeys(all_keys))  # dedup, preserve order
 
-    for cam_key, cam in specs['cameras'].items():
-        lines.append(f'## {cam["name"]} ({cam_key})')
-        lines.append('')
-        lines.append('| 属性 | 值 |')
-        lines.append('|------|-----|')
-        for key, val in cam['specs'].items():
-            lines.append(f'| {key} | {val} |')
-        lines.append('')
+    # Filter to display-worthy keys
+    display_keys = [k for k in all_keys if k not in ('note', 'specs')]
 
-    return '\n'.join(lines)
+    # Build header
+    cam_names = [name for name, _ in cam_list]
+    lines.append('| 属性 | ' + ' | '.join(cam_names) + ' |')
+    lines.append('|------|' + '|'.join(['------'] * len(cam_names)) + '|')
+
+    for key in display_keys:
+        vals = []
+        for _, cam in cam_list:
+            if isinstance(cam, dict):
+                v = cam.get(key, '—')
+                if isinstance(v, bool):
+                    v = '✅' if v else '❌'
+                vals.append(str(v))
+            else:
+                vals.append(str(cam) if cam else '—')
+        lines.append(f'| {key} | ' + ' | '.join(vals) + ' |')
+
+    lines.append('')
 
 
-# ===== Excel generator =====
+# ===== Main =====
 
-def generate_excel():
+def main():
+    parser = argparse.ArgumentParser(description='Generate camera feature list')
+    parser.add_argument('--project', required=True, help='Project code (e.g., 25131, 26111)')
+    parser.add_argument('--format', default='all', choices=['markdown', 'excel', 'all'],
+                        help='Output format (default: all)')
+    args = parser.parse_args()
+
+    project = args.project
+    fmt = args.format
+
+    OUT.mkdir(parents=True, exist_ok=True)
+
+    # Load device config
+    config = load_device_config(project)
+
+    # Load baseline features
+    rear, front, fl = load_features(project)
+
+    # Get project info (handles both formats: dict in YAML, string in JSON)
+    proj_info = config.get('project', {})
+    if isinstance(proj_info, str):
+        code = proj_info
+    else:
+        code = proj_info.get('code', project)
+
+    # Determine baseline label
+    inheritance = config.get('inheritance', {})
+    baseline = inheritance.get('baseline', '')
+    baseline_label = f'{baseline} → {project} 继承基线' if baseline else '基准项目'
+
+    # Apply deltas from device config
+    rear_features = rear['features']
+    front_features = front['features']
+    if config.get('feature_deltas'):
+        rear_features = apply_feature_deltas(rear_features, config, 'rear')
+        front_features = apply_feature_deltas(front_features, config, 'front')
+
+    # Generate markdown
+    if fmt in ('markdown', 'all'):
+        md = []
+        md.append(f'# {code} 相机功能列表\n')
+        md.append(f'> 基线: {baseline_label}')
+        md.append(f'> 自动生成 | 后置 {len(rear_features)} 项 + 前置 {len(front_features)} 项')
+        if not config.get('feature_deltas'):
+            md.append(f'> ⚠️ 未定义 feature_deltas，输出为基线 feature 列表')
+        md.append('')
+        md.append('---\n')
+        md.append(md_support_table(rear_features, '后置摄像头功能列表', code, baseline_label))
+        md.append('\n---\n')
+        md.append(md_support_table(front_features, '前置摄像头功能列表', code, baseline_label))
+        md.append('\n---\n')
+        md.append(md_device_specs(config, code))
+
+        out = '\n'.join(md)
+        path = OUT / f'features-{project}.md'
+        path.write_text(out)
+        print(f'Markdown: {path} ({len(out):,} chars)')
+        print(f'  Rear: {len(rear_features)} features')
+        print(f'  Front: {len(front_features)} features')
+
+    # Generate excel (reuse existing logic for backward compat)
+    if fmt in ('excel', 'all'):
+        generate_excel(project, rear_features, front_features, config)
+
+
+def generate_excel(project, rear_features, front_features, config):
+    """Generate Excel output."""
     try:
         import openpyxl
-        from openpyxl.styles import Font, PatternFill, Alignment, Border, Side
+        from openpyxl.styles import Font, PatternFill, Border, Side
     except ImportError:
         print("Need openpyxl: pip install openpyxl")
         return
 
-    rear = load('features/rear-camera.json')
-    front = load('features/front-camera.json')
-    fl = load('features/focal-lengths.json')
-    specs = load('devices/25131.json')
-
     wb = openpyxl.Workbook()
-
-    # --- Rear Camera sheet ---
-    ws = wb.active
-    ws.title = '后置摄像头'
-
-    header_font = Font(bold=True, size=11)
+    header_font = Font(bold=True, size=11, color='FFFFFF')
     header_fill = PatternFill(start_color='1C1A16', end_color='1C1A16', fill_type='solid')
-    header_font_white = Font(bold=True, size=11, color='FFFFFF')
     thin_border = Border(
         left=Side(style='thin'), right=Side(style='thin'),
         top=Side(style='thin'), bottom=Side(style='thin')
     )
 
-    # Header
+    # Rear Camera
+    ws = wb.active
+    ws.title = '后置摄像头'
+
+    # Detect camera keys from features
     cam_keys = ['ultrawide', 'main', 'macro']
-    headers = ['模式', '分类', '功能组', '子功能', '超广角', '主摄', '微距', '验证方式']
+    if rear_features:
+        first = rear_features[0]
+        cam_keys = list(first.get('support', {}).keys()) or cam_keys
+
+    headers = ['模式', '分类', '功能组', '子功能'] + cam_keys + ['验证方式']
     for ci, h in enumerate(headers, 1):
         cell = ws.cell(row=1, column=ci, value=h)
-        cell.font = header_font_white
+        cell.font = header_font
         cell.fill = header_fill
         cell.border = thin_border
 
-    for ri, f in enumerate(rear['features'], 2):
+    for ri, f in enumerate(rear_features, 2):
         ws.cell(row=ri, column=1, value=f['mode']).border = thin_border
         ws.cell(row=ri, column=2, value=f['category']).border = thin_border
         ws.cell(row=ri, column=3, value=f['group']).border = thin_border
         ws.cell(row=ri, column=4, value=f['name']).border = thin_border
         for ci, ck in enumerate(cam_keys, 5):
             v = f['support'].get(ck, '')
-            ws.cell(row=ri, column=ci, value='√' if v == 'supported' else ('×' if v == 'unsupported' else v)).border = thin_border
-        ws.cell(row=ri, column=8, value=f.get('verify', '')).border = thin_border
+            ws.cell(row=ri, column=ci, value='√' if v == 'supported' else ('×' if v == 'unsupported' else str(v))).border = thin_border
+        ws.cell(row=ri, column=len(headers), value=f.get('verify', '')).border = thin_border
 
     ws.auto_filter.ref = ws.dimensions
     ws.freeze_panes = 'A2'
 
-    # --- Front Camera sheet ---
+    # Front Camera
     ws2 = wb.create_sheet('前置摄像头')
     headers2 = ['模式', '分类', '功能组', '子功能', '前置', '验证方式']
     for ci, h in enumerate(headers2, 1):
         cell = ws2.cell(row=1, column=ci, value=h)
-        cell.font = header_font_white
+        cell.font = header_font
         cell.fill = header_fill
         cell.border = thin_border
 
-    for ri, f in enumerate(front['features'], 2):
+    for ri, f in enumerate(front_features, 2):
         ws2.cell(row=ri, column=1, value=f['mode']).border = thin_border
         ws2.cell(row=ri, column=2, value=f['category']).border = thin_border
         ws2.cell(row=ri, column=3, value=f['group']).border = thin_border
         ws2.cell(row=ri, column=4, value=f['name']).border = thin_border
         v = f['support'].get('front', '')
-        ws2.cell(row=ri, column=5, value='√' if v == 'supported' else ('×' if v == 'unsupported' else v)).border = thin_border
+        ws2.cell(row=ri, column=5, value='√' if v == 'supported' else ('×' if v == 'unsupported' else str(v))).border = thin_border
         ws2.cell(row=ri, column=6, value=f.get('verify', '')).border = thin_border
 
     ws2.auto_filter.ref = ws2.dimensions
     ws2.freeze_panes = 'A2'
 
-    # --- Focal Lengths sheet ---
-    ws3 = wb.create_sheet('焦段配置')
-    for ci, h in enumerate(['模式', '焦段按钮', '滑动变焦', '最大变焦', 'Preset焦距'], 1):
-        cell = ws3.cell(row=1, column=ci, value=h)
-        cell.font = header_font_white
-        cell.fill = header_fill
-        cell.border = thin_border
-
-    for ri, c in enumerate(fl['configs'], 2):
-        ws3.cell(row=ri, column=1, value=c['mode']).border = thin_border
-        ws3.cell(row=ri, column=2, value='\n'.join(c['buttons'])).border = thin_border
-        ws3.cell(row=ri, column=3, value='✓' if c['slide_zoom'] else '×').border = thin_border
-        ws3.cell(row=ri, column=4, value=c['max_zoom']).border = thin_border
-        ws3.cell(row=ri, column=5, value='\n'.join(c['preset_focal_lengths'])).border = thin_border
-
-    ws3.freeze_panes = 'A2'
-
-    # --- Hardware Specs sheet ---
-    ws4 = wb.create_sheet('硬件规格')
-    for ci, h in enumerate(['属性', '50M 主摄', '8M 广角', '16M 前摄'], 1):
-        cell = ws4.cell(row=1, column=ci, value=h)
-        cell.font = header_font_white
-        cell.fill = header_fill
-        cell.border = thin_border
-
-    cam_names = ['main', 'ultrawide', 'front']
-    all_spec_keys = []
-    for ck in cam_names:
-        if ck in specs['cameras']:
-            all_spec_keys.extend(specs['cameras'][ck]['specs'].keys())
-    all_spec_keys = list(dict.fromkeys(all_spec_keys))
-
-    for ri, key in enumerate(all_spec_keys, 2):
-        ws4.cell(row=ri, column=1, value=key).border = thin_border
-        for ci, ck in enumerate(cam_names, 2):
-            val = specs['cameras'].get(ck, {}).get('specs', {}).get(key, '')
-            ws4.cell(row=ri, column=ci, value=val).border = thin_border
-
-    ws4.freeze_panes = 'B2'
-
-    out_path = OUT / 'features.xlsx'
+    out_path = OUT / f'features-{project}.xlsx'
     out_path.parent.mkdir(parents=True, exist_ok=True)
     wb.save(str(out_path))
-    return out_path
+    print(f'Excel: {out_path}')
 
-
-# ===== Main =====
-
-def main():
-    fmt = sys.argv[1] if len(sys.argv) > 1 else 'all'
-    OUT.mkdir(parents=True, exist_ok=True)
-
-    if fmt in ('markdown', 'all'):
-        rear = load('features/rear-camera.json')
-        front = load('features/front-camera.json')
-        fl = load('features/focal-lengths.json')
-        specs = load('devices/25131.json')
-
-        md = []
-        md.append(md_support_table(rear['features'], '后置摄像头功能列表', rear['meta']))
-        md.append('\n---\n')
-        md.append(md_support_table(front['features'], '前置摄像头功能列表', front['meta']))
-        md.append('\n---\n')
-        md.append(md_focal_lengths(fl['configs']))
-        md.append('\n---\n')
-        md.append(md_devices(specs))
-
-        out = '\n'.join(md)
-        path = OUT / 'features.md'
-        path.write_text(out)
-        print(f'Markdown: {path} ({len(out):,} chars)')
-
-    if fmt in ('excel', 'all'):
-        path = generate_excel()
-        print(f'Excel: {path}')
 
 if __name__ == '__main__':
     main()

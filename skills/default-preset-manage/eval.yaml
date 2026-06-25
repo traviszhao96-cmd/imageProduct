@@ -1,0 +1,256 @@
+version: '1.0'
+skill_id: default-preset-manage
+eval_type: content
+cases:
+- id: case-fill-rules
+  threshold: 0.75
+  task: '新增一个 Photo 模式的 preset。请判断以下字段填什么。
+
+
+    ```
+
+    Preset: 新预设，Mode=Photo
+
+    Portrait Effect: 不是人像模式
+
+    Bokeh: 同上
+
+    Filter: 没有用滤镜
+
+    Tuning: 没有调色参数
+
+    ```
+
+    '
+  rubric:
+  - id: r1
+    check: Portrait Effect 和 Bokeh 填「不涉及」
+    weight: 2
+  - id: r2
+    check: Filter 填「Original」，Tuning 填「无」
+    weight: 2
+  - id: r3
+    check: 区分了「不涉及」和「无」的不同含义
+    weight: 1
+- id: case-cricket-sports-sync
+  threshold: 0.75
+  task: 'Cricket 的 Tuning 从 Vignette +15 改为 Contrast +10。Sports 要不要同步？
+
+
+    ```
+
+    Cricket: Watermark=On，印度 RCB 版
+
+    Sports: Watermark=Off，ROW 版
+
+    核心参数应保持一致
+
+    ```
+
+    '
+  rubric:
+  - id: r1
+    check: 回答 Sports 的 Tuning 必须同步改为 Contrast +10
+    weight: 2
+  - id: r2
+    check: 核心参数一致，仅 Watermark 和 备注 可以不同
+    weight: 2
+  - id: r3
+    check: Cricket=On/印度，Sports=Off/ROW
+    weight: 1
+- id: case-focal-format
+  threshold: 0.75
+  task: 'Sports 在 25111 上 160mm，25131 上 24mm。写出 Focal Length 格式。
+
+
+    ```
+
+    25111 焦段: 160mm
+
+    25131 焦段: 24mm
+
+    格式: {project_code}-{focal}，多项目竖线分隔
+
+    ```
+
+    '
+  rubric:
+  - id: r1
+    check: 输出 25111-160mm | 25131-24mm
+    weight: 2
+  - id: r2
+    check: 所有项目相同时直接写如 50mm
+    weight: 2
+  - id: r3
+    check: 格式正确
+    weight: 1
+- id: case-cover-spec
+  threshold: 0.75
+  task: '给 Cine Amber（Video）和 Urban（Photo）分别准备封面图，尺寸要求？
+
+
+    ```
+
+    Cine Amber: Mode=Video
+
+    Urban: Mode=Photo
+
+    封面比例取决于预设的 Mode 类型
+
+    ```
+
+    '
+  rubric:
+  - id: r1
+    check: Urban (Photo) 要求 1080×1440 竖幅
+    weight: 2
+  - id: r2
+    check: Cine Amber (Video) 要求 16:9 横版
+    weight: 2
+  - id: r3
+    check: 说明了封面比例取决于 Mode
+    weight: 1
+- id: case-field-validation
+  threshold: 0.75
+  task: '检查这个 Cine Amber preset 是否有问题。
+
+
+    ```
+
+    Preset Name: Cine Amber
+
+    Mode: Video
+
+    Lens: Rear
+
+    Portrait Effect: 无
+
+    Bokeh: 无
+
+    Flash: On
+
+    ```
+
+    '
+  rubric:
+  - id: r1
+    check: 指出 Portrait Effect 和 Bokeh 应填「不涉及」而非「无」
+    weight: 2
+  - id: r2
+    check: 区分「不涉及」= 不适用，「无」= 适用但为空
+    weight: 2
+  - id: r3
+    check: 没有错误指出 Flash 有问题
+    weight: 1
+- id: case-input-quality
+  threshold: 0.75
+  task: '用户说"帮我更新一下 preset"，没给任何其他信息。请根据 SKILL.md 的 Input Quality Check 规则回答：这时候应该直接操作吗？需要确认哪些信息？
+
+
+    ```
+
+    用户输入: "帮我更新一下 preset"
+
+    已知信息: 无
+
+    缺失信息: 哪个 Preset？什么操作？改什么？
+
+    ```
+
+    '
+  rubric:
+  - id: r1
+    check: 回答不应该直接操作，输入信息不足
+    weight: 2
+  - id: r2
+    check: 回答需要确认：哪个 Preset？做什么操作（新增/修改/删除）？修改哪些字段？
+    weight: 2
+  - id: r3
+    check: 对一句话需求追问而非直接执行
+    weight: 1
+metadata:
+  source_skill_md_sha256: 83f4def4cccd5085045451d40433662886f529bcb65774c4a3e29d0c07faffbe
+  generated_at: '2026-06-25T14:16:15+08:00'
+  generator_version: eval-generate/v3.2
+  source_skill_md_sections:
+  - heading: (preface)
+    content_sha256: 55e33cbad86b61fc43d2a424260334a43f2d2b0c0da3d5bbfbeda44740b4aaa5
+    content_snippet: '# Default Preset Manager'
+    case_ids: []
+  - heading: '## Overview'
+    content_sha256: d340ad114b22dfdd5caa314a3f53f9e751d03151345bee78e6e2f668c8c4081e
+    content_snippet: This skill manages the **Camera Default Preset** multidimensional
+      table (多维表格) in Lark. It is the single source of truth for all default camera
+      presets shipped on Nothing/CMF phones. The skill handles
+    case_ids: []
+  - heading: '## Input Quality Check'
+    content_sha256: 21fc472205319b669a04dfa79910b0ea6ddae828eaf1dc4377be6232146d011b
+    content_snippet: 开始任何操作前，先判断用户输入是否足够。如果只有一句话需求（如"帮我加一个 preset"、"更新一下封面"），必须先确认以下信息，不要直接操作：
+      | 缺乏的信息 | 需要确认 | |-----------|---------| | 哪个 Preset？ | Preset Name | | 做什么操作？
+      | 新增 / 修改 / 删除 | | 修改了哪些字段？ | 具体字段和值 | | 有没有设计稿
+    case_ids: []
+  - heading: '## App & Table IDs'
+    content_sha256: 4862f8187c9903a5a52ebe9531dc297588b643ccdfcf5a27120e3b4ed38302a9
+    content_snippet: '| Item | ID | |------|----| | Bitable app | `TKuObORHDa0vNgs3gF9lsKdPgUg`
+      | | Table (presets) | `tblGPOTtAH66KGXN` | | Table (修改记录) | `tblrxQxcMJ4PN5og`
+      | | Bitable URL | `https://nothing-tech.sg.lark'
+    case_ids: []
+  - heading: '## Authentication'
+    content_sha256: b4418fb5da6ff4732334ab96ec9b57a77d5de2b83e01fa9cc3d63c2dff52cb17
+    content_snippet: '```python import json, urllib.request, ssl from pathlib import
+      Path config = json.loads(Path.home().joinpath(''.openclaw/openclaw.json'').read_text())
+      account = config[''channels''][''feishu''][''accounts'']['
+    case_ids: []
+  - heading: '## API Endpoints'
+    content_sha256: ca86a42d476718559f4ef539743816f1fe898054c5c55236674979ec1e0aaffc
+    content_snippet: '| 操作 | Method | Path | |------|--------|------| | 获取 records
+      | GET | `/open-apis/bitable/v1/apps/{app_token}/tables/{table_id}/records?page_size=500`
+      | | 获取 fields | GET | `/open-apis/bitable/v1/apps/'
+    case_ids: []
+  - heading: '## Field Structure (24 columns)'
+    content_sha256: d6c6f413219e91435c649d241bf615c16ff5d40054c31cbb1182e6045dd29375
+    content_snippet: '| # | Field | Type | Options | |---|-------|------|---------|
+      | 1 | Preset Name | Text (1) | Primary field | | 2 | Sort | Text (1) | | | 3
+      | Description | Text (1) | Bilingual EN/CN | | 4 | 备注 | Text '
+    case_ids: []
+  - heading: '## Fill Rules (填写规则)'
+    content_sha256: cd98000ad97ed5579f999ed7332352e0180aea757292b66fc6907e14dafdbb87
+    content_snippet: 'When adding or updating preset data, follow these strict conventions:
+      | 标注 | When to use | Example | |------|-------------|---------| | **不涉及** |
+      Field not applicable to this Mode | Bokeh for Photo mo'
+    case_ids: []
+  - heading: '## Cricket ↔ Sports Sync Rule'
+    content_sha256: fa3a9d66359c151d468771340c51aa2ac4cf5c830b25dae786bcd9e27179cde3
+    content_snippet: 'Cricket and Sports are the **same preset with different regional
+      branding**: - **Cricket**: India/RCB region, Watermark=On (RCB style), 备注="印度地区机型特供，在与
+      RCB 合作期间有效" - **Sports**: ROW region, Watermark='
+    case_ids: []
+  - heading: '## Device-Specific Focal Length Convention'
+    content_sha256: 2c6a5a2287537657fd8ebbabe32343661410756a6ebc0cf9e1aa7504b702e382
+    content_snippet: 'Format: `{project_code}-{focal} | {project_code}-{focal}` Example:
+      ``` 25111-160mm | 25131-28mm ``` When a single focal applies to all devices,
+      just write the value (e.g., `50mm`).'
+    case_ids: []
+  - heading: '## Source of Truth'
+    content_sha256: 9e2e7de99dbdf5a553e862ee0e64fa50d57a985672c8652ca99c5cbbe70d0861
+    content_snippet: '**在线多维表格是唯一权威数据源。** 本地快照 `v1.json` 仅作为变更对比的基线。每次操作从在线拉取最新数据开始，绝不允许手动修改本地文件后
+      push 到在线。'
+    case_ids: []
+  - heading: '## Workflow: 在线数据变更同步（核心流程）'
+    content_sha256: c2ee2a6be92da4113d7c71fe27bc7c80562879870e05bf48da8b8b7906f47e95
+    content_snippet: '当用户说"刷新了在线数据"、手动修改了 Bitable、或需要检查变更时执行： ### Step 1: 拉取在线数据 同时拉取
+      presets 表 `tblGPOTtAH66KGXN` 和修改记录表 `tblrxQxcMJ4PN5og` 的所有 records。 ### Step
+      2: 对比本地基线 加载本地 `references/default-preset-bitable-v1.json`，'
+    case_ids: []
+  - heading: '## Reference Files'
+    content_sha256: d3f3a488653c4f20123f2e1de0ceb94c2e47a358c2593154bffd94da86d1721a
+    content_snippet: '- `references/default-preset-bitable-v1.json` — Full Bitable
+      dump - `references/default-preset-bitable-v1.md` — Readable markdown table -
+      `../../knowledge/reference/presets/` — Local preset data + ima'
+    case_ids: []
+  - heading: '## Quick Lookup'
+    content_sha256: 2ac7777bdee472ae61aa5c46825ac53ae25773a93022913b6a40d48a6ef7c000
+    content_snippet: '- "拉取 preset 表" / "刷新了在线数据" → Pull from Lark → diff with v1
+      → auto-add changelog → save snapshot → report - "更新 xxx preset" → PUT to Lark,
+      update changelog - "新增 preset" → POST to Lark, update changel'
+    case_ids: []

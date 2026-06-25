@@ -1,0 +1,450 @@
+{
+  "project": {
+    "code": "26111",
+    "name": "Phone 5a",
+    "codename": "Caterpie",
+    "market": "印度",
+    "soc": {
+      "base": "SM7635",
+      "pro": "SM7750"
+    },
+    "software_baseline": "25111 Pro + NOS5.0"
+  },
+  "cameras": {
+    "base": {
+      "front": {
+        "sensor": "OV32D",
+        "resolution": "32MP",
+        "datasheet": null
+      },
+      "main": {
+        "sensor": "HP5",
+        "resolution": "200MP",
+        "ois": false,
+        "note": "无 OIS",
+        "datasheet": null
+      },
+      "ultrawide": {
+        "sensor": "IMX355",
+        "resolution": "8MP",
+        "af": "FF",
+        "datasheet": null
+      },
+      "tele": null,
+      "video": {
+        "4k": false,
+        "1080p60": false,
+        "video_hdr": false
+      }
+    },
+    "pro": {
+      "note": "配置与 25111 Pro 完全一致",
+      "front": {
+        "sensor": "KD1",
+        "resolution": "32MP",
+        "datasheet": null
+      },
+      "main": {
+        "sensor": "IMX896",
+        "resolution": "50MP",
+        "ois": true,
+        "datasheet": "devices/sensors/IMX896-AJH5-C.yaml"
+      },
+      "ultrawide": {
+        "sensor": "IMX355",
+        "resolution": "8MP",
+        "af": "FF",
+        "datasheet": null
+      },
+      "tele": {
+        "sensor": "JN5",
+        "resolution": "50MP",
+        "ois": true,
+        "zoom": "3.5x",
+        "datasheet": "devices/sensors/S5KJNSSQ33.yaml"
+      },
+      "video": {
+        "4k60": true,
+        "video_hdr": true
+      }
+    }
+  },
+  "inheritance": {
+    "baseline": "25131",
+    "rules": [
+      "26111 Base: 200M HP5 主摄，无长焦，继承 25131 功能并移除不适用项",
+      "26121 Pro: 与 25111 Pro 配置完全一致，全功能继承",
+      "新增功能以 26111 PRD 为准",
+      "算法链路以 SE 确认的 26111 算法列表为准"
+    ]
+  },
+  "key_deltas_from_25131": [
+    "主摄: JN1 50MP → HP5 200MP (无 OIS)",
+    "超广角: GC08A8 → IMX355",
+    "前置: GC16B3C → OV32D",
+    "Base 无长焦（仅 Flicker Sensor）",
+    "Base 无 4K、无 1080P60、无 Video HDR",
+    "NOS5.0 软件基线"
+  ],
+  "new_features_p0": [
+    "运动抓拍（继承25131交互，新增普通模式引导入口）",
+    "HDR 运动场景升级 + 影调升级 + 智能分区",
+    "成像预览一致性（2DOL 优先）",
+    "自然质感人像（美颜升级）",
+    "AIGC/SR 效果优化",
+    "4K 60FPS (Pro SAT / Ultra 主摄&长焦)",
+    "前置/广角 4K (upscale)",
+    "Preset 3.0 + AI Preset",
+    "照片风格（自然 & 鲜明）",
+    "专业模式 2.0",
+    "双摄同录 v2",
+    "录制中前后镜头切换",
+    "视频专业参数调节"
+  ],
+  "removed_features": [
+    "TF 50MP QuadBayer Raw HDR",
+    "TF 25MP",
+    "聚会模式",
+    "视频 Log 模式",
+    "视频录制红框提示"
+  ],
+  "feature_deltas": {
+    "rear_additions": [
+      {
+        "mode": "运动抓拍 (Action)",
+        "category": "拍摄",
+        "group": "运动检测",
+        "name": "独立运动抓拍模式",
+        "support": {
+          "ultrawide": "supported",
+          "main": "supported",
+          "macro": "unsupported"
+        },
+        "verify": "模式选择栏最左侧入口"
+      },
+      {
+        "mode": "运动抓拍 (Action)",
+        "category": "拍摄",
+        "group": "运动检测",
+        "name": "高速快门策略",
+        "support": {
+          "ultrawide": "supported",
+          "main": "supported",
+          "macro": "unsupported"
+        },
+        "verify": "检测运动 → 自动提升快门"
+      },
+      {
+        "mode": "运动抓拍 (Action)",
+        "category": "拍摄辅助",
+        "group": "焦段",
+        "name": "焦段点切（不支持滑动变焦）",
+        "support": {
+          "ultrawide": "supported",
+          "main": "supported",
+          "macro": "unsupported"
+        },
+        "verify": "仅点切 1x/3x"
+      },
+      {
+        "mode": "运动抓拍 (Action)",
+        "category": "拍摄辅助",
+        "group": "功能支持",
+        "name": "倒计时",
+        "support": {
+          "ultrawide": "supported",
+          "main": "supported",
+          "macro": "unsupported"
+        },
+        "verify": ""
+      },
+      {
+        "mode": "运动抓拍 (Action)",
+        "category": "拍摄辅助",
+        "group": "功能支持",
+        "name": "HDR",
+        "support": {
+          "ultrawide": "supported",
+          "main": "supported",
+          "macro": "unsupported"
+        },
+        "verify": ""
+      },
+      {
+        "mode": "运动抓拍 (Action)",
+        "category": "拍摄辅助",
+        "group": "功能支持",
+        "name": "手动曝光",
+        "support": {
+          "ultrawide": "supported",
+          "main": "supported",
+          "macro": "unsupported"
+        },
+        "verify": ""
+      },
+      {
+        "mode": "运动抓拍 (Action)",
+        "category": "拍摄辅助",
+        "group": "功能支持",
+        "name": "滤镜",
+        "support": {
+          "ultrawide": "supported",
+          "main": "supported",
+          "macro": "unsupported"
+        },
+        "verify": ""
+      },
+      {
+        "mode": "运动抓拍 (Action)",
+        "category": "拍摄辅助",
+        "group": "功能支持",
+        "name": "Tuning",
+        "support": {
+          "ultrawide": "supported",
+          "main": "supported",
+          "macro": "unsupported"
+        },
+        "verify": ""
+      },
+      {
+        "mode": "拍照",
+        "category": "拍摄辅助",
+        "group": "运动抓拍",
+        "name": "Top Toolbar 运动抓拍开关",
+        "support": {
+          "ultrawide": "supported",
+          "main": "supported",
+          "macro": "unsupported"
+        },
+        "verify": "Photo 模式下轻量运动检测"
+      },
+      {
+        "mode": "拍照",
+        "category": "拍摄辅助",
+        "group": "运动抓拍",
+        "name": "运动检测 → 提升快门速度",
+        "support": {
+          "ultrawide": "supported",
+          "main": "supported",
+          "macro": "unsupported"
+        },
+        "verify": "检测到运动自动提快门"
+      },
+      {
+        "mode": "拍照",
+        "category": "图像处理",
+        "group": "HDR",
+        "name": "HDR 运动场景升级 + 影调升级 + 智能分区",
+        "support": {
+          "ultrawide": "supported",
+          "main": "supported",
+          "macro": "unsupported"
+        },
+        "verify": "26111 P0"
+      },
+      {
+        "mode": "拍照",
+        "category": "图像处理",
+        "group": "成像预览",
+        "name": "成像预览一致性（2DOL 优先）",
+        "support": {
+          "ultrawide": "supported",
+          "main": "supported",
+          "macro": "unsupported"
+        },
+        "verify": "26111 P0"
+      },
+      {
+        "mode": "拍照",
+        "category": "图像处理",
+        "group": "美颜",
+        "name": "自然质感人像（美颜升级）",
+        "support": {
+          "ultrawide": "supported",
+          "main": "supported",
+          "macro": "unsupported"
+        },
+        "verify": "26111 P0"
+      },
+      {
+        "mode": "拍照",
+        "category": "图像处理",
+        "group": "AIGC",
+        "name": "AIGC/SR 效果优化",
+        "support": {
+          "ultrawide": "supported",
+          "main": "supported",
+          "macro": "unsupported"
+        },
+        "verify": "26111 P0"
+      },
+      {
+        "mode": "拍照",
+        "category": "个性化",
+        "group": "照片风格",
+        "name": "照片风格（自然 & 鲜明）",
+        "support": {
+          "ultrawide": "supported",
+          "main": "supported",
+          "macro": "unsupported"
+        },
+        "verify": "26111 P0 新增"
+      },
+      {
+        "mode": "专业模式",
+        "category": "拍摄",
+        "group": "专业模式 2.0",
+        "name": "专业模式 2.0 升级",
+        "support": {
+          "ultrawide": "supported",
+          "main": "supported",
+          "macro": "unsupported"
+        },
+        "verify": "26111 P0"
+      },
+      {
+        "mode": "Preset",
+        "category": "个性化",
+        "group": "Preset 3.0",
+        "name": "Preset 3.0 升级",
+        "support": {
+          "ultrawide": "supported",
+          "main": "supported",
+          "macro": "unsupported"
+        },
+        "verify": "26111 P0"
+      },
+      {
+        "mode": "Preset",
+        "category": "个性化",
+        "group": "Preset 3.0",
+        "name": "AI Preset",
+        "support": {
+          "ultrawide": "supported",
+          "main": "supported",
+          "macro": "unsupported"
+        },
+        "verify": "26111 P0"
+      },
+      {
+        "mode": "录像",
+        "category": "拍摄",
+        "group": "4K60",
+        "name": "4K 60FPS (仅 Pro，SAT / Ultra 主摄&长焦)",
+        "support": {
+          "ultrawide": "Pro-only",
+          "main": "Pro-only",
+          "macro": "unsupported"
+        },
+        "verify": "26121 Pro P0，Base 不支持"
+      },
+      {
+        "mode": "录像",
+        "category": "拍摄",
+        "group": "双摄同录",
+        "name": "双摄同录 v2",
+        "support": {
+          "ultrawide": "supported",
+          "main": "supported",
+          "macro": "unsupported"
+        },
+        "verify": "26111 P0"
+      },
+      {
+        "mode": "录像",
+        "category": "拍摄",
+        "group": "前后切换",
+        "name": "录制中前后镜头切换",
+        "support": {
+          "ultrawide": "supported",
+          "main": "supported",
+          "macro": "unsupported"
+        },
+        "verify": "26111 P0"
+      },
+      {
+        "mode": "录像",
+        "category": "拍摄",
+        "group": "专业参数",
+        "name": "视频专业参数调节",
+        "support": {
+          "ultrawide": "supported",
+          "main": "supported",
+          "macro": "unsupported"
+        },
+        "verify": "26111 P0"
+      }
+    ],
+    "front_additions": [
+      {
+        "mode": "拍照",
+        "category": "图像处理",
+        "group": "AIGC",
+        "name": "AIGC/SR 效果优化",
+        "support": {
+          "front": "supported"
+        },
+        "verify": "26111 P0"
+      },
+      {
+        "mode": "拍照",
+        "category": "图像处理",
+        "group": "美颜",
+        "name": "自然质感人像（美颜升级）",
+        "support": {
+          "front": "supported"
+        },
+        "verify": "26111 P0"
+      },
+      {
+        "mode": "录像",
+        "category": "拍摄",
+        "group": "4K",
+        "name": "前置 4K (upscale)",
+        "support": {
+          "front": "supported"
+        },
+        "verify": "26111 P0"
+      },
+      {
+        "mode": "录像",
+        "category": "拍摄",
+        "group": "前后切换",
+        "name": "录制中前后镜头切换",
+        "support": {
+          "front": "supported"
+        },
+        "verify": "26111 P0"
+      }
+    ],
+    "rear_updates": {
+      "滤镜15种": "滤镜15种（继承）",
+      "照片风格": "照片风格（自然 & 鲜明）",
+      "Preset 选择器": "Preset 3.0 选择器"
+    },
+    "rear_removed": [
+      "TF 50MP QuadBayer Raw HDR",
+      "TF 25MP",
+      "聚会模式",
+      "视频 Log 模式",
+      "视频录制红框提示"
+    ],
+    "front_removed": [
+      "聚会模式"
+    ]
+  },
+  "status": {
+    "feature_list": "features-26111.md 已生成（基于25131继承+delta，待SE确认算法后定稿）",
+    "algorithms": "待 SE 提供",
+    "sensors_missing": [
+      "HP5",
+      "IMX355",
+      "OV32D",
+      "KD1"
+    ],
+    "sensors_done": [
+      "IMX896",
+      "JN5"
+    ]
+  }
+}

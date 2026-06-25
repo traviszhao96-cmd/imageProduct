@@ -26,6 +26,30 @@ Use this checklist before drafting a mobile imaging planning document.
 - Trigger conditions or entry path
 - Configuration options or control strategy
 
+## Memory Rules（记忆规则）
+
+每个涉及用户可修改状态的功能，必须定义以下场景的记忆行为：
+
+- 切换模式后是否记忆
+- 切换前/后置镜头后是否记忆
+- 进入图库再返回相机后是否记忆
+- 进入设置页再返回相机后是否记忆
+- 杀进程 5min 内/后恢复是否记忆（不记忆则设为默认值）
+- Home 键 5min 内/后恢复是否记忆
+- 安全相机（锁屏快捷进入）是否记忆
+
+参考基线：[memory-mutex.json](../../../knowledge/reference/memory-mutex.json)（45 项功能 × 9 种场景，25111 MP1.5）
+
+## Mutual Exclusion（功能互斥）
+
+每个功能必须列出：
+
+- 与哪些功能互斥
+- 互斥时的行为（强制关闭对方 / 自己不可用 / 对方置灰 / 共存但算法不生效）
+- basic 和 pro 变体是否有差异
+
+参考基线：[memory-mutex.json](../../../knowledge/reference/memory-mutex.json)（20 条规则）
+
 ## Technical Dependencies
 
 - Sensor, lens, flash, or other hardware dependency

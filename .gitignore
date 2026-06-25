@@ -52,3 +52,5 @@ openclaw.json
 # Temporary / build artifacts
 .tmp-gerrit-skills/
 dist/
+.eval-generate/
+.eval-generate-archive/

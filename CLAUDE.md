@@ -40,6 +40,7 @@ knowledge/
 │
 ├── reference/                         # External data & feature specs
 │   ├── INDEX.md                       # PRD index by version (4.1, 5.0) and feature group
+│   ├── memory-mutex.json              # Memory rules (45 features × 9 scenarios) + mutual exclusion (20 rules)
 │   ├── algorithms.md                  # Algorithm/capability descriptions
 │   ├── filter.md / tuning.md          # Filter & tuning parameter docs
 │   ├── photo.md / action.md           # Photo & action mode specs
@@ -62,6 +63,8 @@ knowledge/
 4. **Check `knowledge/reference/INDEX.md`** — find related PRDs for reference
 5. **Use the `image-feature-prd-writer` skill** — it has the PRD template and required-info checklist
 6. **Tag the feature with `purpose` from feature-tree.md** — enables cross-dimensional retrieval
+7. **Define memory rules** — for any feature with user-modifiable state, fill all 9 standard scenarios (switch mode, switch camera, gallery, settings, kill 5min in/out, Home 5min in/out, secure camera). Reference: `knowledge/reference/memory-mutex.json`
+8. **Define mutual exclusion** — list all conflicting features with resolution behavior, including basic/pro differences. Reference: `knowledge/reference/memory-mutex.json`
 
 ### 2. When Reviewing a Feature List
 
@@ -100,13 +103,14 @@ Skills in `skills/` directory provide specialized workflows:
 
 | Skill | Purpose |
 |-------|---------|
+| `default-preset-manage` | Read/update/sync Camera Default Preset Bitable, manage covers & changelog |
 | `image-feature-prd-writer` | Write camera/gallery PRDs using templates and required-info checklists |
-| `nothing-camera-athena` | Natural language query over camera event tracking data (SQL playbook, performance, photo, video) |
-| `server-camera-analytics` | Server-side camera analytics (field mapping, charting) |
+| `camera-data-insight` | 相机数据洞察 — Athena SQL + remote SQLite 查询、业务报告、字段映射、数据保留规则 |
 | `camera-tracking-manage` | Camera event tracking bitable management (Lark docs) |
 | `gallery-event-tracking` | Gallery event tracking patterns |
 | `jira-automation` | Jira ticket automation via CLI |
 | `google-play-whats-new` | Google Play "What's New" release note generation |
+| `knowledge-base-manage` | Generate camera feature lists (parameterized by project), manage device configs, maintain sensor datasheets |
 
 ## Feature Tree Convention
 

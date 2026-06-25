@@ -11,6 +11,7 @@ Camera domain knowledge for AI agents writing PRDs, reviewing feature lists, and
 | 某 sensor 详细规格 | `devices/sensors/{model}.yaml` |
 | 焦段/变焦配置 | `features/focal-lengths.json` |
 | NPS 满意度 | `reference/nps-*.json` |
+| 生成功能列表 | `python3 knowledge/generate.py --project {code}` |
 
 ## Directory
 
@@ -31,7 +32,10 @@ knowledge/
 ├── reference/              外部数据
 │   └── nps-*.json
 ├── _output/                自动生成视图
-└── generate.py             JSON → markdown/excel
+│   ├── features-{project}.md
+│   └── features-{project}.xlsx
+└── generate.py             参数化生成器
+    Usage: python3 knowledge/generate.py --project 26111 [--format markdown|excel|all]
 ```
 
 ## Sensor Capability Labels

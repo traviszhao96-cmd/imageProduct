@@ -2,6 +2,23 @@
 
 自动从 _raw/prd/ 整理。按功能组分类。
 
+## 功能定义
+| 文档 | 说明 |
+|------|------|
+| [memory-mutex.json](memory-mutex.json) | 记忆规则（5min记忆逻辑，45项功能）× 互斥逻辑（20条规则），v2.0，25111 MP1.5 基线 |
+
+## 算法说明书
+| 文档 | 适用项目 |
+|------|---------|
+| [algorithms-5a.md](algorithms-5a.md) | Phone (5a) — 26111 + 26121 |
+
+## Default Preset
+| 文档 | 说明 |
+|------|------|
+| [presets/README.md](presets/README.md) | 全部 preset 对比表（v3.3） |
+| [presets/v3.3-sports.md](presets/v3.3-sports.md) | v3.3 +Sports 完整详情（12 个 preset + 封面图） |
+| 原始 xlsx | `~/Downloads/Default preset v3.2.xlsx` (65MB, 含 v3.2/v3.1/v3.0/v2.1/v1.0) |
+
 ## 4.1 版本
 | PRD | 功能组 | 文件 |
 |-----|--------|------|

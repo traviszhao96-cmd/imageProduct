@@ -72,6 +72,23 @@ Bitable → PRD 映射：`event_name` → `event_name`，`label` → `key`，`La
 - **优先** — 提供可复制粘贴的 9 列表格给用户，让用户手动粘贴到 PRD 对应位置
 - **API 写入** — 仅当用户明确要求时尝试；先用 `insert_text_md` 写标题和描述文字，再用 `create_table` + 逐 cell 填充
 
+## 新参数命名原则
+
+**优先使用可读字符串，不用数字编码。**
+
+- 新参数：用字符串枚举（如 `auto_30`、`top_bottom`），不要用数字（如 `0`、`1`）
+- 已有参数：数字编码的（如 `camera_id: 0=主摄,1=前置,2=超广`、`video_mode: 1/2/3`）不改动，新增的值沿用原编码体系
+- 原因：数字在查询时需要查字典（0 是什么模式？1 是什么？），字符串一眼能看懂，数据端分析也快
+
+**示例：**
+
+```
+✅ auto_fps: off / auto_30 / auto_30_60
+✅ dual_split: top_bottom / pip
+✅ video_mode: 1/2/3/4（继有数字体系，新增 4）
+❌ auto_fps: 0/1/2（数字，查字典才知道含义）
+```
+
 ## 历史埋点拼写兼容
 
 以下为历史遗留拼写问题，查询和写入时需兼容，**不可修正原值**，详见各记录的 `备注` 字段：
@@ -89,10 +106,32 @@ Bitable → PRD 映射：`event_name` → `event_name`，`label` → `key`，`La
 
 | 表 | ID | 说明 |
 | --- | --- | --- |
-| 主表 | `tbl3eedJjHPyCEf3` | 原始数据表，不可改 |
-| 含备注表 | `tblh05JLoheZIXfr` | Camera埋点v5.0(含备注)，204 条记录，13 条含历史备注 |
+| 埋点数据 | `tblh05JLoheZIXfr` | Camera 埋点 v5.0(含备注)，219 条记录 |
+| 埋点修改记录 | `tblgkCxH1lGuxP0r` | 每次改动记录（日期/类型/变更项/前后/范围） |
 
 Base token: `N2azb9muvaqqmwsIB7IlPmFGgpg`
+Wiki: `https://nothing-tech.sg.larksuite.com/wiki/NMt0wr2Q2iTWevkSc0hlFcBAgJg`
+
+### 当前状态
+
+| 状态 | 数量 |
+|------|------|
+| 已上线 | 196 |
+| 待开发 | 15 |
+| 已废弃 | 8 (mode_ps/bokeh_ps/filter_ps/50mp_ps) |
+
+### Key 分布
+
+| key | 数量 |
+|-----|------|
+| photo_info | 93 |
+| video_info | 48 |
+| enter_method | 10 |
+| pef_info | 10 |
+| brightness_adjust | 4 |
+| preset_* / auto_fps / activate_type 等 | 54 |
+
+最新本地快照: `references/camera-event-tracking-bitable-v6.json`
 
 ### 视图配置
 
@@ -159,7 +198,7 @@ headers = {'Authorization': f'Bearer {token}', 'Content-Type': 'application/json
 
 ## Reference Files
 
-- `camera-event-tracking-bitable-v5.json` — 完整 204 条埋点记录（JSON）
+- `camera-event-tracking-bitable-v6.json` — 完整 217 条埋点记录 + 统计（2026-06-15）
 - `camera-event-tracking-bitable-v5.md` — 完整埋点参考表格（含备注列）
 - `lark-docs/` — 已保存的飞书文档本地副本
 

@@ -1,0 +1,165 @@
+version: '1.0'
+skill_id: jira-automation
+eval_type: content
+cases:
+- id: case-create-gallery-story
+  threshold: 0.75
+  task: 'PM 需要在 NOS 项目中创建一个 Gallery 功能需求 Story。请根据 SKILL.md 的 PM Issue 内容规范，写出创建这个
+    issue 的完整 CLI 命令。需求概要：标题 "Add album sort by captured date"，让用户能按拍摄日期排序相册，PRD 在
+    https://nothing-tech.sg.larksuite.com/wiki/abc，Figma 在 https://www.figma.com/design/xyz。
+
+
+    ```
+
+    project: NOS
+
+    type: Story
+
+    component: NTGallery
+
+    device: all_phones
+
+    epic: NOS-10644
+
+    assignee: 712020:3b...dff
+
+    ```
+
+    '
+  rubric:
+  - id: r1
+    check: 命令包含 --description，且描述中至少包含「需求背景」和「需求描述」两个章节
+    weight: 2
+  - id: r2
+    check: 描述中附上了 PRD 链接和 Figma 链接
+    weight: 2
+  - id: r3
+    check: 命令使用 --project NOS --issue-type Story，且提到 customfield_10101 (Device) 和
+      components
+    weight: 2
+  - id: r4
+    check: 回答中提到 Epic Link 用 customfield_10014，不是 parent
+    weight: 1
+- id: case-detect-pitfalls
+  threshold: 0.75
+  task: "以下是一个 PM 尝试创建的 Jira issue 配置。但这个配置有 3 个错误。请根据 SKILL.md 的「NOS Project 已知陷阱」逐一指出错误并给出修正。\n\
+    \n```\n{\n  \"fields\": {\n    \"project\": {\"key\": \"NOS\"},\n    \"issuetype\"\
+    : {\"name\": \"Story\"},\n    \"summary\": \"Add filter by media type\",\n   \
+    \ \"parent\": {\"key\": \"NOS-10644\"},\n    \"customfield_10101\": {\"value\"\
+    : \"all_phones\"},\n    \"components\": []\n  }\n}\n```\n"
+  rubric:
+  - id: r1
+    check: 指出 parent 字段错误：Epic Link 应该用 customfield_10014，不是 parent
+    weight: 2
+  - id: r2
+    check: '指出 customfield_10101 (Device) 格式错误：应该是数组 [{"value": "all_phones"}]，不是单对象'
+    weight: 2
+  - id: r3
+    check: '指出 components 错误：不能是空数组 []，必须选已有组件名如 {"name": "NTGallery"}'
+    weight: 1
+- id: case-epic-link-method
+  threshold: 0.75
+  task: '一个已创建的 Story (NOS-12345) 需要关联到 Epic NOS-10644。PM 尝试用 CLI 的 update 命令设置 parent
+    字段但失败了。请根据 SKILL.md 回答：(1) 为什么 CLI update 会失败？(2) 推荐的替代方案是什么？写出具体方法。
+
+
+    ```
+
+    # PM 尝试的命令（失败）
+
+    jira_cli.py update --issue NOS-12345 --fields-json ''{"parent": {"key": "NOS-10644"}}''
+
+
+    # 正确的做法
+
+    PUT /rest/api/3/issue/NOS-12345
+
+    {"fields": {"customfield_10014": "NOS-10644"}}
+
+    ```
+
+    '
+  rubric:
+  - id: r1
+    check: 回答 CLI update --fields-json 对 HTTP 204 返回 {} 无法区分成功和静默失败，parent 字段会被静默丢弃
+    weight: 2
+  - id: r2
+    check: 回答推荐用 REST API PUT /rest/api/3/issue/{key} 直接设置 customfield_10014
+    weight: 2
+  - id: r3
+    check: 回答中提到设置后必须 get 验证关键字段
+    weight: 1
+metadata:
+  source_skill_md_sha256: 33e724f484904be0dbc94968213583d46007a1ec733d5913e1573ed314792cd7
+  generated_at: '2026-06-24T15:48:20+08:00'
+  generator_version: eval-generate/v3.2
+  source_skill_md_sections:
+  - heading: (preface)
+    content_sha256: 4ef6570e72004df988326ca68f84ee239231b86b5a575b5dfb814902a82ff58a
+    content_snippet: '# Jira Automation'
+    case_ids: []
+  - heading: '## Overview'
+    content_sha256: 56b8689a1ff28d726d1c43034628c44c3ccd064b28c5526382f0409c901e1541
+    content_snippet: Use this skill when the user wants Codex to manage Jira issues
+      directly from the local workspace. For Atlassian Cloud sites like `https://nothingtech.atlassian.net`,
+      the Jira API base URL should usual
+    case_ids: []
+  - heading: '## Workflow'
+    content_sha256: 3ad232549d86cecb26a5a88f2ada3a2d1ee3bc4312e153149e0c5371b42138ab
+    content_snippet: '1. Confirm the Jira site base URL and auth mode from environment
+      variables. 2. If the user asks to create an issue, collect or infer: - project
+      key - issue type - summary - description 3. If the user '
+    case_ids: []
+  - heading: '## Command Patterns'
+    content_sha256: e09382281a10e58302117e56f889ad002eca345e386f65511dc83ad553be8fd3
+    content_snippet: 'Create an issue: ```bash python3 outputs/skills/jira-automation/scripts/jira_cli.py
+      create \ --project IMGP \ --issue-type Task \ --summary "Add Gallery edit telemetry
+      audit" \ --description "Need a f'
+    case_ids: []
+  - heading: '## Field Notes'
+    content_sha256: 3930528c5d3743ba410e44b079fabafe0179f372eca5914c699aa5bcefd9ed78
+    content_snippet: '- For Jira Cloud, assignment usually needs `accountId`, not
+      email. - Some Jira projects require extra fields on create. If create fails
+      with a field error, inspect the error message and retry with the'
+    case_ids: []
+  - heading: '## PM Issue 内容规范'
+    content_sha256: 7711335abb6241b314d319837dcf2d899911ea6a633cd5b5c42c735267334316
+    content_snippet: '作为 PM，创建 issue 时 description 必须包含简明扼要的关键信息。一个合格的 story 至少要有：
+      ### 最低内容要求 | 章节 | 必填 | 说明 | |------|------|------| | 需求背景 | ✅ | 为什么做这个需求，解决什么问题
+      | | 需求描述 | ✅ | 具体做什么，功能范围 | | PRD 链接 | 按需 | 有正式 PRD 时必须附上 |'
+    case_ids: []
+  - heading: '## 需求背景'
+    content_sha256: 31e9647c8fad5f8ecf3ad8f3913ffe0b65e5a87b8a5134c4479c66b92e682cb8
+    content_snippet: '[简述问题/机会，1-3 句话]'
+    case_ids: []
+  - heading: '## 需求描述'
+    content_sha256: f3d485c3d9c5f8e149775cb5ea03e150c7f35229c1cc8edea513c5412d85be41
+    content_snippet: '[功能范围，3-5 个要点]'
+    case_ids: []
+  - heading: '## 相关链接'
+    content_sha256: 8927255bd0230eaeefea109c24ddca7c8f1ba5a28f4f24b6ac79c8dc265b8482
+    content_snippet: '- PRD: [链接]（如有） - Figma: [链接]（如有） ``` ### CLI 示例 ```bash python3
+      outputs/skills/jira-automation/scripts/jira_cli.py create \ --project NOS \
+      --issue-type Story \ --summary "Add album sort by captured '
+    case_ids: []
+  - heading: '## 需求描述'
+    content_sha256: d68abd43acbab5a802290a84f11a7856bcf916f3d9acf1950fc6161a838629a2
+    content_snippet: '- 相册主页新增排序选项：最近添加 / 拍摄日期 - 排序选择跨 session 记忆 - 默认排序为最近添加'
+    case_ids: []
+  - heading: '## 相关链接'
+    content_sha256: 3257337e472899c11bda482b8d8c3a3b85089d66e3091ae3aeeddb3d81e50929
+    content_snippet: '- PRD: https://nothing-tech.sg.larksuite.com/wiki/xxx - Figma:
+      https://www.figma.com/design/xxx" ```'
+    case_ids: []
+  - heading: '## Safety Rules'
+    content_sha256: 42739bbf66353a41efc1af2934bb5cbe3deb0fb8a34be0d240d3e946200b4f4c
+    content_snippet: '- Never store live tokens in repo files. - Prefer environment
+      variables over inline command arguments for secrets. - Echo only necessary issue
+      data back to the user. - If the API returns validation er'
+    case_ids: []
+  - heading: '## NOS Project 已知陷阱'
+    content_sha256: ec219fe9202d64f9f52586ed300ae3e6a98a497b60f8d95ab4873c575636a41a
+    content_snippet: '### Issue Type 差异 | Type | 额外必填字段 | |------|------------| |
+      Story | `customfield_10101` (Device), `components`, `assignee` | | Task | 上述全部
+      + `customfield_10041` (Severity) | 建议 Gallery 功能需求统一用 Story。 '
+    case_ids: []

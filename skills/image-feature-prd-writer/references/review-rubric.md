@@ -17,11 +17,15 @@ Use this rubric for the initial requirement review after drafting or when the us
 - Interface impact: whether upstream and downstream modules are identified
 - Resource impact: whether performance, memory, storage, and power costs are mentioned
 - Observability: whether logs, metrics, or debug hooks are needed
+- **Memory rules: whether the feature's persistence behavior is defined across all 9 standard scenarios** (switch mode, switch camera, gallery, settings, kill 5min in/out, Home 5min in/out, secure camera). If a feature modifies user state, every scenario must have an explicit answer.
+- **Mutual exclusion: whether all conflicting features are listed with resolution behavior** (disable self, disable other, coexistence with algorithm bypass, etc.) and whether basic/pro differences are noted.
 
 Common findings:
 - Requirement goal is present, but implementation boundary is missing
 - Hardware dependency is implied, not confirmed
 - No downgrade strategy when algorithm or tuning is not ready
+- `功能未定义切换模式后的记忆行为，开发和测试无法确定预期状态。`
+- `未列出与 HDR/夜景/闪光灯的互斥关系，可能引入未预期的功能冲突。`
 
 ### Gallery-Specific
 

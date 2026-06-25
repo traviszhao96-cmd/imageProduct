@@ -125,6 +125,53 @@ python3 outputs/skills/jira-automation/scripts/jira_cli.py transition \
 - Some Jira projects require extra fields on create. If create fails with a field error, inspect the error message and retry with the required custom field.
 - Use [references/api-notes.md](references/api-notes.md) when you need request shape examples or common failure handling.
 
+## PM Issue 内容规范
+
+作为 PM，创建 issue 时 description 必须包含简明扼要的关键信息。一个合格的 story 至少要有：
+
+### 最低内容要求
+
+| 章节 | 必填 | 说明 |
+|------|------|------|
+| 需求背景 | ✅ | 为什么做这个需求，解决什么问题 |
+| 需求描述 | ✅ | 具体做什么，功能范围 |
+| PRD 链接 | 按需 | 有正式 PRD 时必须附上 |
+| Figma 链接 | 按需 | 有设计稿时必须附上 |
+
+### 模板
+
+```
+## 需求背景
+[简述问题/机会，1-3 句话]
+
+## 需求描述
+[功能范围，3-5 个要点]
+
+## 相关链接
+- PRD: [链接]（如有）
+- Figma: [链接]（如有）
+```
+
+### CLI 示例
+
+```bash
+python3 outputs/skills/jira-automation/scripts/jira_cli.py create \
+  --project NOS \
+  --issue-type Story \
+  --summary "Add album sort by captured date" \
+  --description "## 需求背景
+当前相册仅支持按文件导入时间排序，用户无法按拍摄日期浏览。
+
+## 需求描述
+- 相册主页新增排序选项：最近添加 / 拍摄日期
+- 排序选择跨 session 记忆
+- 默认排序为最近添加
+
+## 相关链接
+- PRD: https://nothing-tech.sg.larksuite.com/wiki/xxx
+- Figma: https://www.figma.com/design/xxx"
+```
+
 ## Safety Rules
 
 - Never store live tokens in repo files.

@@ -3123,12 +3123,12 @@
     "fields": {
       "event_name": "NTCamera",
       "key": "auto_fps",
-      "key_note": "自动帧率——功能开关",
+      "key_note": "视频自动帧率——功能开关",
       "label": null,
       "label_note": null,
-      "string_value": "0",
-      "value_note": "Off",
-      "备注": "选择选项时记录",
+      "string_value": "off",
+      "value_note": "关",
+      "备注": "用户更改时记录",
       "当前状态": "待开发",
       "默认值": "1"
     },
@@ -3139,12 +3139,12 @@
     "fields": {
       "event_name": "NTCamera",
       "key": "auto_fps",
-      "key_note": "自动帧率——功能开关",
+      "key_note": "视频自动帧率——功能开关",
       "label": null,
       "label_note": null,
-      "string_value": "1",
-      "value_note": "Auto 30 fps",
-      "备注": "选择选项时记录",
+      "string_value": "auto_30",
+      "value_note": "自动30fps",
+      "备注": "用户更改时记录",
       "当前状态": "待开发",
       "默认值": "1"
     },
@@ -3155,12 +3155,12 @@
     "fields": {
       "event_name": "NTCamera",
       "key": "auto_fps",
-      "key_note": "自动帧率——功能开关",
+      "key_note": "视频自动帧率——功能开关",
       "label": null,
       "label_note": null,
-      "string_value": "2",
-      "value_note": "Auto 30 & 60 fps",
-      "备注": "选择选项时记录",
+      "string_value": "auto_30_60",
+      "value_note": "自动30&60fps",
+      "备注": "用户更改时记录",
       "当前状态": "待开发",
       "默认值": "1"
     },
@@ -3262,5 +3262,75 @@
     },
     "id": "recvju9zAz9N5O",
     "record_id": "recvju9zAz9N5O"
+  },
+  {
+    "fields": {
+      "event_name": "NTCamera",
+      "key": "photo_info",
+      "key_note": "每次按下拍照快门并成功产出一张照片时上报,记录该照片对应参数,包含拍摄前和拍摄中的临时必要操作。",
+      "label": "flicker_sensor_output",
+      "label_note": "拍照时 Flicker sensor 输出的光源频率值，对应代码变量 m_currentLightFrequency",
+      "string_value": "xxx",
+      "value_note": "Flicker sensor 原始数值，如 0, 100, 120, 240 等",
+      "默认值": "0",
+      "备注": "2026-06-17 新增",
+      "当前状态": "待开发"
+    }
+  },
+  {
+    "fields": {
+      "event_name": "NTCamera",
+      "key": "photo_info",
+      "key_note": "每次按下拍照快门并成功产出一张照片时上报,记录该照片对应参数,包含拍摄前和拍摄中的临时必要操作。",
+      "label": "motion_level",
+      "label_note": "当前场景检测到的运动速度等级，对应代码变量 m_currentMotionLevel。拍照模式下触发运动抓拍时上报",
+      "string_value": "xxx",
+      "value_note": "运动速度等级的具体数值",
+      "默认值": "0",
+      "备注": "2026-06-17 新增，原计划整合到 shot_algo，经讨论改为独立 key",
+      "当前状态": "待开发"
+    }
+  },
+  {
+    "fields": {
+      "event_name": "NTCamera",
+      "key": "video_info",
+      "key_note": "每次停止录制并成功生成一个视频时上报,记录该视频对应参数,包含录制前和录制中的临时必要操作。",
+      "label": "video_mode",
+      "label_note": "在哪个模式拍摄的视频",
+      "string_value": "4",
+      "value_note": "前后双录 (Dual Recording)",
+      "默认值": "无",
+      "备注": "2026-06-25 新增",
+      "当前状态": "待开发"
+    }
+  },
+  {
+    "fields": {
+      "event_name": "NTCamera",
+      "key": "video_info",
+      "key_note": "每次停止录制并成功生成一个视频时上报",
+      "label": "dual_split",
+      "label_note": "前后双录的拼接方式",
+      "string_value": "top_bottom / pip",
+      "value_note": "上下分屏 / 画中画",
+      "默认值": "0",
+      "备注": "2026-06-25 新增",
+      "当前状态": "待开发"
+    }
+  },
+  {
+    "fields": {
+      "event_name": "NTCamera",
+      "key": "video_info",
+      "key_note": "每次停止录制并成功生成一个视频时上报",
+      "label": "dual_lens",
+      "label_note": "前后双录的镜头组合（数字编码，见 camera_id）",
+      "string_value": "1+0 / 1+2",
+      "value_note": "前置+主摄 / 前置+超广角",
+      "默认值": "0",
+      "备注": "2026-06-25 新增",
+      "当前状态": "待开发"
+    }
   }
 ]

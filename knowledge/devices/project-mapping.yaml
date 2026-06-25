@@ -343,59 +343,77 @@ devices:
     pm: {}  # TBD
 
   # ═══════════════════════════════════════════════════════════════
-  # Phone (5a) / (5a) Pro — 下一代
+  # Phone (5a) — base
   # ═══════════════════════════════════════════════════════════════
   - project_code: "26111"
     codename: Caterpie
-    market_name:
-      base: Nothing Phone (5a)
-      pro: Nothing Phone (5a) Pro
+    market_name: Nothing Phone (5a)
     sw_codename: null  # TBD
     model_code: null  # TBD
     colours: []  # TBD
     screen: null  # TBD
     launch: null  # TBD
     phase: null  # TBD
-    soc: null  # platform TBD
+    soc: SM7635  # Snapdragon 7s Gen3
     camera:
-      base:
-        rear_main: 50M OV51A (OIS)   # 1/1.95"
-        rear_uw: 8M IMX355           # 1/4", FF
-        rear_tele: null              # Flicker Sensor only (no telephoto)
-        front: 32M OV32D
-      pro:
-        rear_main: 50M OV51A (OIS)   # 1/1.95"
-        rear_uw: 8M IMX355           # 1/4", FF
-        rear_tele: 50M KN1 (OIS)     # 1/3.1", 3.9x L型潜望, 舜宇
-        front: 32M OV32D
-    software_baseline: "25111 Pro + NOS5.0"
+      rear_main: 200M HP5
+      rear_uw: 8M IMX355
+      rear_tele: null     # Flicker Sensor only
+      front: 32M OV32D
     key_changes_from_25131:
-      - "主摄 JN1 → OV51A"
+      - "主摄 JN1 → 200M HP5"
       - "超广角 GC08A8 → IMX355"
       - "前置 GC16B3C → OV32D"
-      - "Base 无长焦（仅 Flicker Sensor）"
-      - "Pro 新增 3.9x 潜望长焦 KN1"
-    new_features_p0:
-      - 运动抓拍（普通模式引导入口）
-      - HDR 运动场景升级 + 影调升级 + 智能分区
-      - 成像预览一致性（2DOL 优先）
-      - 自然质感人像（美颜升级）
-      - AIGC/SR 效果优化
-      - 4K 60FPS (Pro SAT / Ultra 主摄&长焦)
-      - 前置/广角 4K (upscale)
-      - Preset 3.0 + AI Preset
-      - 照片风格（自然 & 鲜明）
-      - 专业模式 2.0
-      - 双摄同录 v2
-      - 录制中前后镜头切换
-      - 视频专业参数调节
-    removed_features:
-      - "TF 50MP QuadBayer Raw HDR"
-      - "TF 25MP"
-      - "聚会模式"
-      - "视频 Log 模式"
-      - "视频录制红框提示"
+      - "无长焦（仅 Flicker Sensor）"
     pm: {}  # TBD
+
+  # ═══════════════════════════════════════════════════════════════
+  # Phone (5a) Pro
+  # ═══════════════════════════════════════════════════════════════
+  - project_code: "26121"
+    codename: Caterpie Pro   # TBD
+    market_name: Nothing Phone (5a) Pro
+    sw_codename: null  # TBD
+    model_code: null  # TBD
+    colours: []  # TBD
+    screen: null  # TBD
+    launch: null  # TBD
+    phase: null  # TBD
+    soc: SM7750  # Snapdragon 7 Gen4
+    camera:
+      rear_main: 50M IMX896 (OIS)
+      rear_uw: 8M IMX355
+      rear_tele: 50M JN5 (OIS)   # 3.5x
+      front: 32M KD1
+    software_baseline: "复用 25111 Pro 相机配置"
+    key_changes_from_25111_pro:
+      - "SoC: SM7750 (25111 Pro 同款)"
+      - "相机硬件与 25111 Pro 一致"
+    pm: {}  # TBD
+
+  # ═══════════════════════════════════════════════════════════════
+  # Phone (5a) — P0 新功能 & 移除项（base + pro 共用）
+  # ═══════════════════════════════════════════════════════════════
+  # new_features_p0:
+  #   - 运动抓拍（普通模式引导入口）
+  #   - HDR 运动场景升级 + 影调升级 + 智能分区
+  #   - 成像预览一致性（2DOL 优先）
+  #   - 自然质感人像（美颜升级）
+  #   - AIGC/SR 效果优化
+  #   - 4K 60FPS (Pro SAT / Ultra 主摄&长焦)
+  #   - 前置/广角 4K (upscale)
+  #   - Preset 3.0 + AI Preset
+  #   - 照片风格（自然 & 鲜明）
+  #   - 专业模式 2.0
+  #   - 双摄同录 v2
+  #   - 录制中前后镜头切换
+  #   - 视频专业参数调节
+  # removed_features:
+  #   - TF 50MP QuadBayer Raw HDR
+  #   - TF 25MP
+  #   - 聚会模式
+  #   - 视频 Log 模式
+  #   - 视频录制红框提示
 
 # ═══════════════════════════════════════════════════════════════
 # Model Code Quick Index
