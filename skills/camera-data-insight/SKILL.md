@@ -106,6 +106,80 @@ filter vs preset 是两个不同概念。查滤镜用 `filter` 字段，不要�
 - 证据不足时明确说明，不猜测
 - 返回中文结论
 
+## ⚠️ 实战踩坑（2026-06-26 更新）
+
+以下是在实际查询 25111base 人像模式多条件组合时发现的坑，**写 SQL 前务必回顾**。
+
+### 1. 表没有 `dt` 列
+
+`data_mobile_behavior` **没有** `dt` 分区列。日期过滤用 `event_timestamp`（bigint, epoch 毫秒）：
+
+```sql
+-- ❌ 错
+dt >= '2026-06-19'
+
+-- ✅ 对
+AND from_unixtime(event_timestamp / 1000) >= TIMESTAMP '2026-06-19 00:00:00'
+AND from_unixtime(event_timestamp / 1000) < TIMESTAMP '2026-06-26 00:00:00'
+```
+
+### 2. photo_info 打包字符串的分隔符是 `;`（分号），不是 `,`（逗号）
+
+原始字符串示例：
+```
+photoMode:protrait;filter:0;watermark:0;effects:0;hdr:2;retouching:0;...
+```
+
+如果用 `[^,]+` 做正则，由于字符串中没有逗号，会捕获整个剩余字符串，导致字段解析永远错误。某些字段值本身含有 `,`（如 `shot_algo:BokehHDR,CFR`），所以分隔符一定是 `;`。
+
+```sql
+-- ❌ 错（捕获整个剩余字符串）
+REGEXP_EXTRACT(photo_info_raw, 'photoMode:([^,]+)', 1)
+
+-- ✅ 对
+REGEXP_EXTRACT(photo_info_raw, 'photoMode:([^;]+)', 1)
+REGEXP_EXTRACT(photo_info_raw, 'retouching:([^;]+)', 1)
+REGEXP_EXTRACT(photo_info_raw, 'filter:([^;]+)', 1)
+```
+
+### 3. photo_info 字段顺序不固定
+
+某些字段（如 `ai_zoom`、`face_ratio`）在有数据时才出现，不会在所有行中一致。总是按名提取，不要按位置。
+
+### 4. 写查询前先抽样验证
+
+写包含多个字段解析的 SQL 前，**必须先 LIMIT 看原始字符串**，确认字段名/分隔符/值格式：
+
+```sql
+SELECT param.string_value AS photo_info_raw
+FROM data_mobile_behavior
+CROSS JOIN UNNEST(event_params) AS t(param)
+WHERE event_name = 'NTCamera'
+  AND param.key = 'photo_info'
+  AND param.string_value IS NOT NULL
+  AND project_name = 'Frogger'
+LIMIT 5;
+```
+
+不这么做可能会白扫 700GB+ 后发现解析错误。
+
+### 5. 多条件组合查询的逐步验证技巧
+
+当多个功能叠加命中数为 0 时，不要直接改 SQL 扫全表重试。应当**逐步查询**各功能的交叉命中数，定位瓶颈：
+
+```sql
+-- 示例：逐步检查人像+美颜强+滤镜+水印+光斑+HDR 的衰减链
+SELECT
+  COUNT(*) AS total,
+  COUNT_IF(retouching = '2') AS retouch2,
+  COUNT_IF(retouching = '2' AND filter != '0') AS plus_filter,
+  COUNT_IF(retouching = '2' AND filter != '0' AND watermark != '0') AS plus_wm,
+  COUNT_IF(...) AS plus_effect,
+  COUNT_IF(...) AS all
+FROM ...
+WHERE photo_mode = 'protrait';
+```
+
 ## Reference Files
 
 - [references/field-mapping.md](references/field-mapping.md) — 产品语言 → 数据库字段映射
