@@ -9,6 +9,71 @@ description: Use when the user wants to query camera telemetry data — either v
 
 This skill handles all camera telemetry queries — both Athena (data_mobile_behavior) and the shared remote SQLite database. For埋点 table management, event tracking design, and PRD writing, see `camera-tracking-manage`.
 
+## ⚡ Query Execution Protocol（必走流程）
+
+⚠️ **真正的资产是文档知识库（Skill + 模板 + 字段映射 + 踩坑记录），不是数据副本。**
+本地库是过渡期的 sample 验证工具，最终只保留最小样本，甚至完全去掉。
+
+核心理念：**信任文档。模板覆盖 ≥90% 常见查询，不需要验证。直接写 SQL。**
+
+### Step 0: Trust The Docs（信任文档，<10s）
+
+先查已有知识。模板存在 → 直接写 SQL。不许探头。
+
+- [ ] 查 `references/field-mapping.md` — 产品用语 → 字段名
+- [ ] 查 `camera_athena_queries.sql` — 匹配最近模板（9 个已验证）
+- [ ] 查 `memory/data-report-index.md` — 是否有现成报告可复用
+
+**→ 模板命中：基于模板直接写 SQL，跳过验证，直接进入 Step 1。**
+**→ 模板未命中（新字段/新结构）：进入 Step 0a。**
+
+### Step 0a: Sample Validation（仅在模板不存在时，<30s）
+
+⚠️ 只有遇到文档里没记录的新字段/新格式时才触发。仅用最小 sample 验证 regex 和值域，不是跑全量。
+
+```bash
+# 最小 sample 验证：只跑 20 行，确认格式
+python3 ~/imageProduct/scripts/local_sql_analytics.py query \
+  --db ~/imageProduct/outputs/local_analytics/db/{sample}.db \
+  --sql "SELECT ... FROM photo_events_parsed WHERE ... LIMIT 20"
+```
+
+验证通过后，**必须回写知识库**：
+1. 新字段格式 → 补充到 `references/field-mapping.md`
+2. 新查询模式 → 追加到 `camera_athena_queries.sql`
+3. 新踩坑点 → 补充到本文 `## ⚠️ 实战踩坑` 章节
+4. 然后进入 Step 1
+
+### Step 1: One-Shot Athena（一次扫描出所有结果）
+
+⚠️ 所有需要的维度在一个 CTE 中完成。**禁止分次扫描。**
+
+```sql
+-- ✅ 正确：CTE 一次扫描，多维度输出
+WITH base AS (
+  SELECT ... FROM data_mobile_behavior CROSS JOIN UNNEST(event_params) ...
+  WHERE 条件
+)
+SELECT '聚合' AS label, model, COUNT(*) ... FROM base GROUP BY model
+UNION ALL
+SELECT '分滤镜', model, filter_val, COUNT(*) ... FROM base GROUP BY model, filter_val
+```
+
+| 需求场景 | 合并方法 |
+|---------|---------|
+| 总渗透率 + 分设备 | CTE 带 model，GROUP BY model |
+| 总渗透率 + 分滤镜排名 | CTE 带 filter，窗口函数 `SUM() OVER (PARTITION BY model)` 算占比 |
+| 总渗透率 + 分时间段趋势 | CTE 带 event_date，GROUP BY event_date, model |
+| 多个独立指标 | 一个 CTE + UNION ALL 输出多个结果集 |
+
+### Step 2: Cache & Update Knowledge（归档 + 反哺知识库）
+
+1. 结果保存到 `~/imageProduct/outputs/athena_results/{主题}/{YYYY-MM-DD}.csv`
+2. 更新 `memory/data-report-index.md` 追加新条目
+3. 如果查询中发现文档未记录的模式 → 反哺到知识库（Step 0a 的规则同样适用）
+
+---
+
 ## Input Quality Check
 
 开始任何查询前，先判断用户输入是否足够。一句话需求（如"帮我查一下数据"、"看看相机使用率"）必须先追问：
@@ -18,16 +83,40 @@ This skill handles all camera telemetry queries — both Athena (data_mobile_beh
 | 查什么指标？ | 使用率、渗透率、分布、趋势 |
 | 什么模式/参数？ | photoMode、camera_id、filter 等 |
 | 什么时间范围？ | 日期范围（注意 6 个月保留限制） |
-| 哪个数据源？ | Athena / SQLite 远程库 |
+| 哪个数据源？ | Athena（生产） / 本地 sample（仅新字段验证） |
 | 需要排除什么？ | 海外分析默认排除 China、Hong Kong |
 
 ## Data Sources
 
-### 1. Athena (data_mobile_behavior)
+优先级：文档知识库 > 最小 sample 验证 > Athena。
 
-Athena/Presto 语法。主表 `data_mobile_behavior`。用于大规模 Camera 埋点分析。
+### 1. 文档知识库（第一优先级）
 
-### 2. Remote SQLite (server_sqlite_query_client.py)
+真正的资产。所有可复用知识在这里，不依赖数据副本：
+- [`camera_athena_queries.sql`](../scripts/camera_athena_queries.sql) — 11 个已验证 SQL 模板
+- [`references/field-mapping.md`](references/field-mapping.md) — 产品用语 → 字段映射
+- 本文 `## ⚠️ 实战踩坑` — schema 陷阱和历史兼容
+
+### 2. 本地 Sample 库（仅用于新字段验证，过渡工具）
+
+⚠️ **不是数据源。** 仅在遇到文档未记录的新字段/新格式时，用于验证 regex 和值域（LIMIT 20）。
+
+最终目标：文档知识库足够完善后，可删除或压缩为最小样本。
+
+```bash
+python3 ~/imageProduct/scripts/local_sql_analytics.py query \
+  --db ~/imageProduct/outputs/local_analytics/db/{sample}.db \
+  --sql "SELECT ... LIMIT 20"
+```
+
+### 3. Athena (data_mobile_behavior)
+
+唯一的生产数据源。所有正式查询在这里执行。规则：
+- 基于模板直接写 SQL，不许探头
+- 一次 CTE 扫描输出所有维度
+- 结果必须归档
+
+### 4. Remote SQLite (server_sqlite_query_client.py)
 
 HTTP 远程 SQLite 数据库。常用表：`photo_events_parsed`、`camera_events_raw`、`photo_events_time_buckets`。
 
