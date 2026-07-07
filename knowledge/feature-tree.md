@@ -9,6 +9,8 @@
 - AI 写 PRD 时，先查主干确认功能在哪个交互位置
 - AI 做影响分析时，用 `purpose` 标签找出同类功能
 - 新增功能挂载到正确的交互位置，同时打 purpose 标签
+- 写 Feature List 时，`快门区域` 不展开为功能行；快门按键、相册缩略图、前后摄像头翻转按键是所有相机都有的基础入口
+- 写 Feature List 时，`Preset` 和 `Settings` 归入 `模式=通用`，不要在每个拍摄模式下重复写一遍
 
 ---
 
@@ -59,40 +61,41 @@ Camera App
 │   ├── SR 超分                               purpose: 算法
 │   └── EIS / OIS                             purpose: 硬件
 │
-├── 4. Shutter（快门）
-│   ├── 拍照                                  purpose: 拍摄
-│   ├── 连拍（长按）                           purpose: 拍摄
-│   ├── 快录（长按视频）                       purpose: 拍摄
-│   ├── 动态照片（Motion Photo）               purpose: 拍摄
-│   │   ├── 封面帧 HDR
-│   │   ├── 无效信息截取
-│   │   ├── 录制声音
-│   │   └── 重选帧
-│   └── 快门声（日韩 SKU 特殊逻辑）             purpose: 系统
+├── 4. 暂态开关（左右暂态区）
+│   ├── 左侧暂态开关
+│   │   └── 自动微距控制（Macro Control）       purpose: 拍摄辅助 / 硬件
+│   │       └── 前提：仅 Fallback 机型（25111+）。关闭后不切微距镜头。
+│   │
+│   └── 右侧暂态开关
+│       ├── 夜景开关（Night Mode）              purpose: 拍摄辅助
+│       └── AI Zoom 开关                       purpose: 算法
 │
-├── 5. Top Toolbar（下拉工具栏）
-│   ├── 闪光灯（Flash）                        purpose: 拍摄辅助
-│   ├── Glyph 灯 / 补光                        purpose: 拍摄辅助 / 品牌特性
-│   ├── 倒计时（3s / 5s / 10s）                purpose: 拍摄辅助
+├── 5. 快门区域（Feature List 不展开）
+│   ├── 快门按键
+│   ├── 相册缩略图
+│   └── 前后摄像头翻转按键
+│
+├── 6. Top Toolbar（下拉工具栏）
+│   ├── Flash（Off / On / Torch / Auto / Glyph） purpose: 拍摄辅助
+│   ├── Timer（Off / 3s / 10s）                purpose: 拍摄辅助
 │   ├── HDR（Auto / 关）                       purpose: 图像处理
-│   ├── 手动曝光                              purpose: 拍摄
+│   ├── Exposure（-2EV ~ +2EV, 0.3EV step）    purpose: 拍摄
 │   ├── 滤镜                                  purpose: 图像处理
 │   │   ├── 15 个内置 LUT                     see: filter.md
 │   │   ├── 滤镜强度（0-100）                  purpose: 图像处理
 │   │   └── 自定义 LUT 导入                    purpose: 个性化
-│   ├── Auto Tone                             purpose: 图像处理
-│   ├── 照片风格（鲜明 / 自然）                 purpose: 图像处理 / ISP
 │   ├── Tuning（调色，7 参数）                  purpose: 图像处理
 │   │   see: tuning.md
 │   ├── 动态照片开关                          purpose: 拍摄
-│   ├── 高像素（50MP）                         purpose: 拍摄 / 硬件
+│   ├── Quality（20MP / 50MP / 200MP）         purpose: 拍摄 / 硬件
 │   ├── 网格线                                purpose: 拍摄辅助
 │   ├── 比例（1:1 / 4:3 / 16:9 / FULL）       purpose: 拍摄辅助
-│   ├── 色彩模式                              purpose: 图像处理
+│   ├── Watermark                             purpose: 个性化
+│   ├── Glyph Mirror                          purpose: 品牌特性 / 硬件
 │   ├── 运动抓拍                              purpose: 拍摄
 │   └── 更多（进入次级菜单）
 │
-├── 6. Mode Switch（模式栏）
+├── 7. Mode Switch（模式栏）
 │   ├── 拍照                                  purpose: 拍摄
 │   ├── 人像                                  purpose: 拍摄
 │   │   ├── 虚化（bokeh style）
@@ -112,12 +115,7 @@ Camera App
 │   ├── 文档矫正                              purpose: 拍摄
 │   └── 高像素（50MP）                         purpose: 拍摄
 │
-├── 7. Gallery（相册缩略图）
-│   ├── 点击进入相册
-│   ├── 相册返回相机
-│   └── 拍照后缩略图更新
-│
-├── 8. Preset（预设）
+├── 8. Preset（预设，Feature List 使用 模式=通用）
 │   ├── Preset 选择器（底部栏）
 │   ├── 快速保存（修改后保存）
 │   ├── 卡片信息展示                          purpose: 个性化
@@ -127,25 +125,30 @@ Camera App
 │   ├── 导入 / 分享                           purpose: 个性化
 │   └── 默认 Preset 列表                      see: preset.md
 │
-├── 9. Settings（设置页）
-│   ├── 水印                                  purpose: 个性化
-│   │   ├── 文字水印 / 画框水印
-│   │   ├── 自定义文字 / 日期 / 位置 / 参数
-│   │   └── HDR 照片兼容
-│   ├── 水平仪                                purpose: 拍摄辅助
-│   ├── 网格线                                purpose: 拍摄辅助
-│   ├── 快门声音开关                          purpose: 系统
-│   ├── 连拍开关（连拍/快录）                   purpose: 系统
-│   ├── 记忆规则                              purpose: 系统
-│   ├── 预设记忆（5min）                       purpose: 系统
-│   ├── 音量键功能                            purpose: 系统
-│   ├── 防闪烁                                purpose: 系统
-│   └── 位置信息                              purpose: 系统
+├── 9. Settings（设置页，Feature List 使用 模式=通用）
+│   ├── General
+│   │   ├── Preset
+│   │   ├── Save location                      purpose: 系统
+│   │   ├── Shutter sound                      purpose: 系统
+│   │   ├── Mirror front camera                purpose: 系统
+│   │   └── Level                              purpose: 拍摄辅助
+│   │
+│   ├── Photo
+│   │   ├── Watermark                          purpose: 个性化
+│   │   ├── Auto Tone                          purpose: 图像处理
+│   │   ├── Tap to take a photo                purpose: 拍摄
+│   │   ├── QR code scanner                    purpose: 拍摄辅助
+│   │   ├── Press and hold shutter             purpose: 系统
+│   │   └── Ultra XDR                          purpose: 图像处理
+│   │
+│   └── Video
+│       ├── Video encoding（H.264 / H.265）    purpose: 系统
+│       ├── Power saving recording             purpose: 系统
+│       └── Auto FPS（Off / Auto 30 / Auto 30&60） purpose: 系统
 │
 ├── 10. 系统级交互
 │   ├── 双击电源键快启                        purpose: 系统
 │   ├── 锁屏快捷入口                          purpose: 系统
-│   ├── 二维码扫描                            purpose: 拍摄辅助
 │   ├── 三方应用分享                           purpose: 系统
 │   ├── 震动反馈                              purpose: 系统
 │   └── Widget（桌面小组件）                   purpose: 系统
@@ -166,19 +169,18 @@ Camera App
 |------|------|
 | 滤镜 + 强度 | Top Toolbar |
 | Tuning（7参数调色）| Top Toolbar |
-| 照片风格（鲜明/自然）| Top Toolbar |
-| HDR / Auto Tone | Top Toolbar |
-| 色彩模式 | Top Toolbar |
+| HDR | Top Toolbar |
+| Auto Tone | Settings → Photo |
 | 美颜 | Mode Switch → 人像 |
 | 虚化 / 光斑 | Mode Switch → 人像 |
 
 ### 拍摄
 | 功能 | 交互位置 |
 |------|------|
-| 拍照 / 连拍 / 快录 | Shutter |
 | 人像 / 夜景 / 视频 / 慢镜头 / 延时 | Mode Switch |
 | 全景 / 专业 / Action / 文档矫正 | Mode Switch |
-| 动态照片 | Shutter |
+| 动态照片 | Top Toolbar |
+| Tap to take a photo | Settings → Photo |
 
 ### 拍摄辅助
 | 功能 | 交互位置 |
@@ -186,15 +188,16 @@ Camera App
 | 场景检测 / 人脸检测 / 运动检测 | 预览框 |
 | Touch AE/AF / Face AE/AF | AE/AF Box |
 | 变焦 / SAT / 超分 | Zoom |
-| 闪光灯 / Glyph / 倒计时 / 网格 / 比例 | Top Toolbar |
-| 水平仪 | Settings |
-| 二维码扫描 | 系统级 |
+| Flash / Timer / Grid / Ratio | Top Toolbar |
+| Level | Settings → General |
+| QR code scanner | Settings → Photo |
 
 ### 个性化
 | 功能 | 交互位置 |
 |------|------|
-| Preset（默认+自定义）| Preset |
-| 水印 | Settings / Top Toolbar |
+| Preset（默认+自定义）| Preset（模式=通用） |
+| Watermark 快捷开关 | Top Toolbar |
+| Watermark 详细设置 | Settings → Photo |
 | 自定义 LUT 导入 | Top Toolbar → 滤镜 |
 | Preset 卡片信息 | Preset |
 
@@ -204,5 +207,8 @@ Camera App
 | OIS / EIS / ISZ | Zoom |
 | PDAF | AE/AF Box |
 | 畸变矫正 | 预览框 |
-| 快门声 / 记忆规则 | Settings |
+| Quality（20MP / 50MP / 200MP） | Top Toolbar |
+| Glyph Mirror | Top Toolbar |
+| Shutter sound / Save location / Mirror front camera | Settings → General |
+| Video encoding / Power saving recording / Auto FPS | Settings → Video |
 | 息屏 / 快启 / Widget | 系统级 |

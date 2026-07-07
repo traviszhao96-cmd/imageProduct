@@ -6,11 +6,18 @@
 | 文档 | 说明 |
 |------|------|
 | [memory-mutex.json](memory-mutex.json) | 记忆规则（5min记忆逻辑，45项功能）× 互斥逻辑（20条规则），v2.0，25111 MP1.5 基线 |
+| [kb-functions-algorithms-schema.md](kb-functions-algorithms-schema.md) | KB Functions Algorithms 总表 schema、去重原则、生成流程 |
+| [feature-list-layout-common-rules.md](feature-list-layout-common-rules.md) | FL 功能栏布局、通用功能、Preset/Settings 展开规则 |
+| [mode-zoom-transient-rules.md](mode-zoom-transient-rules.md) | 模式栏、变焦栏、左右暂态开关规则 |
+| [photo-top-toolbar-rules.md](photo-top-toolbar-rules.md) | Photo 模式 Top Toolbar 功能项与判断规则 |
 
 ## 算法说明书
 | 文档 | 适用项目 |
 |------|---------|
 | [algorithms-5a.md](algorithms-5a.md) | Phone (5a) — 26111 + 26121 |
+| [algorithm-fl-source-26111-26121.md](algorithm-fl-source-26111-26121.md) | 26111 / 26121 FL 算法行导入源 |
+| [_raw/25111-影像软件设计方案-ocr.md](_raw/25111-影像软件设计方案-ocr.md) | 25111 PDF OCR 原始转写 + 页面图 |
+| [_raw/25131-算法链路-ocr.md](_raw/25131-算法链路-ocr.md) | 25131 PDF OCR 原始转写 + 页面图 |
 
 ## Default Preset
 | 文档 | 说明 |
