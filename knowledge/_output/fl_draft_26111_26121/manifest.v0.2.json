@@ -1,0 +1,24 @@
+{
+  "version": "v0.2",
+  "meaning": "Distribution draft for PM/SE/QA fill-in, not final sign-off.",
+  "base_link": "https://nothing-tech.sg.larksuite.com/wiki/RbYFwco6qiFiywklWSKlL3WcgMg?table=tblmjUrlAEUhegjG&view=vew2pV2f4a",
+  "tables": {
+    "26111": {
+      "rows": 218,
+      "json": "26111_fl_draft.v0.2.json",
+      "csv": "26111_fl_draft.v0.2.csv",
+      "markdown": "26111_fl_draft.v0.2.md"
+    },
+    "26121": {
+      "rows": 235,
+      "json": "26121_fl_draft.v0.2.json",
+      "csv": "26121_fl_draft.v0.2.csv",
+      "markdown": "26121_fl_draft.v0.2.md"
+    }
+  },
+  "hardware": {
+    "rows": 7,
+    "json": "hardware_config.v0.2.json",
+    "csv": "hardware_config.v0.2.csv"
+  }
+}

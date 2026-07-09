@@ -356,13 +356,13 @@ devices:
     phase: null  # TBD
     soc: SM7635  # Snapdragon 7s Gen3
     camera:
-      rear_main: 200M HP5
-      rear_uw: 8M IMX355
-      rear_tele: null     # Flicker Sensor only
-      front: 32M OV32D
+      rear_main: 200M HP5 (OIS)     # S5KHP5SP05-FGX9, 1/1.56", 0.5um
+      rear_uw: 8M OV08J10           # OV08J10-GA5A-001A, 1/3.953", 1.116um, FF
+      rear_tele: null               # Flicker Sensor only
+      front: 32M OV32D              # OV32D40-GA5A-002A, 1/3.6", 0.612um, FF
     key_changes_from_25131:
-      - "主摄 JN1 → 200M HP5"
-      - "超广角 GC08A8 → IMX355"
+      - "主摄 JN1 → 200M HP5 (OIS)"
+      - "超广角 GC08A8 → OV08J10"
       - "前置 GC16B3C → OV32D"
       - "无长焦（仅 Flicker Sensor）"
     pm: {}  # TBD

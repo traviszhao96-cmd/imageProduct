@@ -7,8 +7,8 @@
 
 | 需求 | 模块 | 文档 | Wiki Token |
 |------|------|------|------------|
-| 2亿拍摄玩法 | 相册 | [【PRD】Camera 5.1-200MP 自动裁切](https://nothing-tech.sg.larksuite.com/wiki/DlOTwUuE0ioCJ1kee8klpB8xgQf) | DlOTwUuE0ioCJ1kee8klpB8xgQf |
-| 高像素支持 | 相机 | [【PRD】Camera 5.1-200MP 高像素](https://nothing-tech.sg.larksuite.com/wiki/S1RpwOqS7iVuGXkX8Acl9AVOgcg) | S1RpwOqS7iVuGXkX8Acl9AVOgcg |
+| 2亿拍摄玩法 | 相册 | [Pending - 【PRD】Camera 5.1-200MP 自动裁切](https://nothing-tech.sg.larksuite.com/wiki/DlOTwUuE0ioCJ1kee8klpB8xgQf) | DlOTwUuE0ioCJ1kee8klpB8xgQf |
+| 高像素支持 | 相机 | [【PRD】Camera 5.1-200MP 高像素](https://nothing-tech.sg.larksuite.com/wiki/Wr1VwHGm6igzjtk3OZslJ7oAgnd) | Wr1VwHGm6igzjtk3OZslJ7oAgnd |
 | 2 built-in photo style | 相机 | [【PRD】Camera 照片风格推荐](https://nothing-tech.sg.larksuite.com/wiki/XlJrw4m2eiF91GkEX0ylpaQRgjd) | XlJrw4m2eiF91GkEX0ylpaQRgjd |
 | 专业模式优化 | 相机 | [【PRD】Camera 5.1 - 照片专业模式 2.0](https://nothing-tech.sg.larksuite.com/wiki/UkbtwxItwiQYBLko8r9lidTig1b) | UkbtwxItwiQYBLko8r9lidTig1b |
 | 前置4K | 相机 | [【PRD】Camera 5.1 - 前置 4K 视频](https://nothing-tech.sg.larksuite.com/wiki/EBDYwdO7si66qHk12jUlOIeIgWd) | EBDYwdO7si66qHk12jUlOIeIgWd |
@@ -34,7 +34,7 @@
 | VSS优化 | 相机 | [【PRD】Camera 5.1 - 录像中拍照（VSS）效果提升](https://nothing-tech.sg.larksuite.com/wiki/DOWtwvAaIiWlgzkdsjnljrRrg2c) | DOWtwvAaIiWlgzkdsjnljrRrg2c |
 | 视频H265 | 相机 | [【PRD】Camera 5.1 - 视频默认 H.265 编码](https://nothing-tech.sg.larksuite.com/wiki/CSSfwVFAviGRgukmCrAlPX7EgtA) | CSSfwVFAviGRgukmCrAlPX7EgtA |
 | EIS开关 | 相机 | [【PRD】Camera 5.1 - 视频 EIS 开关](https://nothing-tech.sg.larksuite.com/docx/Vk4Od6Se3otT2MxUlVglBZfDg1d) | Vk4Od6Se3otT2MxUlVglBZfDg1d |
-| AI构图 | 相机 | [【PRD】Camera 5.0 构图助手](https://nothing-tech.sg.larksuite.com/wiki/EZXbwh8rdiKu7TkYsUclzJ0xgob) | EZXbwh8rdiKu7TkYsUclzJ0xgob |
+| AI构图 | 相机 | [Pending - 【PRD】Camera 5.0 构图助手](https://nothing-tech.sg.larksuite.com/wiki/EZXbwh8rdiKu7TkYsUclzJ0xgob) | EZXbwh8rdiKu7TkYsUclzJ0xgob |
 | 识别框动效 | 相机 | [【PRD】Camera 5.1 - 对焦/人脸/宠物识别框视觉动效优化](https://nothing-tech.sg.larksuite.com/wiki/YaZJwu9ddi1UdSkYalslCG2HgGh) | YaZJwu9ddi1UdSkYalslCG2HgGh |
 | 美颜引导 | 相机 | [【PRD】Camera 5.1 美颜功能首次开启引导](https://nothing-tech.sg.larksuite.com/wiki/HX5qwH6cFia5SIkG0jClG0SkgDM) | HX5qwH6cFia5SIkG0jClG0SkgDM |
 

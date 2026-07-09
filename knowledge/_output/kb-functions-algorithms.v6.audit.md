@@ -1,6 +1,6 @@
 # KB Functions Algorithms v6 Audit
 
-- Rows: 51
+- Rows: 55
 - Duplicate names: 0
 - Invalid verification methods: 0
 - Bad source-project mentions: 0
@@ -8,5 +8,4 @@
 
 ## 待确认项
 
-- 普通场景检测: 待确认：普通场景检测与 AI 场景检测的边界需要算法/PM 明确定义。
-- AI场景检测: 待确认：普通场景检测与 AI 场景检测的边界需要算法/PM 明确定义。
+- 锁定镜头: 待确认：目标项目是否继承该基线能力仍需 PM/SE 确认。

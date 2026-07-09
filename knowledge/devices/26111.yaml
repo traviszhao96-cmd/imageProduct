@@ -1,5 +1,5 @@
 # 26111 Camera 项目概览
-# 最后更新: 2026-06-18
+# 最后更新: 2026-07-08 (从硬件规格表更新)
 # 硬件选型已确认 (Travis)
 
 project:
@@ -17,25 +17,70 @@ project:
 cameras:
   base:
     front:
-      sensor: "OV32D"
+      sensor: "OV32D40-GA5A-002A"
       resolution: "32MP"
-      datasheet: "❌ 未创建"
-      specs: "[TBD — 待补充完整规格]"
+      sensor_size: "1/3.6""
+      pixel_size: "0.612um"
+      af: "FF (fixed focus)"
+      af_type: "FF"
+      pd: "FF"
+      f_no: "F2.2"
+      efl: "2.68mm"
+      fov: "89°"
+      equiv_focal: "23.21mm"
+      lens_structure: "5P"
+      datasheet: "❌ 待创建 OV32D.yaml"
+      module_house: "盛泰"
+      module_size: "7.905×8.1mm"
+      module_height: "4.77mm"
+      orientation: "9点钟"
+      eeprom: "TH24C128PACSAI"
+      focus_range: "34.8cm~47cm"
 
     main:
-      sensor: "HP5"
+      sensor: "S5KHP5SP05-FGX9"
       resolution: "200MP"
-      ois: NO
-      datasheet: "❌ 未创建"
-      specs: "[TBD — 待补充完整规格]"
-      note: "200MP 高像素，无 OIS"
+      sensor_size: "1/1.56""
+      pixel_size: "0.5um"
+      af_type: "PDAF"
+      ois: YES
+      vcm_type: "OIS"
+      vcm_model: "HFC66B5003"
+      vcm_driver: "AW86016CSR"
+      ois_driver: "DW9828N"
+      f_no: "F1.88"
+      efl: "5.56mm"
+      fov: "84.1°"
+      equiv_focal: "23.5mm"
+      lens_structure: "6P"
+      datasheet: "❌ 待创建 HP5.yaml"
+      module_house: "盛泰"
+      module_size: "15.3×15.3mm"
+      module_height: "7.17mm (INF)"
+      orientation: "6点钟"
+      supplier: ["一供盛泰（旭业镜头）", "二供盛泰（舜宇镜头）"]
+      eeprom: "GT24P256HA-5CSLI-TR"
+      note: "200MP 高像素，有 OIS。200MP→50MP remosaic HDR upscale。"
 
     ultrawide:
-      sensor: "IMX355"
+      sensor: "OV08J10-GA5A-001A"
       resolution: "8MP"
+      sensor_size: "1/3.953""
+      pixel_size: "1.116um"
       af: "FF (fixed focus)"
-      datasheet: "❌ 未创建"
-      specs: "[TBD — 待补充完整规格]"
+      af_type: "FF"
+      pd: "FF"
+      f_no: "F2.2"
+      efl: "1.64mm"
+      fov: "120.2°"
+      equiv_focal: "15mm"
+      lens_structure: "5P"
+      datasheet: "❌ 待创建 OV08J10.yaml"
+      module_house: "盛泰"
+      module_size: "8.5×8.5mm"
+      module_height: "5.175mm"
+      orientation: "9点钟"
+      eeprom: "TH24C128PACSAI"
 
     tele: "❌ (仅 Flicker Sensor，无长焦镜头)"
 
@@ -45,42 +90,97 @@ cameras:
       video_hdr: "❌"
 
   pro:
-    note: "26121 Pro 配置与 25111 Pro 完全一致"
+    note: "26121 Pro 配置与 25111 Pro 基本一致，传感器细节见下方"
 
     front:
       sensor: "KD1"
       resolution: "32MP"
-      datasheet: "❌ 未创建"
-      specs: "[TBD — 待补充完整规格]"
+      sensor_size: "1/3.44""
+      pixel_size: "0.64um"
+      af_type: "FF"
+      f_no: "F2.2"
+      efl: "2.68mm"
+      fov: "89°"
+      equiv_focal: "24mm"
+      lens_structure: "5P"
+      datasheet: "❌ 待创建 KD1.yaml"
+      module_house: "丘钛"
+      module_size: "9.2×8.8mm"
+      module_height: "5.07mm"
+      orientation: "6点"
+      eeprom: "P24U128B-D4H-MIR"
+      focus_range: "34.6cm~47.4cm"
 
     main:
       sensor: "IMX896"
       resolution: "50MP"
+      sensor_size: "1/1.57""
+      pixel_size: "1.0um"
+      af_type: "PDAF"
       ois: YES
+      vcm_type: "OIS"
+      vcm_model: "OJJ35F5032"
+      vcm_driver: "AW86016SCR"
+      ois_driver: "AW86033 / DW9828N (6月底确定)"
+      f_no: "F1.88"
+      efl: "5.56mm"
+      fov: "84.5°"
+      equiv_focal: "23mm"
+      lens_structure: "6P"
       datasheet: "✅ devices/sensors/IMX896-AJH5-C.yaml"
-      note: "与 25111 Pro 同款"
+      module_house: "盛泰"
+      module_size: "15.6×15.6mm"
+      module_height: "7.517mm @ 10cm"
+      orientation: "3点"
+      eeprom: "P24C128G-D4H-MIR"
+      note: "与 25111 Pro 同款 IMX896"
 
     ultrawide:
       sensor: "IMX355"
       resolution: "8MP"
-      af: "FF (fixed focus)"
-      datasheet: "❌ 未创建"
-      specs: "[TBD — 待补充完整规格]"
+      sensor_size: "1/4""
+      pixel_size: "1.12um"
+      af_type: "FF"
+      f_no: "F2.2"
+      efl: "1.64mm"
+      fov: "120.2°"
+      equiv_focal: "15mm"
+      lens_structure: "5P"
+      datasheet: "❌ 待创建 IMX355.yaml"
+      module_house: "丘钛"
+      module_size: "8.5×8.5mm"
+      module_height: "5.173mm"
+      orientation: "3点"
+      eeprom: "P24U128B–D4H–MIR"
 
     tele:
-      sensor: "JN5 (S5KJNSSQ33)"
+      sensor: "JN5-05"
       resolution: "50MP"
+      sensor_size: "1/2.75""
+      pixel_size: "0.64um"
+      af_type: "PDAF"
       ois: YES
+      vcm_type: "OIS"
+      vcm_model: "磁化"
+      vcm_driver: "DW9827C"
+      ois_driver: "AK7323"
+      f_no: "F2.85"
+      efl: "12.186mm"
+      fov: "30°"
+      equiv_focal: "80.5mm"
+      lens_structure: "4P"
       zoom: "3.5x"
       datasheet: "✅ devices/sensors/S5KJNSSQ33.yaml"
-      note: "与 25111 Pro 同款"
+      module_house: "丘钛 / AAC"
+      module_size: "11.5×10.8mm"
+      supplier: ["一供丘钛", "二供AAC"]
+      eeprom: "P24C256F-D4H-MIR"
+      stroke: "AF: 650um, OIS: +/-210um"
 
     video_capability:
       4k60: "✅ SAT / Ultra 主摄&长焦"
       video_hdr: "✅"
 
-# 各模式默认值（25111 MP1.5 基线，26111 继承）
-# 其他配置中可引用"使用默认值"即指向此处定义的值
 defaults:
   photo:
     mode: "照片"
@@ -103,9 +203,9 @@ defaults:
     doc_mode: "关"
     fallback_auto: "自动开"
   portrait:
-    focal_length: "3.5x"       # 倍率，25111 系列；24111 为 2x，24111 Plus 为 3x
-    equivalent_focal: "80mm"   # 等效焦距，对应 3.5x 长焦；24111 2x≈50mm，24111 Plus 3x≈72mm
-    aperture: "1.4/2.8"        # 不同焦段不一样
+    focal_length: "3.5x"
+    equivalent_focal: "80mm"
+    aperture: "1.4/2.8"
   video:
     hdr: "关"
     resolution: "1080P30fps"
@@ -130,16 +230,16 @@ defaults:
     touch_shoot: "关"
 
 inheritance:
-  baseline: "25111 Pro + NOS5.0"
+  baseline: "25131"
   rules:
-    - "26111 Base: 200M HP5 主摄，无长焦，继承 25131 功能并移除不适用项"
-    - "26121 Pro: 与 25111 Pro 配置完全一致，全功能继承"
+    - "26111 Base: 200M HP5 主摄 (OIS)，无长焦，继承 25131 功能并移除不适用项"
+    - "26121 Pro: IMX896 (OIS) + JN5 (OIS) + IMX355 + KD1，继承 25111 Pro"
     - "新增功能以 26111 PRD 为准"
     - "算法链路以 SE 确认的 26111 算法列表为准"
 
 key_deltas_from_25131_base:
-  - "主摄: JN1 50MP → HP5 200MP (无 OIS)"
-  - "超广角: GC08A8 → IMX355"
+  - "主摄: JN1 50MP → HP5 200MP (OIS)"
+  - "超广角: GC08A8 → OV08J10"
   - "前置: GC16B3C → OV32D"
   - "Base 无长焦（仅 Flicker Sensor）"
   - "Base 无 4K、无 1080P60、无 Video HDR"
@@ -167,181 +267,6 @@ removed_features:
   - "视频 Log 模式"
   - "视频录制红框提示"
 
-feature_deltas:
-  # Structured deltas used by generate.py for feature list generation.
-  # new_features_p0 and removed_features are human-readable summaries;
-  # this section provides machine-processable structured data.
-  rear_additions:
-    - mode: "运动抓拍 (Action)"
-      category: "拍摄"
-      group: "运动检测"
-      name: "独立运动抓拍模式"
-      support: {ultrawide: supported, main: supported, macro: unsupported}
-      verify: "模式选择栏最左侧入口"
-    - mode: "运动抓拍 (Action)"
-      category: "拍摄"
-      group: "运动检测"
-      name: "高速快门策略"
-      support: {ultrawide: supported, main: supported, macro: unsupported}
-      verify: "检测运动 → 自动提升快门"
-    - mode: "运动抓拍 (Action)"
-      category: "拍摄辅助"
-      group: "焦段"
-      name: "焦段点切（不支持滑动变焦）"
-      support: {ultrawide: supported, main: supported, macro: unsupported}
-      verify: "仅点切 1x/3x"
-    - mode: "运动抓拍 (Action)"
-      category: "拍摄辅助"
-      group: "功能支持"
-      name: "倒计时"
-      support: {ultrawide: supported, main: supported, macro: unsupported}
-      verify: ""
-    - mode: "运动抓拍 (Action)"
-      category: "拍摄辅助"
-      group: "功能支持"
-      name: "HDR"
-      support: {ultrawide: supported, main: supported, macro: unsupported}
-      verify: ""
-    - mode: "运动抓拍 (Action)"
-      category: "拍摄辅助"
-      group: "功能支持"
-      name: "手动曝光"
-      support: {ultrawide: supported, main: supported, macro: unsupported}
-      verify: ""
-    - mode: "运动抓拍 (Action)"
-      category: "拍摄辅助"
-      group: "功能支持"
-      name: "滤镜"
-      support: {ultrawide: supported, main: supported, macro: unsupported}
-      verify: ""
-    - mode: "运动抓拍 (Action)"
-      category: "拍摄辅助"
-      group: "功能支持"
-      name: "Tuning"
-      support: {ultrawide: supported, main: supported, macro: unsupported}
-      verify: ""
-    - mode: "拍照"
-      category: "拍摄辅助"
-      group: "运动抓拍"
-      name: "Top Toolbar 运动抓拍开关"
-      support: {ultrawide: supported, main: supported, macro: unsupported}
-      verify: "Photo 模式下轻量运动检测"
-    - mode: "拍照"
-      category: "拍摄辅助"
-      group: "运动抓拍"
-      name: "运动检测 → 提升快门速度"
-      support: {ultrawide: supported, main: supported, macro: unsupported}
-      verify: "检测到运动自动提快门"
-    - mode: "拍照"
-      category: "图像处理"
-      group: "HDR"
-      name: "HDR 运动场景升级 + 影调升级 + 智能分区"
-      support: {ultrawide: supported, main: supported, macro: unsupported}
-      verify: "26111 P0"
-    - mode: "拍照"
-      category: "图像处理"
-      group: "成像预览"
-      name: "成像预览一致性（2DOL 优先）"
-      support: {ultrawide: supported, main: supported, macro: unsupported}
-      verify: "26111 P0"
-    - mode: "拍照"
-      category: "图像处理"
-      group: "美颜"
-      name: "自然质感人像（美颜升级）"
-      support: {ultrawide: supported, main: supported, macro: unsupported}
-      verify: "26111 P0"
-    - mode: "拍照"
-      category: "图像处理"
-      group: "AIGC"
-      name: "AIGC/SR 效果优化"
-      support: {ultrawide: supported, main: supported, macro: unsupported}
-      verify: "26111 P0"
-    - mode: "拍照"
-      category: "个性化"
-      group: "照片风格"
-      name: "照片风格（自然 & 鲜明）"
-      support: {ultrawide: supported, main: supported, macro: unsupported}
-      verify: "26111 P0 新增"
-    - mode: "专业模式"
-      category: "拍摄"
-      group: "专业模式 2.0"
-      name: "专业模式 2.0 升级"
-      support: {ultrawide: supported, main: supported, macro: unsupported}
-      verify: "26111 P0"
-    - mode: "Preset"
-      category: "个性化"
-      group: "Preset 3.0"
-      name: "Preset 3.0 升级"
-      support: {ultrawide: supported, main: supported, macro: unsupported}
-      verify: "26111 P0"
-    - mode: "Preset"
-      category: "个性化"
-      group: "Preset 3.0"
-      name: "AI Preset"
-      support: {ultrawide: supported, main: supported, macro: unsupported}
-      verify: "26111 P0"
-    - mode: "录像"
-      category: "拍摄"
-      group: "4K60"
-      name: "4K 60FPS (仅 Pro，SAT / Ultra 主摄&长焦)"
-      support: {ultrawide: "Pro-only", main: "Pro-only", macro: unsupported}
-      verify: "26121 Pro P0，Base 不支持"
-    - mode: "录像"
-      category: "拍摄"
-      group: "双摄同录"
-      name: "双摄同录 v2"
-      support: {ultrawide: supported, main: supported, macro: unsupported}
-      verify: "26111 P0"
-    - mode: "录像"
-      category: "拍摄"
-      group: "前后切换"
-      name: "录制中前后镜头切换"
-      support: {ultrawide: supported, main: supported, macro: unsupported}
-      verify: "26111 P0"
-    - mode: "录像"
-      category: "拍摄"
-      group: "专业参数"
-      name: "视频专业参数调节"
-      support: {ultrawide: supported, main: supported, macro: unsupported}
-      verify: "26111 P0"
-  front_additions:
-    - mode: "拍照"
-      category: "图像处理"
-      group: "AIGC"
-      name: "AIGC/SR 效果优化"
-      support: {front: supported}
-      verify: "26111 P0"
-    - mode: "拍照"
-      category: "图像处理"
-      group: "美颜"
-      name: "自然质感人像（美颜升级）"
-      support: {front: supported}
-      verify: "26111 P0"
-    - mode: "录像"
-      category: "拍摄"
-      group: "4K"
-      name: "前置 4K (upscale)"
-      support: {front: supported}
-      verify: "26111 P0"
-    - mode: "录像"
-      category: "拍摄"
-      group: "前后切换"
-      name: "录制中前后镜头切换"
-      support: {front: supported}
-      verify: "26111 P0"
-  rear_updates:
-    "滤镜15种": "滤镜15种（继承）"
-    "照片风格": "照片风格（自然 & 鲜明）"
-    "Preset 选择器": "Preset 3.0 选择器"
-  rear_removed:
-    - "TF 50MP QuadBayer Raw HDR"
-    - "TF 25MP"
-    - "聚会模式"
-    - "视频 Log 模式"
-    - "视频录制红框提示"
-  front_removed:
-    - "聚会模式"
-
 stakeholders:
   PM: "Travis Zhao"
   SE: "[TBD]"
@@ -355,8 +280,9 @@ status:
   algorithms: "❌ 待 SE 提供 26111 算法列表"
   sensors_missing:
     - "HP5 (200M) — 26111 Base 主摄"
-    - "IMX355 — 26111/26121 UW"
+    - "OV08J10 — 26111 Base UW"
     - "OV32D — 26111 Base 前置"
+    - "IMX355 — 26121 Pro UW"
     - "KD1 — 26121 Pro 前置"
   sensors_done:
     - "IMX896 — 26121 Pro 主摄"

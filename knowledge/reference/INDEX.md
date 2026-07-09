@@ -9,7 +9,8 @@
 | [kb-functions-algorithms-schema.md](kb-functions-algorithms-schema.md) | KB Functions Algorithms 总表 schema、去重原则、生成流程 |
 | [feature-list-layout-common-rules.md](feature-list-layout-common-rules.md) | FL 功能栏布局、通用功能、Preset/Settings 展开规则 |
 | [mode-zoom-transient-rules.md](mode-zoom-transient-rules.md) | 模式栏、变焦栏、左右暂态开关规则 |
-| [photo-top-toolbar-rules.md](photo-top-toolbar-rules.md) | Photo 模式 Top Toolbar 功能项与判断规则 |
+| [photo-top-toolbar-rules.md](photo-top-toolbar-rules.md) | Photo 模式 Toolbar 功能项与判断规则 |
+| [26111-pending-prds.md](26111-pending-prds.md) | 26111 / 26121 暂不推进的 PRD / 子需求清单 |
 
 ## 算法说明书
 | 文档 | 适用项目 |

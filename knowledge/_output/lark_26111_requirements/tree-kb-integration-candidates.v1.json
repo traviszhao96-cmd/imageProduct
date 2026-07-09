@@ -1,0 +1,488 @@
+[
+  {
+    "candidate_id": "REQ26111-KB-002",
+    "source_ids": [
+      "006",
+      "embedded_base:006_需求列表"
+    ],
+    "requirement": "识别框视觉动效优化",
+    "business_tree_node_id": "interaction.preview_feedback",
+    "business_tree_label": "交互体验提升 / 预览反馈",
+    "proposed_tree_action": "update",
+    "proposed_tree_node_id": "preview.detection_frame_visuals",
+    "proposed_tree_label": "预览框 / 识别框视觉动效",
+    "proposed_kb_action": "update",
+    "kb_name": "识别框视觉动效",
+    "fl_impact": "更新已有识别框视觉动效说明；不因宠物识别框单独新增行。宠物框当前 Pending，不进入 26111/26121 FL。",
+    "confidence": "medium",
+    "dispute_level": "medium",
+    "manual_review_question": "识别框动效只更新已有对焦框/人脸框/二维码框等视觉表现；宠物框不推进，不拆独立 KB/FL 行。",
+    "notes": "PM correction 2026-07-07: 宠物框不做；该候选只保留识别框视觉动效更新。"
+  },
+  {
+    "candidate_id": "REQ26111-KB-004",
+    "source_ids": [
+      "006"
+    ],
+    "requirement": "二维码识别框优化",
+    "business_tree_node_id": "capture_assist.scene_shortcut",
+    "business_tree_label": "拍摄辅助 / 场景快捷操作",
+    "proposed_tree_action": "update",
+    "proposed_tree_node_id": "preview.detection_frame_visuals",
+    "proposed_tree_label": "预览框 / 识别框视觉动效 / 二维码识别框",
+    "proposed_kb_action": "update",
+    "kb_name": "二维码识别",
+    "fl_impact": "不作为全新二维码功能行；更新已有 QR code scanner / 识别框视觉动效说明和验收点。",
+    "confidence": "medium",
+    "dispute_level": "medium",
+    "manual_review_question": "二维码识别框优化更像已有二维码识别与识别框 UI 的更新，除非 PM 明确新增独立入口，否则不新建功能行。",
+    "notes": "PRD 要求只识别一个最大/稳定二维码，识别成功后变焦条区域出现跳转按键。"
+  },
+  {
+    "candidate_id": "REQ26111-KB-005",
+    "source_ids": [
+      "007"
+    ],
+    "requirement": "相机设计改版",
+    "business_tree_node_id": "interaction.visual_refresh",
+    "business_tree_label": "交互体验提升 / 视觉与动效改版",
+    "proposed_tree_action": "review",
+    "proposed_tree_node_id": "top_toolbar.drawer_hot_zone",
+    "proposed_tree_label": "Top Toolbar / 工具栏热区呼出",
+    "proposed_kb_action": "maybe_add",
+    "kb_name": "工具栏热区呼出",
+    "fl_impact": "多数是视觉规范，不应进入 FL；仅右下角工具栏热区如果是可验收交互差异，才进入功能行。",
+    "confidence": "medium",
+    "dispute_level": "high",
+    "manual_review_question": "快门形态、slider 字体属于视觉规范，是否明确不进 FL？右下角工具栏热区是否需要作为 Top Toolbar 交互能力进入 KB？",
+    "notes": "需避免把快门区域默认控件误展开进 FL。"
+  },
+  {
+    "candidate_id": "REQ26111-KB-006",
+    "source_ids": [
+      "009"
+    ],
+    "requirement": "前置自动小广角",
+    "business_tree_node_id": "selfie.framing",
+    "business_tree_label": "自拍体验 / 构图视角",
+    "proposed_tree_action": "add",
+    "proposed_tree_node_id": "zoom.front_auto_wide",
+    "proposed_tree_label": "Zoom / 前置自动小广角",
+    "proposed_kb_action": "add",
+    "kb_name": "前置自动小广角",
+    "fl_impact": "前置照片模式新功能行；依赖前置 0.8x/1x 焦段、设备方向/陀螺仪；横屏自动切 0.8x、竖屏恢复 1x，手动变焦后本进程暂停自动切换。",
+    "confidence": "high",
+    "dispute_level": "low",
+    "manual_review_question": "已找到 PRD 009，范围为系统相机前置照片模式。后续只需确认 26111/26121 前置焦段命名和陀螺仪/方向事件实现。",
+    "notes": "PRD: docx_md/009.md. 依赖项按 PM 口径简化为陀螺仪/方向判断 + 前置焦段能力，不再作为高争议项。"
+  },
+  {
+    "candidate_id": "REQ26111-KB-007",
+    "source_ids": [
+      "010"
+    ],
+    "requirement": "Tuning Palette 调色板",
+    "business_tree_node_id": "style.tuning",
+    "business_tree_label": "影调风格 / 手动调色",
+    "proposed_tree_action": "update",
+    "proposed_tree_node_id": "top_toolbar.style_tuning",
+    "proposed_tree_label": "Top Toolbar / Style（Filter + Tuning 方向）/ Tuning Palette",
+    "proposed_kb_action": "update",
+    "kb_name": "Style / Tuning Palette / Palette-Parameters",
+    "fl_impact": "更新已有 Tuning/Filter/Style 描述；Tuning Palette 本期包含 Palette Mode、Parameter Mode、Strength、7 参数保存。Style 作为 Filter + Tuning 统一方向记录，是否本期合并需以 PRD/PM 最终口径确认。",
+    "confidence": "high",
+    "dispute_level": "medium",
+    "manual_review_question": "PM 口径认为该需求包含 Filter + Tuning 合成 Style 的点；当前缓存 PRD 又写“本期不合并 Filter”，需人工确认 Style 合并是否为 5.1 本期范围还是后续方向。",
+    "notes": "PRD 010: line 28/137 写本期不合并 Filter；line 602 写 Filter 与 Tuning 是否未来合并待确认。候选先按 update existing Tuning/Style，不按纯新增行处理。"
+  },
+  {
+    "candidate_id": "REQ26111-KB-009",
+    "source_ids": [
+      "012",
+      "035",
+      "embedded_sheet:012",
+      "embedded_base:012_任务表",
+      "wiki:Wr1VwHGm6igzjtk3OZslJ7oAgnd",
+      "doc:YhNXdLBV6o1kfoxFVGOlXzyCgEf@rev36"
+    ],
+    "requirement": "200MP 高像素",
+    "business_tree_node_id": "image_quality.high_resolution_extreme",
+    "business_tree_label": "影像画质提升 / 极致高像素",
+    "proposed_tree_action": "update",
+    "proposed_tree_node_id": "mode.high_pixel.200mp",
+    "proposed_tree_label": "Mode Switch / 高像素 / 200MP",
+    "proposed_kb_action": "update",
+    "kb_name": "高像素 / 200MP / HW Remosaic / RAW HDR / AI Upscale",
+    "fl_impact": "高像素为独立模式入口；Top Toolbar 只显示/切换当前分辨率规格。26111 Base 评估 50MP/200MP/200MP Ultra，26121 Pro 不涉及 200MP sensor。",
+    "confidence": "high",
+    "dispute_level": "high",
+    "manual_review_question": "最新 v2.0/revision 36 文档显示：26111 Base 保留 50MP，200MP 方案存在 7.4s/1.75GB/NZSL 风险且待算法实测/商务定稿；26121 Pro 不涉及。需要确认 26111 FL 中 200MP 是否作为支持项、风险项还是仅参考项落表。",
+    "notes": "来源更新为 Wr1Vw... wiki 文档（doc YhNXd... rev36）。技术流水线：200MP sensor -> HW Remosaic -> 50MP RAW HDR -> AI Upscale -> 200MP；50MP 不跑 upscale。7635 预估处理 7.4s、算法内存 800-900MB、峰值约 1.75GB、ZSL 不可用，需 NZSL。 PM correction: 主节点应挂 Mode Switch / 高像素，不挂 Top Toolbar。"
+  },
+  {
+    "candidate_id": "REQ26111-KB-010",
+    "source_ids": [
+      "013"
+    ],
+    "requirement": "照片专业模式 2.0",
+    "business_tree_node_id": "pro_capture.still_pro",
+    "business_tree_label": "专业拍摄 / 照片专业模式",
+    "proposed_tree_action": "update",
+    "proposed_tree_node_id": "mode.expert.expert_mode_2",
+    "proposed_tree_label": "Mode Switch / 专业模式 / Expert Mode 2.0",
+    "proposed_kb_action": "update_multiple",
+    "kb_name": "Expert Mode 2.0",
+    "fl_impact": "专业模式更新，并新增/更新子能力：测光方式切换、间隔拍摄、峰值对焦、Preset 保存专业参数、RAW capture 相关验收行。",
+    "confidence": "high",
+    "dispute_level": "low",
+    "manual_review_question": "已确认本地缓存标题为 Camera 5.1 - 照片专业模式 2.0；内部文档信息仍写 4.2，应以 5.1 文档标题/目录为准。",
+    "notes": "PRD 013 明确新增测光方式、间隔拍摄、峰值对焦，并扩展 Preset 保存 EV/ISO/S/WB/AF/RAW capture。"
+  },
+  {
+    "candidate_id": "REQ26111-KB-011",
+    "source_ids": [
+      "014",
+      "032"
+    ],
+    "requirement": "美颜效果与首次开启引导",
+    "business_tree_node_id": "portrait.beauty_discovery",
+    "business_tree_label": "人像自拍 / 美颜发现与效果",
+    "proposed_tree_action": "update",
+    "proposed_tree_node_id": "mode.portrait.beauty",
+    "proposed_tree_label": "Mode Switch / 人像 / 美颜",
+    "proposed_kb_action": "add",
+    "kb_name": "美颜 / 美颜首次开启引导",
+    "fl_impact": "美颜效果本身作为人像/拍照能力；首次引导按前置拍照、前置人像、人像后置是否支持展开。",
+    "confidence": "medium",
+    "dispute_level": "medium",
+    "manual_review_question": "032 中范围写“人像后置不支持”，兼容性表又写“人像模式后置可触发引导”，需要 PM 确认。",
+    "notes": "014 是 4.0 参考定义；032 是 5.1 首次引导草稿，印度市场/灰度可控。"
+  },
+  {
+    "candidate_id": "REQ26111-KB-012",
+    "source_ids": [
+      "015"
+    ],
+    "requirement": "照片风格（自然 / 鲜明）",
+    "business_tree_node_id": "style.photo_style",
+    "business_tree_label": "影调风格 / 照片风格",
+    "proposed_tree_action": "add",
+    "proposed_tree_node_id": "top_toolbar.photo_style",
+    "proposed_tree_label": "Top Toolbar / Photo Style",
+    "proposed_kb_action": "add",
+    "kb_name": "Photo Style",
+    "fl_impact": "拍照类模式展开；后置所有摄像头支持，自然/鲜明两种风格，默认鲜明，Preset 可保存。",
+    "confidence": "high",
+    "dispute_level": "low",
+    "manual_review_question": "Photo Style 与 Filter、Tuning、Preset 的互斥/叠加顺序需在 KB 中写清。",
+    "notes": "风格通过 ISP tone/color/sharpen 参数实现，RAW 不受影响。"
+  },
+  {
+    "candidate_id": "REQ26111-KB-013",
+    "source_ids": [
+      "016",
+      "028"
+    ],
+    "requirement": "AI Preset / 场景识别推荐滤镜与 preset",
+    "business_tree_node_id": "ai_recommendation.style_recommendation",
+    "business_tree_label": "AI 推荐 / 风格推荐",
+    "proposed_tree_action": "add",
+    "proposed_tree_node_id": "preview.ai_preset_entry",
+    "proposed_tree_label": "预览框 / AI Preset 引导入口",
+    "proposed_kb_action": "add",
+    "kb_name": "AI Preset 预览引导入口 / 场景推荐",
+    "fl_impact": "作为相机预览页入口/引导能力进入 FL；点击后分析当前预览帧并推荐滤镜+调色 preset 卡片。Preset 区域记录被推荐/应用的 preset 结果，不作为主入口节点。",
+    "confidence": "high",
+    "dispute_level": "medium",
+    "manual_review_question": "入口位置已确认在相机预览页、位于 preset 按键附近；仍需确认覆盖“所有模式/所有焦段”是否缩小为首版场景范围。",
+    "notes": "PRD 016: 相机预览页 AI Preset 按键；R1 为场景推荐，R2 推荐风格待定。PM correction: 预览作为引导入口。"
+  },
+  {
+    "candidate_id": "REQ26111-KB-014",
+    "source_ids": [
+      "017"
+    ],
+    "requirement": "视频 ISZ（无损变焦）",
+    "business_tree_node_id": "video.zoom_quality",
+    "business_tree_label": "视频能力 / 变焦画质",
+    "proposed_tree_action": "update",
+    "proposed_tree_node_id": "zoom.isz.video",
+    "proposed_tree_label": "Zoom / ISZ / Video ISZ",
+    "proposed_kb_action": "update",
+    "kb_name": "ISZ / In Sensor Zoom",
+    "fl_impact": "视频、慢动作及支持变焦的视频类模式；26111 点位 0.6/1/2/4，26121 点位 0.6/1/2/3.5/7。",
+    "confidence": "high",
+    "dispute_level": "medium",
+    "manual_review_question": "慢动作/所有视频规格都支持的说法需工程确认，ISZ 与 EIS 叠加顺序也待确认。",
+    "notes": "超广、前后双录、最高 ISZ 点位以上画质增强均 out of scope。"
+  },
+  {
+    "candidate_id": "REQ26111-KB-015",
+    "source_ids": [
+      "018",
+      "embedded_sheet:018"
+    ],
+    "requirement": "前置 4K 视频",
+    "business_tree_node_id": "video.front_camera_specs",
+    "business_tree_label": "视频能力 / 前置规格",
+    "proposed_tree_action": "update",
+    "proposed_tree_node_id": "mode.video.front_4k",
+    "proposed_tree_label": "Mode Switch / 视频 / 前置 4K",
+    "proposed_kb_action": "add",
+    "kb_name": "前置 4K 视频",
+    "fl_impact": "视频模式前置 4K30；Filter/Tuning/60fps/其他录像模式不支持，EIS/EV/WB/H.265/VSS 支持或待确认。",
+    "confidence": "high",
+    "dispute_level": "medium",
+    "manual_review_question": "HLG、美颜、Base 前置 4K 编码能力、EIS 后画质和长录降帧阈值仍待确认。",
+    "notes": "嵌入 Sheet 明确互斥表：Filter/Tuning/60fps 不支持，EIS/EV/WB/VSS/H.265 支持。"
+  },
+  {
+    "candidate_id": "REQ26111-KB-016",
+    "source_ids": [
+      "019"
+    ],
+    "requirement": "视频 EIS 开关",
+    "business_tree_node_id": "video.stabilization_control",
+    "business_tree_label": "视频能力 / 稳定性控制",
+    "proposed_tree_action": "update",
+    "proposed_tree_node_id": "settings.video.video_stabilization",
+    "proposed_tree_label": "Settings / Video / Video Stabilization",
+    "proposed_kb_action": "add",
+    "kb_name": "视频防抖开关",
+    "fl_impact": "视频模式、前后双录模式；所有支持 EIS 的视频规格均可开关，默认开。",
+    "confidence": "high",
+    "dispute_level": "low",
+    "manual_review_question": "文档目标中一处写慢动作成功指标，但范围内只写视频/前后双录；需确认慢动作是否支持。",
+    "notes": "控制录制过程中 EIS，不影响 OIS。"
+  },
+  {
+    "candidate_id": "REQ26111-KB-017",
+    "source_ids": [
+      "020",
+      "embedded_base:020_需求表"
+    ],
+    "requirement": "视频锁定镜头",
+    "business_tree_node_id": "video.zoom_stability",
+    "business_tree_label": "视频能力 / 镜头切换稳定性",
+    "proposed_tree_action": "add",
+    "proposed_tree_node_id": "settings.video.lock_lens",
+    "proposed_tree_label": "Settings / Video / Lock Lens",
+    "proposed_kb_action": "add",
+    "kb_name": "锁定镜头",
+    "fl_impact": "视频模式设置项；开启后录制中禁用 SAT，不切换物理镜头，后续变焦为数码变焦。",
+    "confidence": "high",
+    "dispute_level": "medium",
+    "manual_review_question": "文档是 Camera 4.0/25111 首上项，是否作为 26111/26121 基线继承，还是 5.1 新需求？来源字段需区分。",
+    "notes": "嵌入 Base 只有一条需求记录，定义清晰。"
+  },
+  {
+    "candidate_id": "REQ26111-KB-018",
+    "source_ids": [
+      "021"
+    ],
+    "requirement": "视频锁定白平衡",
+    "business_tree_node_id": "video.color_control",
+    "business_tree_label": "视频能力 / 色彩控制",
+    "proposed_tree_action": "add",
+    "proposed_tree_node_id": "settings.video.lock_white_balance",
+    "proposed_tree_label": "Settings / Video / Lock White Balance",
+    "proposed_kb_action": "add",
+    "kb_name": "锁定白平衡",
+    "fl_impact": "视频模式；默认关，录制开始后锁定起始白平衡。",
+    "confidence": "high",
+    "dispute_level": "low",
+    "manual_review_question": "与视频模式手动 WB 调节同时存在时优先级需与 022 对齐。",
+    "notes": "所有视频规格支持已在文档风险表中写为已确认。"
+  },
+  {
+    "candidate_id": "REQ26111-KB-019",
+    "source_ids": [
+      "022"
+    ],
+    "requirement": "视频模式专业参数调节",
+    "business_tree_node_id": "video.manual_controls",
+    "business_tree_label": "视频能力 / 手动参数控制",
+    "proposed_tree_action": "add",
+    "proposed_tree_node_id": "top_toolbar.video_manual_controls",
+    "proposed_tree_label": "Top Toolbar / Video / Exposure-WB Controls",
+    "proposed_kb_action": "add",
+    "kb_name": "视频曝光调节 / 视频白平衡调节",
+    "fl_impact": "视频、慢动作、前后双录下拉菜单；EV -2EV~+2EV，WB 以当前 AWB 为基准浮动。",
+    "confidence": "high",
+    "dispute_level": "medium",
+    "manual_review_question": "入口是“视频录制界面下拉菜单”，需要 tree 中新增 Video Top Toolbar 子区，还是复用 Top Toolbar？",
+    "notes": "与锁定白平衡关系待确认；退出相机后自动归零。"
+  },
+  {
+    "candidate_id": "REQ26111-KB-020",
+    "source_ids": [
+      "023"
+    ],
+    "requirement": "视频默认 H.265 编码",
+    "business_tree_node_id": "video.encoding_efficiency",
+    "business_tree_label": "视频能力 / 编码效率",
+    "proposed_tree_action": "update",
+    "proposed_tree_node_id": "settings.video.video_encoding",
+    "proposed_tree_label": "Settings / Video / Video Encoding",
+    "proposed_kb_action": "update",
+    "kb_name": "Video encoding",
+    "fl_impact": "视频、慢动作、延时、前后双录，以及视频+滤镜/Tuning 录屏链路；26111/26121 默认 H.265。",
+    "confidence": "high",
+    "dispute_level": "low",
+    "manual_review_question": "录屏链路 H.265、双录 H.265 功耗和码率标定仍需工程评估，但不阻止 KB 说明更新。",
+    "notes": "保留 H.264/H.265 手动切换；HLG 强制 H.265。"
+  },
+  {
+    "candidate_id": "REQ26111-KB-021",
+    "source_ids": [
+      "024",
+      "embedded_sheet:024"
+    ],
+    "requirement": "前后双录 v2",
+    "business_tree_node_id": "video.dual_view",
+    "business_tree_label": "视频能力 / 前后双录",
+    "proposed_tree_action": "update",
+    "proposed_tree_node_id": "mode.dual_view_video.v2",
+    "proposed_tree_label": "Mode Switch / 前后双录 / v2",
+    "proposed_kb_action": "add_multiple",
+    "kb_name": "双录后置镜头选择 / 主副互换 / 小窗大小 / 分开保存 / 4K 评估",
+    "fl_impact": "需要拆多行：录制前后置镜头选择、录制中主副互换、PiP 小窗大小、合并/分开保存、4K 双录评估。",
+    "confidence": "high",
+    "dispute_level": "medium",
+    "manual_review_question": "4K 双录在文档里被划掉但嵌入表仍是评估项；最终 FL 应标 [TBD]/✗ 还是不进入基础交付？",
+    "notes": "Base 支持超广/主摄，Pro 支持长焦；双文件独立保存有性能和滤镜/Tuning 互斥风险。"
+  },
+  {
+    "candidate_id": "REQ26111-KB-022",
+    "source_ids": [
+      "025"
+    ],
+    "requirement": "录像中拍照（VSS）效果提升",
+    "business_tree_node_id": "video.capture_during_recording",
+    "business_tree_label": "视频能力 / 录制中拍照",
+    "proposed_tree_action": "add_exception",
+    "proposed_tree_node_id": "mode.video.vss",
+    "proposed_tree_label": "Mode Switch / 视频 / 录像中拍照",
+    "proposed_kb_action": "add",
+    "kb_name": "录像中拍照（VSS）",
+    "fl_impact": "视频模式；从截帧改为独立拍照流，统一 9MP，FOV/色彩跟随视频，滤镜可保留。",
+    "confidence": "high",
+    "dispute_level": "medium",
+    "manual_review_question": "VSS 位于快门行为附近，但这是差异化录制中能力，建议作为快门区域例外进入 FL；需你确认。",
+    "notes": "1080P/4K 均输出 9MP；MFNR、取帧偏差、滤镜保留为 P1/待测。"
+  },
+  {
+    "candidate_id": "REQ26111-KB-023",
+    "source_ids": [
+      "026"
+    ],
+    "requirement": "SAT 体验优化",
+    "business_tree_node_id": "zoom.sat_experience",
+    "business_tree_label": "变焦体验 / 多摄切换",
+    "proposed_tree_action": "update",
+    "proposed_tree_node_id": "zoom.sat",
+    "proposed_tree_label": "Zoom / SAT",
+    "proposed_kb_action": "update",
+    "kb_name": "SAT / 平滑镜头切换",
+    "fl_impact": "更像体验验收口径更新，不一定新增 FL 行；可补充验证方法：点切响应、滑动跟手、色彩/视角跳变、fallback 响应。",
+    "confidence": "high",
+    "dispute_level": "low",
+    "manual_review_question": "是否把 SAT 体验优化作为独立项目需求，还是只更新 SAT KB 的验证方法和风险？",
+    "notes": "文档结论聚焦平滑性、fallback 响应、zoomratio 下发、色彩/视角跳变。"
+  },
+  {
+    "candidate_id": "REQ26111-KB-025",
+    "source_ids": [
+      "029"
+    ],
+    "requirement": "人像模式 Consistent Zoom",
+    "business_tree_node_id": "portrait.zoom_framing",
+    "business_tree_label": "人像体验 / 构图焦段",
+    "proposed_tree_action": "update",
+    "proposed_tree_node_id": "zoom.portrait_consistent_zoom",
+    "proposed_tree_label": "Zoom / 人像 Consistent Zoom",
+    "proposed_kb_action": "add",
+    "kb_name": "人像模式 Consistent Zoom",
+    "fl_impact": "后摄人像模式 1.0x-3.5x 连续变焦；固定 1x/2x/3.5x 入口保留；光圈/虚化随焦段联动。",
+    "confidence": "high",
+    "dispute_level": "medium",
+    "manual_review_question": "底层是否支持中间焦段人像链路、人像虚化连续曲线、默认焦段记忆仍需开发/算法确认。",
+    "notes": "不含前摄、人像视频、低于 1x 或超过 3.5x。"
+  },
+  {
+    "candidate_id": "REQ26111-KB-026",
+    "source_ids": [
+      "030"
+    ],
+    "requirement": "镜头脏污专项 / AI 去油污",
+    "business_tree_node_id": "image_quality.lens_dirt",
+    "business_tree_label": "影像画质提升 / 镜头脏污",
+    "proposed_tree_action": "add",
+    "proposed_tree_node_id": "preview.lens_dirt_ai_recover_guide",
+    "proposed_tree_label": "预览框 / 镜头脏污检测与 AI 去油污引导",
+    "proposed_kb_action": "add",
+    "kb_name": "镜头脏污检测 / AI 去油污 / 提示引导",
+    "fl_impact": "作为新功能进入 FL，模式范围：照片、人像。包含脏污检测分级、AI 去油污/去雾/光斑抑制/清晰度恢复、弱提示/擦拭提示等交互验收；硬件涂层/清洁布不进入 Camera FL。",
+    "confidence": "high",
+    "dispute_level": "medium",
+    "manual_review_question": "PM 已确认有交互且需作为新功能；仍需把硬件/配件项从 Camera FL 中排除，只保留相机内检测、修复和提示交互。",
+    "notes": "PRD 030 4.2/4.3 写明检测、AI修复与提示升级；PM correction: 支持照片和人像模式。"
+  },
+  {
+    "candidate_id": "REQ26111-KB-027",
+    "source_ids": [
+      "031"
+    ],
+    "requirement": "普通照片模式运动场景引导",
+    "business_tree_node_id": "capture_assist.mode_recommendation",
+    "business_tree_label": "拍摄辅助 / 模式引导",
+    "proposed_tree_action": "add",
+    "proposed_tree_node_id": "preview.motion_action_mode_guide",
+    "proposed_tree_label": "预览框 / 运动检测 / Try Action mode 引导",
+    "proposed_kb_action": "add",
+    "kb_name": "运动场景引导",
+    "fl_impact": "普通 Photo 后置；检测较大运动后展示 Try Action mode 胶囊，可点击跳转 Action，带频控。",
+    "confidence": "high",
+    "dispute_level": "medium",
+    "manual_review_question": "胶囊展示区域是否归预览框，而不是暂态开关？触发阈值和生效焦段仍待确认。",
+    "notes": "不改变普通照片轻量运动抓拍，不在前置/视频/人像/夜景/Action 展示。"
+  },
+  {
+    "candidate_id": "REQ26111-KB-028",
+    "source_ids": [
+      "033"
+    ],
+    "requirement": "Camera Settings 增加 Tips and feedback 入口",
+    "business_tree_node_id": "support.feedback_entry",
+    "business_tree_label": "支持反馈 / 问题反馈入口",
+    "proposed_tree_action": "update",
+    "proposed_tree_node_id": "settings.help_support.tips_feedback",
+    "proposed_tree_label": "Settings / Help & Support / Tips and feedback",
+    "proposed_kb_action": "add",
+    "kb_name": "Tips and feedback",
+    "fl_impact": "Settings 通用能力；最终 FL 按模式展开或进入通用表，取决于后续 FL 设计。",
+    "confidence": "high",
+    "dispute_level": "low",
+    "manual_review_question": "Settings 目前没有 Help & Support 分组，是否在 tree 中新增该分组？",
+    "notes": "只跳转系统 Tips and feedback，不在 Camera 内自建表单。"
+  },
+  {
+    "candidate_id": "REQ26111-KB-029",
+    "source_ids": [
+      "034"
+    ],
+    "requirement": "26121 视频 Log 功能评估",
+    "business_tree_node_id": "pro_video.log",
+    "business_tree_label": "专业视频 / Log",
+    "proposed_tree_action": "add",
+    "proposed_tree_node_id": "mode.video.log",
+    "proposed_tree_label": "Mode Switch / 视频 / Log",
+    "proposed_kb_action": "maybe_add",
+    "kb_name": "Log 视频",
+    "fl_impact": "26121 Pro 候选；需要根据 feasibility 决策拆出 Log 曲线、10-bit Rec.2020、LUT 监看/还原、相册识别等能力。",
+    "confidence": "medium",
+    "dispute_level": "high",
+    "manual_review_question": "这还是评估文档，不是定稿 PRD；是否先进入 KB 的“候选/待确认”区，而不是 canonical 行？",
+    "notes": "底层需要定义 Nothing Log 曲线、还原 LUT；入口待定；录制 10-bit Log 取决于底层暴露能力。"
+  }
+]

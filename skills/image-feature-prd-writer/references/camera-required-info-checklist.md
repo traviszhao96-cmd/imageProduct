@@ -21,6 +21,7 @@ Use this checklist before drafting a mobile imaging planning document.
 ## Scope Definition
 
 - Feature name
+- **Interaction area** — 从 `knowledge/feature-tree.md` 确定功能所属交互区，格式 `交互区 | 子模块`。如 `预览框 | 场景检测`、`Mode Switch | 视频 | 防抖`。PRD 的「需求范围」节必须写明交互位置。
 - In-scope capabilities
 - Explicit out-of-scope items
 - Trigger conditions or entry path

@@ -26,11 +26,12 @@ Match the response to how much context the user provides:
 ## Workflow
 
 1. **Classify** the request mode and domain (Camera / Gallery)
-2. **Braindump first** — 不让用户对空白模板。先问："关于这个功能，你目前想到的、确定的、不确定的、纠结的，全部倒出来。" 混乱的原始想法先被外化，再结构化。
-3. **Check completeness** — 对照对应领域的 critical dependencies 检查
-4. **Draft** — 用对应领域模板，所有未确认值就地写 `[TBD — 需XXX确认]`
-5. **Review** — agent 开发 + agent 测试 + agent solution smuggling 检查 + agent 全文打分
-6. **Publish** — 如果要求
+2. **Locate in feature tree** — 读 `knowledge/feature-tree.md`，确定功能属于哪个交互区（预览框 / AE/AF Box / Zoom / Toolbar / Mode Switch / Preset / Settings 等）。功能范围说明中以 `交互位置：xxx` 标注。
+3. **Braindump first** — 不让用户对空白模板。先问："关于这个功能，你目前想到的、确定的、不确定的、纠结的，全部倒出来。" 混乱的原始想法先被外化，再结构化。
+4. **Check completeness** — 对照对应领域的 critical dependencies 检查
+5. **Draft** — 用对应领域模板，所有未确认值就地写 `[TBD — 需XXX确认]`
+6. **Review** — agent 开发 + agent 测试 + agent solution smuggling 检查 + agent 全文打分
+7. **Publish** — 如果要求
 
 ## Anti-Hallucination: [TBD] Rule
 
@@ -72,6 +73,7 @@ Before drafting, check domain-specific requirements:
 ### Shared Critical Dependencies — Do Not Invent
 
 - **产品背景**: product line, target market, release window, project stage
+- **交互位置**: 从 `knowledge/feature-tree.md` 确定功能挂载在哪个交互区（必填）。如 `预览框 | 场景检测`、`Mode Switch | 视频 | 防抖`。PRD 范围节必须写明。
 - **用户价值**: target users, scenario, pain point, expected improvement
 - **功能范围**: feature boundaries, in-scope, out-of-scope, entry path
 - **技术依赖**: algorithm, hardware/sensor, ISP/SoC, platform version, cross-team
