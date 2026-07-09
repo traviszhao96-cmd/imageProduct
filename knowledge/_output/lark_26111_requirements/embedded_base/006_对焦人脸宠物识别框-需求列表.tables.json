@@ -1,0 +1,17 @@
+{
+  "ok": true,
+  "identity": "user",
+  "data": {
+    "tables": [
+      {
+        "id": "tblCBKZy8DCB12lu",
+        "name": "tblrJLULqS9AV6er"
+      },
+      {
+        "id": "tblaLpdPCqb9fspX",
+        "name": "tblso8HWmgcpVC0i"
+      }
+    ],
+    "total": 2
+  }
+}

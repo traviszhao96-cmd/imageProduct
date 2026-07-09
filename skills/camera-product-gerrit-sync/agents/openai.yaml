@@ -1,0 +1,3 @@
+display_name: Camera Product Gerrit Sync
+short_description: Sync Camera/Gallery product skills to Nothing Gerrit cameraProduct branch.
+default_prompt: Help me sync the Camera/Gallery product skills to the internal Gerrit cameraProduct branch.

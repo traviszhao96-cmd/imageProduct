@@ -1,0 +1,365 @@
+#!/usr/bin/env python3
+"""Build canonical KB functions/algorithms table.
+
+This script intentionally does not transform the old FL-derived KB because that
+file contains duplicated mode rows, copied support marks, and target-project
+source notes. The canonical table below is the source of truth for the KB stage.
+Project Feature Lists should be generated later by expanding these mode scopes
+against hardware/project configuration.
+"""
+
+from __future__ import annotations
+
+import json
+from collections import Counter
+from pathlib import Path
+
+
+ROOT = Path(__file__).resolve().parents[1]
+OUT = ROOT / "knowledge" / "_output"
+OUT_CANONICAL = OUT / "kb-functions-algorithms.json"
+OUT_JSON = OUT / "kb-functions-algorithms.v6.json"
+OUT_AUDIT = OUT / "kb-functions-algorithms.v6.audit.md"
+
+SOURCE = "25111 / 25131"
+
+
+def row(
+    modes: str,
+    level1: str,
+    level2: str,
+    name: str,
+    desc: str,
+    judgement: str,
+    dependency: str,
+    verify: str,
+    note: str = "",
+) -> dict[str, str]:
+    return {
+        "模式": modes,
+        "一级分类": level1,
+        "二级分类": level2,
+        "名称": name,
+        "说明": desc,
+        "判断依据": judgement,
+        "依赖": dependency,
+        "验证方法": verify,
+        "来源项目": SOURCE,
+        "备注": note,
+    }
+
+
+ALL_STILL = "照片 / 人像 / 夜景 / 高像素 / 专业"
+ALL_CAPTURE = "照片 / 人像 / 运动 / 视频 / 夜景 / 慢动作 / 全景 / 专业 / 前后双录 / 高像素 / 延时摄影"
+
+
+ROWS = [
+    row(
+        "通用",
+        "功能",
+        "Mode Switch",
+        "模式栏",
+        "相机默认进入 Photo/照片；模式栏按项目支持范围展示人像、运动、视频、夜景、慢动作、延时摄影、全景、专业、前后双录等模式。",
+        "生成项目 FL 时，先确认项目模式清单，再按每个模式支持的工具栏、算法和摄像头能力展开。",
+        "依赖项目模式配置、模式入口、每个模式的摄像头/算法/交互能力。",
+        "打开相机并滑动模式栏，确认项目要求的模式是否存在且能进入。",
+    ),
+    row(
+        "照片 / 人像 / 视频 / 夜景 / 高像素 / 专业",
+        "功能",
+        "预览框",
+        "人脸检测",
+        "检测预览中的人脸并驱动人脸框、Face AE/AF、美颜、人像、FRT 等后续能力。",
+        "当前模式需要基于人脸做对焦、测光、美颜、人像、FRT 或 UI 提示时填写支持。",
+        "依赖人脸检测算法、预览流、AE/AF/美颜/人像等消费方。",
+        "在单人、多人、逆光、口罩/墨镜等场景下预览，确认人脸框和相关策略稳定。",
+    ),
+    row(
+        "照片 / 人像 / 夜景 / 高像素",
+        "基础算法",
+        "后处理算法",
+        "人脸清晰度增强",
+        "Face Restoration / FRT 类能力，用于有人脸时提升脸部细节清晰度。",
+        "项目算法链路明确接入 FRT，且当前模式有人脸后处理增强需求时填写支持。",
+        "依赖人脸检测、FRT/人脸增强算法、拍照/夜景/人像/高像素后处理链路。",
+        "拍摄有人脸样张，对比开启链路前后的人脸细节、伪影和自然度。",
+    ),
+    row(
+        ALL_CAPTURE,
+        "功能",
+        "预览框",
+        "ASD / AI场景检测",
+        "ASD（AI Scene Detection）通过 AI 模型识别画面语义场景，例如绿植、舞台、室外天空等需要特殊调试策略介入的场景；不包含仅基于亮度、DRC 等基础信号的普通场景判断。",
+        "当项目明确接入 ASD 模型，且语义场景输出会影响 UI 提示、ISP 调试策略或算法策略时填写支持。",
+        "依赖 ASD 模型、预览流、场景策略表、ISP/算法消费方。",
+        "使用绿植、舞台、天空等 ASD 定义场景集验证识别结果、触发时机和对应调试策略。",
+    ),
+    row(
+        ALL_CAPTURE,
+        "功能",
+        "预览框",
+        "脏污检测",
+        "检测镜头脏污并在 UI 中提示用户清洁镜头。",
+        "项目接入脏污检测策略并会在预览中展示提示时填写支持。",
+        "依赖脏污检测算法、预览流、提示 UI、项目地区/策略开关。",
+        "制造镜头脏污场景，确认提示出现、消失和误触发情况。",
+    ),
+    row(
+        "照片 / 人像 / 视频 / 夜景 / 高像素 / 专业",
+        "功能",
+        "AE/AF",
+        "自动对焦-自动曝光",
+        "统一描述 Touch AE/AF、Face AE/AF、Touch AE/AF Lock、CAF 和 EV 补偿等对焦测光能力。",
+        "当前模式允许点击/人脸驱动对焦测光、连续对焦、锁定或曝光补偿时填写支持；固定焦摄像头需注明仅 AE 或不支持 AF。",
+        "依赖 AF 马达或固定焦策略、AE/AF 算法、触控/人脸输入、预览 UI。",
+        "点击预览、人脸入镜、长按锁定、移动被摄体，确认对焦/测光/锁定/CAF 行为符合模式定义。",
+    ),
+    row(
+        ALL_CAPTURE,
+        "功能",
+        "Zoom",
+        "变焦",
+        "变焦栏位于模式栏上方，默认变焦点应覆盖硬件光学点，并覆盖可用 In-Sensor Zoom 点。变焦方式需要在项目 FL 中说明：SAT 平滑镜头切换、硬切镜头切换，或纯数码变焦。",
+        "按项目摄像头硬件倍率、ISZ/crop 能力、SAT 能力、硬切策略和当前模式允许的摄像头/倍率范围判断。",
+        "依赖摄像头硬件倍率、sensor crop/ISZ、模式可用摄像头列表、zoom range 配置、SAT 标定或硬切转场动画。",
+        "检查默认变焦点、双指缩放、滑动变焦和跨镜头切换；确认倍率、预览、成片路径和切换方式（SAT/硬切/数码变焦）一致。",
+    ),
+    row(
+        "照片 / 夜景 / 专业 / 高像素",
+        "基础算法",
+        "实时算法",
+        "Photo EIS / PZL",
+        "照片电子防抖，通常只在高倍率拍照或高倍率预览链路生效。PZL 是按下快门后再取帧的后取帧策略，区别于 ZSL（Zero Shutter Lag）预缓存取帧。",
+        "当前拍照模式、镜头和倍率进入照片 EIS/PZL 链路时填写支持；触发倍率按项目和镜头组合决定。",
+        "依赖陀螺仪、裁切空间、照片 EIS 算法、PZL 取帧策略、当前镜头/倍率。",
+        "在项目定义的高倍率手持场景拍摄，确认取景稳定、裁切范围、快门后取帧时序和成片清晰度。",
+    ),
+    row(
+        "视频 / 慢动作 / 延时摄影 / 前后双录",
+        "基础算法",
+        "实时算法",
+        "Video EIS",
+        "视频电子防抖。与照片 EIS 不同，视频 EIS 通常作为录制过程中的全局稳定能力，在支持的视频规格和倍率范围内持续生效。",
+        "当前视频模式/规格/镜头支持录制防抖链路时填写支持；用户可通过 Settings > Video 的视频防抖开关控制是否启用。",
+        "依赖陀螺仪、裁切空间、视频 EIS 算法、当前镜头/倍率/分辨率/帧率和视频防抖设置项。",
+        "在支持规格下手持录制，确认开启/关闭视频防抖后的稳定性、视角裁切、果冻效应和发热功耗符合规格。",
+    ),
+    row(
+        "照片 / 视频 / 夜景 / 专业 / 高像素",
+        "功能",
+        "Zoom",
+        "OIS",
+        "光学防抖能力，由具备 OIS 的摄像头硬件提供。",
+        "仅对应摄像头硬件具备 OIS，且当前模式链路启用该摄像头 OIS 时填写支持。",
+        "依赖摄像头 OIS 硬件、驱动、当前模式调用的摄像头链路。",
+        "查硬件配置确认 OIS；在对应摄像头低照/长焦手持场景验证稳定性。",
+    ),
+    row(
+        "照片 / 视频 / 夜景",
+        "功能",
+        "Zoom",
+        "SAT / 平滑镜头切换",
+        "Smooth Auto Transition，多摄变焦时平滑切换镜头，降低亮度、色彩、视角突变。",
+        "项目存在可连续切换的多摄组合，且当前模式允许跨摄像头平滑切换时填写支持。",
+        "依赖多摄组合、标定、色彩/曝光一致性、zoom range 和 SAT 策略。",
+        "连续滑动变焦跨镜头点，确认亮度、色彩、视角和清晰度过渡。",
+    ),
+    row(
+        "照片 / 夜景 / 高像素",
+        "基础算法",
+        "后处理算法",
+        "超分（SR）",
+        "高倍率变焦或裁切链路上的超分辨率能力，用于提升细节清晰度。",
+        "当前模式和倍率进入 SR/超分算法链路时填写支持；普通数字变焦不等同于 SR。",
+        "依赖 zoom 倍率范围、sensor crop/长焦链路、SR 算法、平台算力。",
+        "在算法定义的倍率点拍摄细节目标，确认清晰度提升和伪影控制。",
+    ),
+    row(
+        "照片",
+        "功能",
+        "右侧暂态开关",
+        "AI Zoom",
+        "右侧暂态开关能力，用于 30x 以上高倍率长焦拍摄，通过 AISR / AI Super Zoom 提升清晰度。",
+        "仅当项目具备 30x+ 变焦能力、平台达到 SM7750 级及以上，并接入 AISR/AI Zoom 算法时填写支持。",
+        "依赖长焦/高倍裁切链路、SM7750 级平台能力、AISR/AI Super Zoom 算法、右侧暂态开关 UI。",
+        "在 30x 以上场景确认 AI Zoom 暂态开关出现；点击后拍摄高细节目标，检查成片清晰度和生成伪影。",
+    ),
+    row(
+        "照片",
+        "功能",
+        "左侧暂态开关",
+        "自动微距控制",
+        "左侧暂态开关。近距离对焦时，如果项目支持 fallback，可提示/控制自动切换到更近对焦距离的摄像头。",
+        "仅 fallback 机型填写支持；不支持 fallback 的项目不应出现该开关。",
+        "依赖 fallback 能力、可承担微距的摄像头、近距检测、左侧暂态开关 UI。",
+        "近距离拍摄目标，确认开关出现；关闭后确认不再自动切换微距/近距摄像头。",
+    ),
+    row(
+        "照片",
+        "功能",
+        "右侧暂态开关",
+        "自动夜景",
+        "右侧暂态开关。低照且夜景算法效果优于普通拍照时出现，用户未关闭时按 Super Night 链路拍照。",
+        "照片模式具备低照检测、夜景收益判断和 Super Night 链路时填写支持。",
+        "依赖低照/场景检测、AE 策略、Super Night 算法、右侧暂态开关 UI。",
+        "在低照场景确认夜景暂态开关出现；拍照后检查算法 tag、曝光时间和成片效果。",
+    ),
+    row(
+        "照片",
+        "功能",
+        "右侧暂态开关",
+        "Text Mode（文本模式）",
+        "右侧暂态开关。预览识别到文本后弹出，点击后框选文本边缘，做透视矫正并增强文本清晰度。",
+        "项目支持文本检测、边缘检测、透视矫正和文本增强，并在检测到文本时弹出右侧暂态开关时填写支持。",
+        "依赖文本检测、文本边缘检测、透视矫正、文本增强算法、右侧暂态开关 UI。",
+        "用照片模式预览文档/文字内容，确认开关出现；点击后确认边缘框选、透视矫正和清晰度增强。",
+    ),
+    row(
+        "照片",
+        "功能",
+        "Toolbar",
+        "Flash",
+        "照片工具栏补光入口。后置支持 Off / On / Torch；前置无物理闪光灯，使用屏幕补光，可出现 Auto；Glyph 补光只在具备对应硬件的旧项目/特定项目出现。",
+        "按摄像头位置和硬件判断：后置需 LED flash；前置用屏幕补光；Glyph 需项目具备可用于补光的 Glyph 硬件。",
+        "依赖 LED flash、屏幕补光、Glyph 硬件/项目配置、Toolbar UI。",
+        "分别切换后置/前置检查 Flash 选项；验证后置 Off/On/Torch 和前置屏幕补光/Auto。",
+    ),
+    row("照片", "功能", "Toolbar", "Timer", "倒计时入口，支持 Off / 3s / 10s。", "照片模式提供倒计时拍照入口时填写支持。", "依赖延迟触发、倒计时 UI。", "切换 Off / 3s / 10s 后拍照，确认延迟触发。"),
+    row(
+        "照片",
+        "功能",
+        "Toolbar",
+        "HDR",
+        "照片工具栏 HDR 入口。当前项目只有 Auto / Off，无强制 On。不同项目中 Auto/Off 对应 MFNR、RAW HDR 或其他 HDR 链路可能不同。",
+        "只按 Auto / Off 两种状态写功能；具体算法链路必须按项目算法文档确认。",
+        "依赖 HDR 检测/决策、MFNR、RAW HDR/HDR 算法、Toolbar UI。",
+        "切换 Auto / Off，在普通和高动态场景拍照，确认 UI 状态、算法 tag 和成片动态范围。",
+    ),
+    row("照片", "功能", "Toolbar", "Exposure", "全局曝光调节，范围 -2EV 到 +2EV，步进 0.3EV。", "当前模式提供全局 EV 调节滑杆时填写支持。", "依赖 AE/EV 控制、预览曝光同步、slider UI。", "调节 -2/0/+2 EV，确认预览和成片亮度变化。"),
+    row("照片", "功能", "Toolbar", "Filter", "内置滤镜和用户导入滤镜入口；不在 KB/FL 展开每个滤镜名。", "支持内置 LUT、滤镜强度或用户导入 LUT 时填写支持。", "依赖滤镜/LUT 渲染、导入管理、filter 管理文档。", "选择内置和导入滤镜，确认预览/成片效果；具体列表看 filter 文档。"),
+    row("照片", "功能", "Toolbar", "Tuning", "Preset 2.0 / Tuning Palette 七参数调节。", "七个参数能写入预览/成像或 Preset 时填写支持。", "依赖 Tuning Palette、参数渲染链路、Preset 保存。", "分别调节七个参数，确认预览/成片变化，并验证可存入 Preset。"),
+    row("照片", "功能", "Toolbar", "Motion Photo", "动态照片入口；摄像头范围、录音、片段截取等差异写说明，不默认拆行。", "项目支持 Motion Photo 拍摄时填写支持。", "依赖预录缓存、封面帧选择、动态照片封装。", "开启 Motion Photo 后拍摄，确认相册中可播放动态照片。"),
+    row("照片", "功能", "Toolbar", "Motion Photo cover HDR", "动态照片封面帧 HDR 支持，可作为单独验收点。", "Motion Photo 封面帧可输出或显示 HDR/Ultra HDR 时填写支持。", "依赖 Motion Photo、HDR/Ultra HDR 输出、查看器显示能力。", "HDR 场景拍摄动态照片，确认封面帧 HDR 信息和显示效果。"),
+    row("照片", "功能", "Toolbar", "Quality", "输出像素数量选择，常见为 20MP / 50MP；支持 200MP 的项目增加 200MP。", "按 sensor 输出、ISZ/crop、高像素/200MP 链路判断可选档位。", "依赖 sensor 输出规格、ISZ/crop、高像素/200MP 链路、内存和耗时。", "切换各像素档位，确认入口、成片分辨率、处理耗时和互斥关系。"),
+    row("照片", "功能", "Toolbar", "Grid", "网格线快捷入口，支持 On / Off。", "提供网格线快捷开关并能在预览显示构图网格时填写支持。", "依赖预览 overlay、Toolbar UI。", "切换 On / Off，确认网格显示和隐藏。"),
+    row("照片", "功能", "Toolbar", "Ratio", "画幅比例入口，支持 1:1 / 4:3 / 16:9 / Full；50MP 等最大像素输出时不支持切换。", "支持画幅裁切时填写支持；最大像素输出时应禁用或隐藏。", "依赖裁切输出、预览比例适配、Quality 互斥策略。", "普通质量下切换比例；切到最大像素后确认 Ratio 不可切换。"),
+    row("照片", "功能", "Toolbar", "Watermark", "水印快捷入口。点击 On / Off；长按跳转 Settings > Photo > Watermark。", "支持照片水印且工具栏提供快捷入口时填写支持。", "依赖水印渲染、Toolbar 入口、Settings 水印页。", "点击切换并拍照确认；长按进入水印设置页。"),
+    row("照片", "功能", "Toolbar", "More settings", "进入 Camera Settings 的工具栏入口。", "Toolbar 提供 More settings 入口时填写支持。", "依赖 Camera Settings 页面和工具栏入口。", "点击 More settings，确认进入 Camera Settings。"),
+    row("照片", "功能", "Toolbar", "Glyph Mirror", "使用背面大尺寸 Glyph LED 预览构图，让用户使用后置摄像头自拍。", "仅具备大尺寸 Glyph Mirror 所需硬件并开放该功能的项目支持；已知 25111 Pro 支持，25111 不支持。", "依赖后置大尺寸 Glyph LED、后摄自拍预览策略、Toolbar UI。", "开启 Glyph Mirror 后使用后摄自拍，确认背面 Glyph 预览和拍摄流程。"),
+    row(
+        "通用",
+        "Preset",
+        "Preset",
+        "Preset",
+        "底部独立功能区域，支持默认/自定义 Preset、选择、保存、卡片信息、封面、导入和分享。",
+        "项目支持 Camera Preset 能力时填写；不要按每个模式重复写 Preset。",
+        "依赖 Preset 配置、默认 Preset 列表、滤镜/Tuning/参数保存恢复、Preset Bitable。",
+        "进入底部 Preset 区域，验证选择、保存、导入、分享和卡片展示。",
+    ),
+    row(
+        "通用",
+        "Widget",
+        "Widget",
+        "Preset Widget",
+        "桌面相机小组件能力，支持 Preset Widget 2 聚合多个 Preset，并从桌面点击后唤起相机并应用对应 Preset。",
+        "项目引入 Camera/Preset Widget、出厂预装 Widget 或支持用户配置 Preset Widget 时填写支持。",
+        "依赖系统 Widget 框架、Preset 列表、Widget 配置页、相机冷启动/唤起参数和 Preset 应用链路。",
+        "添加或使用预装 Preset Widget，选择最多 5 个 Preset，点击不同卡片唤起相机，确认应用的 Preset、顺序同步、空状态和上限提示符合规格。",
+        "参考 `knowledge/reference/preset/preset-widget-2.0.md`。",
+    ),
+    row("通用", "Settings", "General settings", "Save location", "保存位置设置。", "Settings > General 存在保存位置设置时填写。", "依赖存储权限、可用存储位置、Settings UI。", "进入设置切换保存位置，确认照片/视频保存路径。"),
+    row("通用", "Settings", "General settings", "Shutter sound", "快门声音设置，部分地区/SKU 可能强制开启。", "Settings > General 提供快门声设置或存在地区策略时填写。", "依赖地区/SKU 策略、音频播放、Settings UI。", "切换快门声并拍照验证；地区 SKU 验证强制策略。"),
+    row("通用", "Settings", "General settings", "Mirror front camera", "前置镜像设置，影响前置拍照/录像输出方向。", "Settings > General 提供前置镜像设置时填写。", "依赖前置摄像头、镜像处理、Settings UI。", "切换后用前置拍摄，确认输出方向。"),
+    row("通用", "Settings", "General settings", "Level", "水平仪/水平辅助线设置。", "Settings > General 提供 Level 设置时填写。", "依赖姿态传感器、预览叠加层、Settings UI。", "开启后旋转设备，确认水平辅助显示和随姿态变化。"),
+    row("通用", "Settings", "Photo settings", "Auto Tone", "照片类模式的色调处理设置，会影响 still photo 出片效果。", "Settings > Photo 存在 Auto Tone，且会影响照片输出时填写。", "依赖照片色调处理策略、Settings UI、成像链路。", "开关 Auto Tone 后拍摄相同场景，确认色调变化。"),
+    row("通用", "Settings", "Photo settings", "Watermark settings", "水印详细设置，包括样式和自定义信息。", "Settings > Photo 提供 Watermark 设置且会写入照片输出时填写。", "依赖水印渲染、照片输出链路、Settings UI。", "调整水印设置后拍照，确认成片水印内容和样式。"),
+    row("通用", "Settings", "Photo settings", "Tap to take a photo", "点击预览区域触发拍照的设置。", "Settings > Photo 提供该开关且开启后点击预览可拍照时填写。", "依赖预览触控事件、快门触发链路、Settings UI。", "开启后点击预览区域，确认触发拍照。"),
+    row("通用", "Settings", "Photo settings", "QR code scanner", "二维码扫描设置，控制预览中二维码识别和跳转提示。", "Settings > Photo 提供 QR code scanner 设置，且开启后可识别二维码时填写。", "依赖二维码检测/识别、预览浮层、Settings UI。", "开启后对准二维码，确认识别浮层和点击跳转。"),
+    row("通用", "Settings", "Photo settings", "Press and hold shutter", "长按快门行为设置，如连拍或快录。", "Settings > Photo 提供长按快门行为选项时填写；快门按键本身不作为 KB 功能行。", "依赖快门长按事件、连拍/快录链路、Settings UI。", "切换选项后长按快门，确认行为符合设置。"),
+    row("通用", "Settings", "Photo settings", "Ultra XDR", "Ultra HDR / XDR 照片显示或输出设置。", "Settings > Photo 提供 Ultra XDR 设置，且会影响照片输出或查看显示时填写。", "依赖 Ultra HDR/XDR 输出、相册/系统查看器、Settings UI。", "开启/关闭后拍摄并在支持查看器中确认动态范围表现。"),
+    row("通用", "Settings", "Video settings", "Video encoding", "视频编码设置，用户可选择 H.264 或 H.265。", "Settings > Video 提供 H.264/H.265 选择或项目默认编码策略变化时填写。", "依赖平台视频编码器、视频录制链路、Settings UI。", "切换 H.264/H.265 后录制视频，确认文件编码格式。"),
+    row("通用", "Settings", "Video settings", "Power saving recording", "省电录制。设备静止时自动关闭预览屏幕以节省功耗。", "Settings > Video 提供该设置且静止录制场景会触发省电策略时填写。", "依赖运动/静止检测、录制状态、屏幕控制、省电策略。", "开启后开始录制并保持设备静止，确认预览屏幕关闭且录制不中断。"),
+    row("通用", "Settings", "Video settings", "Auto FPS", "自动帧率设置，用户可选择 Off、Auto 30 FPS、Auto 30 & 60 FPS。", "Settings > Video 提供 Auto FPS 并能根据场景/光照调整视频帧率时填写。", "依赖视频帧率策略、AE/低照判断、平台视频规格。", "切换 Off / Auto 30 / Auto 30&60，在不同光照场景录制并确认帧率策略。"),
+    row("通用", "Settings", "Video settings", "视频防抖开关", "视频设置项。用于控制支持 EIS 的视频录制规格是否启用电子防抖，默认开启。", "Settings > Video 提供视频防抖开关，且当前视频模式/规格支持 EIS 时填写。", "依赖 EIS 算法、视频规格、Settings UI、录制链路和默认开关策略。", "进入 Settings > Video 切换视频防抖开关，在支持 EIS 的规格下录制并确认防抖开关生效；在不支持规格下确认置灰或隐藏策略。"),
+    row("通用", "Settings", "Video settings", "锁定镜头", "视频设置项。开启后录制中禁用 SAT，不切换物理镜头，后续变焦保持当前镜头并走数码变焦。", "Settings > Video 提供锁定镜头开关，且项目继承或新增录制中锁定物理镜头能力时填写。", "依赖 SAT/变焦策略、视频录制链路、Settings UI 和当前镜头可用倍率范围。", "开启锁定镜头后开始录制，跨镜头倍率点变焦，确认不发生物理镜头切换且录制不中断。", "待确认：目标项目是否继承该基线能力仍需 PM/SE 确认。"),
+    row("通用", "Settings", "Video settings", "锁定白平衡", "视频设置项。默认关闭；录制开始后锁定起始白平衡，录制过程中不随场景色温变化重新收敛。", "Settings > Video 提供锁定白平衡开关，且视频链路支持录制起始 WB 锁定时填写。", "依赖 AWB/WB 锁定策略、视频录制链路、Settings UI，以及与手动白平衡调节的优先级规则。", "开启锁定白平衡后在不同色温光源间移动录制，确认白平衡保持起始状态；关闭后确认 WB 正常收敛。"),
+    row("通用", "Settings", "Help & Support", "Tips and feedback", "Camera Settings 中的帮助与反馈入口，跳转系统 Tips and feedback；Camera 内不自建反馈表单。", "Settings 页面提供 Tips and feedback 入口时填写。", "依赖系统 Tips and feedback 页面、Settings UI 和跳转返回链路。", "进入 Camera Settings 点击 Tips and feedback，确认跳转系统帮助/反馈入口，并能返回 Camera。"),
+    row("夜景 / 照片", "基础算法", "后处理算法", "超级夜景", "低照拍照核心算法链路；夜景模式直接使用，照片模式可由自动夜景暂态开关触发。", "低照检测、曝光策略和算法配置允许进入 Super Night 链路时填写。", "依赖低照检测、Super Night 算法、多帧合成、AE/曝光策略。", "低照场景拍摄，确认算法 tag、曝光时间、噪声、亮度和细节。"),
+    row("夜景", "基础算法", "后处理算法", "极夜", "极低照增强分支，用于比普通夜景更暗的场景。", "亮度低于极夜阈值且摄像头、曝光、防抖、平台能力满足要求时填写。", "依赖极低照检测、极夜算法、多帧合成、平台算力。", "极低照场景拍摄，确认亮度、噪声、细节和伪影控制。"),
+    row("夜景 / 人像", "基础算法", "后处理算法", "超级夜景+美颜", "夜景成像链路中叠加人脸检测与美颜处理。", "当前模式和摄像头同时支持 Super Night、FD 和美颜，并允许低照人脸策略叠加时填写。", "依赖 Super Night、人脸检测、美颜算法、低照人脸策略。", "低照人脸场景开启美颜拍摄，确认夜景和美颜同时生效且自然。"),
+    row("高像素", "基础算法", "后处理算法", "Remosaic", "高像素输出链路中的 remosaic / upscale 能力，如 50MP 或 200MP 输出。", "项目 sensor 和高像素链路支持对应输出时填写。", "依赖 sensor 输出、remosaic/upscale 算法、内存和耗时预算。", "高像素模式拍摄，确认分辨率、耗时、内存和画质。"),
+    row("视频 / 前后双录", "功能", "Mode Switch", "前后双录", "前后摄同时录制模式。", "项目支持前后摄同时预览/录制并有模式入口时填写。", "依赖双路预览/录制、编码能力、布局和音频策略。", "进入前后双录，验证镜头组合、布局、文件输出和录制稳定性。"),
+    row("视频 / 前后双录", "功能", "Mode Switch", "录制中前后镜头切换", "视频录制过程中不中断地切换前后镜头。", "项目明确支持录制中切换前后镜头且不中断录制时填写。", "依赖双路/切换录制链路、编码、音视频同步、UI。", "录制中切换前后镜头，确认不中断、音画同步、文件正常。"),
+]
+
+
+def audit(rows: list[dict[str, str]]) -> list[str]:
+    lines = ["# KB Functions Algorithms v6 Audit", ""]
+    names = Counter(r["名称"] for r in rows)
+    duplicates = [name for name, count in names.items() if count > 1]
+    bad_verify = [
+        r for r in rows
+        if r["验证方法"].strip() in {"✓", "✗", "✅", "❌"} or not r["验证方法"].strip()
+    ]
+    bad_source = [
+        r for r in rows
+        if "26111" in r.get("来源项目", "") or "26121" in r.get("来源项目", "")
+        or "26111" in r.get("备注", "") or "26121" in r.get("备注", "")
+    ]
+    bad_terms = [
+        r for r in rows
+        if any(term in json.dumps(r, ensure_ascii=False) for term in ["Hyper Zoom", "虹软", "4x以上支持"])
+    ]
+
+    lines.append(f"- Rows: {len(rows)}")
+    lines.append(f"- Duplicate names: {len(duplicates)}")
+    lines.append(f"- Invalid verification methods: {len(bad_verify)}")
+    lines.append(f"- Bad source-project mentions: {len(bad_source)}")
+    lines.append(f"- Bad legacy terms: {len(bad_terms)}")
+    lines.append("")
+
+    todo_rows = [r for r in rows if "待确认" in r.get("备注", "")]
+    lines.append("## 待确认项")
+    lines.append("")
+    if todo_rows:
+        for r in todo_rows:
+            lines.append(f"- {r['名称']}: {r['备注']}")
+    else:
+        lines.append("- None")
+
+    if duplicates:
+        lines.append("")
+        lines.append("## Duplicate Names")
+        lines.extend(f"- {name}" for name in duplicates)
+
+    if bad_verify:
+        lines.append("")
+        lines.append("## Invalid Verification Methods")
+        lines.extend(f"- {r['名称']}: {r['验证方法']}" for r in bad_verify)
+
+    if bad_source:
+        lines.append("")
+        lines.append("## Bad Source Project Mentions")
+        lines.extend(f"- {r['名称']}: {r.get('来源项目', '')} / {r.get('备注', '')}" for r in bad_source)
+
+    if bad_terms:
+        lines.append("")
+        lines.append("## Bad Legacy Terms")
+        lines.extend(f"- {r['名称']}" for r in bad_terms)
+
+    return lines
+
+
+def main() -> None:
+    OUT.mkdir(parents=True, exist_ok=True)
+    payload = json.dumps(ROWS, ensure_ascii=False, indent=2) + "\n"
+    OUT_CANONICAL.write_text(payload, encoding="utf-8")
+    OUT_JSON.write_text(payload, encoding="utf-8")
+    OUT_AUDIT.write_text("\n".join(audit(ROWS)) + "\n", encoding="utf-8")
+    print(f"wrote {OUT_CANONICAL} ({len(ROWS)} rows)")
+    print(f"wrote {OUT_JSON} ({len(ROWS)} rows)")
+    print(f"wrote {OUT_AUDIT}")
+
+
+if __name__ == "__main__":
+    main()

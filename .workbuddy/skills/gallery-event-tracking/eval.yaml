@@ -1,0 +1,231 @@
+version: '1.0'
+skill_id: gallery-event-tracking
+eval_type: content
+cases:
+- id: case-edit-pattern
+  threshold: 0.75
+  task: 'PM 要为 Gallery 新增的「Draw」编辑功能设计埋点。请根据 SKILL.md 的编辑类埋点模式，写出需要的 event_name 和参数，按标准
+    5 列表格输出。
+
+
+    ```
+
+    功能: Draw (画笔)
+
+    入口: 编辑模块 → Draw
+
+    工具: 画笔 (brush)
+
+    保存参数: color=#FF0000, thickness=5
+
+    ```
+
+    '
+  rubric:
+  - id: r1
+    check: 输出包含 edit_action 事件，enter_module=draw，且包含 UUID
+    weight: 2
+  - id: r2
+    check: 输出包含 edit_draw 保存结算事件，参数包含 color 和 thickness 的最终值，且 UUID 与 edit_action
+      一致
+    weight: 2
+  - id: r3
+    check: 输出为标准的 5 列表格格式 (event_name | key | key_description | parameter_value |
+      说明)
+    weight: 1
+- id: case-reuse-existing
+  threshold: 0.75
+  task: 'PM 要为「Map Album 中收藏照片」这个操作设计埋点。请根据 SKILL.md 的 Event Patterns Reference，回答：(1)
+    应该复用哪个已有 event_name？(2) 需要哪些参数？列出完整的 5 列表格。(3) 这个操作是否需要新增 event_name？
+
+
+    ```
+
+    操作: 在地图相册中点击照片，选择收藏
+
+    来源视图: map_album
+
+    操作类型: 收藏单张照片
+
+    ```
+
+    '
+  rubric:
+  - id: r1
+    check: 回答复用 media_manage event，不需要新增 event_name
+    weight: 2
+  - id: r2
+    check: 参数包含 action=favorite, source_view=map_album, select_count=1, media_type=photo
+    weight: 2
+  - id: r3
+    check: 回答说明了复用原则：已有 event family 能覆盖就不要新建
+    weight: 1
+- id: case-save-time-settlement
+  threshold: 0.75
+  task: '开发问：用户用 Draw 先选红色画了 3 笔，换蓝色画了 2 笔，撤销 1 笔蓝色，点保存。应该报哪些参数？请根据 SKILL.md 回答。
+
+
+    ```
+
+    时间线:
+
+    1. 进入 Draw
+
+    2. 选红色 → 画 3 笔
+
+    3. 换蓝色 → 画 2 笔
+
+    4. 撤销 1 笔蓝色
+
+    5. 点保存
+
+    ```
+
+    '
+  rubric:
+  - id: r1
+    check: 回答只在保存时上报最终结果，不是每次操作都报
+    weight: 2
+  - id: r2
+    check: 回答最终颜色是蓝色，笔画数报 4
+    weight: 2
+  - id: r3
+    check: 回答撤销不需要单独上报，除非产品明确要分析撤销频率
+    weight: 1
+- id: case-reedit-detection
+  threshold: 0.75
+  task: '用户在一张已有历史 text 的图片上进入 Text 编辑，新增了 1 个 text。请根据 SKILL.md 的 Re-edit Detection
+    规则回答：(1) 保存时应该报 is_reedit = 0 还是 1？(2) text_details 应该报什么？(3) 为什么需要 is_reedit
+    这个字段？
+
+
+    ```
+
+    初始状态: 图片上已有 T1（上次编辑留下的）
+
+    本次操作: 新增 T2，保存
+
+    最终画布: T1 + T2 共存
+
+    ```
+
+    '
+  rubric:
+  - id: r1
+    check: 回答 is_reedit = 1，因为画布上已有历史内容 T1
+    weight: 2
+  - id: r2
+    check: 回答 text_details 报 T1*1, T2*1，传最终画面全貌
+    weight: 2
+  - id: r3
+    check: 回答 is_reedit 的作用是让数据端区分首次创作和二次修改，避免把 T1+T2 误判为一次新增 2 个
+    weight: 1
+- id: case-privacy-first
+  threshold: 0.75
+  task: '用户进入 Text 编辑，把 T1 的文字从"你好"改成"再见"，字体、颜色、对齐都没换，直接保存。请根据 SKILL.md 的 Privacy-First
+    Rule 回答：(1) 要不要上报 edit_text？(2) 为什么？(3) 如果 PM 真的想知道"多少人改过文字内容"，怎么加？
+
+
+    ```
+
+    操作:
+
+    进入 Text → 点开 T1 → 改文字内容 → 保存
+
+    样式变化: 无
+
+    分析需求: PM 想知道文字编辑的保存率
+
+    ```
+
+    '
+  rubric:
+  - id: r1
+    check: 回答不上报 edit_text，因为只改了文字内容、样式无变化
+    weight: 2
+  - id: r2
+    check: 回答原因是隐私优先：文字内容属于用户隐私。用户进入 Text 的动作已由 edit_action 记录
+    weight: 2
+  - id: r3
+    check: '回答如果需要数据，加轻量的 text_edited: 0/1 flag，不报内容不报样式'
+    weight: 1
+metadata:
+  source_skill_md_sha256: bc3b2c65397ce49ba32a4d5e22a13621c67fcfc5c001b0ea03f941fc5db33058
+  generated_at: '2026-06-25T11:29:28+08:00'
+  generator_version: eval-generate/v3.2
+  source_skill_md_sections:
+  - heading: (preface)
+    content_sha256: 2eefced3a52163846af8d75c5ceb1af3aff0d2cafd9e407ff9cffee765ac9ba8
+    content_snippet: '# Gallery Event Tracking'
+    case_ids: []
+  - heading: '## Purpose'
+    content_sha256: ca3f89869a02bd3f1de12a0ebcbbdcd7bfe13cc6d4b9e5b63fcf6ce22effdcd0
+    content_snippet: Use this skill when the user wants埋点内容 for Gallery features.
+      This skill aligns new tracking proposals with the existing `NTGallery App Event
+      Tracking Spec 2026` workbook rather than inventing a new st
+    case_ids: []
+  - heading: '## Default Source'
+    content_sha256: 7d01d81e1e9bca658b5875e1c843b4332a539fea7d88f609ab151f6c7c992632
+    content_snippet: Gallery 埋点的权威数据源是飞书多维表格： | 项目 | 值 | |------|-----| | Bitable
+      URL | `https://nothing-tech.sg.larksuite.com/base/WB4QbWtr2ajCGXsZucglh0DAgsh`
+      | | Base Token | `WB4QbWtr2ajCGXsZucglh0DAgsh` | | Table | `
+    case_ids: []
+  - heading: '## Existing Pattern'
+    content_sha256: 7472cf8dd3ea0cd75009fbdf6c9f138729d2d6cf035dd10faa4852d9a18b1dbc
+    content_snippet: Gallery 使用多 `event_name`（`gallery_view`、`media_manage`、`album_manage`、`edit_action`
+      等），不同于 Camera 的单 `NTCamera`。PRD 中一行一个 parameter，与 Bitable 对齐： | event_name |
+      key | key_description | parameter_value
+    case_ids: []
+  - heading: '## Workflow'
+    content_sha256: 596d98088e4ca6e11fef4adb4d823cf9808a5b6940ec2b393fef62ad2576bab4
+    content_snippet: '1. Identify the feature and whether it belongs to `Manage`,
+      `Edit`, or `Settings`. 2. Check whether the new feature should reuse an existing
+      event family. 3. For editing features, default to: - one `e'
+    case_ids: []
+  - heading: '## Re-edit Detection'
+    content_sha256: e42f76ba7e9c1e6db25746b76ec454bc4454eaef522aeeeb27f0bb699f407349
+    content_snippet: 编辑可能是全新创作，也可能是在历史图片上二次修改。用 `is_reedit` 区分： | is_reedit | 含义 |
+      触发条件 | |-----------|------|---------| | 0 | 首次编辑 | 进入编辑模块时画布上没有该类型的已有内容 | |
+      1 | 二次编辑 | 画布上已有历史内容（如之前加的 text），本次编辑在此基础上修改 | **上报方式：** 前端传最终
+    case_ids: []
+  - heading: '## Privacy-First Rule'
+    content_sha256: ac5edd7dde3d8b73b347419e2709aa288f432bf934efee8dfb76b4e109dc1cfb
+    content_snippet: '**只改文字内容、不改任何样式 → 不上报 edit_text。** 理由： - 文字内容属于用户隐私，不应通过埋点泄露
+      - 初始字串 = 最终字串 → 判定为无有效样式变更 - 用户"碰过" Text 工具的动作，已由 `edit_action` 记录 这是一个有意识的
+      tradeoff：PM 无法通过埋点知道"多少人改了文字内容"，但隐私保护优先级更高。如果产品确实需要这个数据，加一个轻量的 '
+    case_ids: []
+  - heading: '## Rules'
+    content_sha256: 8583627007e9b6c01535de7ad7fde924c66a697d6d26763ef6fbbe9fa23c497d
+    content_snippet: '- Keep event names short and consistent with the workbook. -
+      Prefer enum-style parameter values over free text. - Reuse `UUID` when the feature
+      belongs to an edit session. - Do not mix entry events an'
+    case_ids: []
+  - heading: '## Output Format'
+    content_sha256: 94ce05d48c84483c467387844154c3145cf3e6fc46aad6e8597b7dfe16b5d58d
+    content_snippet: '### PRD 中使用（给开发看） | event_name | key | key_description | parameter_value
+      | 说明 | | --- | --- | --- | --- | --- | ### 写入 Bitable 时（给 AI 或同步用） 对齐 Gallery
+      Bitable 的 7 列： ``` event_name | event_description'
+    case_ids: []
+  - heading: '## Writing to Bitable'
+    content_sha256: a0de6da668cb576b4cad38ccb668d566c32b96621693601bfc65210229388d01
+    content_snippet: '设计新埋点时，先查 Bitable 是否有可复用的 event_name，再决定是追加 parameter 还是新增 event。
+      1. 查询已有记录 → 确认 event_name 和 parameter 是否可复用 2. 新增记录 → 按 Bitable 7 列格式写入 `tbl4YaZDJ2Psv9ok`
+      3. 不确定的枚举值 → `value_note` 写「待确认」，`备注` 标注原因 '
+    case_ids: []
+  - heading: '## Event Patterns Reference'
+    content_sha256: 32b5ff3d27428b5970252306fc4c3d09c8890932495dfafb076c58522df7899a
+    content_snippet: '以下为已确立的 Gallery 埋点命名和结构模式，设计新埋点时必须对齐。 ### 常用 event_name 分组 |
+      event_name | 用途 | 示例参数 | |------------|------|---------| | `gallery_view` |
+      浏览/导航行为 | album_type, entry_source, duration, has_location_medi'
+    case_ids: []
+  - heading: '## Review Focus'
+    content_sha256: 0740ceabe69c16bbf29dc7b690435d61cff08d0f34b019fc0ad3df6d7ca2e3f6
+    content_snippet: 'When reviewing埋点内容, check: - whether names follow existing Gallery
+      conventions - whether parameters are enum-friendly - whether save-time and process-time
+      events are separated - whether there are too '
+    case_ids: []
+  - heading: '## References'
+    content_sha256: feff2b116b8602e0ad639ed8cc9d065879a3571d2f28321af4db06f581d336d5
+    content_snippet: '- [references/ntgallery-event-patterns.md](references/ntgallery-event-patterns.md):
+      extracted structure and naming patterns from the existing workbook'
+    case_ids: []

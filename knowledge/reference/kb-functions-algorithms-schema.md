@@ -6,14 +6,19 @@
 
 `kb-functions-algorithms` is a **canonical function / algorithm manual**, not a project Feature List.
 
+Project FL is a downstream acceptance checklist: it defines which Camera functions a project finally supports and is mainly read by PM and QA/test for development completion and acceptance. Therefore repeated rows in FL are useful output, but they should not become manually maintained knowledge.
+
 In this repository, `KB` means **Knowledge Base**. This table explains what each function/algorithm means, which mode scope it belongs to, how to judge support, what it depends on, and how to verify it.
 
 Rules:
 
 - One row = one unique user-facing function or one unique algorithm capability.
 - Do not repeat the same function once per mode.
-- The `模式` field is a mode scope, such as `照片 / 人像 / 视频`, `照片`, or `全部拍摄模式`.
-- Do not use `通用` as a mode in this KB. Universal features should use `全部拍摄模式` or a concrete mode list.
+- Do not create a new KB row just because a PRD updates an existing capability. If the requirement changes copy, interaction detail, judgement basis, dependency, or verification method of an existing feature, update that existing row.
+- The `模式` field is a mode scope, such as `通用` (all modes / maximum compatibility), `照片 / 人像 / 视频`, `照片`, or `全部拍摄模式`.
+- Use `通用` only when the function applies to all modes. Mode-specific features should use a concrete mode list.
+- `Settings`, `Preset`, and `Widget` are common features: use `模式=通用`, with `一级分类=Settings`, `Preset`, or `Widget`; do not expand Settings into specific capture modes in final FL.
+- Final FL display values for `模式`, `一级分类`, and `二级分类` should be bilingual in one field, for example `照片 / Photo`, `设置 / Settings`, and `预览框 / Preview`.
 - Unsupported states are not represented in the KB. Support / unsupported differences belong to the final project FL.
 - Source projects for this KB are baseline references only: `25111 / 25131`.
 - Do not write future target projects such as `26111 / 26121` as source projects.
@@ -25,8 +30,8 @@ Rules:
 | Field | Meaning |
 |---|---|
 | 模式 | Supported mode scope, not one expanded row per mode |
-| 一级分类 | `功能` or `基础算法` |
-| 二级分类 | Interaction/module area, such as `预览框`, `AE/AF`, `Zoom`, `Top Toolbar`, `Settings`, `右侧暂态开关` |
+| 一级分类 | `功能`, `基础算法`, `Preset`, `Settings`, or `Widget` |
+| 二级分类 | Interaction/module area, such as `预览框`, `AE/AF`, `Zoom`, `Toolbar`, `Preset`, `General settings`, `Photo settings`, `Video settings`, `Help & Support`, `Widget`, `右侧暂态开关` |
 | 名称 | Canonical function/algorithm name |
 | 说明 | What the item means in product terms |
 | 判断依据 | How to decide support when generating project FL |
@@ -43,6 +48,8 @@ Rules:
 | Project Feature List | Project capability matrix | Expand KB mode scope into one row per real mode | Keep rows even when unsupported; write `✗` in camera/project support columns |
 
 Final FL rows are intentionally more repetitive than KB rows because they need to show differences by project, mode, and camera. For example, KB should have one `自动对焦-自动曝光` row with a mode scope; final FL can expand it into rows for Photo, Portrait, Video, Night, etc., with `✓` or `✗` per camera/project.
+
+Do not back-propagate FL duplication into KB or Feature Tree. Use FL as evidence and audit material, but maintain unique taxonomy in Feature Tree and unique function meaning in KB.
 
 ## Generation Flow
 

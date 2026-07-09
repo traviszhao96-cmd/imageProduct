@@ -1,0 +1,64 @@
+{
+  "ok": true,
+  "identity": "user",
+  "data": {
+    "fields": [
+      {
+        "id": "fldd73A30J",
+        "name": "截止日期",
+        "style": {
+          "format": "yyyy/MM/dd"
+        },
+        "type": "datetime"
+      },
+      {
+        "id": "fldD4DVj4K",
+        "name": "任务名",
+        "style": {
+          "type": "plain"
+        },
+        "type": "text"
+      },
+      {
+        "id": "fldxpFppR4",
+        "multiple": false,
+        "name": "任务状态",
+        "options": [
+          {
+            "hue": "Blue",
+            "lightness": "Lighter",
+            "name": "未开始"
+          },
+          {
+            "hue": "Orange",
+            "lightness": "Lighter",
+            "name": "进行中"
+          },
+          {
+            "hue": "Wathet",
+            "lightness": "Lighter",
+            "name": "已完成"
+          }
+        ],
+        "type": "select"
+      },
+      {
+        "id": "fldzyvOD4A",
+        "name": "备注",
+        "style": {
+          "type": "plain"
+        },
+        "type": "text"
+      },
+      {
+        "id": "fldbM001rD",
+        "name": "开始日期",
+        "style": {
+          "format": "yyyy/MM/dd"
+        },
+        "type": "datetime"
+      }
+    ],
+    "total": 5
+  }
+}

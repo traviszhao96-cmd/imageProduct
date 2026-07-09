@@ -1,0 +1,154 @@
+version: '1.0'
+skill_id: gallery-event-tracking
+eval_type: content
+cases:
+- id: case-edit-pattern
+  threshold: 0.75
+  task: 'PM 要为 Gallery 新增的「Draw」编辑功能设计埋点。请根据 SKILL.md 的编辑类埋点模式，写出需要的 event_name 和参数，按标准
+    5 列表格输出。功能：用户在编辑模块中进入 Draw，使用画笔工具，保存时应用了红色画笔、粗度 5。
+
+
+    ```
+
+    功能: Draw (画笔)
+
+    入口: 编辑模块 → Draw
+
+    工具: 画笔 (brush)
+
+    保存参数: color=#FF0000, thickness=5
+
+    ```
+
+    '
+  rubric:
+  - id: r1
+    check: 输出包含 edit_action 事件，enter_module=draw，且包含 UUID
+    weight: 2
+  - id: r2
+    check: 输出包含 edit_draw 保存结算事件，参数包含 color 和 thickness 的最终值，且 UUID 与 edit_action
+      一致
+    weight: 2
+  - id: r3
+    check: 输出为标准的 5 列表格格式 (event_name | key | key_description | parameter_value |
+      说明)
+    weight: 1
+- id: case-reuse-existing
+  threshold: 0.75
+  task: 'PM 要为「Map Album 中收藏照片」这个操作设计埋点。请根据 SKILL.md 的 Event Patterns Reference，回答：(1)
+    应该复用哪个已有 event_name？(2) 需要哪些参数？列出完整的 5 列表格。(3) 这个操作是否需要新增 event_name？
+
+
+    ```
+
+    操作: 在地图相册中点击照片，选择收藏
+
+    来源视图: map_album
+
+    操作类型: 收藏单张照片
+
+    ```
+
+    '
+  rubric:
+  - id: r1
+    check: 回答复用 media_manage event，不需要新增 event_name
+    weight: 2
+  - id: r2
+    check: 参数包含 action=favorite, source_view=map_album, select_count=1, media_type=photo
+    weight: 2
+  - id: r3
+    check: 回答说明了复用原则：已有 event family 能覆盖就不要新建
+    weight: 1
+- id: case-avoid-common-errors
+  threshold: 0.75
+  task: '以下是 PM 为「Text」编辑功能写的埋点草稿。请根据 SKILL.md 的 Rules 和编辑类模式，指出 3 个问题并给出修正版本。
+
+
+    ```
+
+    event_name: text_add
+
+    key: text_content
+
+    key_description: 用户输入的文字内容
+
+    parameter_value: (用户实际输入的文字)
+
+    说明: 每次输入文字时上报
+
+    ```
+
+    '
+  rubric:
+  - id: r1
+    check: 指出 event_name 不规范：编辑类应该用 edit_action（进入）+ edit_text（保存），不是每个操作一个 event
+    weight: 2
+  - id: r2
+    check: 指出上报时机错误：应该只在保存时上报最终参数，不是每次输入都上报
+    weight: 2
+  - id: r3
+    check: 指出参数值不应该包含用户实际输入的文字内容（隐私风险），应该只报属性（字体/大小/颜色等）
+    weight: 1
+metadata:
+  source_skill_md_sha256: 2016d1549e5fefbf0a196d0ba416d292c22f4e8a73cc579d38d9430c0bc40dbf
+  generated_at: '2026-06-24T16:33:48+08:00'
+  generator_version: eval-generate/v3.2
+  source_skill_md_sections:
+  - heading: (preface)
+    content_sha256: 2eefced3a52163846af8d75c5ceb1af3aff0d2cafd9e407ff9cffee765ac9ba8
+    content_snippet: '# Gallery Event Tracking'
+    case_ids: []
+  - heading: '## Purpose'
+    content_sha256: ca3f89869a02bd3f1de12a0ebcbbdcd7bfe13cc6d4b9e5b63fcf6ce22effdcd0
+    content_snippet: Use this skill when the user wants埋点内容 for Gallery features.
+      This skill aligns new tracking proposals with the existing `NTGallery App Event
+      Tracking Spec 2026` workbook rather than inventing a new st
+    case_ids: []
+  - heading: '## Default Source'
+    content_sha256: 2898c941bf741e9770c669a060132490bf9c39caa0f86e53da50d19fcc58d40e
+    content_snippet: 'Prefer the extracted reference note: - [references/ntgallery-event-patterns.md](references/ntgallery-event-patterns.md)
+      If the user provides a newer workbook or a different source of truth, use that
+      f'
+    case_ids: []
+  - heading: '## Existing Pattern'
+    content_sha256: 7472cf8dd3ea0cd75009fbdf6c9f138729d2d6cf035dd10faa4852d9a18b1dbc
+    content_snippet: Gallery 使用多 `event_name`（`gallery_view`、`media_manage`、`album_manage`、`edit_action`
+      等），不同于 Camera 的单 `NTCamera`。PRD 中一行一个 parameter，与 Bitable 对齐： | event_name |
+      key | key_description | parameter_value
+    case_ids: []
+  - heading: '## Workflow'
+    content_sha256: 596d98088e4ca6e11fef4adb4d823cf9808a5b6940ec2b393fef62ad2576bab4
+    content_snippet: '1. Identify the feature and whether it belongs to `Manage`,
+      `Edit`, or `Settings`. 2. Check whether the new feature should reuse an existing
+      event family. 3. For editing features, default to: - one `e'
+    case_ids: []
+  - heading: '## Rules'
+    content_sha256: 8583627007e9b6c01535de7ad7fde924c66a697d6d26763ef6fbbe9fa23c497d
+    content_snippet: '- Keep event names short and consistent with the workbook. -
+      Prefer enum-style parameter values over free text. - Reuse `UUID` when the feature
+      belongs to an edit session. - Do not mix entry events an'
+    case_ids: []
+  - heading: '## Output Format'
+    content_sha256: 659eda847ba03b861047c515e86467ebdf871468df4d323cfddf881a69288504
+    content_snippet: 'Default to this table: | event_name | key | key_description
+      | parameter_value | 说明 | | --- | --- | --- | --- | --- | If the user asks for
+      PRD-ready text, you may additionally provide a short JSON exam'
+    case_ids: []
+  - heading: '## Event Patterns Reference'
+    content_sha256: 32b5ff3d27428b5970252306fc4c3d09c8890932495dfafb076c58522df7899a
+    content_snippet: '以下为已确立的 Gallery 埋点命名和结构模式，设计新埋点时必须对齐。 ### 常用 event_name 分组 |
+      event_name | 用途 | 示例参数 | |------------|------|---------| | `gallery_view` |
+      浏览/导航行为 | album_type, entry_source, duration, has_location_medi'
+    case_ids: []
+  - heading: '## Review Focus'
+    content_sha256: 0740ceabe69c16bbf29dc7b690435d61cff08d0f34b019fc0ad3df6d7ca2e3f6
+    content_snippet: 'When reviewing埋点内容, check: - whether names follow existing Gallery
+      conventions - whether parameters are enum-friendly - whether save-time and process-time
+      events are separated - whether there are too '
+    case_ids: []
+  - heading: '## References'
+    content_sha256: feff2b116b8602e0ad639ed8cc9d065879a3571d2f28321af4db06f581d336d5
+    content_snippet: '- [references/ntgallery-event-patterns.md](references/ntgallery-event-patterns.md):
+      extracted structure and naming patterns from the existing workbook'
+    case_ids: []

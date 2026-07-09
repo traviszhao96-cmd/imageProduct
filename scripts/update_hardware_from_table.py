@@ -1,0 +1,426 @@
+#!/usr/bin/env python3
+"""Update hardware knowledge from the detailed spec table."""
+
+import csv, json
+from pathlib import Path
+
+BASE = Path("/Users/travis.zhao/imageProduct")
+DEVICE_YAML = BASE / "knowledge/devices/26111.yaml"
+CSV_DIR = BASE / "knowledge/_output/fl_draft_26111_26121"
+SENSOR_DIR = BASE / "knowledge/devices/sensors"
+
+# ============================================================
+# Updated hardware info from the spec table
+# ============================================================
+
+# 26111 Base sensors
+HP5_SPEC = {
+    "model": "S5KHP5SP05-FGX9",
+    "resolution": "200MP",
+    "size": "1/1.56\"",
+    "pixel_size": "0.5um",
+    "pdaf": True,
+    "ois": True,
+    "vcm": {"type": "OIS", "model": "HFC66B5003", "driver": "AW86016CSR"},
+    "ois_driver": "DW9828N",
+    "lens": {"f_no": "F1.88", "efl": "5.56mm", "fov": "84.1°", "equiv_focal": "23.5mm", "structure": "6P"},
+    "module": {"size": "15.3×15.3mm", "height": "7.17mm (INF)", "orientation": "6点钟"},
+    "supplier": ["一供盛泰（旭业镜头）", "二供盛泰（舜宇镜头）"],
+    "eeprom": "GT24P256HA-5CSLI-TR",
+}
+
+OV08J10_SPEC = {
+    "model": "OV08J10-GA5A-001A",
+    "resolution": "8MP",
+    "size": "1/3.953\"",
+    "pixel_size": "1.116um",
+    "pdaf": False,
+    "af": "FF",
+    "lens": {"f_no": "F2.2", "efl": "1.64mm", "fov": "120.2°", "equiv_focal": "15mm", "structure": "5P"},
+    "module": {"size": "8.5×8.5mm", "height": "5.175mm", "orientation": "9点钟"},
+    "supplier": ["盛泰"],
+    "eeprom": "TH24C128PACSAI",
+    "vdd": "DVDD1V2, IOVDD1V8, AVDD2V8",
+}
+
+OV32D_SPEC = {
+    "model": "OV32D40-GA5A-002A",
+    "resolution": "32MP",
+    "size": "1/3.6\"",
+    "pixel_size": "0.612um",
+    "pdaf": False,
+    "af": "FF",
+    "lens": {"f_no": "F2.2", "efl": "2.68mm", "fov": "89°", "equiv_focal": "23.21mm", "structure": "5P"},
+    "module": {"size": "7.905×8.1mm", "height": "4.77mm", "orientation": "9点钟"},
+    "supplier": ["盛泰"],
+    "eeprom": "TH24C128PACSAI",
+    "vdd": "DVDD1V2, IOVDD1V8, AVDD2V8",
+    "focus_range": "34.8cm~47cm",
+}
+
+# 26121 Pro tele details
+JN5_TELE_SPEC = {
+    "model": "JN5-05",
+    "resolution": "50MP",
+    "size": "1/2.75\"",
+    "pixel_size": "0.64um",
+    "pdaf": True,
+    "ois": True,
+    "vcm": {"type": "OIS", "model": "磁化", "driver": "DW9827C"},
+    "ois_driver": "AK7323",
+    "lens": {"f_no": "F2.85", "efl": "12.186mm", "fov": "30°", "equiv_focal": "80.5mm", "structure": "4P"},
+    "module": {"size": "11.5×10.8mm", "orientation": "6点"},
+    "supplier": ["一供丘钛", "二供AAC"],
+    "eeprom": "P24C256F-D4H-MIR",
+    "stroke": "AF: 650um, OIS: +/-210um",
+}
+
+
+def update_device_yaml():
+    """Update 26111.yaml with corrected hardware info."""
+    content = """# 26111 Camera 项目概览
+# 最后更新: 2026-07-08 (从硬件规格表更新)
+# 硬件选型已确认 (Travis)
+
+project:
+  code: "26111"
+  name: "Phone 5a"
+  codename: "Caterpie"
+  models: ["Phone 5a (Base)", "Phone 5a Pro"]
+  market: "印度"
+  soc:
+    base: "SM7635 (Snapdragon 7s Gen3)"
+    pro: "SM7750 (Snapdragon 7 Gen4)"
+  android_version: "[TBD]"
+  software_baseline: "25111 Pro + NOS5.0"
+
+cameras:
+  base:
+    front:
+      sensor: "OV32D40-GA5A-002A"
+      resolution: "32MP"
+      sensor_size: "1/3.6\""
+      pixel_size: "0.612um"
+      af: "FF (fixed focus)"
+      af_type: "FF"
+      pd: "FF"
+      f_no: "F2.2"
+      efl: "2.68mm"
+      fov: "89°"
+      equiv_focal: "23.21mm"
+      lens_structure: "5P"
+      datasheet: "❌ 待创建 OV32D.yaml"
+      module_house: "盛泰"
+      module_size: "7.905×8.1mm"
+      module_height: "4.77mm"
+      orientation: "9点钟"
+      eeprom: "TH24C128PACSAI"
+      focus_range: "34.8cm~47cm"
+
+    main:
+      sensor: "S5KHP5SP05-FGX9"
+      resolution: "200MP"
+      sensor_size: "1/1.56\""
+      pixel_size: "0.5um"
+      af_type: "PDAF"
+      ois: YES
+      vcm_type: "OIS"
+      vcm_model: "HFC66B5003"
+      vcm_driver: "AW86016CSR"
+      ois_driver: "DW9828N"
+      f_no: "F1.88"
+      efl: "5.56mm"
+      fov: "84.1°"
+      equiv_focal: "23.5mm"
+      lens_structure: "6P"
+      datasheet: "❌ 待创建 HP5.yaml"
+      module_house: "盛泰"
+      module_size: "15.3×15.3mm"
+      module_height: "7.17mm (INF)"
+      orientation: "6点钟"
+      supplier: ["一供盛泰（旭业镜头）", "二供盛泰（舜宇镜头）"]
+      eeprom: "GT24P256HA-5CSLI-TR"
+      note: "200MP 高像素，有 OIS。200MP→50MP remosaic HDR upscale。"
+
+    ultrawide:
+      sensor: "OV08J10-GA5A-001A"
+      resolution: "8MP"
+      sensor_size: "1/3.953\""
+      pixel_size: "1.116um"
+      af: "FF (fixed focus)"
+      af_type: "FF"
+      pd: "FF"
+      f_no: "F2.2"
+      efl: "1.64mm"
+      fov: "120.2°"
+      equiv_focal: "15mm"
+      lens_structure: "5P"
+      datasheet: "❌ 待创建 OV08J10.yaml"
+      module_house: "盛泰"
+      module_size: "8.5×8.5mm"
+      module_height: "5.175mm"
+      orientation: "9点钟"
+      eeprom: "TH24C128PACSAI"
+
+    tele: "❌ (仅 Flicker Sensor，无长焦镜头)"
+
+    video_capability:
+      4k: "❌"
+      1080p60: "❌"
+      video_hdr: "❌"
+
+  pro:
+    note: "26121 Pro 配置与 25111 Pro 基本一致，传感器细节见下方"
+
+    front:
+      sensor: "KD1"
+      resolution: "32MP"
+      sensor_size: "1/3.44\""
+      pixel_size: "0.64um"
+      af_type: "FF"
+      f_no: "F2.2"
+      efl: "2.68mm"
+      fov: "89°"
+      equiv_focal: "24mm"
+      lens_structure: "5P"
+      datasheet: "❌ 待创建 KD1.yaml"
+      module_house: "丘钛"
+      module_size: "9.2×8.8mm"
+      module_height: "5.07mm"
+      orientation: "6点"
+      eeprom: "P24U128B-D4H-MIR"
+      focus_range: "34.6cm~47.4cm"
+
+    main:
+      sensor: "IMX896"
+      resolution: "50MP"
+      sensor_size: "1/1.57\""
+      pixel_size: "1.0um"
+      af_type: "PDAF"
+      ois: YES
+      vcm_type: "OIS"
+      vcm_model: "OJJ35F5032"
+      vcm_driver: "AW86016SCR"
+      ois_driver: "AW86033 / DW9828N (6月底确定)"
+      f_no: "F1.88"
+      efl: "5.56mm"
+      fov: "84.5°"
+      equiv_focal: "23mm"
+      lens_structure: "6P"
+      datasheet: "✅ devices/sensors/IMX896-AJH5-C.yaml"
+      module_house: "盛泰"
+      module_size: "15.6×15.6mm"
+      module_height: "7.517mm @ 10cm"
+      orientation: "3点"
+      eeprom: "P24C128G-D4H-MIR"
+      note: "与 25111 Pro 同款 IMX896"
+
+    ultrawide:
+      sensor: "IMX355"
+      resolution: "8MP"
+      sensor_size: "1/4\""
+      pixel_size: "1.12um"
+      af_type: "FF"
+      f_no: "F2.2"
+      efl: "1.64mm"
+      fov: "120.2°"
+      equiv_focal: "15mm"
+      lens_structure: "5P"
+      datasheet: "❌ 待创建 IMX355.yaml"
+      module_house: "丘钛"
+      module_size: "8.5×8.5mm"
+      module_height: "5.173mm"
+      orientation: "3点"
+      eeprom: "P24U128B–D4H–MIR"
+
+    tele:
+      sensor: "JN5-05"
+      resolution: "50MP"
+      sensor_size: "1/2.75\""
+      pixel_size: "0.64um"
+      af_type: "PDAF"
+      ois: YES
+      vcm_type: "OIS"
+      vcm_model: "磁化"
+      vcm_driver: "DW9827C"
+      ois_driver: "AK7323"
+      f_no: "F2.85"
+      efl: "12.186mm"
+      fov: "30°"
+      equiv_focal: "80.5mm"
+      lens_structure: "4P"
+      zoom: "3.5x"
+      datasheet: "✅ devices/sensors/S5KJNSSQ33.yaml"
+      module_house: "丘钛 / AAC"
+      module_size: "11.5×10.8mm"
+      supplier: ["一供丘钛", "二供AAC"]
+      eeprom: "P24C256F-D4H-MIR"
+      stroke: "AF: 650um, OIS: +/-210um"
+
+    video_capability:
+      4k60: "✅ SAT / Ultra 主摄&长焦"
+      video_hdr: "✅"
+
+defaults:
+  photo:
+    mode: "照片"
+    camera: "后置"
+    flash: "关"
+    timer: "关"
+    ratio: "4:3"
+    hdr: "Auto"
+    autotone: "关"
+    motion_photo: "关"
+    high_resolution: "12MP"
+    filter: "关"
+    filter_strength: "10.0"
+    beauty: "关"
+    exposure: "0"
+    grid: "关"
+    glyph_mirror: "关"
+    night_mode: "自动开"
+    ai_zoom: "20x-自动开"
+    doc_mode: "关"
+    fallback_auto: "自动开"
+  portrait:
+    focal_length: "3.5x"
+    equivalent_focal: "80mm"
+    aperture: "1.4/2.8"
+  video:
+    hdr: "关"
+    resolution: "1080P30fps"
+    rec_light: "开"
+  slow_motion:
+    resolution: "1080P120fps"
+  timelapse:
+    speed: "1080P15x"
+    resolution: "1080P30fps"
+  pro:
+    lens: "1x"
+    parameters: "自动"
+    raw: "关"
+  front:
+    flash: "自动"
+    zoom: "1.2x"
+  settings:
+    location: "开"
+    shutter_sound: "跟随系统"
+    mirror_front: "开"
+    level: "关"
+    touch_shoot: "关"
+
+inheritance:
+  baseline: "25131"
+  rules:
+    - "26111 Base: 200M HP5 主摄 (OIS)，无长焦，继承 25131 功能并移除不适用项"
+    - "26121 Pro: IMX896 (OIS) + JN5 (OIS) + IMX355 + KD1，继承 25111 Pro"
+    - "新增功能以 26111 PRD 为准"
+    - "算法链路以 SE 确认的 26111 算法列表为准"
+
+key_deltas_from_25131_base:
+  - "主摄: JN1 50MP → HP5 200MP (OIS)"
+  - "超广角: GC08A8 → OV08J10"
+  - "前置: GC16B3C → OV32D"
+  - "Base 无长焦（仅 Flicker Sensor）"
+  - "Base 无 4K、无 1080P60、无 Video HDR"
+  - "NOS5.0 软件基线"
+
+new_features_p0:
+  - "运动抓拍（继承25131交互，新增普通模式引导入口）"
+  - "HDR 运动场景升级 + 影调升级 + 智能分区"
+  - "成像预览一致性（2DOL 优先）"
+  - "自然质感人像（美颜升级）"
+  - "AIGC/SR 效果优化"
+  - "4K 60FPS (Pro SAT / Ultra 主摄&长焦)"
+  - "前置/广角 4K (upscale)"
+  - "Preset 3.0 + AI Preset"
+  - "照片风格（自然 & 鲜明）"
+  - "专业模式 2.0"
+  - "双摄同录 v2"
+  - "录制中前后镜头切换"
+  - "视频专业参数调节"
+
+removed_features:
+  - "TF 50MP QuadBayer Raw HDR"
+  - "TF 25MP"
+  - "聚会模式"
+  - "视频 Log 模式"
+  - "视频录制红框提示"
+
+stakeholders:
+  PM: "Travis Zhao"
+  SE: "[TBD]"
+  ISP: "[TBD]"
+  Camera App: "[TBD]"
+  设计: "[TBD]"
+  测试: "[TBD]"
+
+status:
+  feature_list: "✅ features-26111.md 已生成（基于25131继承+delta，待SE确认算法后定稿）"
+  algorithms: "❌ 待 SE 提供 26111 算法列表"
+  sensors_missing:
+    - "HP5 (200M) — 26111 Base 主摄"
+    - "OV08J10 — 26111 Base UW"
+    - "OV32D — 26111 Base 前置"
+    - "IMX355 — 26121 Pro UW"
+    - "KD1 — 26121 Pro 前置"
+  sensors_done:
+    - "IMX896 — 26121 Pro 主摄"
+    - "JN5 — 26121 Pro 长焦"
+  feature_json:
+    26111_rear: "❌ 待创建（依赖 SE 算法确认）"
+    26111_front: "❌ 待创建（依赖 SE 算法确认）"
+  algorithm_doc: "❌ 待 SE 提供后创建 reference/algorithms-26111.md"
+"""
+
+    with open(DEVICE_YAML, "w", encoding="utf-8") as f:
+        f.write(content)
+    print("✅ Updated knowledge/devices/26111.yaml")
+
+
+def fix_fl_ois():
+    """Fix OIS in FL: 26111 Main now has OIS."""
+    for fname, label, ois_map in [
+        ("26111_fl_final.csv", "26111", {"Main": "✓", "UW": "✗", "Front": "✗"}),
+        ("26121_fl_final.csv", "26121", {"Main": "✓", "UW": "✗", "Tele": "✓", "Front": "✗"}),
+    ]:
+        p = CSV_DIR / fname
+        with open(p, "r", encoding="utf-8-sig") as f:
+            r = csv.DictReader(f)
+            fn = list(r.fieldnames)
+            rows = list(r)
+        
+        fixed = 0
+        for row in rows:
+            if row.get("名称", "").strip() == "OIS":
+                cameras = [k for k in row if k not in (
+                    "模式", "一级分类", "二级分类", "名称", "说明",
+                    "不支持原因", "状态", "确认负责人", "验证方法")]
+                changed = False
+                for c in cameras:
+                    new_val = ois_map.get(c, "✗")
+                    if row.get(c) != new_val:
+                        row[c] = new_val
+                        changed = True
+                if changed:
+                    reasons = [f"{c}: 该摄像头无 OIS 硬件。" for c, v in ois_map.items() if v == "✗"]
+                    row["不支持原因"] = "；".join(reasons) if reasons else ""
+                    fixed += 1
+                    print(f"  [{label}] OIS ({row['模式']}): {dict((c,row[c]) for c in cameras)}")
+
+        with open(p, "w", encoding="utf-8-sig", newline="") as f:
+            w = csv.DictWriter(f, fn)
+            w.writeheader()
+            w.writerows(rows)
+        print(f"  [{label}] {fixed} OIS rows fixed")
+
+
+def main():
+    update_device_yaml()
+    print()
+    fix_fl_ois()
+    print("\n✅ 硬件知识库和 FL OIS 已更新")
+
+
+if __name__ == "__main__":
+    main()

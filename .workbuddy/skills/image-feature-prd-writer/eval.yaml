@@ -1,0 +1,280 @@
+version: '1.0'
+skill_id: image-feature-prd-writer
+eval_type: content
+cases:
+- id: case-anti-hallucination
+  threshold: 0.75
+  task: '用户说"预览延迟要快一些"。PRD 的性能目标怎么写？
+
+
+    ```
+
+    用户输入: 预览延迟要快一些
+
+    正确做法: 写 [TBD]，不编造数字
+
+    示例: [TBD — 需算法侧给出预览延迟基线]
+
+    ```
+
+    '
+  rubric:
+  - id: r1
+    check: 回答写 [TBD — 需算法侧给出预览延迟基线]
+    weight: 2
+  - id: r2
+    check: 不编造具体数字如 200ms
+    weight: 2
+  - id: r3
+    check: '[TBD] 带责任人标注'
+    weight: 1
+- id: case-input-completeness
+  threshold: 0.75
+  task: '用户说"帮我写一个相机滤镜的 PRD"，没给任何信息。应该直接写还是先追问？
+
+
+    ```
+
+    用户输入: "帮我写一个相机滤镜的 PRD"
+
+    已知信息: 无
+
+    缺失: 机型、市场、功能边界、技术依赖
+
+    ```
+
+    '
+  rubric:
+  - id: r1
+    check: 回答不应直接写 PRD，先追问
+    weight: 2
+  - id: r2
+    check: 列出缺失项：机型、功能边界、技术依赖
+    weight: 2
+  - id: r3
+    check: 使用追问模板格式
+    weight: 1
+- id: case-naming-convention
+  threshold: 0.75
+  task: 'Camera 运动抓拍和 Gallery 相册排序，各自的 PRD 标题怎么写？
+
+
+    ```
+
+    Camera 功能: 运动抓拍
+
+    Gallery 功能: 相册排序
+
+    规则: 统一加领域前缀
+
+    ```
+
+    '
+  rubric:
+  - id: r1
+    check: Camera 为「【PRD】Camera 运动抓拍」
+    weight: 2
+  - id: r2
+    check: Gallery 为「【PRD】Gallery 相册排序」
+    weight: 2
+  - id: r3
+    check: 区分 Camera 和 Gallery 领域前缀
+    weight: 1
+- id: case-memory-mutex-required
+  threshold: 0.75
+  task: 'PM 写 Camera PRD，功能涉及用户可修改的状态。PRD 中必须额外定义哪两个内容？
+
+
+    ```
+
+    功能: 有用户可修改状态的新功能
+
+    记忆规则: 切换模式/杀进程等 9 种场景
+
+    互斥: 与其他功能的冲突关系
+
+    ```
+
+    '
+  rubric:
+  - id: r1
+    check: 回答必须定义记忆规则（9 种场景）
+    weight: 2
+  - id: r2
+    check: 回答必须定义功能互斥
+    weight: 2
+  - id: r3
+    check: 提到可参考 memory-mutex.json
+    weight: 1
+- id: case-delegate-tracking
+  threshold: 0.75
+  task: 'PM 写 PRD 时问"埋点怎么设计"。根据 SKILL.md 应该怎么处理？
+
+
+    ```
+
+    功能: Camera 前后双录
+
+    需求: 设计埋点
+
+    正确做法: 委托专门的埋点 skill
+
+    ```
+
+    '
+  rubric:
+  - id: r1
+    check: 回答 Camera 委托 camera-tracking-manage，Gallery 委托 gallery-event-tracking
+    weight: 2
+  - id: r2
+    check: PRD writer 负责文档，不负责埋点设计
+    weight: 2
+  - id: r3
+    check: 不直接写埋点，委托对应 skill
+    weight: 1
+- id: case-scoring-rubric
+  threshold: 0.75
+  task: 'PM 要求对 PRD 做 agent 评审打分。评审包含几个维度？满分多少？
+
+
+    ```
+
+    需求: 评审 Camera PRD
+
+    模式: review + scoring
+
+    输出: DONE / DONE_WITH_CONCERNS / BLOCKED / NEEDS_CONTEXT
+
+    ```
+
+    '
+  rubric:
+  - id: r1
+    check: 回答 4 个评审维度：dev review, test review, smuggling check, scoring
+    weight: 2
+  - id: r2
+    check: 回答 scoring 满分 100，8 个维度
+    weight: 2
+  - id: r3
+    check: 回答输出状态标注（DONE/DONE_WITH_CONCERNS/BLOCKED/NEEDS_CONTEXT）
+    weight: 1
+- id: case-feishu-writing-strategy
+  threshold: 0.75
+  task: 'PRD 发布到飞书，内容含文本和一张 12 行的埋点表格。根据 SKILL.md 怎么分段写入才能避免 API 报错？
+
+
+    ```
+
+    内容结构: 文本 → 12行表格 → 文本
+
+    风险1: descendant 不能写表格，报 HTTP 400
+
+    风险2: 表格 >9 行报 400 invalid param
+
+    风险3: 单元格 DELETE 不生效，出现多余空行
+
+    ```
+
+    '
+  rubric:
+  - id: r1
+    check: 文本用 descendant（convert → descendant），表格用 children 单独创建，不可混用
+    weight: 2
+  - id: r2
+    check: 12 行表格拆为两个子表（≤9 行），每个子表重复表头
+    weight: 2
+  - id: r3
+    check: 单元格用 PATCH update_text_elements 更新已有文本块，不能用 DELETE+POST
+    weight: 1
+metadata:
+  source_skill_md_sha256: 67e52608c0dff8434c09384a0af8bc23192a648970479f8d47234cc2918d186c
+  generated_at: '2026-06-25T17:02:34+08:00'
+  generator_version: eval-generate/v3.2
+  source_skill_md_sections:
+  - heading: (preface)
+    content_sha256: 9c1d4d8dafea1d8b2defe04936b212d3934544cf98fdbbcc0b55fb09e5944fe6
+    content_snippet: '# Image Feature PRD Writer'
+    case_ids: []
+  - heading: '## Overview'
+    content_sha256: 11105c02d0a12c5fc4b6f09f0dbb51994219a8273b6be8b06a3959e37fff3c2f
+    content_snippet: 'Unified entry point for writing Camera and Gallery feature PRDs.
+      Workflow: classify → braindump → check inputs → draft → review → publish. For
+      event tracking (埋点), delegate to the domain-specific skil'
+    case_ids: []
+  - heading: '## Interaction Style'
+    content_sha256: 150a9e64daeb0585953d56090a6caaf4c89e8751014b26a1bce1d3af96d1e9fc
+    content_snippet: 'Match the response to how much context the user provides: |
+      输入状态 | 策略 | |---------|------| | 需求清晰 | 直接出活，标注假设 | | 部分上下文 | 先出骨架草稿，再定向追问缺失项
+      | | 探索性/模糊 | 引导模式，一次一个问题，逐步收窄 |'
+    case_ids: []
+  - heading: '## Workflow'
+    content_sha256: 4149f092e6ac3dd112804fefa04506ce35ec83e320d58284f6d11bddb36de3a4
+    content_snippet: '1. **Classify** the request mode and domain (Camera / Gallery)
+      2. **Braindump first** — 不让用户对空白模板。先问："关于这个功能，你目前想到的、确定的、不确定的、纠结的，全部倒出来。" 混乱的原始想法先被外化，再结构化。
+      3. **Check completeness** — 对照对应领域的 critical '
+    case_ids: []
+  - heading: '## Anti-Hallucination: [TBD] Rule'
+    content_sha256: 32f949e20ac04c8d8d7b0a008675431ecdc053ee1fb98dc89ba628cda92b13c7
+    content_snippet: '**绝对不编造。** 任何用户没说清楚的值，就地标记 `[TBD]`，不写看起来合理的假数字。 ``` # 正确 性能目标：[TBD
+      — 需算法侧给出预览延迟基线] 上市时间：[TBD — 需产品经理确认版本窗口] # 错误 — 绝对不要 性能目标：预览延迟 < 200ms ``` [TBD]
+      变体： - `[TBD — 需XXX确认]` — 等待特定角色输入 - `[TBD — 待数据验证]` '
+    case_ids: []
+  - heading: '## Request Modes'
+    content_sha256: 218cc1012d3b35f9790a5e90ed3bf06f23c3f606bee4a55d56ffe6aa45a03edd
+    content_snippet: '| Mode | Trigger | Action | |------|---------|--------| | Full
+      drafting | "写 PRD", "出规划文档" | Braindump → 逐节访谈式撰写 | | Refinement | User provides
+      existing draft | 保留事实 → 重整结构 → 标记缺口 | | Review only | "评'
+    case_ids: []
+  - heading: '## Input Completeness Check'
+    content_sha256: 792ceb7cf4707fc951b3db553579e1b3b1fec66d289b5b492da5d367b9d770df
+    content_snippet: 'Before drafting, check domain-specific requirements: - Camera:
+      [references/camera-required-info-checklist.md](references/camera-required-info-checklist.md)
+      - Gallery: [references/gallery-required-info'
+    case_ids: []
+  - heading: '## Output Format'
+    content_sha256: f662eef22825ffe3943ad68e193dec8c20648639efd43785b337c47a8c3d638a
+    content_snippet: 'Choose template by domain: - **Camera**: [assets/camera-prd-template.md](assets/camera-prd-template.md)
+      — camera-specific structure - **Gallery**: [assets/gallery-feature-template.md](assets/gallery-f'
+    case_ids: []
+  - heading: '## Review Pass'
+    content_sha256: 06cfdd939eab9d4221bbd0eceea13636309a54f4cdae9ef0b0797d6bf8e52779
+    content_snippet: '所有评审子章节统一加 `agent` 前缀，表明为 AI 辅助评审，非人工评审结论。 ### agent Development
+      Review Check: 方案可行性、scope 边界、依赖就绪度、接口影响、进度风险、回退策略。 ### agent Test Review Check:
+      验收可测试性、场景/设备覆盖、兼容性矩阵、异常路径、回归范围、客观 pass/fail 信号。 ### age'
+    case_ids: []
+  - heading: '## Feishu Docx Writing'
+    content_sha256: 29c1b99912369affc1309429b402646e7e42eb73887fa19c39b4a0814a2d172a
+    content_snippet: '### CRITICAL: Confirm Before Refresh **每次重新刷飞书文档内容前，必须让用户确认。**
+      写入会清除并重建整个文档，用户可能已手动编辑（删章节、插图等）。刷新前必须告知： ``` ⚠️ 重新写入会清除飞书文档当前内容并重建。确认刷新？ ```
+      ### Known API Limitations 1. **`descendant` endpoint rejects'
+    case_ids: []
+  - heading: '## Jira 关联'
+    content_sha256: 57eb38337c5451673dbb90204c635c6934a0a6535c3b7a7347a7729fc5933ec1
+    content_snippet: 'PRD 撰写完成后创建 Jira Story 关联父 Epic： | 字段 | ID/格式 | 示例值 | |------|---------|-------|
+      | Epic Link | `customfield_10014`（不是 `parent`） | `"NOS-10644"` | | Device |
+      `customfield_10101` 多选数组 | `[{"value": "all'
+    case_ids: []
+  - heading: '## Handling Existing Drafts'
+    content_sha256: 810dcfbf599afeffd62a4014b2fd71f757802bfa96b5e55f9fd75447350c298d
+    content_snippet: 1. Preserve confirmed facts 2. Normalize structure to template
+      3. Mark contradictions with `待确认` 4. Add [TBD] for missing values 5. Append
+      review without rewriting confirmed facts
+    case_ids: []
+  - heading: '## 已知陷阱速查'
+    content_sha256: 1a83ed9341c048785118505dec1ed3a45ce6cc7f2ee6f4c9b19beb4c771f59eb
+    content_snippet: '| # | 陷阱 | 表现 | 解法 | |---|------|------|------| | 1 | `descendant`
+      写表格 | HTTP 400 | 文本用 descendant，表格用 children | | 2 | 表格 >9 行 | HTTP 400 `invalid
+      param` | 拆为多个 ≤9 行子表 | | 3 | 单元格 DELETE 不生效 | 每格多空行 '
+    case_ids: []
+  - heading: '## Reference Files'
+    content_sha256: 3afcf7637d416da2c1445fcccd4a8da88ac940d9f2b08f3e2593a670c3c43fa7
+    content_snippet: '- [assets/camera-prd-template.md](assets/camera-prd-template.md)
+      — Camera PRD template (11 sections) - [assets/gallery-feature-template.md](assets/gallery-feature-template.md)
+      — Gallery PRD template ('
+    case_ids: []
+  - heading: '## Quick Lookup'
+    content_sha256: 2c1b197cb8f73a6641ec14ce223d3c4d9a1f9e2b351eff9fbc70933c249f9117
+    content_snippet: '- "写 PRD" / "写 Gallery PRD" → full drafting - "整理成 PRD" → refinement
+      - "review 一下" → review + scoring - "还缺什么" → gap collection - "挑刺" / "coach me"
+      → coaching mode - "发布到飞书" → publish - "埋点怎么写" → dele'
+    case_ids: []

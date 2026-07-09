@@ -1,0 +1,87 @@
+{
+  "pulled_at": "2026-06-25",
+  "source": "https://nothing-tech.sg.larksuite.com/wiki/NMt0wr2Q2iTWevkSc0hlFcBAgJg",
+  "base_token": "N2azb9muvaqqmwsIB7IlPmFGgpg",
+  "table_id": "tblh05JLoheZIXfr",
+  "total_records": 222,
+  "fields": [
+    {
+      "name": "event_name",
+      "type": 1
+    },
+    {
+      "name": "key",
+      "type": 3
+    },
+    {
+      "name": "key_note",
+      "type": 1
+    },
+    {
+      "name": "label",
+      "type": 3
+    },
+    {
+      "name": "label_note",
+      "type": 1
+    },
+    {
+      "name": "string_value",
+      "type": 1
+    },
+    {
+      "name": "value_note",
+      "type": 1
+    },
+    {
+      "name": "默认值",
+      "type": 1
+    },
+    {
+      "name": "备注",
+      "type": 1
+    },
+    {
+      "name": "当前状态",
+      "type": 3
+    }
+  ],
+  "key_distribution": {
+    "photo_info": 93,
+    "video_info": 51,
+    "enter_method": 10,
+    "pef_info": 10,
+    "brightness_adjust": 4,
+    "preset_control": 3,
+    "preset_import": 3,
+    "auto_fps": 3,
+    "activate_type": 2,
+    "grid": 2,
+    "shutter_sound": 2,
+    "mirror_front": 2,
+    "qr_scan": 2,
+    "tap_shoot": 2,
+    "save_location": 2,
+    "level": 2,
+    "watermark": 2,
+    "press_hold_shutter": 2,
+    "recording_light": 2,
+    "video_encoding": 2,
+    "ultra_XDR": 2,
+    "quality": 2,
+    "mode_ps": 2,
+    "bokeh_ps": 2,
+    "filter_ps": 2,
+    "50mp_ps": 2,
+    "lut_control": 2,
+    "enter_mode": 2,
+    "preset_create": 2,
+    "lock_lens": 2,
+    "null": 1
+  },
+  "status_distribution": {
+    "null": 196,
+    "待开发": 18,
+    "已废弃": 8
+  }
+}

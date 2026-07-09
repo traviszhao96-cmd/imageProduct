@@ -17,7 +17,7 @@
 - AE/AF Box: Touch AE/AF / Face AF / EV
 - Zoom: 光变点 / 滑动变焦 / 双指缩放 / SAT
 - Shutter: 拍照 / 连拍 / 动态照片
-- Top Toolbar: HDR / 闪光灯 / 滤镜 / Tuning / 照片风格 / 比例 / ...
+- Toolbar: HDR / 闪光灯 / 滤镜 / Tuning / 照片风格 / 比例 / ...
 - Settings: 水印 / 网格 / 水平仪 / ...
 
 ## 功能全量（按交互位置）
@@ -69,7 +69,7 @@
 | - 录制声音 | ✅ | ✅ |
 | - 封面帧 HDR | ❌ | ❌ (虹软不支持) |
 
-### Top Toolbar
+### Toolbar
 | 功能 | UW | Main | 说明 |
 |------|------|------|------|
 | 闪光灯 / 多帧 | ✅ | ✅ | |

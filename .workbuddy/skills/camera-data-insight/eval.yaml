@@ -1,0 +1,232 @@
+version: '1.0'
+skill_id: camera-data-insight
+eval_type: content
+cases:
+- id: case-spelling-compat
+  threshold: 0.75
+  task: '用户要查 portrait 模式照片数。请根据 SKILL.md 的拼写兼容规则写 Athena SQL。
+
+
+    ```
+
+    需求: 统计 photoMode 为 portrait 的照片数
+
+    问题: 历史数据拼写为 protrait
+
+    表: data_mobile_behavior
+
+    规则: 必须同时查两种拼写
+
+    ```
+
+    '
+  rubric:
+  - id: r1
+    check: SQL 同时包含 portrait 和 protrait，用 OR 或 IN
+    weight: 2
+  - id: r2
+    check: 使用 param.key='photoMode'
+    weight: 2
+  - id: r3
+    check: 没有遗漏 protrait
+    weight: 1
+- id: case-retention-window
+  threshold: 0.75
+  task: '用户要查 2025 年 8 月的数据。请根据 SKILL.md 的保留窗口规则回答。
+
+
+    ```
+
+    需求: 查询 2025 年 8 月的 photo_mode 分布
+
+    当前日期: 2026 年 6 月
+
+    保留期限: 约 6 个月
+
+    判断: 2025 年 8 月距今超过保留期
+
+    ```
+
+    '
+  rubric:
+  - id: r1
+    check: 回答数据已超出约 6 个月保留期限
+    weight: 2
+  - id: r2
+    check: 建议重定向到保留窗口内的日期
+    weight: 2
+  - id: r3
+    check: 没有直接写出超出保留期的查询
+    weight: 1
+- id: case-overseas-exclusion
+  threshold: 0.75
+  task: '用户要查 Action 模式在海外市场的使用率。请根据 SKILL.md 写 Athena SQL。
+
+
+    ```
+
+    需求: 海外市场 action mode 渗透率
+
+    排除: China, Hong Kong
+
+    指标: 同时报事件量和用户渗透率
+
+    ```
+
+    '
+  rubric:
+  - id: r1
+    check: SQL 包含 WHERE country NOT IN ('China', 'Hong Kong')
+    weight: 2
+  - id: r2
+    check: 使用 photoMode='action' 过滤
+    weight: 2
+  - id: r3
+    check: 同时报出事件量和用户渗透率
+    weight: 1
+- id: case-sql-patterns
+  threshold: 0.75
+  task: '用户要查照片的 zoom_ratio 分布。请根据 SKILL.md 写出 Athena SQL。
+
+
+    ```
+
+    需求: 各 zoom_ratio 的照片数量分布
+
+    表: data_mobile_behavior, key=photo_info
+
+    注意: zoom_ratio 是浮点数
+
+    ```
+
+    '
+  rubric:
+  - id: r1
+    check: 使用 CROSS JOIN UNNEST(event_params) 展开
+    weight: 2
+  - id: r2
+    check: 使用 ROUND(zoom_ratio, 1) 处理浮点匹配
+    weight: 2
+  - id: r3
+    check: 使用 CTE 分层，中文注释
+    weight: 1
+- id: case-filter-vs-preset
+  threshold: 0.75
+  task: '用户问"用了 CC Film 滤镜的照片有多少"。请根据 SKILL.md 回答应该查哪个字段。
+
+
+    ```
+
+    需求: 统计 CC Film 滤镜使用量
+
+    可用字段: filter, preset
+
+    别名: cc → CC Film
+
+    ```
+
+    '
+  rubric:
+  - id: r1
+    check: 回答查 filter 字段，不能用 preset
+    weight: 2
+  - id: r2
+    check: 理由：preset 是预设模式，和滤镜不同
+    weight: 2
+  - id: r3
+    check: 提到别名映射 cc → CC Film
+    weight: 1
+- id: case-input-quality
+  threshold: 0.75
+  task: '用户说"帮我查一下相机数据"。请根据 SKILL.md 判断如何处理。
+
+
+    ```
+
+    用户输入: "帮我查一下相机数据"
+
+    已知信息: 无
+
+    缺失: 指标、模式、时间范围、数据源
+
+    ```
+
+    '
+  rubric:
+  - id: r1
+    check: 回答不应直接写 SQL，输入不足
+    weight: 2
+  - id: r2
+    check: 回答需确认：什么指标？什么模式？什么时间范围？
+    weight: 2
+  - id: r3
+    check: 对模糊需求追问而非猜测
+    weight: 1
+metadata:
+  source_skill_md_sha256: c80c99b2c89d4d0beacf5b292b4636722a1401888ca38a3b43517f20ed1313c8
+  generated_at: '2026-06-25T15:59:44+08:00'
+  generator_version: eval-generate/v3.2
+  source_skill_md_sections:
+  - heading: (preface)
+    content_sha256: f58dd57778f6450db84dfde3f3a7dfc5a285615d526203815bed90b9f30e6cc1
+    content_snippet: '# Camera Analytics'
+    case_ids: []
+  - heading: '## Overview'
+    content_sha256: dc0249a52cfdcaa2842fbbb053e309e86b47d0d66109bbda841601a08ace0cf9
+    content_snippet: This skill handles all camera telemetry queries — both Athena
+      (data_mobile_behavior) and the shared remote SQLite database. For埋点 table management,
+      event tracking design, and PRD writing, see `camera-
+    case_ids: []
+  - heading: '## Input Quality Check'
+    content_sha256: 1f90e8629af6e2c603d0adfe47ab2637cad2e8b14722ae368fa5fc35b7d6edab
+    content_snippet: '开始任何查询前，先判断用户输入是否足够。一句话需求（如"帮我查一下数据"、"看看相机使用率"）必须先追问： | 缺乏的信息
+      | 需要确认 | |-----------|---------| | 查什么指标？ | 使用率、渗透率、分布、趋势 | | 什么模式/参数？ | photoMode、camera_id、filter
+      等 | | 什么时间范围？ | 日期范围（注意 6 个月保留限制） | | '
+    case_ids: []
+  - heading: '## Data Sources'
+    content_sha256: 706192d48e9f46db2770ebe4357c4d2d95042bb6c30647159bfed91ed90a4a01
+    content_snippet: '### 1. Athena (data_mobile_behavior) Athena/Presto 语法。主表 `data_mobile_behavior`。用于大规模
+      Camera 埋点分析。 ### 2. Remote SQLite (server_sqlite_query_client.py) HTTP 远程 SQLite
+      数据库。常用表：`photo_events_parsed`、`ca'
+    case_ids: []
+  - heading: '## SQL Rules'
+    content_sha256: f2079a72b4bd0c3614ff774fe31d87f312e54eb0afebd6a83974aed948d03413
+    content_snippet: '### Athena 模式 - 使用 `CROSS JOIN UNNEST(event_params) AS t(param)`
+      展开参数 - 过滤参数：`param.key = ''...''` 和 `param.string_value IS NOT NULL` - 浮点字段用
+      `ROUND(value, 1)` 匹配 - 数值用 `TRY_CAST(REGEXP_EXTRACT(...))` 提'
+    case_ids: []
+  - heading: '## 历史拼写兼容'
+    content_sha256: d47f25cfdd64e90402ef33b7edaf71b7b8dc1b939b6ac7ce5c0f8019347270fc
+    content_snippet: 查询时需兼容历史拼写错误，**不要用"正确"拼写过滤**（会漏掉历史数据）： | 原值 | 正确值 | 影响 | |------|-------|------|
+      | `protrait` | `portrait` | photoMode | | `tuning_shapen` | `tuning_sharpen`
+      | label | | `pef_info` | `perf_info` | key
+    case_ids: []
+  - heading: '## 数据保留窗口'
+    content_sha256: ba10d2573da7b8ec3acd9d3b00910d381ab26845b87d538eaff4525d5fddf143
+    content_snippet: Camera 埋点数据仅保留约 6 个月。不要写超出保留期的查询。如果用户要求的时间超出窗口，告知并建议重定向。
+    case_ids: []
+  - heading: '## 海外分析'
+    content_sha256: afee016f61385c5b8680ba72d0a12b3eab51f44a984fecd30fed9144ca75f5f3
+    content_snippet: 默认排除 `China` 和 `Hong Kong`，除非用户明确覆盖。
+    case_ids: []
+  - heading: '## 常用字段'
+    content_sha256: 0705162daaf43195874ab04d4fdf693fcf1beed80bf04a5c074899f59b91ea11
+    content_snippet: '### photo_events_parsed (SQLite) `event_date`, `exact_time`,
+      `user_pseudo_id`, `model_name`, `country`, `photo_mode`, `camera_id`, `zoom_ratio`,
+      `lux`, `adrc`, `cct`, `face_count`, `orientation`, `nig'
+    case_ids: []
+  - heading: '## Mode Selection'
+    content_sha256: fd5f01553e81f48cdddda923537984af777454fce1c39d6711ff91e1259a050c
+    content_snippet: '- "帮我查"、"统计"、"写 SQL"、"渗透率" → 写 SQL - "生成报告"、"解读"、"根据链接出结论" →
+      生成报告 - 两者混合 → 先写 SQL，再出报告'
+    case_ids: []
+  - heading: '## Report Output'
+    content_sha256: 06e1b96b1d6f65dc1398381f4c1d9f0e2340e87e6a1a6296644e79d618ec9dce
+    content_snippet: '- SQL 用 CTE 分层，中文注释 - 业务结论简洁、直接、基于证据 - 同时报事件量和用户渗透率 - 证据不足时明确说明，不猜测
+      - 返回中文结论'
+    case_ids: []
+  - heading: '## Reference Files'
+    content_sha256: f35a8992841e2596a305d2168695ee2c2baf04820495e2bc1f0c89ea1e92e541
+    content_snippet: '- [references/field-mapping.md](references/field-mapping.md)
+      — 产品语言 → 数据库字段映射'
+    case_ids: []

@@ -1,0 +1,182 @@
+version: '1.0'
+skill_id: google-play-whats-new
+eval_type: content
+cases:
+- id: case-features-to-copy
+  threshold: 0.75
+  task: '以下是 Gallery 功能更新的 PRD 摘要。请根据 SKILL.md 的 Writing Rules 和 App Store Style Heuristics，写出
+    500 字符以内的 Google Play What''s New 英文文案。
+
+
+    ```
+
+    Gallery v3.0 updates:
+
+    - Album page: long-press drag to reorder albums, move between large/small zones
+
+    - Sort by: recently added or captured date, with permanent memory
+
+    - Filter by: All, Favourite, Edited, Photo, Video, Screenshots
+
+    - Map Album: browse photos by location on map
+
+    ```
+
+    '
+  rubric:
+  - id: r1
+    check: 输出在 500 字符以内，且报告了字符数
+    weight: 2
+  - id: r2
+    check: 文案覆盖了来源中至少 3 个功能点（排序、筛选、拖拽、地图相册中至少三个）
+    weight: 2
+  - id: r3
+    check: 文案为英文，无 marketing 夸大词（best ever / revolutionary / powerful），无模糊用语如 various
+      improvements
+    weight: 1
+- id: case-fact-check
+  threshold: 0.75
+  task: '以下是一份 PRD 摘要，以及一个 PM 草拟的 What''s New 文案。请根据 SKILL.md 的 Fact-Checking Against
+    Docs 规则，审查文案并指出哪些声明没有来源支持。
+
+
+    ```
+
+    PRD: Camera 5.0 - shutter button redesigned from circle to oval.
+
+    All modes supported. Tool panel icons refreshed.
+
+    ```
+
+
+    ```
+
+    草拟文案:
+
+    "Capture every moment with our redesigned camera. The new oval
+
+    shutter is faster and more responsive across all modes. Fresh
+
+    tool icons make editing photos easier than ever."
+
+    ```
+
+    '
+  rubric:
+  - id: r1
+    check: 指出 'faster and more responsive' 没有来源支持，PRD 只说了形状改变，没说性能提升
+    weight: 2
+  - id: r2
+    check: 指出 'make editing photos easier than ever' 是夸大，来源说的只是工具栏图标刷新，不是编辑功能改进
+    weight: 2
+  - id: r3
+    check: 修正版本去掉了没有来源支持的声明
+    weight: 1
+- id: case-char-limit-variants
+  threshold: 0.75
+  task: '同一个功能更新需要写 80 字符和 200 字符两个版本。请根据 SKILL.md 的 Output Format，分别写出两个版本，标注字符数。
+
+
+    ```
+
+    功能: Gallery now supports Map Album — browse photos and
+
+    videos by location on an interactive map. Tap clusters to
+
+    explore, use the locate button to jump to your current position.
+
+    Available from Albums and Photo Details pages.
+
+    ```
+
+    '
+  rubric:
+  - id: r1
+    check: 输出两个版本，各自标注字符数
+    weight: 2
+  - id: r2
+    check: 80 字符版本不超过 80，200 字符版本不超过 200
+    weight: 2
+  - id: r3
+    check: 两个版本的核心信息一致，只是详细程度不同
+    weight: 1
+metadata:
+  source_skill_md_sha256: bd69b59afd8ac0f870a5b4450bc007545c17d506fe7f4e94e554644621fc1770
+  generated_at: '2026-06-24T16:04:21+08:00'
+  generator_version: eval-generate/v3.2
+  source_skill_md_sections:
+  - heading: (preface)
+    content_sha256: 0ac8d4597a9abc59ee37f8c2198f7d431c1a4442a452645f35e00837015fb9b4
+    content_snippet: '# Google Play What''s New'
+    case_ids: []
+  - heading: '## When to use'
+    content_sha256: 7214568c29c383f1b6746b97ea20834ba87af5beb87b11fff48ab935fa15ad07
+    content_snippet: 'Use this skill when the user wants: - Google Play update logs
+      or `What''s New` copy - English release notes based on PRDs, PDFs, DOCXs, or
+      feature bullets - Character-limited changelog variants such as'
+    case_ids: []
+  - heading: '## Goal'
+    content_sha256: c6d5e39adaa1a0f7ae945744ef7de008eb4ed9381383465a715967e5efd97776
+    content_snippet: 'Turn product changes into short, natural English store copy
+      that: - stays within the requested character limit - explains the user-facing
+      value simply - matches the source documents closely - avoids o'
+    case_ids: []
+  - heading: '## Workflow'
+    content_sha256: 89508ddc8cf005ae06a9535dfcc4a62c83c77dc1b03ff7dda5587fc4b6738b69
+    content_snippet: 'Follow this order unless the user asks for only one part. 1.
+      Identify the target store and language. 2. Confirm the character limit. If none
+      is given, default to `500 characters`, which is the common '
+    case_ids: []
+  - heading: '## Source Priority'
+    content_sha256: 1517f7eddeacb692f3c84ef563ad00f6a2a44b681095095a2289a42c5441f453
+    content_snippet: 'Use the strongest source available in this order: 1. Explicit
+      product documents provided by the user 2. Existing release notes or version
+      summaries in the workspace 3. The user''s direct feature bullet'
+    case_ids: []
+  - heading: '## Writing Rules'
+    content_sha256: bf5f83e15d8f1ccaaa41320626d1fcdb8fdadc15ddacb53c5d0a6c246b0c7a62
+    content_snippet: '- Write in English unless the user asks otherwise. - Focus on
+      user-facing functionality, not implementation details. - Keep the tone clear,
+      lightweight, and store-appropriate. - Prefer short sentences'
+    case_ids: []
+  - heading: '## Hard Constraints'
+    content_sha256: 5fadbb247e62a2823df87fb7346fc26de81165d8f2aa400ba1d62dcadaf1c6b3
+    content_snippet: '- Respect the requested character cap exactly. - Count spaces
+      and punctuation in the total. - Do not fabricate gestures, menus, settings,
+      or UI labels. - Do not claim a feature is reversible, non-dest'
+    case_ids: []
+  - heading: '## Output Format'
+    content_sha256: 38b12508ba4529498a564cebac12bbe722408aafd1d5fcfee40abb153ad1a264
+    content_snippet: 'Default output should be compact and ready to use. Provide:
+      1. A recommended version 2. Character count 3. Optional alternates if useful
+      4. A brief note if any wording was adjusted to stay closer to t'
+    case_ids: []
+  - heading: '## Fact-Checking Against Docs'
+    content_sha256: e409548b9e906766c26e3dc42c9f5e514a3a0fc990521c0c0c15e74c8b04d9f3
+    content_snippet: 'When documents are provided, verify these before writing: -
+      official feature name - actual user actions supported - whether the feature
+      is new or improved - whether limits or exclusions exist - whethe'
+    case_ids: []
+  - heading: '## App Store Style Heuristics'
+    content_sha256: b5acb76bdeea4a8b6e4ce55b86ffce14ed6ed70f02a7cbea614e520696d8f209
+    content_snippet: 'For Google Play `What''s New`, prefer: - one short paragraph
+      - `2` to `4` user-facing feature points compressed into prose - simple benefit
+      wording such as `add`, `hide`, `export`, `edit`, `save`, `hig'
+    case_ids: []
+  - heading: '## Image Product Defaults'
+    content_sha256: 0b5eaf29e17b78f2a7c9f25410909122c97221b638feab5defa5ae623ede39cd
+    content_snippet: 'For gallery, camera, and video products, bias toward these explanation
+      patterns: - editing tools: what users can now do directly - privacy tools: what
+      can be hidden or blurred - creative tools: what c'
+    case_ids: []
+  - heading: '## If the user provides an existing draft'
+    content_sha256: bdb8ab8d0fd2b86ea2752132f7fa81d82807fda679d5f3e1533ee88df658b777
+    content_snippet: 'Review it against the source and fix: - unsupported claims -
+      awkward English - missing core features - character-limit overflow - inconsistent
+      terminology Then return the corrected version with charac'
+    case_ids: []
+  - heading: '## References'
+    content_sha256: c1cfd4364ccd77fe3e8d97434aede109d74bd4b360d469ac8599d4599ef58f28
+    content_snippet: 'Read only if needed: - [references/examples.md](references/examples.md):
+      example prompts and output patterns'
+    case_ids: []

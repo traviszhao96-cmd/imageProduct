@@ -1,0 +1,226 @@
+version: '1.0'
+skill_id: camera-tracking-manage
+eval_type: content
+cases:
+- id: case-photo-info-new-param
+  threshold: 0.75
+  task: 'PM 要为拍照模式新增 Flicker sensor 光源频率参数。请按 9 列格式写出完整定义。
+
+
+    ```
+
+    代码变量: m_currentLightFrequency
+
+    含义: sensor 输出的光源频率
+
+    值: 原始数值，如 0, 100, 120, 240
+
+    挂载位置: 拍照成片时上报
+
+    ```
+
+    '
+  rubric:
+  - id: r1
+    check: 回答挂在 photo_info 下，label 命名为 flicker_sensor_output（snake_case）
+    weight: 2
+  - id: r2
+    check: string_value 写 xxx，不是硬编码枚举
+    weight: 2
+  - id: r3
+    check: label_note 说明对应代码变量
+    weight: 1
+- id: case-toggle-feature
+  threshold: 0.75
+  task: 'PM 要新增视频自动帧率功能。请按 9 列格式写出埋点。
+
+
+    ```
+
+    功能: 视频自动帧率
+
+    选项: 关 / 自动30fps / 自动30&60fps
+
+    触发: 用户更改时
+
+    ```
+
+    '
+  rubric:
+  - id: r1
+    check: 使用独立 key auto_fps，key_note 为「视频自动帧率——功能开关」
+    weight: 2
+  - id: r2
+    check: string_value 用字符串 off / auto_30 / auto_30_60，不是数字 0/1/2
+    weight: 2
+  - id: r3
+    check: label 和 label_note 留空
+    weight: 1
+- id: case-string-over-numeric
+  threshold: 0.75
+  task: 'PM 要新增前后双录的拼接方式参数。请根据 SKILL.md 的新参数命名原则，判断用数字还是字符串，写出值定义。
+
+
+    ```
+
+    参数: 拼接方式
+
+    选项: 上下分屏, 画中画
+
+    现状: camera_id 等旧参数用数字编码（0/1/2/3）
+
+    ```
+
+    '
+  rubric:
+  - id: r1
+    check: 回答用字符串枚举 top_bottom / pip，不用数字 0/1
+    weight: 2
+  - id: r2
+    check: 理由：新参数优先用可读字符串。旧参数（camera_id）保持数字不动，不反复改
+    weight: 2
+  - id: r3
+    check: 没有要求修改任何已有数字参数
+    weight: 1
+- id: case-extend-vs-new-flag
+  threshold: 0.75
+  task: '前后双录：方案 A 加 dual_record flag，方案 B 作为 video_mode=4。请判断。
+
+
+    ```
+
+    现有 video_mode:
+
+    1 = Video（普通录像）
+
+    2 = Slo-mo（慢动作）
+
+    3 = Time-lapse（延时摄影）
+
+    前后双录: 也是视频录制模式
+
+    ```
+
+    '
+  rubric:
+  - id: r1
+    check: 选择方案 B，video_mode=4
+    weight: 2
+  - id: r2
+    check: 理由：前后双录是独立视频模式，应扩展现有枚举而非加 flag
+    weight: 2
+  - id: r3
+    check: 提到方案 A 需跨字段查询，方案 B 一行 SQL 就够了
+    weight: 1
+- id: case-separate-vs-integrate
+  threshold: 0.75
+  task: '运动速度等级原本打算拼入 shot_algo。请判断为什么独立 label 更好。
+
+
+    ```
+
+    代码变量: m_currentMotionLevel
+
+    含义: 检测到的运动速度等级
+
+    shot_algo: 算法名称（已有字段）
+
+    拼入方案: shot_algo 值变为 "zsl+motion_snap_exp_reduce"
+
+    ```
+
+    '
+  rubric:
+  - id: r1
+    check: 回答用独立 label motion_level，不并入 shot_algo
+    weight: 2
+  - id: r2
+    check: 理由：运动速度是独立概念，和算法名不同。拼入后需字符串拆分查询
+    weight: 2
+  - id: r3
+    check: label 挂在 photo_info 下，label_note 对应 m_currentMotionLevel
+    weight: 1
+- id: case-spelling-compatibility
+  threshold: 0.75
+  task: 'photoMode 的 protrait（拼错）和 portrait（正确）同时存在，已上线。
+
+
+    ```
+
+    错误值: protrait
+
+    正确值: portrait
+
+    状态: 已上线，有大量历史数据
+
+    影响: 数据分析时要同时查两个值
+
+    ```
+
+    '
+  rubric:
+  - id: r1
+    check: 回答不修正原值，protrait 保持不动
+    weight: 2
+  - id: r2
+    check: 回答在备注标注拼写错误和正确值
+    weight: 2
+  - id: r3
+    check: 回答查询时兼容两种写法
+    weight: 1
+metadata:
+  source_skill_md_sha256: 804951491c366e24822eae2a142557959784e22779ff9b35bc0659031fa2f9e1
+  generated_at: '2026-06-25T14:05:58+08:00'
+  generator_version: eval-generate/v3.2
+  source_skill_md_sections:
+  - heading: (preface)
+    content_sha256: c95f4a15775ecea97f8f74ea4bca0fd177ba18954dce65e0b75b76c4cf766583
+    content_snippet: '# Camera Event Tracking Manager'
+    case_ids: []
+  - heading: '## Overview'
+    content_sha256: e65e577e8a4beae3f21601c42ed01ef6f56ad91c6bf4fe0902dc6c2d8976b416
+    content_snippet: 'This skill is the single source of truth for Camera App SW 埋点
+      (event tracking) document management. It covers reading/saving Lark documents,
+      maintaining the Bitable with historical error annotations, '
+    case_ids: []
+  - heading: '## Core Capabilities'
+    content_sha256: 34200d38c023eccbdc4638ec1622454f17fe38f510b9009df5301bccc9b11494
+    content_snippet: '### 1. 读飞书文档 — 自动本地保存 每次通过 API 读取飞书文档（Bitable、Wiki、Docx）时，**必须同时保存到本地**：
+      - Bitable 数据 → `references/camera-event-tracking-bitable-v5.json` (JSON) + `.md`
+      (表格) - Wiki/PRD/飞书文档 → `references/lark-docs/<'
+    case_ids: []
+  - heading: '## 新参数命名原则'
+    content_sha256: 8ac18be67ed124ec8025101f975983d40cb71c2436b4016eaca3843a44a19fa0
+    content_snippet: '**优先使用可读字符串，不用数字编码。** - 新参数：用字符串枚举（如 `auto_30`、`top_bottom`），不要用数字（如
+      `0`、`1`） - 已有参数：数字编码的（如 `camera_id: 0=主摄,1=前置,2=超广`、`video_mode: 1/2/3`）不改动，新增的值沿用原编码体系
+      - 原因：数字在查询时需要查字典（0 是什么模式？1 是什么？），字符串一眼能看懂，数'
+    case_ids: []
+  - heading: '## 历史埋点拼写兼容'
+    content_sha256: 58bbe96205e75f3c8a1f1cd325d549fa8bff50585d09f303ef654a3a6c0569e0
+    content_snippet: 以下为历史遗留拼写问题，查询和写入时需兼容，**不可修正原值**，详见各记录的 `备注` 字段： | 原值 | 正确拼写
+      | 影响范围 | 备注 | | --- | --- | --- | --- | | `protrait` | `portrait` | label=photoMode,
+      string_value | 1 条记录 | | `tuning_shapen` | `tuning_sha
+    case_ids: []
+  - heading: '## Bitable 表'
+    content_sha256: e3ba2e2226a382a9c6608bda7a55a5badee2602483589342db882f2973650dfb
+    content_snippet: '| 表 | ID | 说明 | | --- | --- | --- | | 埋点数据 | `tblh05JLoheZIXfr`
+      | Camera 埋点 v5.0(含备注)，219 条记录 | | 埋点修改记录 | `tblgkCxH1lGuxP0r` | 每次改动记录（日期/类型/变更项/前后/范围）
+      | Base token: `N2azb9muvaqqmwsIB7IlPmFGgpg` Wiki'
+    case_ids: []
+  - heading: '## API Reference'
+    content_sha256: fc28a877ec1d5e85e9152b184e4418697ee2c5b6496eed7315290b58468344fb
+    content_snippet: '### 认证 ```python import json, urllib.request, ssl from pathlib
+      import Path config = json.loads(Path.home().joinpath(''.openclaw/openclaw.json'').read_text())
+      account = config[''channels''][''feishu''][''acco'
+    case_ids: []
+  - heading: '## Reference Files'
+    content_sha256: ad90a755de289c5d2e2a4a3888adead876d74f29b881c45272dbf1a596e52627
+    content_snippet: '- `camera-event-tracking-bitable-v6.json` — 完整 217 条埋点记录 + 统计（2026-06-15）
+      - `camera-event-tracking-bitable-v5.md` — 完整埋点参考表格（含备注列） - `lark-docs/` — 已保存的飞书文档本地副本'
+    case_ids: []
+  - heading: '## Quick Lookup'
+    content_sha256: 5d123bee74cb311d791fd63f8a36c93647b9e0d40463c1d3a3a54fd0d1723340
+    content_snippet: '- "帮我读一下埋点表" → 拉取 Bitable → 保存本地 - "这个功能的埋点怎么设计" → 查已有 pattern
+      → 输出 9 列表格 - "更新埋点表，加备注" → 6 步同步流程 - "把这个埋点写入 PRD" → 输出复制粘贴版本 - "新建含备注表" → 从主表拉取
+      + 标注 + 创建 + 复制视图'
+    case_ids: []

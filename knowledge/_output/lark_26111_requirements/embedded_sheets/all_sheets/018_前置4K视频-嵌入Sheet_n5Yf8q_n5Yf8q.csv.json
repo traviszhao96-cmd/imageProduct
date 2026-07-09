@@ -1,0 +1,31 @@
+{
+  "ok": true,
+  "identity": "user",
+  "data": {
+    "actual_range": "A1:C11",
+    "annotated_csv": "[row=1] 功能项,支持情况,说明\n[row=2] 滤镜（Filter）,❌,当前仅支持 1080P pipeline\n[row=3] 调色（Tuning）,❌,当前仅支持 1080P pipeline\n[row=4] 60fps,❌,4K 锁定 30fps\n[row=5] HLG,待确认,随后置 4K HLG 能力同步评估\n[row=6] EIS 开关,✅,\n[row=7] 手动 EV / WB 调节,✅,\n[row=8] VSS（录像中拍照）,✅,\n[row=9] H.265 编码,✅,\n[row=10] 美颜（Beauty）,待确认,需确认是否依赖 1080P pipeline\n[row=11] 其他录像模式（慢动作等）,❌,前置 4K 仅录像模式生效",
+    "col_count": 3,
+    "col_indices": [
+      "A",
+      "B",
+      "C"
+    ],
+    "current_region": "A1:C11",
+    "has_more": false,
+    "row_count": 11,
+    "row_indices": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11
+    ],
+    "warning_message": "①定位行号：必须直接读取 annotated_csv 中每行开头的 [row=N] 前缀（N 即为实际表格行号），不要自己数行，不要用\"序号/ID/编号\"列的值推导（这些列可能跳号或从非 1 开始，会全盘错位）；②定位列字母：必须用 col_indices[j]，不要手数。"
+  }
+}

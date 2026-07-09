@@ -1,0 +1,226 @@
+[
+  {
+    "idx": 3,
+    "title": "26111 用户调研相关",
+    "obj_token": "CGpAdLYuzo531ox9n6Kl0elkgMe",
+    "revision_id": 7,
+    "markdown_path": "knowledge/_output/lark_26111_requirements/docx_md/003.md"
+  },
+  {
+    "idx": 4,
+    "title": "【26111】25MP 超清模式需求文档",
+    "obj_token": "Tvdkdo0eDop9lPxFcSllwzFVgDd",
+    "revision_id": 265,
+    "markdown_path": "knowledge/_output/lark_26111_requirements/docx_md/004.md"
+  },
+  {
+    "idx": 5,
+    "title": "供应商能力汇总",
+    "obj_token": "HecgdhPozofJ7IxRcglloihXgYf",
+    "revision_id": 30,
+    "markdown_path": "knowledge/_output/lark_26111_requirements/docx_md/005.md"
+  },
+  {
+    "idx": 6,
+    "title": "【PRD】Camera 5.1 - 对焦/人脸/宠物识别框视觉动效优化",
+    "obj_token": "KujNdEhujoltg1x6xgAluzLpgdT",
+    "revision_id": 125,
+    "markdown_path": "knowledge/_output/lark_26111_requirements/docx_md/006.md"
+  },
+  {
+    "idx": 7,
+    "title": "【PRD】Camera 5.1 - 相机设计改版",
+    "obj_token": "XOpvdfIjBoVwSPxq6QElp9W8gMg",
+    "revision_id": 84,
+    "markdown_path": "knowledge/_output/lark_26111_requirements/docx_md/007.md"
+  },
+  {
+    "idx": 9,
+    "title": "【PRD】Camera 5.1 - 前置自动小广角",
+    "obj_token": "J8lkd4KGEobGtuxf3EelmToBg3E",
+    "revision_id": 12,
+    "markdown_path": "knowledge/_output/lark_26111_requirements/docx_md/009.md"
+  },
+  {
+    "idx": 10,
+    "title": "【PRD】Camera 5.1 - Tuning Palette 调色板",
+    "obj_token": "AQY0d37afoixBNxovr0l1fwmgDd",
+    "revision_id": 55,
+    "markdown_path": "knowledge/_output/lark_26111_requirements/docx_md/010.md"
+  },
+  {
+    "idx": 11,
+    "title": "【PRD】Camera 5.1 - 200MP 自动裁切",
+    "obj_token": "S9cVdbeQLoIyYvx51tzlXDqfgUc",
+    "revision_id": 30,
+    "markdown_path": "knowledge/_output/lark_26111_requirements/docx_md/011.md"
+  },
+  {
+    "idx": 12,
+    "title": "【PRD】Camera 5.1 - 200MP 高像素",
+    "obj_token": "QCdGdErD6omTlzx9AtzlgxpIgWe",
+    "revision_id": 46,
+    "markdown_path": "knowledge/_output/lark_26111_requirements/docx_md/012.md"
+  },
+  {
+    "idx": 13,
+    "title": "【PRD】Camera 5.1 - 照片专业模式 2.0（Expert Mode 2.0）",
+    "obj_token": "Kl8pd7g4FoK52px0LkTlqqn7gdd",
+    "revision_id": 488,
+    "markdown_path": "knowledge/_output/lark_26111_requirements/docx_md/013.md"
+  },
+  {
+    "idx": 14,
+    "title": "【PRD】Camera 4.0 - 美颜效果定义",
+    "obj_token": "JhhKdNT9wof7q2xpOE6lOL6qgdh",
+    "revision_id": 2721,
+    "markdown_path": "knowledge/_output/lark_26111_requirements/docx_md/014.md"
+  },
+  {
+    "idx": 15,
+    "title": "【PRD】Camera 5.1 - 照片风格（自然 & 鲜明）",
+    "obj_token": "OmaEd4Re8oKF5WxHd5glNVjGgbd",
+    "revision_id": 18,
+    "markdown_path": "knowledge/_output/lark_26111_requirements/docx_md/015.md"
+  },
+  {
+    "idx": 16,
+    "title": "【PRD】Camera 5.1-AI Preset",
+    "obj_token": "R6bPdX8BOoAQWfxaSGpllX6ngGg",
+    "revision_id": 128,
+    "markdown_path": "knowledge/_output/lark_26111_requirements/docx_md/016.md"
+  },
+  {
+    "idx": 17,
+    "title": "【PRD】Camera 5.1 - 视频 ISZ（无损变焦）",
+    "obj_token": "RCTgdoQ0toQzfzxsknvlGBO9guh",
+    "revision_id": 128,
+    "markdown_path": "knowledge/_output/lark_26111_requirements/docx_md/017.md"
+  },
+  {
+    "idx": 18,
+    "title": "【PRD】Camera 5.1 - 前置 4K 视频",
+    "obj_token": "TfcwdgkqboAiHhxcCH3lIPxgg4g",
+    "revision_id": 60,
+    "markdown_path": "knowledge/_output/lark_26111_requirements/docx_md/018.md"
+  },
+  {
+    "idx": 19,
+    "title": "【PRD】Camera 5.1 - 视频 EIS 开关",
+    "obj_token": "Vk4Od6Se3otT2MxUlVglBZfDg1d",
+    "revision_id": 436,
+    "markdown_path": "knowledge/_output/lark_26111_requirements/docx_md/019.md"
+  },
+  {
+    "idx": 20,
+    "title": "【PRD】Camera 4.0-视频锁定镜头",
+    "obj_token": "DTD2dpTlLop7yFxzWAPlm9bPgHe",
+    "revision_id": 210,
+    "markdown_path": "knowledge/_output/lark_26111_requirements/docx_md/020.md"
+  },
+  {
+    "idx": 21,
+    "title": "【PRD】Camera 5.1 - 视频锁定白平衡",
+    "obj_token": "GVaHdfT0eouHxJxawuqlwLpjgme",
+    "revision_id": 378,
+    "markdown_path": "knowledge/_output/lark_26111_requirements/docx_md/021.md"
+  },
+  {
+    "idx": 22,
+    "title": "【PRD】Camera 5.1 - 视频模式专业参数调节",
+    "obj_token": "Ny4HdTqI3oLtYLx2m1wlDP9Mgdg",
+    "revision_id": 780,
+    "markdown_path": "knowledge/_output/lark_26111_requirements/docx_md/022.md"
+  },
+  {
+    "idx": 23,
+    "title": "【PRD】Camera 5.1 - 视频默认 H.265 编码",
+    "obj_token": "MoVidaFWooY5enx6IIGldnI5ghe",
+    "revision_id": 124,
+    "markdown_path": "knowledge/_output/lark_26111_requirements/docx_md/023.md"
+  },
+  {
+    "idx": 24,
+    "title": "【PRD】Camera 5.1 - 前后双录 v2",
+    "obj_token": "Xh3udZK6RoAVv3xfELWlAODggLc",
+    "revision_id": 624,
+    "markdown_path": "knowledge/_output/lark_26111_requirements/docx_md/024.md"
+  },
+  {
+    "idx": 25,
+    "title": "【PRD】Camera 5.1 - 录像中拍照（VSS）效果提升",
+    "obj_token": "HIdPdtWOmotqKCxVBoBlPsvggNw",
+    "revision_id": 428,
+    "markdown_path": "knowledge/_output/lark_26111_requirements/docx_md/025.md"
+  },
+  {
+    "idx": 26,
+    "title": "SAT 体验优化",
+    "obj_token": "PlZVdBufqoC6oPx4MjxlgGmpgOd",
+    "revision_id": 2707,
+    "markdown_path": "knowledge/_output/lark_26111_requirements/docx_md/026.md"
+  },
+  {
+    "idx": 27,
+    "title": "【PRD】Camera 5.0 构图助手",
+    "obj_token": "BIswd8SdhorzJJxIx7Kla2qZgEe",
+    "revision_id": 38,
+    "markdown_path": "knowledge/_output/lark_26111_requirements/docx_md/027.md"
+  },
+  {
+    "idx": 28,
+    "title": "相机 AI 推荐功能立项申请书",
+    "obj_token": "ZzVbdaiL5odgsyxTcKSlEDOBg9g",
+    "revision_id": 114,
+    "markdown_path": "knowledge/_output/lark_26111_requirements/docx_md/028.md"
+  },
+  {
+    "idx": 29,
+    "title": "【PRD】Camera 5.1-人像模式 Consistent Zoom",
+    "obj_token": "Co3UdroAGos7ypxaAAKlPkzug6e",
+    "revision_id": 118,
+    "markdown_path": "knowledge/_output/lark_26111_requirements/docx_md/029.md"
+  },
+  {
+    "idx": 30,
+    "title": "印度镜头脏污专项",
+    "obj_token": "HzVWdX7KfoP2FWxPVpJlFL68gUd",
+    "revision_id": 187,
+    "markdown_path": "knowledge/_output/lark_26111_requirements/docx_md/030.md"
+  },
+  {
+    "idx": 31,
+    "title": "【PRD】Camera 5.1 普通照片模式运动场景引导",
+    "obj_token": "TOPMdAsjDoOuW2x2XrQljB6hgOb",
+    "revision_id": 47,
+    "markdown_path": "knowledge/_output/lark_26111_requirements/docx_md/031.md"
+  },
+  {
+    "idx": 32,
+    "title": "【PRD】Camera 5.1 美颜功能首次开启引导",
+    "obj_token": "NOlCdnmtqo9etOx43PalXbUugvb",
+    "revision_id": 120,
+    "markdown_path": "knowledge/_output/lark_26111_requirements/docx_md/032.md"
+  },
+  {
+    "idx": 33,
+    "title": "【PRD】Camera 5.1- 设置 增加 Tips and feedback 入口",
+    "obj_token": "KDpwdKtEso7lP4xgCsgllRHlgqh",
+    "revision_id": 17,
+    "markdown_path": "knowledge/_output/lark_26111_requirements/docx_md/033.md"
+  },
+  {
+    "idx": 34,
+    "title": "26121 视频 Log 功能评估",
+    "obj_token": "S8KDdD8reojpU9xcxgWlnFNHgRe",
+    "revision_id": 1415,
+    "markdown_path": "knowledge/_output/lark_26111_requirements/docx_md/034.md"
+  },
+  {
+    "idx": 35,
+    "title": "【PRD】Camera 5.1 - 200MP 高像素",
+    "obj_token": "YhNXdLBV6o1kfoxFVGOlXzyCgEf",
+    "revision_id": 33,
+    "markdown_path": "knowledge/_output/lark_26111_requirements/docx_md/035.md"
+  }
+]

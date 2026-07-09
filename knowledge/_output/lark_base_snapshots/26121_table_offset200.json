@@ -1,0 +1,1749 @@
+{
+  "ok": true,
+  "identity": "user",
+  "data": {
+    "data": [
+      [
+        [
+          "高像素 / High Resolution"
+        ],
+        [
+          "功能 / Feature"
+        ],
+        [
+          "工具栏 / Toolbar"
+        ],
+        "Filter",
+        null,
+        [
+          "✓"
+        ],
+        [
+          "✗"
+        ],
+        [
+          "✗"
+        ],
+        [
+          "✗"
+        ],
+        "UW: 依赖高像素 sensor 输出或 remosaic 链路，该摄像头不满足规格。；Tele: 依赖高像素 sensor 输出或 remosaic 链路，该摄像头不满足规格。；Front: 依赖高像素 sensor 输出或 remosaic 链路，该摄像头不满足规格。",
+        [
+          "已确认"
+        ],
+        "PM / QA / SE",
+        "在对应模式打开顶部工具栏，确认入口、选项、状态保持，以及对成片/录制结果的影响符合规格。",
+        "current-fl-records-26111-26121.json",
+        null
+      ],
+      [
+        [
+          "高像素 / High Resolution"
+        ],
+        [
+          "功能 / Feature"
+        ],
+        [
+          "工具栏 / Toolbar"
+        ],
+        "Flash",
+        null,
+        [
+          "✗"
+        ],
+        [
+          "✗"
+        ],
+        [
+          "✗"
+        ],
+        [
+          "✗"
+        ],
+        "Main: 依赖高像素 sensor 输出或 remosaic 链路，该摄像头不满足规格。；UW: 依赖高像素 sensor 输出或 remosaic 链路，该摄像头不满足规格。；Tele: 依赖高像素 sensor 输出或 remosaic 链路，该摄像头不满足规格。；Front: 依赖高像素 sensor 输出或 remosaic 链路，该摄像头不满足规格。",
+        [
+          "已确认"
+        ],
+        "PM / QA / SE",
+        "更新为 nothing 项目，支持 glyph",
+        "current-fl-records-26111-26121.json",
+        null
+      ],
+      [
+        [
+          "高像素 / High Resolution"
+        ],
+        [
+          "功能 / Feature"
+        ],
+        [
+          "工具栏 / Toolbar"
+        ],
+        "Photo Style",
+        "拍照类模式展开；后置所有摄像头支持，自然/鲜明两种风格，默认鲜明，Preset 可保存。",
+        [
+          "✓"
+        ],
+        [
+          "✓"
+        ],
+        [
+          "✓"
+        ],
+        [
+          "✓"
+        ],
+        null,
+        [
+          "已确认"
+        ],
+        "PM / QA",
+        "Photo Style 与 Filter、Tuning、Preset 的互斥/叠加顺序需在 KB 中写清。",
+        "tree-kb-integration-candidates.v1.json",
+        "REQ26111-KB-012 | add | dispute=low | 风格通过 ISP tone/color/sharpen 参数实现，RAW 不受影响。"
+      ],
+      [
+        [
+          "高像素 / High Resolution"
+        ],
+        [
+          "功能 / Feature"
+        ],
+        [
+          "工具栏 / Toolbar"
+        ],
+        "Style / Tuning Palette / Palette-Parameters",
+        "更新已有 Tuning/Filter/Style 描述；Tuning Palette 本期包含 Palette Mode、Parameter Mode、Strength、7 参数保存。Style 作为 Filter + Tuning 统一方向记录，是否本期合并需以 PRD/PM 最终口径确认。",
+        [
+          "TBD"
+        ],
+        [
+          "TBD"
+        ],
+        [
+          "TBD"
+        ],
+        [
+          "TBD"
+        ],
+        null,
+        [
+          "待确认"
+        ],
+        "PM / SE",
+        "PM 口径认为该需求包含 Filter + Tuning 合成 Style 的点；当前缓存 PRD 又写“本期不合并 Filter”，需人工确认 Style 合并是否为 5.1 本期范围还是后续方向。",
+        "tree-kb-integration-candidates.v1.json",
+        "REQ26111-KB-007 | update | dispute=medium | PRD 010: line 28/137 写本期不合并 Filter；line 602 写 Filter 与 Tuning 是否未来合并待确认。候选先按 update existing Tuning/Style，不按纯新增行处理。"
+      ],
+      [
+        [
+          "高像素 / High Resolution"
+        ],
+        [
+          "功能 / Feature"
+        ],
+        [
+          "工具栏 / Toolbar"
+        ],
+        "色彩模式",
+        null,
+        [
+          "✓"
+        ],
+        [
+          "✗"
+        ],
+        [
+          "✗"
+        ],
+        [
+          "✗"
+        ],
+        "UW: 依赖高像素 sensor 输出或 remosaic 链路，该摄像头不满足规格。；Tele: 依赖高像素 sensor 输出或 remosaic 链路，该摄像头不满足规格。；Front: 依赖高像素 sensor 输出或 remosaic 链路，该摄像头不满足规格。",
+        [
+          "已确认"
+        ],
+        "PM / QA / SE",
+        "在对应模式打开顶部工具栏，确认入口、选项、状态保持，以及对成片/录制结果的影响符合规格。",
+        "current-fl-records-26111-26121.json",
+        null
+      ],
+      [
+        [
+          "高像素 / High Resolution"
+        ],
+        [
+          "功能 / Feature"
+        ],
+        [
+          "变焦 / Zoom"
+        ],
+        "OIS",
+        "光学防抖能力，由具备 OIS 的摄像头硬件提供。",
+        [
+          "✓"
+        ],
+        [
+          "✗"
+        ],
+        [
+          "✓"
+        ],
+        [
+          "✗"
+        ],
+        "UW: 依赖长焦/高倍率链路，该摄像头不在支持范围。；Front: 依赖长焦/高倍率链路，该摄像头不在支持范围。",
+        [
+          "已确认"
+        ],
+        "影像 SE",
+        "查硬件配置确认 OIS；在对应摄像头低照/长焦手持场景验证稳定性。",
+        "kb-functions-algorithms.json",
+        "由 KB mode scope 展开；需按项目硬件/算法配置确认支持状态。"
+      ],
+      [
+        [
+          "高像素 / High Resolution"
+        ],
+        [
+          "功能 / Feature"
+        ],
+        [
+          "变焦 / Zoom"
+        ],
+        "变焦",
+        "变焦栏位于模式栏上方，默认变焦点应覆盖硬件光学点，并覆盖可用 In-Sensor Zoom 点。",
+        [
+          "✓"
+        ],
+        [
+          "✗"
+        ],
+        [
+          "✓"
+        ],
+        [
+          "✗"
+        ],
+        "UW: 依赖高像素 sensor 输出或 remosaic 链路，该摄像头不满足规格。；Front: 依赖高像素 sensor 输出或 remosaic 链路，该摄像头不满足规格。",
+        [
+          "已确认"
+        ],
+        "PM / QA / SE",
+        "检查默认变焦点、双指缩放、滑动变焦和跨镜头切换；确认倍率、预览和成片路径一致。",
+        "kb-functions-algorithms.json",
+        "由 KB mode scope 展开；需按项目硬件/算法配置确认支持状态。"
+      ],
+      [
+        [
+          "高像素 / High Resolution"
+        ],
+        [
+          "功能 / Feature"
+        ],
+        [
+          "预览框 / Preview"
+        ],
+        "AI场景检测",
+        "AI 场景检测算法，用于识别更细分的场景类别并驱动 UI 提示或算法策略。",
+        [
+          "✓"
+        ],
+        [
+          "✗"
+        ],
+        [
+          "✓"
+        ],
+        [
+          "✗"
+        ],
+        "UW: 依赖高像素 sensor 输出或 remosaic 链路，该摄像头不满足规格。；Front: 依赖高像素 sensor 输出或 remosaic 链路，该摄像头不满足规格。",
+        [
+          "已确认"
+        ],
+        "影像 SE",
+        "使用算法定义的典型场景集验证识别结果和触发策略。",
+        "kb-functions-algorithms.json",
+        "由 KB mode scope 展开；需按项目硬件/算法配置确认支持状态。"
+      ],
+      [
+        [
+          "高像素 / High Resolution"
+        ],
+        [
+          "功能 / Feature"
+        ],
+        [
+          "预览框 / Preview"
+        ],
+        "人脸检测",
+        "检测预览中的人脸并驱动人脸框、Face AE/AF、美颜、人像、FRT 等后续能力。",
+        [
+          "✓"
+        ],
+        [
+          "✗"
+        ],
+        [
+          "✓"
+        ],
+        [
+          "✗"
+        ],
+        "UW: 依赖高像素 sensor 输出或 remosaic 链路，该摄像头不满足规格。；Front: 依赖高像素 sensor 输出或 remosaic 链路，该摄像头不满足规格。",
+        [
+          "已确认"
+        ],
+        "影像 SE",
+        "在对应触发场景确认预览框、提示或识别结果出现/消失时机正确，点击后的跳转或拍摄行为符合规格。",
+        "current-fl-records-26111-26121.json; kb-functions-algorithms.json",
+        "由 KB mode scope 展开；需按项目硬件/算法配置确认支持状态。"
+      ],
+      [
+        [
+          "高像素 / High Resolution"
+        ],
+        [
+          "功能 / Feature"
+        ],
+        [
+          "预览框 / Preview"
+        ],
+        "普通场景检测",
+        "基于预览内容识别普通场景状态，用于驱动 HDR、夜景、运动、提示或参数策略。",
+        [
+          "✓"
+        ],
+        [
+          "✗"
+        ],
+        [
+          "✓"
+        ],
+        [
+          "✗"
+        ],
+        "UW: 依赖高像素 sensor 输出或 remosaic 链路，该摄像头不满足规格。；Front: 依赖高像素 sensor 输出或 remosaic 链路，该摄像头不满足规格。",
+        [
+          "已确认"
+        ],
+        "影像 SE",
+        "在对应触发场景确认预览框、提示或识别结果出现/消失时机正确，点击后的跳转或拍摄行为符合规格。",
+        "current-fl-records-26111-26121.json; kb-functions-algorithms.json",
+        "由 KB mode scope 展开；需按项目硬件/算法配置确认支持状态。"
+      ],
+      [
+        [
+          "高像素 / High Resolution"
+        ],
+        [
+          "功能 / Feature"
+        ],
+        [
+          "预览框 / Preview"
+        ],
+        "脏污检测",
+        "检测镜头脏污并在 UI 中提示用户清洁镜头。",
+        [
+          "✓"
+        ],
+        [
+          "✗"
+        ],
+        [
+          "✓"
+        ],
+        [
+          "✗"
+        ],
+        "UW: 依赖高像素 sensor 输出或 remosaic 链路，该摄像头不满足规格。；Front: 依赖高像素 sensor 输出或 remosaic 链路，该摄像头不满足规格。",
+        [
+          "已确认"
+        ],
+        "PM / QA / SE",
+        "制造镜头脏污场景，确认提示出现、消失和误触发情况。",
+        "kb-functions-algorithms.json",
+        "由 KB mode scope 展开；需按项目硬件/算法配置确认支持状态。"
+      ],
+      [
+        [
+          "高像素 / High Resolution"
+        ],
+        [
+          "基础算法 / Base Algorithm"
+        ],
+        [
+          "后处理算法 / Post-processing Algorithm"
+        ],
+        "HW Remosaic",
+        "26111 为 200MP HP5；26121 为 50MP IMX896/JN5 方案。参考高像素 lux \u003c 200；仅叠加滤镜/CFR/FRT。",
+        [
+          "✓"
+        ],
+        [
+          "✗"
+        ],
+        [
+          "✓"
+        ],
+        [
+          "✗"
+        ],
+        "UW: 依赖高像素 sensor 输出或 remosaic 链路，该摄像头不满足规格。；Front: 依赖高像素 sensor 输出或 remosaic 链路，该摄像头不满足规格。",
+        [
+          "已确认"
+        ],
+        "影像 SE",
+        "高像素模式出图；确认分辨率、耗时、内存",
+        "algorithm-fl-source-26111-26121.md",
+        "算法来源行，需 SE 按项目实测确认。"
+      ],
+      [
+        [
+          "高像素 / High Resolution"
+        ],
+        [
+          "基础算法 / Base Algorithm"
+        ],
+        [
+          "后处理算法 / Post-processing Algorithm"
+        ],
+        "Remosaic",
+        "高像素输出链路中的 remosaic / upscale 能力，如 50MP 或 200MP 输出。",
+        [
+          "✓"
+        ],
+        [
+          "✗"
+        ],
+        [
+          "✓"
+        ],
+        [
+          "✗"
+        ],
+        "UW: 依赖高像素 sensor 输出或 remosaic 链路，该摄像头不满足规格。；Front: 依赖高像素 sensor 输出或 remosaic 链路，该摄像头不满足规格。",
+        [
+          "已确认"
+        ],
+        "影像 SE",
+        "高像素模式拍摄，确认分辨率、耗时、内存和画质。",
+        "kb-functions-algorithms.json",
+        "由 KB mode scope 展开；需按项目硬件/算法配置确认支持状态。"
+      ],
+      [
+        [
+          "高像素 / High Resolution"
+        ],
+        [
+          "基础算法 / Base Algorithm"
+        ],
+        [
+          "后处理算法 / Post-processing Algorithm"
+        ],
+        "人脸清晰度增强",
+        "Face Restoration / FRT 类能力，用于有人脸时提升脸部细节清晰度。",
+        [
+          "✓"
+        ],
+        [
+          "✗"
+        ],
+        [
+          "✓"
+        ],
+        [
+          "✗"
+        ],
+        "UW: 依赖高像素 sensor 输出或 remosaic 链路，该摄像头不满足规格。；Front: 依赖高像素 sensor 输出或 remosaic 链路，该摄像头不满足规格。",
+        [
+          "已确认"
+        ],
+        "影像 SE",
+        "拍摄有人脸样张，对比开启链路前后的人脸细节、伪影和自然度。",
+        "kb-functions-algorithms.json",
+        "由 KB mode scope 展开；需按项目硬件/算法配置确认支持状态。"
+      ],
+      [
+        [
+          "高像素 / High Resolution"
+        ],
+        [
+          "基础算法 / Base Algorithm"
+        ],
+        [
+          "后处理算法 / Post-processing Algorithm"
+        ],
+        "超分（SR）",
+        "高倍率变焦或裁切链路上的超分辨率能力，用于提升细节清晰度。",
+        [
+          "✓"
+        ],
+        [
+          "✗"
+        ],
+        [
+          "✓"
+        ],
+        [
+          "✗"
+        ],
+        "UW: 依赖高像素 sensor 输出或 remosaic 链路，该摄像头不满足规格。；Front: 依赖高像素 sensor 输出或 remosaic 链路，该摄像头不满足规格。",
+        [
+          "已确认"
+        ],
+        "影像 SE",
+        "在算法定义的倍率点拍摄细节目标，确认清晰度提升和伪影控制。",
+        "kb-functions-algorithms.json",
+        "由 KB mode scope 展开；需按项目硬件/算法配置确认支持状态。"
+      ],
+      [
+        [
+          "高像素 / High Resolution"
+        ],
+        [
+          "基础算法 / Base Algorithm"
+        ],
+        [
+          "实时算法 / Realtime Algorithm"
+        ],
+        "EIS",
+        "电子防抖。拍照高倍率预览或视频录制中用于提升画面稳定性，触发倍率按项目和镜头组合决定。",
+        [
+          "✓"
+        ],
+        [
+          "✗"
+        ],
+        [
+          "✓"
+        ],
+        [
+          "✗"
+        ],
+        "UW: 依赖高像素 sensor 输出或 remosaic 链路，该摄像头不满足规格。；Front: 依赖高像素 sensor 输出或 remosaic 链路，该摄像头不满足规格。",
+        [
+          "已确认"
+        ],
+        "影像 SE",
+        "根据项目防抖规格，在对应镜头、倍率或视频规格下手持移动测试，确认预览/成片稳定和视角裁切。",
+        "kb-functions-algorithms.json",
+        "由 KB mode scope 展开；需按项目硬件/算法配置确认支持状态。"
+      ],
+      [
+        [
+          "延时摄影 / Timelapse"
+        ],
+        [
+          "功能 / Feature"
+        ],
+        [
+          "工具栏 / Toolbar"
+        ],
+        "4K",
+        null,
+        [
+          "✓"
+        ],
+        [
+          "✗"
+        ],
+        [
+          "✗"
+        ],
+        [
+          "✗"
+        ],
+        "UW: 按当前项目硬件、PRD 或基线 FL，该摄像头不在支持范围。；Tele: 按当前项目硬件、PRD 或基线 FL，该摄像头不在支持范围。；Front: 按当前项目硬件、PRD 或基线 FL，该摄像头不在支持范围。",
+        [
+          "已确认"
+        ],
+        "PM / QA / SE",
+        "在对应模式打开顶部工具栏，确认入口、选项、状态保持，以及对成片/录制结果的影响符合规格。",
+        "current-fl-records-26111-26121.json",
+        null
+      ],
+      [
+        [
+          "延时摄影 / Timelapse"
+        ],
+        [
+          "功能 / Feature"
+        ],
+        [
+          "工具栏 / Toolbar"
+        ],
+        "Flash",
+        null,
+        [
+          "✓"
+        ],
+        [
+          "✓"
+        ],
+        [
+          "✗"
+        ],
+        [
+          "✗"
+        ],
+        "Tele: 按当前项目硬件、PRD 或基线 FL，该摄像头不在支持范围。；Front: 前置无后置闪光灯/Glyph 硬件链路。",
+        [
+          "已确认"
+        ],
+        "PM / QA / SE",
+        "在对应模式打开顶部工具栏，确认入口、选项、状态保持，以及对成片/录制结果的影响符合规格。",
+        "current-fl-records-26111-26121.json",
+        null
+      ],
+      [
+        [
+          "延时摄影 / Timelapse"
+        ],
+        [
+          "功能 / Feature"
+        ],
+        [
+          "工具栏 / Toolbar"
+        ],
+        "Rec. light 录影灯",
+        null,
+        [
+          "✓"
+        ],
+        [
+          "✓"
+        ],
+        [
+          "✗"
+        ],
+        [
+          "✗"
+        ],
+        "Tele: 按当前项目硬件、PRD 或基线 FL，该摄像头不在支持范围。；Front: 按当前项目硬件、PRD 或基线 FL，该摄像头不在支持范围。",
+        [
+          "已确认"
+        ],
+        "PM / QA / SE",
+        "在对应模式打开顶部工具栏，确认入口、选项、状态保持，以及对成片/录制结果的影响符合规格。",
+        "current-fl-records-26111-26121.json",
+        null
+      ],
+      [
+        [
+          "延时摄影 / Timelapse"
+        ],
+        [
+          "功能 / Feature"
+        ],
+        [
+          "变焦 / Zoom"
+        ],
+        "SAT / 平滑镜头切换",
+        "更像体验验收口径更新，不一定新增 FL 行；可补充验证方法：点切响应、滑动跟手、色彩/视角跳变、fallback 响应。",
+        [
+          "✓"
+        ],
+        [
+          "✓"
+        ],
+        [
+          "✓"
+        ],
+        [
+          "✓"
+        ],
+        null,
+        [
+          "已确认"
+        ],
+        "PM / QA",
+        "是否把 SAT 体验优化作为独立项目需求，还是只更新 SAT KB 的验证方法和风险？",
+        "tree-kb-integration-candidates.v1.json",
+        "REQ26111-KB-023 | update | dispute=low | 文档结论聚焦平滑性、fallback 响应、zoomratio 下发、色彩/视角跳变。"
+      ],
+      [
+        [
+          "延时摄影 / Timelapse"
+        ],
+        [
+          "功能 / Feature"
+        ],
+        [
+          "变焦 / Zoom"
+        ],
+        "变焦",
+        "变焦栏位于模式栏上方，默认变焦点应覆盖硬件光学点，并覆盖可用 In-Sensor Zoom 点。",
+        [
+          "TBD"
+        ],
+        [
+          "TBD"
+        ],
+        [
+          "TBD"
+        ],
+        [
+          "TBD"
+        ],
+        null,
+        [
+          "待确认"
+        ],
+        "PM / QA / SE",
+        "检查默认变焦点、双指缩放、滑动变焦和跨镜头切换；确认倍率、预览和成片路径一致。",
+        "kb-functions-algorithms.json",
+        "由 KB mode scope 展开；需按项目硬件/算法配置确认支持状态。"
+      ],
+      [
+        [
+          "延时摄影 / Timelapse"
+        ],
+        [
+          "功能 / Feature"
+        ],
+        [
+          "预览框 / Preview"
+        ],
+        "AI场景检测",
+        "AI 场景检测算法，用于识别更细分的场景类别并驱动 UI 提示或算法策略。",
+        [
+          "TBD"
+        ],
+        [
+          "TBD"
+        ],
+        [
+          "TBD"
+        ],
+        [
+          "TBD"
+        ],
+        null,
+        [
+          "待确认"
+        ],
+        "影像 SE",
+        "使用算法定义的典型场景集验证识别结果和触发策略。",
+        "kb-functions-algorithms.json",
+        "由 KB mode scope 展开；需按项目硬件/算法配置确认支持状态。"
+      ],
+      [
+        [
+          "延时摄影 / Timelapse"
+        ],
+        [
+          "功能 / Feature"
+        ],
+        [
+          "预览框 / Preview"
+        ],
+        "人脸检测",
+        null,
+        [
+          "TBD"
+        ],
+        [
+          "TBD"
+        ],
+        [
+          "TBD"
+        ],
+        [
+          "TBD"
+        ],
+        null,
+        [
+          "待确认"
+        ],
+        "影像 SE",
+        "在对应触发场景确认预览框、提示或识别结果出现/消失时机正确，点击后的跳转或拍摄行为符合规格。",
+        "current-fl-records-26111-26121.json",
+        null
+      ],
+      [
+        [
+          "延时摄影 / Timelapse"
+        ],
+        [
+          "功能 / Feature"
+        ],
+        [
+          "预览框 / Preview"
+        ],
+        "普通场景检测",
+        "基于预览内容识别普通场景状态，用于驱动 HDR、夜景、运动、提示或参数策略。",
+        [
+          "TBD"
+        ],
+        [
+          "TBD"
+        ],
+        [
+          "TBD"
+        ],
+        [
+          "TBD"
+        ],
+        null,
+        [
+          "待确认"
+        ],
+        "影像 SE",
+        "切换高动态、低照、运动等场景，确认对应 UI 或算法策略触发。",
+        "kb-functions-algorithms.json",
+        "由 KB mode scope 展开；需按项目硬件/算法配置确认支持状态。"
+      ],
+      [
+        [
+          "延时摄影 / Timelapse"
+        ],
+        [
+          "功能 / Feature"
+        ],
+        [
+          "预览框 / Preview"
+        ],
+        "脏污检测",
+        "检测镜头脏污并在 UI 中提示用户清洁镜头。",
+        [
+          "TBD"
+        ],
+        [
+          "TBD"
+        ],
+        [
+          "TBD"
+        ],
+        [
+          "TBD"
+        ],
+        null,
+        [
+          "待确认"
+        ],
+        "PM / QA / SE",
+        "制造镜头脏污场景，确认提示出现、消失和误触发情况。",
+        "kb-functions-algorithms.json",
+        "由 KB mode scope 展开；需按项目硬件/算法配置确认支持状态。"
+      ],
+      [
+        [
+          "延时摄影 / Timelapse"
+        ],
+        [
+          "基础算法 / Base Algorithm"
+        ],
+        [
+          "实时算法 / Realtime Algorithm"
+        ],
+        "EIS",
+        "电子防抖。拍照高倍率预览或视频录制中用于提升画面稳定性，触发倍率按项目和镜头组合决定。",
+        [
+          "TBD"
+        ],
+        [
+          "TBD"
+        ],
+        [
+          "TBD"
+        ],
+        [
+          "TBD"
+        ],
+        null,
+        [
+          "待确认"
+        ],
+        "影像 SE",
+        "根据项目防抖规格，在对应镜头、倍率或视频规格下手持移动测试，确认预览/成片稳定和视角裁切。",
+        "kb-functions-algorithms.json",
+        "由 KB mode scope 展开；需按项目硬件/算法配置确认支持状态。"
+      ],
+      [
+        [
+          "延时摄影 / Timelapse"
+        ],
+        [
+          "基础算法 / Base Algorithm"
+        ],
+        [
+          "实时算法 / Realtime Algorithm"
+        ],
+        "SAT / 平滑镜头切换",
+        "多摄平滑切换。26121 主摄/长焦支持；26111 是否支持 Main-UW SAT 当前资料冲突，需 SE 确认。",
+        [
+          "✓"
+        ],
+        [
+          "TBD"
+        ],
+        [
+          "✓"
+        ],
+        [
+          "✗"
+        ],
+        "Front: 依赖长焦/高倍率链路，该摄像头不在支持范围。",
+        [
+          "待确认"
+        ],
+        "影像 SE",
+        "变焦跨镜头点；确认亮度/色彩/视角过渡",
+        "algorithm-fl-source-26111-26121.md",
+        "算法来源行，需 SE 按项目实测确认。"
+      ],
+      [
+        [
+          "通用 / Common"
+        ],
+        [
+          "通用功能 / Common"
+        ],
+        [
+          "预设 / Preset"
+        ],
+        "Preset",
+        "底部独立功能区域，支持默认/自定义 Preset、选择、保存、卡片信息、封面、导入和分享。",
+        [
+          "✓"
+        ],
+        [
+          "✓"
+        ],
+        [
+          "✓"
+        ],
+        [
+          "✓"
+        ],
+        null,
+        [
+          "已确认"
+        ],
+        "PM / Tuning",
+        "进入底部 Preset 区域，验证选择、保存、导入、分享和卡片展示。",
+        "kb-functions-algorithms.json",
+        "由 KB mode scope 展开；需按项目硬件/算法配置确认支持状态。"
+      ],
+      [
+        [
+          "通用 / Common"
+        ],
+        [
+          "通用功能 / Common"
+        ],
+        [
+          "预设 / Preset"
+        ],
+        "顶部快捷保存入口",
+        null,
+        [
+          "✓"
+        ],
+        [
+          "✓"
+        ],
+        [
+          "✗"
+        ],
+        [
+          "✗"
+        ],
+        "Tele: 按当前项目硬件、PRD 或基线 FL，该摄像头不在支持范围。；Front: 按当前项目硬件、PRD 或基线 FL，该摄像头不在支持范围。",
+        [
+          "已确认"
+        ],
+        "PM / Tuning",
+        "按项目 FL 规格确认 `顶部快捷保存入口` 的入口、支持范围、默认值和结果表现。",
+        "current-fl-records-26111-26121.json",
+        null
+      ],
+      [
+        [
+          "通用 / Common"
+        ],
+        [
+          "通用功能 / Common"
+        ],
+        [
+          "设置 / Settings"
+        ],
+        "Auto FPS",
+        "自动帧率设置，用户可选择 Off、Auto 30 FPS、Auto 30 \u0026 60 FPS。",
+        [
+          "✓"
+        ],
+        [
+          "✓"
+        ],
+        [
+          "✓"
+        ],
+        [
+          "✓"
+        ],
+        null,
+        [
+          "已确认"
+        ],
+        "PM / QA",
+        "切换 Off / Auto 30 / Auto 30\u002660，在不同光照场景录制并确认帧率策略。",
+        "kb-functions-algorithms.json",
+        "由 KB mode scope 展开；需按项目硬件/算法配置确认支持状态。"
+      ],
+      [
+        [
+          "通用 / Common"
+        ],
+        [
+          "通用功能 / Common"
+        ],
+        [
+          "设置 / Settings"
+        ],
+        "Auto Tone",
+        "照片类模式的色调处理设置，会影响 still photo 出片效果。",
+        [
+          "✓"
+        ],
+        [
+          "✓"
+        ],
+        [
+          "✗"
+        ],
+        [
+          "✗"
+        ],
+        "Tele: 按当前项目硬件、PRD 或基线 FL，该摄像头不在支持范围。；Front: 按当前项目硬件、PRD 或基线 FL，该摄像头不在支持范围。",
+        [
+          "已确认"
+        ],
+        "PM / QA",
+        "进入 Camera Settings 修改该项，返回对应模式后确认设置生效、持久化和默认值符合规格。",
+        "current-fl-records-26111-26121.json; kb-functions-algorithms.json",
+        "由 KB mode scope 展开；需按项目硬件/算法配置确认支持状态。"
+      ],
+      [
+        [
+          "通用 / Common"
+        ],
+        [
+          "通用功能 / Common"
+        ],
+        [
+          "设置 / Settings"
+        ],
+        "Level",
+        "水平仪/水平辅助线设置。",
+        [
+          "✓"
+        ],
+        [
+          "✓"
+        ],
+        [
+          "✓"
+        ],
+        [
+          "✓"
+        ],
+        null,
+        [
+          "已确认"
+        ],
+        "PM / QA",
+        "开启后旋转设备，确认水平辅助显示和随姿态变化。",
+        "kb-functions-algorithms.json",
+        "由 KB mode scope 展开；需按项目硬件/算法配置确认支持状态。"
+      ],
+      [
+        [
+          "通用 / Common"
+        ],
+        [
+          "通用功能 / Common"
+        ],
+        [
+          "设置 / Settings"
+        ],
+        "Mirror front camera",
+        "前置镜像设置，影响前置拍照/录像输出方向。",
+        [
+          "✓"
+        ],
+        [
+          "✓"
+        ],
+        [
+          "✓"
+        ],
+        [
+          "✓"
+        ],
+        null,
+        [
+          "已确认"
+        ],
+        "PM / QA",
+        "切换后用前置拍摄，确认输出方向。",
+        "kb-functions-algorithms.json",
+        "由 KB mode scope 展开；需按项目硬件/算法配置确认支持状态。"
+      ],
+      [
+        [
+          "通用 / Common"
+        ],
+        [
+          "通用功能 / Common"
+        ],
+        [
+          "设置 / Settings"
+        ],
+        "Power saving recording",
+        "省电录制。设备静止时自动关闭预览屏幕以节省功耗。",
+        [
+          "✓"
+        ],
+        [
+          "✓"
+        ],
+        [
+          "✓"
+        ],
+        [
+          "✓"
+        ],
+        null,
+        [
+          "已确认"
+        ],
+        "PM / QA",
+        "开启后开始录制并保持设备静止，确认预览屏幕关闭且录制不中断。",
+        "kb-functions-algorithms.json",
+        "由 KB mode scope 展开；需按项目硬件/算法配置确认支持状态。"
+      ],
+      [
+        [
+          "通用 / Common"
+        ],
+        [
+          "通用功能 / Common"
+        ],
+        [
+          "设置 / Settings"
+        ],
+        "Press and hold shutter",
+        "长按快门行为设置，如连拍或快录。",
+        [
+          "✓"
+        ],
+        [
+          "✓"
+        ],
+        [
+          "✓"
+        ],
+        [
+          "✓"
+        ],
+        null,
+        [
+          "已确认"
+        ],
+        "PM / QA",
+        "切换选项后长按快门，确认行为符合设置。",
+        "kb-functions-algorithms.json",
+        "由 KB mode scope 展开；需按项目硬件/算法配置确认支持状态。"
+      ],
+      [
+        [
+          "通用 / Common"
+        ],
+        [
+          "通用功能 / Common"
+        ],
+        [
+          "设置 / Settings"
+        ],
+        "QR code scanner",
+        "二维码扫描设置，控制预览中二维码识别和跳转提示。",
+        [
+          "✓"
+        ],
+        [
+          "✓"
+        ],
+        [
+          "✓"
+        ],
+        [
+          "✓"
+        ],
+        null,
+        [
+          "已确认"
+        ],
+        "PM / QA",
+        "开启后对准二维码，确认识别浮层和点击跳转。",
+        "kb-functions-algorithms.json",
+        "由 KB mode scope 展开；需按项目硬件/算法配置确认支持状态。"
+      ],
+      [
+        [
+          "通用 / Common"
+        ],
+        [
+          "通用功能 / Common"
+        ],
+        [
+          "设置 / Settings"
+        ],
+        "Save location",
+        "保存位置设置。",
+        [
+          "✓"
+        ],
+        [
+          "✓"
+        ],
+        [
+          "✓"
+        ],
+        [
+          "✓"
+        ],
+        null,
+        [
+          "已确认"
+        ],
+        "PM / QA",
+        "进入设置切换保存位置，确认照片/视频保存路径。",
+        "kb-functions-algorithms.json",
+        "由 KB mode scope 展开；需按项目硬件/算法配置确认支持状态。"
+      ],
+      [
+        [
+          "通用 / Common"
+        ],
+        [
+          "通用功能 / Common"
+        ],
+        [
+          "设置 / Settings"
+        ],
+        "Shutter sound",
+        "快门声音设置，部分地区/SKU 可能强制开启。",
+        [
+          "✓"
+        ],
+        [
+          "✓"
+        ],
+        [
+          "✓"
+        ],
+        [
+          "✓"
+        ],
+        null,
+        [
+          "已确认"
+        ],
+        "PM / QA",
+        "切换快门声并拍照验证；地区 SKU 验证强制策略。",
+        "kb-functions-algorithms.json",
+        "由 KB mode scope 展开；需按项目硬件/算法配置确认支持状态。"
+      ],
+      [
+        [
+          "通用 / Common"
+        ],
+        [
+          "通用功能 / Common"
+        ],
+        [
+          "设置 / Settings"
+        ],
+        "Tap to take a photo",
+        "点击预览区域触发拍照的设置。",
+        [
+          "✓"
+        ],
+        [
+          "✓"
+        ],
+        [
+          "✓"
+        ],
+        [
+          "✓"
+        ],
+        null,
+        [
+          "已确认"
+        ],
+        "PM / QA",
+        "开启后点击预览区域，确认触发拍照。",
+        "kb-functions-algorithms.json",
+        "由 KB mode scope 展开；需按项目硬件/算法配置确认支持状态。"
+      ],
+      [
+        [
+          "通用 / Common"
+        ],
+        [
+          "通用功能 / Common"
+        ],
+        [
+          "设置 / Settings"
+        ],
+        "Tips and feedback",
+        "Settings 通用能力；最终 FL 按模式展开或进入通用表，取决于后续 FL 设计。",
+        [
+          "✓"
+        ],
+        [
+          "✓"
+        ],
+        [
+          "✓"
+        ],
+        [
+          "✓"
+        ],
+        null,
+        [
+          "已确认"
+        ],
+        "PM / QA",
+        "Settings 目前没有 Help \u0026 Support 分组，是否在 tree 中新增该分组？",
+        "tree-kb-integration-candidates.v1.json",
+        "REQ26111-KB-028 | update | dispute=low | 只跳转系统 Tips and feedback，不在 Camera 内自建表单。"
+      ],
+      [
+        [
+          "通用 / Common"
+        ],
+        [
+          "通用功能 / Common"
+        ],
+        [
+          "设置 / Settings"
+        ],
+        "Ultra XDR",
+        "Ultra HDR / XDR 照片显示或输出设置。",
+        [
+          "✓"
+        ],
+        [
+          "✓"
+        ],
+        [
+          "✓"
+        ],
+        [
+          "✓"
+        ],
+        null,
+        [
+          "已确认"
+        ],
+        "PM / QA",
+        "开启/关闭后拍摄并在支持查看器中确认动态范围表现。",
+        "kb-functions-algorithms.json",
+        "由 KB mode scope 展开；需按项目硬件/算法配置确认支持状态。"
+      ],
+      [
+        [
+          "通用 / Common"
+        ],
+        [
+          "通用功能 / Common"
+        ],
+        [
+          "设置 / Settings"
+        ],
+        "Video encoding",
+        "视频、慢动作、延时、前后双录，以及视频+滤镜/Tuning 录屏链路；26111/26121 默认 H.265。",
+        [
+          "✓"
+        ],
+        [
+          "✓"
+        ],
+        [
+          "✓"
+        ],
+        [
+          "✓"
+        ],
+        null,
+        [
+          "已确认"
+        ],
+        "PM / QA",
+        "录屏链路 H.265、双录 H.265 功耗和码率标定仍需工程评估，但不阻止 KB 说明更新。",
+        "tree-kb-integration-candidates.v1.json",
+        "REQ26111-KB-020 | update | dispute=low | 保留 H.264/H.265 手动切换；HLG 强制 H.265。"
+      ],
+      [
+        [
+          "通用 / Common"
+        ],
+        [
+          "通用功能 / Common"
+        ],
+        [
+          "设置 / Settings"
+        ],
+        "Watermark settings",
+        "水印详细设置，包括样式和自定义信息。",
+        [
+          "✓"
+        ],
+        [
+          "✓"
+        ],
+        [
+          "✓"
+        ],
+        [
+          "✓"
+        ],
+        null,
+        [
+          "已确认"
+        ],
+        "PM / QA",
+        "调整水印设置后拍照，确认成片水印内容和样式。",
+        "kb-functions-algorithms.json",
+        "由 KB mode scope 展开；需按项目硬件/算法配置确认支持状态。"
+      ],
+      [
+        [
+          "通用 / Common"
+        ],
+        [
+          "通用功能 / Common"
+        ],
+        [
+          "设置 / Settings"
+        ],
+        "视频防抖开关",
+        "视频模式、前后双录模式；所有支持 EIS 的视频规格均可开关，默认开。",
+        [
+          "✓"
+        ],
+        [
+          "✓"
+        ],
+        [
+          "✓"
+        ],
+        [
+          "✓"
+        ],
+        null,
+        [
+          "已确认"
+        ],
+        "PM / QA",
+        "文档目标中一处写慢动作成功指标，但范围内只写视频/前后双录；需确认慢动作是否支持。",
+        "tree-kb-integration-candidates.v1.json",
+        "REQ26111-KB-016 | update | dispute=low | 控制录制过程中 EIS，不影响 OIS。"
+      ],
+      [
+        [
+          "通用 / Common"
+        ],
+        [
+          "通用功能 / Common"
+        ],
+        [
+          "设置 / Settings"
+        ],
+        "锁定白平衡",
+        "视频模式；默认关，录制开始后锁定起始白平衡。",
+        [
+          "✓"
+        ],
+        [
+          "✓"
+        ],
+        [
+          "✓"
+        ],
+        [
+          "✓"
+        ],
+        null,
+        [
+          "已确认"
+        ],
+        "PM / QA",
+        "与视频模式手动 WB 调节同时存在时优先级需与 022 对齐。",
+        "tree-kb-integration-candidates.v1.json",
+        "REQ26111-KB-018 | add | dispute=low | 所有视频规格支持已在文档风险表中写为已确认。"
+      ],
+      [
+        [
+          "通用 / Common"
+        ],
+        [
+          "通用功能 / Common"
+        ],
+        [
+          "设置 / Settings"
+        ],
+        "锁定镜头",
+        "视频模式设置项；开启后录制中禁用 SAT，不切换物理镜头，后续变焦为数码变焦。",
+        [
+          "TBD"
+        ],
+        [
+          "TBD"
+        ],
+        [
+          "TBD"
+        ],
+        [
+          "TBD"
+        ],
+        null,
+        [
+          "待确认"
+        ],
+        "PM / SE",
+        "文档是 Camera 4.0/25111 首上项，是否作为 26111/26121 基线继承，还是 5.1 新需求？来源字段需区分。",
+        "tree-kb-integration-candidates.v1.json",
+        "REQ26111-KB-017 | add | dispute=medium | 嵌入 Base 只有一条需求记录，定义清晰。"
+      ],
+      [
+        [
+          "通用 / Common"
+        ],
+        [
+          "通用功能 / Common"
+        ],
+        [
+          "小组件 / Widget"
+        ],
+        "Preset Widget",
+        "桌面相机小组件能力，支持 Preset Widget 2 聚合多个 Preset，并从桌面点击后唤起相机并应用对应 Preset。",
+        [
+          "✓"
+        ],
+        [
+          "✓"
+        ],
+        [
+          "✓"
+        ],
+        [
+          "✓"
+        ],
+        null,
+        [
+          "已确认"
+        ],
+        "PM / Tuning",
+        "添加或使用预装 Preset Widget，选择最多 5 个 Preset，点击不同卡片唤起相机，确认应用的 Preset、顺序同步、空状态和上限提示符合规格。",
+        "kb-functions-algorithms.json",
+        "由 KB mode scope 展开；需按项目硬件/算法配置确认支持状态。"
+      ],
+      [
+        [
+          "通用 / Common"
+        ],
+        [
+          "功能 / Feature"
+        ],
+        [
+          "模式栏 / Mode Switch"
+        ],
+        "模式栏",
+        "相机默认进入 Photo/照片；模式栏按项目支持范围展示人像、运动、视频、夜景、慢动作、延时摄影、全景、专业、前后双录等模式。",
+        [
+          "✓"
+        ],
+        [
+          "✓"
+        ],
+        [
+          "✓"
+        ],
+        [
+          "✓"
+        ],
+        null,
+        [
+          "已确认"
+        ],
+        "PM / QA / SE",
+        "打开相机并滑动模式栏，确认项目要求的模式是否存在且能进入。",
+        "kb-functions-algorithms.json",
+        "由 KB mode scope 展开；需按项目硬件/算法配置确认支持状态。"
+      ],
+      [
+        [
+          "通用 / Common"
+        ],
+        [
+          "功能 / Feature"
+        ],
+        [
+          "工具栏 / Toolbar"
+        ],
+        "工具栏热区呼出",
+        "多数是视觉规范，不应进入 FL；仅右下角工具栏热区如果是可验收交互差异，才进入功能行。",
+        [
+          "TBD"
+        ],
+        [
+          "TBD"
+        ],
+        [
+          "TBD"
+        ],
+        [
+          "TBD"
+        ],
+        null,
+        [
+          "待确认"
+        ],
+        "PM / SE",
+        "快门形态、slider 字体属于视觉规范，是否明确不进 FL？右下角工具栏热区是否需要作为 Toolbar 交互能力进入 KB？",
+        "tree-kb-integration-candidates.v1.json",
+        "REQ26111-KB-005 | review | dispute=high | 需避免把快门区域默认控件误展开进 FL。"
+      ],
+      [
+        [
+          "通用 / Common"
+        ],
+        [
+          "功能 / Feature"
+        ],
+        [
+          "预览框 / Preview"
+        ],
+        "AI Preset 预览引导入口 / 场景推荐",
+        "作为相机预览页入口/引导能力进入 FL；点击后分析当前预览帧并推荐滤镜+调色 preset 卡片。Preset 区域记录被推荐/应用的 preset 结果，不作为主入口节点。",
+        [
+          "TBD"
+        ],
+        [
+          "TBD"
+        ],
+        [
+          "TBD"
+        ],
+        [
+          "TBD"
+        ],
+        null,
+        [
+          "待确认"
+        ],
+        "PM / SE",
+        "入口位置已确认在相机预览页、位于 preset 按键附近；仍需确认覆盖“所有模式/所有焦段”是否缩小为首版场景范围。",
+        "tree-kb-integration-candidates.v1.json",
+        "REQ26111-KB-013 | add | dispute=medium | PRD 016: 相机预览页 AI Preset 按键；R1 为场景推荐，R2 推荐风格待定。PM correction: 预览作为引导入口。"
+      ]
+    ],
+    "field_id_list": [
+      "fld3zhCldu",
+      "fldKe0KglY",
+      "fldZlp4Orf",
+      "fldfglZ8SE",
+      "fldGA7AXJ2",
+      "fldNBswO3l",
+      "fldtv81h3q",
+      "fld20d9vGC",
+      "fldUkqmj4o",
+      "fldVw7lCOz",
+      "fldg6czYvv",
+      "fldMPYAmoE",
+      "fld5Au4zgi",
+      "fldpPAS05P",
+      "fldK3h2gLH"
+    ],
+    "fields": [
+      "模式",
+      "一级分类",
+      "二级分类",
+      "名称",
+      "说明",
+      "Main",
+      "UW",
+      "Tele",
+      "Front",
+      "不支持原因",
+      "状态",
+      "确认负责人",
+      "验证方法",
+      "来源",
+      "备注"
+    ],
+    "has_more": false,
+    "query_context": {
+      "field_scope": "view_visible_fields",
+      "record_scope": "view_filtered_records"
+    },
+    "record_id_list": [
+      "recvoGo6jv1Qhd",
+      "recvoGo6PgsjLK",
+      "recvoGo6Pgikeb",
+      "recvoGo6Pgdg0H",
+      "recvoGo6PgSaXx",
+      "recvoGo6Pgv0oP",
+      "recvoGo6PgNVNK",
+      "recvoGo6PgulCr",
+      "recvoGo6Pgpwp8",
+      "recvoGo6PgK00S",
+      "recvoGo6PgSPuY",
+      "recvoGo6PghgwF",
+      "recvoGo6PgfR2T",
+      "recvoGo6PgI0Ea",
+      "recvoGo6PgKoMZ",
+      "recvoGo6PgrIsp",
+      "recvoGo6Pg4M8T",
+      "recvoGo6PgnkiC",
+      "recvoGo6Pg0Hen",
+      "recvoGo6Pgpimo",
+      "recvoGo6PgVoGH",
+      "recvoGo6Pgnntt",
+      "recvoGo6PgVCs9",
+      "recvoGo6PgQiLw",
+      "recvoGo6Pg5Vnh",
+      "recvoGo6Pghpzk",
+      "recvoGo6PgC33i",
+      "recvoGo6PgaT0d",
+      "recvoGo6PgynnQ",
+      "recvoGo6PgzkL3",
+      "recvoGo6PgRrAV",
+      "recvoGo6PgBX1Q",
+      "recvoGo6PgvFeN",
+      "recvoGo6Pg7Bu6",
+      "recvoGo6PgCmFy",
+      "recvoGo6Pg4XAG",
+      "recvoGo6PgvXhq",
+      "recvoGo6PgeCWS",
+      "recvoGo6Pg35P6",
+      "recvoGo6PgqSGi",
+      "recvoGo6PgfBiU",
+      "recvoGo6Pg177b",
+      "recvoGo6PgIKjr",
+      "recvoGo6PgOObw",
+      "recvoGo6Pg3pvv",
+      "recvoGo6Pg17R4",
+      "recvoGo6Pge2xv",
+      "recvoGo6Pghfn7",
+      "recvoGo6Pg2Xv7",
+      "recvoGo6Pgdb6Y"
+    ]
+  }
+}
