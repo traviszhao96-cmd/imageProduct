@@ -37,7 +37,7 @@ def finalize(csv_path: Path, label: str):
         if name == "识别框视觉动效":
             row["二级分类"] = "AE/AF"
             row["状态"] = "已确认"
-            row["确认负责人"] = "PM / SE"
+            row["确认负责人"] = "Product / SE"
             for c in cameras:
                 row[c] = "✓"
             row["不支持原因"] = ""
@@ -49,7 +49,7 @@ def finalize(csv_path: Path, label: str):
             if "UW" in cameras:
                 row["UW"] = "✓"
             row["状态"] = "已确认"
-            row["确认负责人"] = "PM / SE"
+            row["确认负责人"] = "Product / SE"
             updates += 1
             print(f"  [{label}] 镜头脏污 UW→✓ ({mode})")
         
@@ -59,7 +59,7 @@ def finalize(csv_path: Path, label: str):
                 row[c] = "✓"
             row["不支持原因"] = ""
             row["状态"] = "已确认"
-            row["确认负责人"] = "PM / SE"
+            row["确认负责人"] = "Product / SE"
             updates += 1
             print(f"  [{label}] 锁定镜头 → 已确认")
         
@@ -69,7 +69,7 @@ def finalize(csv_path: Path, label: str):
                 row[c] = "✓"
             row["不支持原因"] = ""
             row["状态"] = "已确认"
-            row["确认负责人"] = "PM / SE"
+            row["确认负责人"] = "Product / SE"
             row["说明"] = "相机预览页引导入口，位于 Preset 按键附近；覆盖照片和人像模式的所有焦段。点击后分析当前预览帧并推荐滤镜+调色 preset 卡片。"
             updates += 1
             print(f"  [{label}] AI Preset → 已确认（照片+人像，全焦段）")
@@ -80,7 +80,7 @@ def finalize(csv_path: Path, label: str):
             row["状态"] = "已确认" if all(
                 row.get(c, "") in ("✓", "✗") for c in cameras
             ) else row["状态"]
-            row["确认负责人"] = "PM / SE / QA"
+            row["确认负责人"] = "Product / SE / SQA"
             if "UW:" not in (row.get("不支持原因") or ""):
                 if row["不支持原因"]:
                     row["不支持原因"] += "；UW: 26111 Base 不支持 4K。"
@@ -102,7 +102,7 @@ def finalize(csv_path: Path, label: str):
         if label == "26121" and name in ("1080P 60FPS", "1080P 60FPS HLG") and "UW" in cameras and row.get("UW", "") in ("TBD", "✗", ""):
             row["UW"] = "✓"
             row["状态"] = "已确认"
-            row["确认负责人"] = "PM / SE / QA"
+            row["确认负责人"] = "Product / SE / SQA"
             updates += 1
             print(f"  [{label}] {name}: UW ✓")
         
@@ -114,7 +114,7 @@ def finalize(csv_path: Path, label: str):
                 row["Tele"] = "✓"
             all_resolved = all(row.get(c, "") in ("✓", "✗") for c in cameras)
             row["状态"] = "已确认" if all_resolved else row["状态"]
-            row["确认负责人"] = "PM / SE / QA"
+            row["确认负责人"] = "Product / SE / SQA"
             updates += 1
             print(f"  [{label}] {name}: Main/Tele ✓")
         
@@ -123,7 +123,7 @@ def finalize(csv_path: Path, label: str):
             all_resolved = all(row.get(c, "") in ("✓", "✗") for c in cameras)
             if all_resolved:
                 row["状态"] = "已确认"
-                row["确认负责人"] = "PM / SE / QA"
+                row["确认负责人"] = "Product / SE / SQA"
                 updates += 1
                 print(f"  [{label}] {name}: all resolved → 已确认")
         
@@ -132,7 +132,7 @@ def finalize(csv_path: Path, label: str):
             all_resolved = all(row.get(c, "") in ("✓", "✗") for c in cameras)
             if all_resolved:
                 row["状态"] = "已确认"
-                row["确认负责人"] = "PM / SE / QA"
+                row["确认负责人"] = "Product / SE / SQA"
                 updates += 1
                 print(f"  [{label}] {name}: all resolved → 已确认")
         
@@ -148,8 +148,8 @@ def finalize(csv_path: Path, label: str):
 
 def main():
     for fname, label in [
-        ("26111_fl_draft.v0.2.csv", "26111"),
-        ("26121_fl_draft.v0.2.csv", "26121"),
+        ("26111_fl_draft.v1.0.csv", "26111"),
+        ("26121_fl_draft.v1.0.csv", "26121"),
     ]:
         p = BASE / fname
         print(f"\n=== {label} ===")

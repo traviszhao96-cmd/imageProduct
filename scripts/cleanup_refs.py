@@ -56,8 +56,8 @@ def process_csv(input_path: Path):
 def main():
     base = Path("/Users/travis.zhao/imageProduct/knowledge/_output/fl_draft_26111_26121")
     for fname, label in [
-        ("26111_fl_draft.v0.2.csv", "26111"),
-        ("26121_fl_draft.v0.2.csv", "26121"),
+        ("26111_fl_draft.v1.0.csv", "26111"),
+        ("26121_fl_draft.v1.0.csv", "26121"),
     ]:
         p = base / fname
         print(f"\n=== Cleaning {label} ===")

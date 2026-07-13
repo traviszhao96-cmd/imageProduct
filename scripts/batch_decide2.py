@@ -51,7 +51,7 @@ def process_csv(csv_path: Path, label: str, af_map: dict):
                 ae_row[c] = "✓"
             ae_row["不支持原因"] = ""
             ae_row["状态"] = "已确认"
-            ae_row["确认负责人"] = "PM / QA / SE"
+            ae_row["确认负责人"] = "Product / SE / SQA"
             ae_row["验证方法"] = "短按/长按预览区域，确认 AE 调节 UI、曝光补偿和锁定功能。"
             new_rows.append(ae_row)
 
@@ -71,7 +71,7 @@ def process_csv(csv_path: Path, label: str, af_map: dict):
                     reasons.append(f"{c}: FF 定焦摄像头，仅支持 AE，不支持 AF。")
             af_row["不支持原因"] = "；".join(reasons) if reasons else ""
             af_row["状态"] = "已确认"
-            af_row["确认负责人"] = "PM / QA / SE"
+            af_row["确认负责人"] = "Product / SE / SQA"
             af_row["验证方法"] = "点击预览、人脸入镜、长按锁定、移动被摄体，确认 CAF/Touch AF/Face AF/Lock 行为；FF 摄像头确认仅 AE 生效。"
             new_rows.append(af_row)
 
@@ -91,7 +91,7 @@ def process_csv(csv_path: Path, label: str, af_map: dict):
                 row[c] = "✓"
             row["不支持原因"] = ""
             row["状态"] = "已确认"
-            row["确认负责人"] = "PM / QA / SE"
+            row["确认负责人"] = "Product / SE / SQA"
             if len(row.get("说明", "").strip()) < 30:
                 row["说明"] = ZOOM_DESC
 
@@ -112,8 +112,8 @@ def process_csv(csv_path: Path, label: str, af_map: dict):
 
 def main():
     for fname, label, af_map in [
-        ("26111_fl_draft.v0.2.csv", "26111", CAM26111_AF),
-        ("26121_fl_draft.v0.2.csv", "26121", CAM26121_AF),
+        ("26111_fl_draft.v1.0.csv", "26111", CAM26111_AF),
+        ("26121_fl_draft.v1.0.csv", "26121", CAM26121_AF),
     ]:
         p = BASE / fname
         print(f"\n=== {label} ===")

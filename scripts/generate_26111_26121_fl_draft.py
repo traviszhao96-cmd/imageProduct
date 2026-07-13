@@ -4,7 +4,7 @@
 The draft is intentionally distribution-friendly rather than final:
 - preserve current Bitable rows where available;
 - add algorithm source rows and active Tree/KB integration candidates;
-- keep unresolved support as TBD so PM/SE/QA can fill it in the shared table.
+- keep unresolved support as TBD so Product/SE/SQA/IQA can fill it in the shared table.
 """
 
 from __future__ import annotations
@@ -14,7 +14,7 @@ import json
 import re
 from collections import Counter, defaultdict
 from pathlib import Path
-from typing import Iterable
+from typing import Any, Iterable
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -194,6 +194,18 @@ SETTING_GROUP_BY_NAME = {
 SETTINGS_LEVEL2 = {"General settings", "Photo settings", "Video settings", "Help & Support"}
 COMMON_LEVEL1 = {"通用功能", "Preset", "Settings", "Widget"}
 PRUNED_NAMES = {"普通场景检测", "运动检测"}
+
+FRONT_SUPPORTED_NAMES = {
+    "Exposure",
+    "Grid",
+    "More settings",
+    "Ratio",
+    "Watermark",
+    "风格-滤镜 / Style-Filter",
+    "风格-调色 / Style-Tuning",
+    "风格-调色盘 / Style-Tuning Palette",
+    "AE / 自动曝光",
+}
 
 
 def normalize_level2(value: str) -> str:
@@ -483,14 +495,30 @@ def repair_legacy_current_row(row: dict[str, str], project: str, source: str) ->
 
 
 def owner_for(row: dict[str, str]) -> str:
-    text = f"{row.get('一级分类','')} {row.get('二级分类','')} {row.get('名称','')}"
-    if row.get("一级分类") == "基础算法" or any(term in text for term in ["算法", "HDR", "EIS", "OIS", "SAT", "ISZ", "Remosaic", "SR", "FRT", "人脸", "场景检测"]):
-        return "影像 SE"
-    if any(term in text for term in ["Tuning", "滤镜", "Style", "Photo Style", "Preset", "风格", "调色"]):
-        return "PM / Tuning"
-    if any(term in text for term in ["Settings", "setting", "设置", "编码", "Auto FPS", "Lock"]):
-        return "PM / QA"
-    return "PM / QA / SE"
+    level1 = row.get("一级分类", "")
+    level2 = row.get("二级分类", "")
+    text = f"{level1} {level2} {row.get('名称','')}"
+    quality_terms = [
+        "HDR", "夜景", "美颜", "滤镜", "Tuning", "Style", "Photo Style", "风格", "调色",
+        "EIS", "OIS", "SAT", "ISZ", "Remosaic", "SR", "FRT", "人脸", "场景检测",
+        "虚化", "清晰度", "降噪", "色彩", "曝光", "白平衡",
+    ]
+    if "算法" in level1 or "Algorithm" in level1:
+        return "SE"
+    if any(term in level2 for term in ["视频规格", "Video Specs", "慢动作规格", "Slow Motion Specs", "延时规格", "Timelapse Specs"]):
+        return "SE / SQA"
+    if any(term in text for term in quality_terms):
+        return "Product / IQA"
+    return "Product / SQA"
+
+
+def normalize_owner(value: Any, row: dict[str, str]) -> str:
+    """Keep canonical multi-select roles and reclassify legacy owner labels."""
+    order = ["Product", "SE", "SQA", "IQA"]
+    roles = [part.strip() for part in as_text(value).split("/") if part.strip()]
+    if roles and set(roles).issubset(set(order)):
+        return " / ".join(role for role in order if role in roles)
+    return owner_for(row)
 
 
 def status_for(row: dict[str, str]) -> str:
@@ -531,7 +559,7 @@ def normalize_row(row: dict, project: str, source: str) -> dict[str, str]:
         out[cam] = as_text(row.get(cam)) or as_text(row.get(f"{project} {cam}"))
     for cam in {"Main", "UW", "Tele", "Front"} - set(PROJECTS[project]["cameras"]):
         out[cam] = ""
-    out["确认负责人"] = as_text(row.get("确认负责人")) or owner_for(out)
+    out["确认负责人"] = normalize_owner(row.get("确认负责人"), out)
     out["状态"] = status_for(out)
     repair_legacy_current_row(out, project, source)
     return out
@@ -561,7 +589,17 @@ def merge_row(rows: dict[tuple[str, str, str, str], dict[str, str]], row: dict[s
 def apply_canonical_support_overrides(row: dict[str, str], project: str) -> None:
     """Keep merged rows aligned with canonical camera-scope rules."""
     name = row.get("名称", "")
+    mode = row.get("模式", "")
     cameras = PROJECTS[project]["cameras"]
+    row["确认负责人"] = owner_for(row)
+    if mode in {"人像", "人像 / Portrait"} and "UW" in cameras:
+        # UW can participate as an internal depth auxiliary stream, but it is
+        # not exposed as a selectable/output camera in Portrait mode.
+        row["UW"] = "✗"
+    if name in FRONT_SUPPORTED_NAMES and "Front" in cameras:
+        row["Front"] = "✓"
+    if mode in {"专业", "专业 / Expert", "高像素", "高像素 / High Resolution"} and "Front" in cameras:
+        row["Front"] = "✗"
     if name == "SAT / 平滑镜头切换":
         for cam in cameras:
             row[cam] = "✗" if cam == "Front" else "✓"
@@ -616,7 +654,7 @@ def add_algorithm_rows(project: str, rows: dict[tuple[str, str, str, str], dict[
                     "名称": clean_legacy_text(item["名称"]),
                     "说明": clean_legacy_text(item["说明"]),
                     "状态": "待确认" if "TBD" in json.dumps(item, ensure_ascii=False) else "待确认",
-                    "确认负责人": "影像 SE",
+                    "确认负责人": "SE / IQA",
                     "验证方法": clean_legacy_text(item["验证方法"]),
                     "来源": "algorithm-fl-source-26111-26121.md",
                     "备注": "算法来源行，需 SE 按项目实测确认。",
@@ -757,7 +795,7 @@ def add_video_spec_rows(project: str, rows: dict[tuple[str, str, str, str], dict
                 "名称": spec,
                 "说明": VIDEO_SPEC_DESCRIPTIONS[spec],
                 "状态": "待确认",
-                "确认负责人": "PM / SE / QA",
+                    "确认负责人": "Product / SE / SQA",
                 "验证方法": f"切到视频模式，分别选择 {spec}，逐个摄像头录制并检查入口、文件分辨率/帧率、稳定性、发热和降帧提示。",
                 "来源": "generated-video-spec-matrix",
                 "备注": "初步按 26111.yaml、P0 功能列表、前置 4K PRD 和算法源表整理；TBD 项需 SE 确认。",
@@ -779,10 +817,10 @@ def add_slow_motion_spec_rows(project: str, rows: dict[tuple[str, str, str, str]
                 "名称": spec,
                 "说明": f"慢动作模式录制规格：{spec}。慢动作模式支持本身已确认，具体规格按摄像头独立打勾/打叉。",
                 "状态": "待确认",
-                "确认负责人": "PM / SE / QA",
+                    "确认负责人": "Product / SE / SQA",
                 "验证方法": f"切到慢动作模式，选择 {spec}，逐个摄像头录制并检查入口、文件分辨率/帧率、播放倍率、稳定性和发热。",
                 "来源": "generated-slow-motion-spec-matrix",
-                "备注": "按 PM 口径展开为慢动作具体规格；每个项目通常只支持部分规格，需 SE/QA 填写最终支持列。",
+                "备注": "按 Product 口径展开为慢动作具体规格；每个项目通常只支持部分规格，需 SE/SQA 填写最终支持列。",
             }
         )
         for cam in PROJECTS[project]["cameras"]:
@@ -808,7 +846,7 @@ def add_high_res_option_rows(project: str, rows: dict[tuple[str, str, str, str],
                 "名称": option,
                 "说明": desc,
                 "状态": "待确认",
-                "确认负责人": "PM / SE / QA",
+                    "确认负责人": "Product / SE / SQA",
                 "验证方法": f"进入高像素模式选择 {option}，逐个支持摄像头拍摄并确认入口、分辨率、处理耗时、RAW HDR/Ultra 标记和成片画质。",
                 "来源": "generated-high-res-options",
                 "备注": "按 PM 口径：26111 支持 50MP / 200MP / 200MP Ultra；26121 支持 50MP / 50MP Ultra。",
@@ -842,7 +880,7 @@ def add_video_toolbar_rows(project: str, rows: dict[tuple[str, str, str, str], d
                 "名称": item["名称"],
                 "说明": item["说明"],
                 "状态": "待确认",
-                "确认负责人": "PM / SE / QA",
+                    "确认负责人": "Product / SE / SQA",
                 "验证方法": item["验证方法"],
                 "来源": "generated-video-toolbar-rules",
                 "备注": "由前置 4K 互斥表、VSS 说明和 PM 反馈补齐；具体规格互斥需继续确认。",
@@ -897,7 +935,7 @@ def add_dual_view_v2_rows(project: str, rows: dict[tuple[str, str, str, str], di
                 "名称": item["名称"],
                 "说明": item["说明"],
                 "状态": "待确认",
-                "确认负责人": "PM / SE / QA",
+                    "确认负责人": "Product / SE / SQA",
                 "验证方法": item["验证方法"],
                 "来源": "generated-dual-view-v2-rules",
                 "备注": "由 PM 口径拆分前后双录 v2：后置镜头选择归预览；split-save 归 Settings；Pro tele、Filter/Tuning 支持。",
@@ -918,7 +956,7 @@ def add_log_video_row(project: str, rows: dict[tuple[str, str, str, str], dict[s
             "名称": "Log 视频",
             "说明": "视频 Toolbar 中的 Log 拍摄功能，用于以 Log 曲线录制视频；需在说明/规格中写清支持的分辨率、帧率、镜头和编码范围。",
             "状态": "待确认",
-            "确认负责人": "PM / SE / QA",
+            "确认负责人": "Product / SE / SQA",
             "验证方法": "在视频 Toolbar 开启 Log，按支持规格录制样片，确认入口、编码/位深、颜色曲线、LUT 还原、相册识别和不支持规格的置灰/提示。",
             "来源": "generated-log-video-toolbar-rule",
             "备注": "按 PM 口径：Log 放在视频 Toolbar；支持规格范围仍需根据项目 PRD/平台能力补齐。",
@@ -1041,7 +1079,7 @@ def add_candidate_rows(project: str, rows: dict[tuple[str, str, str, str], dict[
                     "打开 Tuning，分别验证 Palette Mode、Parameter Mode、Strength、7 参数调节、"
                     "Reset、Preset 保存/恢复，以及与 Filter、Photo Style 的叠加顺序。"
                 )
-                row["确认负责人"] = "PM / Tuning"
+                row["确认负责人"] = "Product / SE / IQA"
                 if item.get("notes") and item["notes"] not in row.get("备注", ""):
                     row["备注"] = (row.get("备注", "") + " | " + clean_legacy_text(item["notes"])).strip(" |")
                 if "tree-kb-integration-candidates.v1.json" not in row.get("来源", ""):
@@ -1075,7 +1113,7 @@ def add_candidate_rows(project: str, rows: dict[tuple[str, str, str, str], dict[
                     "名称": item.get("kb_name") or item["requirement"],
                     "说明": description,
                     "状态": "待确认" if item.get("dispute_level") in {"medium", "high"} else "待确认",
-                    "确认负责人": "PM / SE" if item.get("dispute_level") in {"medium", "high"} else "PM / QA",
+                    "确认负责人": "Product / SE" if item.get("dispute_level") in {"medium", "high"} else "Product / SQA",
                     "验证方法": verification,
                     "来源": "tree-kb-integration-candidates.v1.json",
                     "备注": note,
@@ -1090,6 +1128,12 @@ def unsupported_reason(row: dict[str, str], project: str, cam: str) -> str:
     name = row.get("名称", "")
     mode = row.get("模式", "")
     level2 = row.get("二级分类", "")
+    if cam == "Front" and mode in {"专业", "专业 / Expert"}:
+        return "专业模式不支持前置摄像头，因此该功能在 Front 不适用。"
+    if cam == "Front" and mode in {"高像素", "高像素 / High Resolution"}:
+        return "高像素模式不支持前置摄像头，因此该功能在 Front 不适用。"
+    if cam == "UW" and mode in {"人像", "人像 / Portrait"}:
+        return "人像模式不开放超广角摄像头，因此该功能在 UW 不适用。"
     text = row_search_text(row)
     if row.get(cam) != "✗":
         return ""
@@ -1290,34 +1334,34 @@ def main() -> None:
         rows = sorted_rows(finalize_row(row, project) for row in merged.values())
         project_rows[project] = rows
         rendered_rows = display_rows(rows)
-        (DRAFT / f"{project}_fl_draft.v0.2.json").write_text(json.dumps(rendered_rows, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-        write_csv(DRAFT / f"{project}_fl_draft.v0.2.csv", rendered_rows, project)
-        write_markdown(DRAFT / f"{project}_fl_draft.v0.2.md", rendered_rows, project)
+        (DRAFT / f"{project}_fl_draft.v1.0.json").write_text(json.dumps(rendered_rows, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        write_csv(DRAFT / f"{project}_fl_draft.v1.0.csv", rendered_rows, project)
+        write_markdown(DRAFT / f"{project}_fl_draft.v1.0.md", rendered_rows, project)
 
     hw = hardware_rows()
-    (DRAFT / "hardware_config.v0.2.json").write_text(json.dumps(hw, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-    with (DRAFT / "hardware_config.v0.2.csv").open("w", encoding="utf-8-sig", newline="") as f:
+    (DRAFT / "hardware_config.v1.0.json").write_text(json.dumps(hw, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    with (DRAFT / "hardware_config.v1.0.csv").open("w", encoding="utf-8-sig", newline="") as f:
         writer = csv.DictWriter(f, fieldnames=["项目代号", "机型", "相机位置", "Sensor 型号", "分辨率", "OIS", "备注"])
         writer.writeheader()
         writer.writerows(hw)
 
-    (DRAFT / "fl-generation-audit.v0.2.md").write_text(audit(project_rows), encoding="utf-8")
+    (DRAFT / "fl-generation-audit.v1.0.md").write_text(audit(project_rows), encoding="utf-8")
     manifest = {
-        "version": "v0.2",
-        "meaning": "Distribution draft for PM/SE/QA fill-in, not final sign-off.",
+        "version": "v1.0",
+        "meaning": "Distribution draft for Product/SE/SQA/IQA fill-in, not final sign-off.",
         "base_link": "https://nothing-tech.sg.larksuite.com/wiki/RbYFwco6qiFiywklWSKlL3WcgMg?table=tblmjUrlAEUhegjG&view=vew2pV2f4a",
         "tables": {
             project: {
                 "rows": len(rows),
-                "json": f"{project}_fl_draft.v0.2.json",
-                "csv": f"{project}_fl_draft.v0.2.csv",
-                "markdown": f"{project}_fl_draft.v0.2.md",
+                "json": f"{project}_fl_draft.v1.0.json",
+                "csv": f"{project}_fl_draft.v1.0.csv",
+                "markdown": f"{project}_fl_draft.v1.0.md",
             }
             for project, rows in project_rows.items()
         },
-        "hardware": {"rows": len(hw), "json": "hardware_config.v0.2.json", "csv": "hardware_config.v0.2.csv"},
+        "hardware": {"rows": len(hw), "json": "hardware_config.v1.0.json", "csv": "hardware_config.v1.0.csv"},
     }
-    (DRAFT / "manifest.v0.2.json").write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    (DRAFT / "manifest.v1.0.json").write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(json.dumps(manifest, ensure_ascii=False, indent=2))
 
 

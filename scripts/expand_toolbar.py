@@ -8,7 +8,8 @@ from copy import deepcopy
 BASE = Path("/Users/travis.zhao/imageProduct/knowledge/_output/fl_draft_26111_26121")
 
 # Which toolbar rows to expand to which modes, and camera rules
-# 'all_rear' = Main+UW ✓, Front ✗; 'all' = all ✓; 'main_only' = Main ✓, others ✗
+# 'all_rear' = Main+UW(+Tele) ✓, Front ✗; 'portrait' = UW ✗, other project cameras ✓
+# 'all' = all ✓; 'main_only' = Main ✓, others ✗
 TOOLBAR_ROWS = [
     "Exposure", "Flash", "Grid", "HDR", "More settings",
     "Ratio", "Timer", "Watermark",
@@ -25,9 +26,23 @@ VIDEO_STYLE_ROWS = [
     "风格-调色盘 / Style-Tuning Palette",
 ]
 
+FRONT_SUPPORTED_ROWS = {
+    "Exposure", "Grid", "More settings", "Ratio", "Watermark",
+    "风格-滤镜 / Style-Filter",
+    "风格-调色 / Style-Tuning",
+    "风格-调色盘 / Style-Tuning Palette",
+}
+
+QUALITY_INTERACTION_ROWS = {
+    "HDR",
+    "风格-滤镜 / Style-Filter",
+    "风格-调色 / Style-Tuning",
+    "风格-调色盘 / Style-Tuning Palette",
+}
+
 # Expansion rules per target mode
 EXPANSION = {
-    "人像 / Portrait": {"rows": TOOLBAR_ROWS, "cam_rule": "all_rear", "flash": "front_only"},
+    "人像 / Portrait": {"rows": TOOLBAR_ROWS, "cam_rule": "portrait", "flash": "front_only"},
     "夜景 / Night": {"rows": [r for r in TOOLBAR_ROWS if r not in ("Timer", "HDR")], "cam_rule": "all_rear", "flash": "all_off"},
     "专业 / Expert": {"rows": [r for r in TOOLBAR_ROWS if r not in ("HDR",)], "cam_rule": "all_rear", "flash": "all_rear"},
     "运动 / Action": {"rows": [r for r in TOOLBAR_ROWS if r not in ("HDR", "Quality", "Watermark")], "cam_rule": "all_rear", "flash": "all_rear"},
@@ -40,7 +55,7 @@ EXPANSION = {
 
 # Flash per mode (special handling because Flash behavior differs by front/rear)
 FLASH_MODE_RULES = {
-    "人像 / Portrait": {"Main": "✓", "UW": "✓", "Front": "✓"},  # Front uses screen fill
+    "人像 / Portrait": {"Main": "✓", "UW": "✗", "Tele": "✓", "Front": "✓"},  # Front uses screen fill
     "夜景 / Night": {"Main": "✗", "UW": "✗", "Front": "✗"},
     "专业 / Expert": {"Main": "✓", "UW": "✓", "Front": "✗"},
     "运动 / Action": {"Main": "✓", "UW": "✓", "Front": "✗"},
@@ -108,7 +123,7 @@ def expand_csv(csv_path: Path, label: str):
             new_row = deepcopy(template)
             new_row["模式"] = target_mode
             new_row["状态"] = "已确认"
-            new_row["确认负责人"] = "PM / QA / SE"
+            new_row["确认负责人"] = "Product / IQA" if row_name in QUALITY_INTERACTION_ROWS else "Product / SQA"
             
             # Apply camera rules
             if row_name == "Flash" and target_mode in FLASH_MODE_RULES:
@@ -120,16 +135,31 @@ def expand_csv(csv_path: Path, label: str):
             elif rules["cam_rule"] == "main_only":
                 for c in cameras:
                     new_row[c] = "✓" if c == "Main" else "✗"
+            elif rules["cam_rule"] == "portrait":
+                for c in cameras:
+                    new_row[c] = "✗" if c == "UW" else "✓"
             elif rules["cam_rule"] == "all":
                 for c in cameras:
                     new_row[c] = "✓"
+
+            if row_name in FRONT_SUPPORTED_ROWS and "Front" in cameras:
+                new_row["Front"] = "✓"
+
+            if target_mode in {"专业 / Expert", "高像素 / High Resolution"} and "Front" in cameras:
+                new_row["Front"] = "✗"
             
             # Build unsupport reason
             reasons = []
             for c in cameras:
                 if new_row.get(c) == "✗":
-                    if c == "Front":
-                        reasons.append(f"Front: 该模式不支持前置摄像头。")
+                    if c == "UW" and target_mode == "人像 / Portrait":
+                        reasons.append("UW: 人像模式不开放超广角摄像头，因此该功能在 UW 不适用。")
+                    elif c == "Front" and target_mode == "专业 / Expert":
+                        reasons.append("Front: 专业模式不支持前置摄像头，因此该功能在 Front 不适用。")
+                    elif c == "Front" and target_mode == "高像素 / High Resolution":
+                        reasons.append("Front: 高像素模式不支持前置摄像头，因此该功能在 Front 不适用。")
+                    elif c == "Front":
+                        reasons.append("Front: 该模式不支持前置摄像头。")
                     elif c == "UW" and rules["cam_rule"] == "main_only":
                         reasons.append(f"UW: 高像素模式仅主摄可用。")
             new_row["不支持原因"] = "；".join(reasons) if reasons else ""
@@ -151,7 +181,7 @@ def expand_csv(csv_path: Path, label: str):
             new_row = deepcopy(template)
             new_row["模式"] = "视频 / Video"
             new_row["状态"] = "已确认"
-            new_row["确认负责人"] = "PM / SE / QA"
+            new_row["确认负责人"] = "Product / IQA"
             for c in cameras:
                 new_row[c] = "✓"
             new_row["不支持原因"] = ""
@@ -164,7 +194,7 @@ def expand_csv(csv_path: Path, label: str):
             new_row = deepcopy(template)
             new_row["模式"] = "前后双录 / Dual View Video"
             new_row["状态"] = "已确认"
-            new_row["确认负责人"] = "PM / SE / QA"
+            new_row["确认负责人"] = "Product / IQA"
             for c in cameras:
                 new_row[c] = "✓"
             new_row["不支持原因"] = ""
@@ -200,8 +230,8 @@ def expand_csv(csv_path: Path, label: str):
 
 def main():
     for fname, label in [
-        ("26111_fl_draft.v0.2.csv", "26111"),
-        ("26121_fl_draft.v0.2.csv", "26121"),
+        ("26111_fl_draft.v1.0.csv", "26111"),
+        ("26121_fl_draft.v1.0.csv", "26121"),
     ]:
         p = BASE / fname
         print(f"\n=== {label} ===")

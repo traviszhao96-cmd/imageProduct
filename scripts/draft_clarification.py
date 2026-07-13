@@ -132,11 +132,11 @@ def group_pending(pending_26111, pending_26121):
 
 
 def main():
-    print("# 26111 / 26121 FL 澄清清单 v0.2\n")
-    print("> 生成时间: 2026-07-08, 基于 v0.2 restyled drafts\n")
+    print("# 26111 / 26121 FL 澄清清单 v1.0\n")
+    print("> 生成时间: 2026-07-08, 基于 v1.0 restyled drafts\n")
     
-    t1, p1, tbd1, weak1 = analyze_csv(BASE / "26111_fl_draft.v0.2.csv", "26111")
-    t2, p2, tbd2, weak2 = analyze_csv(BASE / "26121_fl_draft.v0.2.csv", "26121")
+    t1, p1, tbd1, weak1 = analyze_csv(BASE / "26111_fl_draft.v1.0.csv", "26111")
+    t2, p2, tbd2, weak2 = analyze_csv(BASE / "26121_fl_draft.v1.0.csv", "26121")
     
     print("## Snapshot\n")
     print(f"| | 26111 | 26121 |")

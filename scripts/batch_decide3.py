@@ -71,7 +71,7 @@ def process_csv(csv_path: Path, label: str, ois_map, glyph_map, glyph_reason, sl
             reasons = [f"{c}: {OIS_UNSUPPORT}" for c, v in ois_map.items() if v == "✗"]
             row["不支持原因"] = "；".join(reasons)
             row["状态"] = "已确认"
-            row["确认负责人"] = "影像 SE"
+            row["确认负责人"] = "SE / IQA"
             updates += 1
             print(f"  [{label}] OIS: {row['模式']} → 已确认")
 
@@ -81,7 +81,7 @@ def process_csv(csv_path: Path, label: str, ois_map, glyph_map, glyph_reason, sl
                 row[c] = glyph_map.get(c, "✗")
             row["不支持原因"] = glyph_reason
             row["状态"] = "已确认"
-            row["确认负责人"] = "PM / QA / SE"
+            row["确认负责人"] = "Product / SE / SQA"
             updates += 1
             print(f"  [{label}] Glyph Mirror: → 已确认")
 
@@ -93,7 +93,7 @@ def process_csv(csv_path: Path, label: str, ois_map, glyph_map, glyph_reason, sl
                     row[c] = "✓"
                 row["不支持原因"] = ""
                 row["状态"] = "已确认"
-                row["确认负责人"] = "PM / QA / SE"
+                row["确认负责人"] = "Product / SE / SQA"
                 updates += 1
                 print(f"  [{label}] {name}: → 已确认")
 
@@ -109,7 +109,7 @@ def process_csv(csv_path: Path, label: str, ois_map, glyph_map, glyph_reason, sl
                     reasons.append(f"Front: {SLOWMO_UNSUPPORT_FRONT}")
                 row["不支持原因"] = "；".join(reasons) if reasons else ""
                 row["状态"] = "已确认" if all(v != "TBD" for v in spec.values()) else "待确认"
-                row["确认负责人"] = "PM / SE / QA"
+                row["确认负责人"] = "Product / SE / SQA"
                 updates += 1
                 print(f"  [{label}] {name}: {spec} → {row['状态']}")
 
@@ -126,9 +126,9 @@ def main():
     glyph_26121 = {"Main": "✓", "UW": "✓", "Tele": "✓", "Front": "✗"}
 
     for fname, label, ois_map, glyph_map, glyph_reason, slowmo in [
-        ("26111_fl_draft.v0.2.csv", "26111", OIS_26111,
+        ("26111_fl_draft.v1.0.csv", "26111", OIS_26111,
          glyph_26111, GLYPH_UNSUPPORT_26111, SLOWMO_SPECS_26111),
-        ("26121_fl_draft.v0.2.csv", "26121", OIS_26121,
+        ("26121_fl_draft.v1.0.csv", "26121", OIS_26121,
          glyph_26121, GLYPH_UNSUPPORT_26121_FRONT, SLOWMO_SPECS_26121),
     ]:
         p = BASE / fname

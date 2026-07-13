@@ -74,7 +74,7 @@ def process_csv(csv_path: Path, label: str, front_map, front_reason):
                     if c == "Front":
                         row[c] = "✓"
                 row["状态"] = "已确认"
-                row["确认负责人"] = "影像 SE"
+                row["确认负责人"] = "SE / IQA"
                 updates += 1
                 print(f"  [{label}] HLG/HDR: Front → ✓")
 
@@ -88,8 +88,8 @@ def process_csv(csv_path: Path, label: str, front_map, front_reason):
 
 def main():
     for fname, label, front_map, front_reason in [
-        ("26111_fl_draft.v0.2.csv", "26111", FRONT_VIDEO_26111, FRONT_UNSUPPORT_26111),
-        ("26121_fl_draft.v0.2.csv", "26121", FRONT_VIDEO_26121, FRONT_UNSUPPORT_26121),
+        ("26111_fl_draft.v1.0.csv", "26111", FRONT_VIDEO_26111, FRONT_UNSUPPORT_26111),
+        ("26121_fl_draft.v1.0.csv", "26121", FRONT_VIDEO_26121, FRONT_UNSUPPORT_26121),
     ]:
         p = BASE / fname
         print(f"\n=== {label} ===")

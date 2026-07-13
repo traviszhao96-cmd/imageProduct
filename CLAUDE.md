@@ -10,6 +10,7 @@ Before doing ANY camera-related work, load the relevant knowledge files first:
 |------|-----------------|
 | Write a camera PRD | `knowledge/feature-tree.md` → `knowledge/features/{rear,front}-camera.json` → `knowledge/devices/{project}.yaml` |
 | Review a feature list | `knowledge/features/{rear,front}-camera.json` → `knowledge/devices/{project}.yaml` → sensor YAMLs |
+| Review 26111 / 26121 FL | `knowledge/reference/hal-26111-26121.md` → `knowledge/reference/algorithm-fl-source-26111-26121.md` → `knowledge/devices/26111.yaml` |
 | Check hardware capability | `knowledge/devices/{project}.yaml` → `knowledge/devices/sensors/{model}.yaml` |
 | Analyze NPS/feedback | `knowledge/reference/nps-*.json` → `knowledge/reference/gallery-feedback-*.json` |
 | Understand device lineup | `knowledge/devices/project-mapping.yaml` |
@@ -167,15 +168,22 @@ Skills in `skills/` directory provide specialized workflows:
 
 ## Feature Tree Convention
 
-The camera feature tree (`knowledge/feature-tree.md`) organizes all features by **interaction zone** (12 zones: 启动退出, 预览框, AE/AF, Zoom, 暂态开关, 快门区域, Top Toolbar, Mode Switch, Preset, Settings, 系统级交互, 相册联动).
+The camera feature tree (`knowledge/feature-tree.md`) organizes features by interaction zone and common category: 启动退出, 预览框, AE/AF, Zoom, 暂态开关, 快门区域, Toolbar, Mode Switch, 通用/Common (Preset, Settings, Widget), 系统级交互, 相册联动.
 
 Feature List generation rules:
 - `快门区域` is documented for UI completeness but should not be expanded into FL rows. Shutter button, gallery thumbnail, and front/rear camera flip are default camera controls.
-- KB is the function manual; final FL is the project capability matrix. In KB, `模式` is a mode scope such as `全部拍摄模式` or `照片 / 人像 / 视频`. In final FL, expand that scope into real mode rows and use `✓` / `✗` to show support differences.
-- Do not use `通用` as a mode value by default. Preset and Settings can use `全部拍摄模式` in KB, then expand to actual modes in final FL unless a separate common-feature table is explicitly designed.
-- Settings groups are General (Preset, Save location, Shutter sound, Mirror front camera, Level), Photo (Watermark, Auto Tone, Tap to take a photo, QR code scanner, Press and hold shutter, Ultra XDR), and Video (Video encoding H.264/H.265, Power saving recording, Auto FPS).
+- FL is a project acceptance checklist artifact produced by imaging SE/PM and read mainly by PM and QA/test. It is intentionally verbose for acceptance, but repeated mode/camera support rows should be generated from Feature Tree, KB, project requirements, and hardware/project config rather than manually maintained as canonical knowledge.
+- A PRD that updates an existing capability should update the existing Tree/KB node, not create a new row, unless it introduces a distinct user-facing function, mode, entry, or algorithm capability.
+- KB is the function manual; final FL is the project capability matrix. In KB, `模式` is a mode scope such as `通用` (all modes / maximum compatibility), `全部拍摄模式`, or `照片 / 人像 / 视频`. In final FL, keep common rows for `Settings`, `Preset`, and `Widget`, and expand mode-specific scopes into real mode rows.
+- `通用` is valid only when the function really applies to all modes or is part of common features. Do not use it for mode-specific functions.
+- Final FL uses bilingual display values in the same field for `模式`, `一级分类`, and `二级分类`, such as `照片 / Photo`, `设置 / Settings`, and `预览框 / Preview`.
+- `Settings`, `Preset`, and `Widget` use `模式=通用 / Common` and direct first-level categories: `预设 / Preset`, `设置 / Settings`, `小组件 / Widget`. Settings rows must not be repeated under Photo/Video/Night; affected mode scope belongs in description, judgement, or verification.
+- Final FL sort order puts concrete capture modes first and `模式=通用 / Common` rows at the very bottom of each project table.
+- Distribution FL drafts should include `不支持原因` for inferred `✗` camera support. If every camera column is resolved to `✓` or `✗`, set `状态=已确认`; keep `状态=待确认` when any camera column is `TBD`.
+- Settings groups are General Settings (Preset, Save location, Shutter sound, Mirror front camera, Level), Photo Settings (Watermark, Auto Tone, Tap to take a photo, QR code scanner, Press and hold shutter, Ultra XDR), Video Settings (Video encoding H.264/H.265, Power saving recording, Auto FPS, 视频防抖开关, 锁定镜头, 锁定白平衡), and Help & Support (Tips and feedback).
 - Detailed rules: `knowledge/reference/feature-list-layout-common-rules.md`.
-- Photo Top Toolbar rows follow `knowledge/reference/photo-top-toolbar-rules.md`: Flash, Timer, HDR, Exposure, Filter, Tuning, Motion Photo, Quality, Grid, Ratio, Watermark, More settings, Glyph Mirror, with `Motion Photo cover HDR` as the only default split-out sub-row.
+- Photo Toolbar rows follow `knowledge/reference/photo-top-toolbar-rules.md`: Flash, Timer, HDR, Exposure, Filter, Tuning, Motion Photo, Quality, Grid, Ratio, Watermark, More settings, Glyph Mirror. `Motion Photo cover HDR` and `动态照片 - 无效信息截取` can be split out when baseline FL or QA acceptance needs explicit validation.
+- Video Specs rows should be concrete specs such as `1080P 30FPS`, `1080P 60FPS`, `4K 30FPS`, and `4K 60FPS`, with every camera column judged independently. Do not keep broad checklist rows such as `前置 4K 视频`.
 
 Each feature has a **`purpose` tag** for cross-dimensional retrieval:
 - `拍摄` (capture), `拍摄辅助` (capture assist), `图像处理` (image processing)

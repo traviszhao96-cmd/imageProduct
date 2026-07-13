@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Transform 26111/26121 FL draft v0.2: 风格 restructure + remove 多帧 rows."""
+"""Transform 26111/26121 FL draft v1.0: 风格 restructure + remove 多帧 rows."""
 
 import csv
 import sys
@@ -35,7 +35,7 @@ TUNING_PALETTE_ROW = {
     "Front": "✗",
     "不支持原因": "Front: Photo Style PRD 当前范围为后置自然/鲜明风格，前置风格未纳入本期。",
     "状态": "已确认",
-    "确认负责人": "PM / Tuning",
+    "确认负责人": "Product / SE / IQA",
     "验证方法": "在照片模式打开 Toolbar → 风格，进入调色盘界面，验证色轮/滑块交互、与调色参数互斥关系、Preset 保存恢复。",
 }
 
@@ -107,8 +107,8 @@ def main():
     base_dir = Path("/Users/travis.zhao/imageProduct/knowledge/_output/fl_draft_26111_26121")
 
     for fname, has_tele, label in [
-        ("26111_fl_draft.v0.2.csv", False, "26111"),
-        ("26121_fl_draft.v0.2.csv", True, "26121"),
+        ("26111_fl_draft.v1.0.csv", False, "26111"),
+        ("26121_fl_draft.v1.0.csv", True, "26121"),
     ]:
         inp = base_dir / fname
         out = base_dir / fname.replace(".csv", ".restyled.csv")

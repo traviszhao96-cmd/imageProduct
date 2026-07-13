@@ -6,27 +6,27 @@ from pathlib import Path
 
 BASE = Path("/Users/travis.zhao/imageProduct/knowledge/_output/fl_draft_26111_26121")
 
-# Decision 1: ASD — all modes, all cameras ✓, owner=影像 SE
-# Decision 2: 人脸检测 — all modes, all cameras ✓, owner=影像 SE
+# Decision 1: ASD — all modes, all cameras ✓, owner=SE / IQA
+# Decision 2: 人脸检测 — all modes, all cameras ✓, owner=SE / IQA
 # Decision 3: 脏污检测 — only 照片+人像 ✓, other modes ✗
 
 RULES = [
     {
         "match_name": ["ASD / AI场景检测", "ASD / AI场景检测 (功能行)"],
         "action": "all_yes",
-        "owner": "影像 SE",
+        "owner": "SE / IQA",
         "desc_update": None,
     },
     {
         "match_name": ["人脸检测"],
         "action": "all_yes",
-        "owner": "影像 SE",
+        "owner": "SE / IQA",
         "desc_update": None,
     },
     {
         "match_name": ["脏污检测"],
         "action": "photo_portrait_only",
-        "owner": "PM / QA / SE",
+        "owner": "Product / SE / SQA",
         "unsupport_reason": "脏污检测仅在照片和人像模式生效，其他模式不支持。",
         "desc_update": None,
     },
@@ -91,8 +91,8 @@ def apply_rules(csv_path: Path, label: str):
 
 def main():
     for fname, label in [
-        ("26111_fl_draft.v0.2.csv", "26111"),
-        ("26121_fl_draft.v0.2.csv", "26121"),
+        ("26111_fl_draft.v1.0.csv", "26111"),
+        ("26121_fl_draft.v1.0.csv", "26121"),
     ]:
         p = BASE / fname
         print(f"\n=== {label} ===")
@@ -101,8 +101,8 @@ def main():
 
     # Count pending rows
     for fname, label in [
-        ("26111_fl_draft.v0.2.csv", "26111"),
-        ("26121_fl_draft.v0.2.csv", "26121"),
+        ("26111_fl_draft.v1.0.csv", "26111"),
+        ("26121_fl_draft.v1.0.csv", "26121"),
     ]:
         with open(BASE / fname, "r", encoding="utf-8-sig") as f:
             reader = csv.DictReader(f)

@@ -6,7 +6,7 @@
 
 `kb-functions-algorithms` is a **canonical function / algorithm manual**, not a project Feature List.
 
-Project FL is a downstream acceptance checklist: it defines which Camera functions a project finally supports and is mainly read by PM and QA/test for development completion and acceptance. Therefore repeated rows in FL are useful output, but they should not become manually maintained knowledge.
+Project FL is a downstream acceptance checklist: it defines which Camera functions a project finally supports and is mainly read by Product, SQA, and IQA for development completion and acceptance. Therefore repeated rows in FL are useful output, but they should not become manually maintained knowledge.
 
 In this repository, `KB` means **Knowledge Base**. This table explains what each function/algorithm means, which mode scope it belongs to, how to judge support, what it depends on, and how to verify it.
 

@@ -2,6 +2,7 @@
 
 > Source: Travis verbal clarification, 2026-07-07.
 > Purpose: guide canonical KB maintenance and 26111/26121 Feature List expansion.
+> Current partner-review release: `v1.0`. Shared Base title and generated artifact filenames must include `v1.0`.
 
 ## Functional Bar Layout
 
@@ -28,9 +29,26 @@ FL is a **project acceptance checklist artifact**, not the source of product tax
 
 Primary ownership and readers:
 
-- Producers: imaging SE and PM.
-- Core readers: PM and especially QA/test.
+- Producers: SE and Product.
+- Core readers: Product, SQA, and IQA.
 - Purpose: define which Camera functions the project finally supports, then support project completion and acceptance checks.
+
+`确认负责人` is a multi-select field with four canonical roles only:
+
+- `Product`: product definition, requirement scope, interaction, and project decisions.
+- `SE`: hardware, algorithm, pipeline, integration feasibility, and project support boundaries.
+- `SQA`: software functionality, interaction, state, compatibility, and specification acceptance.
+- `IQA`: image/video quality and algorithm-effect acceptance.
+
+Do not use `PM`, `QA`, `影像 SE`, or `Tuning` as owner values. Use `Product` instead of PM, split QA into SQA or IQA by acceptance type, and use only `SE` for the SE role.
+
+Owner assignment rules:
+
+- Algorithm requirements (`一级分类=算法 / Algorithm` or `基础算法 / Base Algorithm`) are confirmed by `SE` only. Do not add Product merely because the algorithm is user-visible.
+- Concrete video, slow-motion, and timelapse specifications use `SE + SQA`.
+- Pure function and interaction requirements use `Product + SQA`.
+- User-facing interaction requirements that also require image/video effect acceptance, such as Style, Filter, Tuning, HDR controls, beauty, and bokeh, use `Product + IQA`.
+- Product must not appear on rows that only describe an algorithm, pipeline, hardware dependency, or implementation capability.
 
 Because FL is used for acceptance, it is intentionally verbose: support differences by project, mode, camera, and algorithm path must be visible. This verbosity should be generated from maintained sources instead of manually duplicated.
 
@@ -45,7 +63,13 @@ Final FL display values for `模式`, `一级分类`, and `二级分类` should 
 
 Final FL sort order should place concrete capture modes first. Rows with `模式=通用 / Common` should be placed at the very bottom of each project table.
 
+Each project FL table must expose one filtered grid view per Mode and must not create views by first-level category. Use this view order: `照片`, `人像`, `运动`, `视频`, `夜景`, `慢动作`, `延时摄影`, `全景`, `专业`, `前后双录`, `高像素`, `通用`. Keep change history in the Base-level `修改记录` table rather than mixing change-log rows into project mode views.
+
 For distribution drafts, include a `不支持原因` field for every `✗` camera support judgement when it can be inferred from hardware, PRD scope, baseline FL, or project configuration. If every camera column in a row has been judged as `✓` or `✗`, mark the row `已确认`; keep `待确认` when any camera column remains `TBD`.
+
+Portrait camera-scope rule: `UW=✗` for every Portrait-mode FL row. The ultrawide stream may be used internally as a depth auxiliary input, but Portrait mode does not expose UW as a selectable/output camera. Use the canonical unsupported reason: `UW: 人像模式不开放超广角摄像头，因此该功能在 UW 不适用。`
+
+Front camera support rule: `Exposure`, `Grid`, `More settings`, `Ratio`, `Watermark`, `风格-滤镜 / Style-Filter`, `风格-调色 / Style-Tuning`, `风格-调色盘 / Style-Tuning Palette`, and `AE / 自动曝光` support Front in modes that expose the front camera. Expert and High Resolution are mode-level exceptions: every row in `专业 / Expert` and `高像素 / High Resolution` must use `Front=✗`, including these otherwise Front-supported functions.
 
 AI maintenance target:
 

@@ -7,7 +7,7 @@ from collections import defaultdict
 
 BASE = Path("/Users/travis.zhao/imageProduct")
 KB_PATH = BASE / "knowledge/_output/kb-functions-algorithms.v6.json"
-FL_PATH = BASE / "knowledge/_output/fl_draft_26111_26121/26111_fl_draft.v0.2.csv"
+FL_PATH = BASE / "knowledge/_output/fl_draft_26111_26121/26111_fl_draft.v1.0.csv"
 
 # Mode name mapping from KB to FL
 MODE_MAP = {
