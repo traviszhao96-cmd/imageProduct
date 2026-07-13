@@ -11,10 +11,12 @@
 | [mode-zoom-transient-rules.md](mode-zoom-transient-rules.md) | 模式栏、变焦栏、左右暂态开关规则 |
 | [photo-top-toolbar-rules.md](photo-top-toolbar-rules.md) | Photo 模式 Toolbar 功能项与判断规则 |
 | [26111-pending-prds.md](26111-pending-prds.md) | 26111 / 26121 暂不推进的 PRD / 子需求清单 |
+| [project-26111-26121.md](project-26111-26121.md) | 26111 / 26121 项目标识、平台配置、人员、WBS 里程碑与项目资源导航（源 revision 504） |
 
 ## 算法说明书
 | 文档 | 适用项目 |
 |------|---------|
+| [hal-26111-26121.md](hal-26111-26121.md) | 26111 / 26121 最新 HAL 设计摘要、FL 更新候选与待确认项（2026-07-13，优先读取） |
 | [algorithms-5a.md](algorithms-5a.md) | Phone (5a) — 26111 + 26121 |
 | [algorithm-fl-source-26111-26121.md](algorithm-fl-source-26111-26121.md) | 26111 / 26121 FL 算法行导入源 |
 | [_raw/25111-影像软件设计方案-ocr.md](_raw/25111-影像软件设计方案-ocr.md) | 25111 PDF OCR 原始转写 + 页面图 |

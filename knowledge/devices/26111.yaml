@@ -1,25 +1,31 @@
 # 26111 Camera 项目概览
-# 最后更新: 2026-07-08 (从硬件规格表更新)
+# 最后更新: 2026-07-13 (对齐 HAL 软件设计方案与影像项目信息 revision 504)
 # 硬件选型已确认 (Travis)
 
 project:
   code: "26111"
   name: "Phone 5a"
   codename: "Caterpie"
-  models: ["Phone 5a (Base)", "Phone 5a Pro"]
-  market: "印度"
+  internal_codename: "Doom"
+  model_name: "A010"
+  models: ["26111 Base", "26121 Pro"]
+  market: "IN / IND"
   soc:
-    base: "SM7635 (Snapdragon 7s Gen3)"
-    pro: "SM7750 (Snapdragon 7 Gen4)"
-  android_version: "[TBD]"
+    base: "SM7635 Pro"
+    pro: "SM7750"
+  android_version: "Android 17"
   software_baseline: "25111 Pro + NOS5.0"
+  variants:
+    "26111": {tier: "Base", marketing_codename: "Caterpie", internal_codename: "Doom", model_name: "A010"}
+    "26121": {tier: "Pro", marketing_codename: "Charizard", internal_codename: "Quake", model_name: "A006"}
+  source: "knowledge/reference/project-26111-26121.md"
 
 cameras:
   base:
     front:
       sensor: "OV32D40-GA5A-002A"
       resolution: "32MP"
-      sensor_size: "1/3.6""
+      sensor_size: '1/3.6"'
       pixel_size: "0.612um"
       af: "FF (fixed focus)"
       af_type: "FF"
@@ -40,7 +46,7 @@ cameras:
     main:
       sensor: "S5KHP5SP05-FGX9"
       resolution: "200MP"
-      sensor_size: "1/1.56""
+      sensor_size: '1/1.56"'
       pixel_size: "0.5um"
       af_type: "PDAF"
       ois: YES
@@ -60,12 +66,12 @@ cameras:
       orientation: "6点钟"
       supplier: ["一供盛泰（旭业镜头）", "二供盛泰（舜宇镜头）"]
       eeprom: "GT24P256HA-5CSLI-TR"
-      note: "200MP 高像素，有 OIS。200MP→50MP remosaic HDR upscale。"
+      note: "200MP 高像素，有 OIS。高像素产品选项以最新版 PRD 为准；HAL 另标注 4x SR 外部软件 remosaic 需评估。"
 
     ultrawide:
       sensor: "OV08J10-GA5A-001A"
       resolution: "8MP"
-      sensor_size: "1/3.953""
+      sensor_size: '1/3.953"'
       pixel_size: "1.116um"
       af: "FF (fixed focus)"
       af_type: "FF"
@@ -85,9 +91,13 @@ cameras:
     tele: "❌ (仅 Flicker Sensor，无长焦镜头)"
 
     video_capability:
-      4k: "❌"
-      1080p60: "❌"
-      video_hdr: "❌"
+      1080p30: YES
+      1080p60: YES
+      4k30: YES
+      4k60: NO
+      hlg: "1080P30 / 4K30；1080P60 不支持 HLG"
+      video_hdr_algorithm: "[TBD] HAL 确认 HLG/stagger 通路，但未按摄像头确认产品开放范围"
+      evidence: "knowledge/reference/hal-26111-26121.md"
 
   pro:
     note: "26121 Pro 配置与 25111 Pro 基本一致，传感器细节见下方"
@@ -95,7 +105,7 @@ cameras:
     front:
       sensor: "KD1"
       resolution: "32MP"
-      sensor_size: "1/3.44""
+      sensor_size: '1/3.44"'
       pixel_size: "0.64um"
       af_type: "FF"
       f_no: "F2.2"
@@ -114,7 +124,7 @@ cameras:
     main:
       sensor: "IMX896"
       resolution: "50MP"
-      sensor_size: "1/1.57""
+      sensor_size: '1/1.57"'
       pixel_size: "1.0um"
       af_type: "PDAF"
       ois: YES
@@ -138,7 +148,7 @@ cameras:
     ultrawide:
       sensor: "IMX355"
       resolution: "8MP"
-      sensor_size: "1/4""
+      sensor_size: '1/4"'
       pixel_size: "1.12um"
       af_type: "FF"
       f_no: "F2.2"
@@ -156,7 +166,7 @@ cameras:
     tele:
       sensor: "JN5-05"
       resolution: "50MP"
-      sensor_size: "1/2.75""
+      sensor_size: '1/2.75"'
       pixel_size: "0.64um"
       af_type: "PDAF"
       ois: YES
@@ -178,8 +188,13 @@ cameras:
       stroke: "AF: 650um, OIS: +/-210um"
 
     video_capability:
-      4k60: "✅ SAT / Ultra 主摄&长焦"
-      video_hdr: "✅"
+      1080p30: YES
+      1080p60: YES
+      4k30: YES
+      4k60: YES
+      hlg: "HAL 覆盖 1080P30/60 与 4K30/60；产品和镜头范围待 SE 确认"
+      video_hdr_algorithm: "[TBD] 逐镜头确认"
+      evidence: "knowledge/reference/hal-26111-26121.md"
 
 defaults:
   photo:
@@ -232,7 +247,7 @@ defaults:
 inheritance:
   baseline: "25131"
   rules:
-    - "26111 Base: 200M HP5 主摄 (OIS)，无长焦，继承 25131 功能并移除不适用项"
+    - "26111 Base: 200M HP5 主摄 (OIS)，无长焦；旧项目继承仅作参考，项目 HAL 设计优先"
     - "26121 Pro: IMX896 (OIS) + JN5 (OIS) + IMX355 + KD1，继承 25111 Pro"
     - "新增功能以 26111 PRD 为准"
     - "算法链路以 SE 确认的 26111 算法列表为准"
@@ -242,7 +257,7 @@ key_deltas_from_25131_base:
   - "超广角: GC08A8 → OV08J10"
   - "前置: GC16B3C → OV32D"
   - "Base 无长焦（仅 Flicker Sensor）"
-  - "Base 无 4K、无 1080P60、无 Video HDR"
+  - "Base HAL 支持 4K30 与 1080P60；1080P60 不支持 HLG，逐镜头产品范围待确认"
   - "NOS5.0 软件基线"
 
 new_features_p0:
@@ -264,8 +279,12 @@ removed_features:
   - "TF 50MP QuadBayer Raw HDR"
   - "TF 25MP"
   - "聚会模式"
-  - "视频 Log 模式"
   - "视频录制红框提示"
+
+open_scope_questions:
+  - "26121 Video Log 是否保留：HAL 有项目文档链接，旧需求清单曾标记移除，需 PM/SE 统一"
+  - "前置/广角 4K upscale 是否量产：HAL 当前只明确前置 1080P30/60"
+  - "AIGC 高倍变焦是否量产：两项目 HAL 均保留评估项"
 
 stakeholders:
   PM: "Travis Zhao"
@@ -277,7 +296,7 @@ stakeholders:
 
 status:
   feature_list: "✅ features-26111.md 已生成（基于25131继承+delta，待SE确认算法后定稿）"
-  algorithms: "❌ 待 SE 提供 26111 算法列表"
+  algorithms: "⚠️ HAL 设计已归一化到 reference/hal-26111-26121.md；逐镜头规格和评估项待 SE 确认"
   sensors_missing:
     - "HP5 (200M) — 26111 Base 主摄"
     - "OV08J10 — 26111 Base UW"
@@ -290,4 +309,4 @@ status:
   feature_json:
     26111_rear: "❌ 待创建（依赖 SE 算法确认）"
     26111_front: "❌ 待创建（依赖 SE 算法确认）"
-  algorithm_doc: "❌ 待 SE 提供后创建 reference/algorithms-26111.md"
+  algorithm_doc: "✅ reference/hal-26111-26121.md；reference/algorithms-5a.md 待持续合并 PRD 口径"

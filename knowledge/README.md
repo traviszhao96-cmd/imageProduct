@@ -10,6 +10,8 @@ Camera domain knowledge for AI agents writing PRDs, reviewing feature lists, and
 | 某摄像头硬件能力 | `devices/{project}.json` → capability 字段 |
 | 某 sensor 详细规格 | `devices/sensors/{model}.yaml` |
 | 焦段/变焦配置 | `features/focal-lengths.json` |
+| 26111 / 26121 HAL 与算法能力 | `reference/hal-26111-26121.md` → `reference/algorithm-fl-source-26111-26121.md` |
+| 26111 / 26121 项目信息、人员与里程碑 | `reference/project-26111-26121.md` |
 | NPS 满意度 | `reference/nps-*.json` |
 | 生成功能列表 | `python3 knowledge/generate.py --project {code}` |
 

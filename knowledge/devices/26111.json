@@ -3,12 +3,30 @@
     "code": "26111",
     "name": "Phone 5a",
     "codename": "Caterpie",
-    "market": "印度",
+    "internal_codename": "Doom",
+    "model_name": "A010",
+    "market": "IN / IND",
+    "android_version": "Android 17",
     "soc": {
-      "base": "SM7635",
+      "base": "SM7635 Pro",
       "pro": "SM7750"
     },
-    "software_baseline": "25111 Pro + NOS5.0"
+    "software_baseline": "25111 Pro + NOS5.0",
+    "variants": {
+      "26111": {
+        "tier": "Base",
+        "marketing_codename": "Caterpie",
+        "internal_codename": "Doom",
+        "model_name": "A010"
+      },
+      "26121": {
+        "tier": "Pro",
+        "marketing_codename": "Charizard",
+        "internal_codename": "Quake",
+        "model_name": "A006"
+      }
+    },
+    "source": "knowledge/reference/project-26111-26121.md"
   },
   "cameras": {
     "base": {
@@ -20,25 +38,28 @@
       "main": {
         "sensor": "HP5",
         "resolution": "200MP",
-        "ois": false,
-        "note": "无 OIS",
+        "ois": true,
+        "note": "HAL 物料表确认 OIS",
         "datasheet": null
       },
       "ultrawide": {
-        "sensor": "IMX355",
+        "sensor": "OV08J10",
         "resolution": "8MP",
         "af": "FF",
         "datasheet": null
       },
       "tele": null,
       "video": {
-        "4k": false,
-        "1080p60": false,
-        "video_hdr": false
+        "1080p30": true,
+        "1080p60": true,
+        "4k30": true,
+        "4k60": false,
+        "hlg": "1080P30 / 4K30; 1080P60 HLG unsupported",
+        "camera_scope": "TBD"
       }
     },
     "pro": {
-      "note": "配置与 25111 Pro 完全一致",
+      "note": "相机硬件参考 25111 Pro；项目 HAL 能力与产品裁剪以 26121 设计为准",
       "front": {
         "sensor": "KD1",
         "resolution": "32MP",
@@ -64,26 +85,30 @@
         "datasheet": "devices/sensors/S5KJNSSQ33.yaml"
       },
       "video": {
+        "1080p30": true,
+        "1080p60": true,
+        "4k30": true,
         "4k60": true,
-        "video_hdr": true
+        "hlg": "HAL path covers 1080P30/60 and 4K30/60; product camera scope TBD",
+        "camera_scope": "TBD"
       }
     }
   },
   "inheritance": {
     "baseline": "25131",
     "rules": [
-      "26111 Base: 200M HP5 主摄，无长焦，继承 25131 功能并移除不适用项",
-      "26121 Pro: 与 25111 Pro 配置完全一致，全功能继承",
+      "26111 Base: 200M HP5 OIS 主摄，无长焦；旧项目继承仅作参考，项目 HAL 设计优先",
+      "26121 Pro: 相机硬件参考 25111 Pro；项目 HAL 与 PRD 优先，不能全功能直接继承",
       "新增功能以 26111 PRD 为准",
       "算法链路以 SE 确认的 26111 算法列表为准"
     ]
   },
   "key_deltas_from_25131": [
-    "主摄: JN1 50MP → HP5 200MP (无 OIS)",
-    "超广角: GC08A8 → IMX355",
+    "主摄: JN1 50MP → HP5 200MP (OIS)",
+    "超广角: GC08A8 → OV08J10",
     "前置: GC16B3C → OV32D",
     "Base 无长焦（仅 Flicker Sensor）",
-    "Base 无 4K、无 1080P60、无 Video HDR",
+    "Base HAL 支持 4K30 与 1080P60；1080P60 不支持 HLG，逐镜头产品范围待确认",
     "NOS5.0 软件基线"
   ],
   "new_features_p0": [
@@ -105,8 +130,12 @@
     "TF 50MP QuadBayer Raw HDR",
     "TF 25MP",
     "聚会模式",
-    "视频 Log 模式",
     "视频录制红框提示"
+  ],
+  "open_scope_questions": [
+    "26121 Video Log 是否保留：HAL 有项目文档链接，旧需求清单曾标记移除，需 PM/SE 统一",
+    "前置/广角 4K upscale 是否量产：HAL 当前只明确前置 1080P30/60",
+    "AIGC 高倍变焦是否量产：两项目 HAL 均保留评估项"
   ],
   "feature_deltas": {
     "rear_additions": [
@@ -426,7 +455,6 @@
       "TF 50MP QuadBayer Raw HDR",
       "TF 25MP",
       "聚会模式",
-      "视频 Log 模式",
       "视频录制红框提示"
     ],
     "front_removed": [
@@ -435,10 +463,10 @@
   },
   "status": {
     "feature_list": "features-26111.md 已生成（基于25131继承+delta，待SE确认算法后定稿）",
-    "algorithms": "待 SE 提供",
+    "algorithms": "HAL 已归一化；逐镜头规格和评估项待 SE 确认",
     "sensors_missing": [
       "HP5",
-      "IMX355",
+      "OV08J10",
       "OV32D",
       "KD1"
     ],
