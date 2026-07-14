@@ -55,14 +55,14 @@ Each FL Bitable contains:
 | 列 | 类型 | 说明 |
 |---|---|---|
 | 模式 | select | 双语枚举，如 通用 / Common、照片 / Photo、人像 / Portrait、视频 / Video、夜景 / Night |
-| 一级分类 | select | 功能 / Feature、基础算法 / Base Algorithm、预设 / Preset、设置 / Settings、小组件 / Widget |
+| 一级分类 | select | 功能 / Feature、算法 / Algorithm、预设 / Preset、设置 / Settings、小组件 / Widget |
 | 二级分类 | select | 双语枚举：预览框 / Preview、AE/AF、变焦 / Zoom、工具栏 / Toolbar、模式栏 / Mode Switch、预设 / Preset、通用设置 / General Settings、照片设置 / Photo Settings、视频设置 / Video Settings、帮助与反馈 / Help & Support、小组件 / Widget、左侧暂态开关 / Left Transient Switch、右侧暂态开关 / Right Transient Switch、实时算法 / Realtime Algorithm、后处理算法 / Post-processing Algorithm |
 | 名称 | text | 功能名或算法方案名 |
 | 说明 | text | 功能基本描述 |
 | {camera} | select(✓/✗/TBD) | 每个摄像头独立一列，仅列出该设备实际存在的摄像头；TBD 仅用于分发草稿和待确认项 |
 | 不支持原因 | text | 当摄像头列为 ✗ 时，说明不支持来自硬件限制、PRD 范围、基线 FL 或项目配置的原因 |
 | 状态 | select | 已确认 / 待确认 / Pending |
-| 确认负责人 | text | PM / QA / SE 等 |
+| 确认负责人 | select | 单一角色：Product / SE / SQA / IQA；旧多选字段也只能保存一个值 |
 | 验证方法 | text | 验收标准 |
 
 **Camera columns**: Only include cameras the device actually has. 26111: Main + UW + Front. 26121: Main + UW + Tele + Front. Never create "无长焦" placeholder columns — just omit.
@@ -171,7 +171,7 @@ KB rules:
 - 功能名称 = 用户 UI 上看到的名称（如 "自动微距控制"）
 - 说明 = 技术实现简述
 
-**一级分类 = 基础算法 / Base Algorithm**: 底层算法模块，用户不直接感知
+**一级分类 = 算法 / Algorithm**: 算法和处理链路能力，用户不一定直接感知
 - 二级分类 = 实时算法 / 后处理算法
 - 实时算法: 预览/拍摄时即时运行的算法（HDR多帧合成、人脸检测、场景检测...）
 - 后处理算法: 拍摄后异步处理的算法（AI Upscale、美颜、超分...）
@@ -231,7 +231,8 @@ Normalize old FL, KB, Feature Tree and project requirement names before generati
 |---|---|
 | `ASD / AI场景检测` | AI-model semantic scene detection, e.g. green plants, stage and outdoor sky. Do not keep `普通场景检测` as a standalone row when it only means brightness/DRC/motion judgement. |
 | `SAT / 平滑镜头切换` | Same as SAT. Rear cameras support the lens-switching capability; front camera does not. `变焦` row should explain SAT smooth switch, hard cut and digital zoom. |
-| `Photo EIS / PZL` | Photo high-zoom stabilization / post-shutter frame capture. PZL differs from ZSL pre-buffer capture. |
+| `Photo EIS` | Photo electronic stabilization, typically enabled for project-defined high-zoom ranges. |
+| `PZL` | Post-shutter frame-capture strategy; separate from Photo EIS and different from ZSL pre-buffer capture. |
 | `Video EIS` | Video electronic stabilization; the user switch lives in Settings > Video as `视频防抖开关`. |
 | `光学畸变矫正` | Merge `镜头畸变矫正` / `光学畸变矫正` / `光学畸变校正`; keep `人脸畸变矫正` separate. |
 | `人脸清晰度增强` | Merge FRT wording into this row; keep `人脸检测` separate. |

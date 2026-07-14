@@ -30,11 +30,13 @@ ALGO_MD = ROOT / "knowledge" / "reference" / "algorithm-fl-source-26111-26121.md
 PROJECTS = {
     "26111": {
         "table": "26111",
+        "brand": "Nothing",
         "cameras": ["Main", "UW", "Front"],
         "note": "Phone 5a Base; HP5 200MP main, IMX355 UW, OV32D front, no tele.",
     },
     "26121": {
         "table": "26121",
+        "brand": "Nothing",
         "cameras": ["Main", "UW", "Tele", "Front"],
         "note": "Phone 5a Pro; reuses 25111 Pro IMX896 + IMX355 + JN5 + KD1.",
     },
@@ -86,7 +88,7 @@ LEVEL1_DISPLAY = {
     "Settings": "设置 / Settings",
     "Widget": "小组件 / Widget",
     "功能": "功能 / Feature",
-    "基础算法": "基础算法 / Base Algorithm",
+    "算法": "算法 / Algorithm",
 }
 
 MODE_DISPLAY = {
@@ -125,7 +127,9 @@ LEVEL2_DISPLAY = {
     "右侧暂态开关": "右侧暂态开关 / Right Transient Switch",
     "系统": "系统 / System",
     "实时算法": "实时算法 / Realtime Algorithm",
+    "取帧策略": "取帧策略 / Frame Capture Strategy",
     "后处理算法": "后处理算法 / Post-processing Algorithm",
+    "自然质感人像 / Natural Texture Portrait": "自然质感人像 / Natural Texture Portrait",
 }
 
 
@@ -155,8 +159,8 @@ def split_modes(scope: str) -> list[str]:
 
 def normalize_level1(value: str) -> str:
     value = as_text(value).strip()
-    if value in {"底层算法", "算法", "基础算法"}:
-        return "基础算法"
+    if value in {"底层算法", "基础算法", "基础算法 / Base Algorithm", "算法", "算法 / Algorithm"}:
+        return "算法"
     if value in {"通用", "通用功能", "公共功能", "Common"}:
         return "通用功能"
     if value in {"预设", "Preset", "预设 / Preset"}:
@@ -177,6 +181,7 @@ SETTING_GROUP_BY_NAME = {
     "Mirror front camera": "General settings",
     "Level": "General settings",
     "Auto Tone": "Photo settings",
+    "色彩模式 / Color Mode": "Photo settings",
     "Watermark settings": "Photo settings",
     "Tap to take a photo": "Photo settings",
     "QR code scanner": "Photo settings",
@@ -193,7 +198,7 @@ SETTING_GROUP_BY_NAME = {
 
 SETTINGS_LEVEL2 = {"General settings", "Photo settings", "Video settings", "Help & Support"}
 COMMON_LEVEL1 = {"通用功能", "Preset", "Settings", "Widget"}
-PRUNED_NAMES = {"普通场景检测", "运动检测"}
+PRUNED_NAMES = {"普通场景检测", "运动检测", "多帧", "多帧 + 滤镜"}
 
 FRONT_SUPPORTED_NAMES = {
     "Exposure",
@@ -232,6 +237,8 @@ def normalize_level2(value: str) -> str:
         "Help & Support": "Help & Support",
         "帮助与反馈": "Help & Support",
         "帮助与反馈 / Help & Support": "Help & Support",
+        "自然质感人像": "自然质感人像 / Natural Texture Portrait",
+        "自然质感人像 / Natural Texture Portrait": "自然质感人像 / Natural Texture Portrait",
         "设置 / Settings": "Settings",
         "设置 / Setting": "Settings",
         "预设 / Preset": "Preset",
@@ -263,7 +270,7 @@ def clean_legacy_text(value: str) -> str:
     value = value.replace("Hyper Zoom", "AI Zoom")
     value = value.replace("Top Toolbar", "Toolbar")
     value = value.replace("AIGC SR / AI Zoom", "AI Zoom / AIGC SR")
-    value = value.replace("EIS / PZS", "Photo EIS / PZL")
+    value = value.replace("EIS / PZS", "Photo EIS")
     value = value.replace("4x以上支持", "高倍变焦支持门槛按项目配置确认")
     value = value.replace("虹软AI场景识别算法", "AI 场景检测算法")
     return value
@@ -287,32 +294,44 @@ def normalize_legacy_name(row: dict[str, str]) -> None:
             row["说明"] = "ASD（AI Scene Detection）通过 AI 模型识别绿植、舞台、天空等语义场景，并驱动对应调试策略。"
     elif name in {"SAT", "SAT平滑镜头切换"}:
         row["名称"] = "SAT / 平滑镜头切换"
-    elif name in {"FRT / 人脸清晰度增强", "FRT"}:
-        row["名称"] = "人脸清晰度增强"
+    elif name == "照片影调 / Image Tone":
+        row["名称"] = "影像基调 / Image Tone"
+    elif name in {"人脸清晰度增强", "FRT / 人脸清晰度增强", "FRT / 人像清晰度提升", "FRT"}:
+        row["名称"] = "FRT / 人像清晰度提升"
+    elif name in {"美颜", "美颜 / 自然质感人像", "美颜 / 美颜首次开启引导", "自然质感人像（美颜升级）"}:
+        row["名称"] = "美颜升级 / Beauty Upgrade"
+    elif name in {"MFNR", "多帧降噪", "多帧降噪（低ISO）"}:
+        row["名称"] = "多帧降噪 / MFNR"
+        if normalize_level1(row.get("一级分类", "")) == "算法":
+            row["二级分类"] = "后处理算法"
     elif name in {"镜头畸变矫正", "光学畸变矫正/光学畸变校正"}:
         row["名称"] = "光学畸变矫正"
-    elif name in {"EIS / PZS", "Photo EIS / PZS"}:
-        row["名称"] = "Photo EIS / PZL"
+    elif name in {"EIS / PZS", "Photo EIS / PZS", "Photo EIS / PZL"}:
+        row["名称"] = "Photo EIS"
+    elif name in {"录影灯", "Rec. light 录影灯", "Recording light", "Video light"}:
+        row["名称"] = "录影灯 / Recording Light"
+    elif name in {"色彩模式", "Color mode", "Color Mode"}:
+        row["名称"] = "色彩模式 / Color Mode"
     elif name == "EIS":
-        row["名称"] = "Video EIS" if mode in {"视频", "慢动作", "延时摄影", "前后双录"} else "Photo EIS / PZL"
+        row["名称"] = "Video EIS" if mode in {"视频", "慢动作", "延时摄影", "前后双录"} else "Photo EIS"
     elif "数码变焦" in name:
         row["名称"] = "变焦"
-    elif name == "SR（Zoom）":
-        row["名称"] = "SR / Super Resolution"
+    elif name in {"SR（Zoom）", "SR / Super Resolution", "超分（SR）", "超分 / Super Resolution（SR）"}:
+        row["名称"] = "超分 / Super Resolution（SR）"
     elif name in {"AI极夜", "极夜"}:
         row["名称"] = "极夜"
-    elif name == "Ultra HDR":
-        row["名称"] = "Ultra XDR"
-    elif name in {"remosaic单帧", "Remosaic 单帧"}:
+    elif name in {"Ultra HDR", "XDR / Ultra HDR"} or (name == "Ultra XDR" and mode != "通用"):
+        row["名称"] = "Ultra HDR"
+    elif name in {"remosaic单帧", "Remosaic 单帧", "HW Remosaic"}:
         row["名称"] = "Remosaic"
-    elif name == "多帧降噪（低ISO）":
-        row["名称"] = "多帧降噪"
     elif re.search(r"3s.*10s.*倒计时|倒计时", name):
         row["名称"] = "Timer"
     elif any(term in name for term in ["滤镜强度", "自定义滤镜", "选择一种滤镜"]) or ("滤镜" in name and "场景检测" in name):
-        row["名称"] = "Filter"
+        row["名称"] = "风格-滤镜 / Style-Filter"
+    elif name == "Filter":
+        row["名称"] = "风格-滤镜 / Style-Filter"
     elif len([term for term in ["光韵", "映迹", "琥珀", "菲林", "黑白", "负片"] if term in name]) >= 3:
-        row["名称"] = "Filter"
+        row["名称"] = "风格-滤镜 / Style-Filter"
     elif all(term in name for term in ["曝光", "对比度", "饱和度", "色温", "颗粒"]):
         row["名称"] = "Tuning"
     elif "50MP" in name and "输出" in name:
@@ -335,6 +354,12 @@ def normalize_legacy_name(row: dict[str, str]) -> None:
             row["说明"] = "Motion Photo 动态照片子能力：拍摄时自动截掉按下快门前后明显无效的过渡片段，减少误触、抬手或收手造成的无效动态内容。"
     elif any(term in name for term in ["屏幕补光", "补光 (torchMode)", "Glyph灯"]) or name == "补光":
         row["名称"] = "Flash"
+    elif name == "在设置中将长按功能改为连拍后，长按即可连拍":
+        row["名称"] = "长按快门连拍 / Press and Hold Burst"
+    elif name == "点击选择开启和关闭水印，长按进入水印设置界面":
+        row["名称"] = "Watermark"
+    elif name == "Zoom":
+        row["名称"] = "变焦 / Zoom"
 
 
 def normalize_legacy_classification(row: dict[str, str]) -> None:
@@ -361,6 +386,12 @@ def normalize_legacy_classification(row: dict[str, str]) -> None:
     if row.get("名称") == "自动对焦-自动曝光":
         row["一级分类"] = "功能"
         row["二级分类"] = "AE/AF"
+    elif row.get("名称") in {"FRT / 人像清晰度提升", "美颜升级 / Beauty Upgrade"}:
+        row["一级分类"] = "算法"
+        row["二级分类"] = "自然质感人像 / Natural Texture Portrait"
+    elif row.get("名称") == "OIS":
+        row["一级分类"] = "功能"
+        row["二级分类"] = "Zoom"
     elif row.get("名称") == "Auto Tone":
         row["一级分类"] = "Settings"
         row["二级分类"] = "Photo settings"
@@ -372,13 +403,13 @@ def normalize_legacy_classification(row: dict[str, str]) -> None:
             row["一级分类"] = "功能"
             row["二级分类"] = "Zoom"
         elif any(term in text for term in algo_realtime):
-            row["一级分类"] = "基础算法"
+            row["一级分类"] = "算法"
             row["二级分类"] = "实时算法"
         elif any(term in text for term in algo_post):
-            row["一级分类"] = "基础算法"
+            row["一级分类"] = "算法"
             row["二级分类"] = "后处理算法"
         else:
-            row["一级分类"] = "基础算法"
+            row["一级分类"] = "算法"
             row["二级分类"] = "实时算法"
     elif level2 in {"通用模块"}:
         if row.get("名称") == "自动对焦-自动曝光":
@@ -391,7 +422,7 @@ def normalize_legacy_classification(row: dict[str, str]) -> None:
             row["一级分类"] = "功能"
             row["二级分类"] = "预览框"
         elif any(term in name for term in ["极夜", "夜景", "多帧降噪", "Remosaic", "SR", "Ultra XDR", "美颜"]):
-            row["一级分类"] = "基础算法"
+            row["一级分类"] = "算法"
             row["二级分类"] = "后处理算法"
         elif any(term in name for term in ["Glyph", "补光", "录影灯", "Rec. light", "色彩模式", "比例", "4K", "1080P", "屏幕补光"]):
             row["一级分类"] = "功能"
@@ -403,7 +434,7 @@ def normalize_legacy_classification(row: dict[str, str]) -> None:
         row["一级分类"] = "功能"
         row["二级分类"] = "Toolbar"
     elif level2 in {"畸变矫正", "FRT", "夜景"}:
-        row["一级分类"] = "基础算法"
+        row["一级分类"] = "算法"
         row["二级分类"] = "后处理算法"
     elif level2 in {"AI Zoom"}:
         row["一级分类"] = "功能"
@@ -457,9 +488,9 @@ def default_verification(row: dict[str, str]) -> str:
         return "滑动模式栏进入对应模式，确认入口展示、默认状态、退出恢复和拍摄/录制流程符合规格。"
     if level2 in {"左侧暂态开关", "右侧暂态开关"}:
         return "在满足触发条件的场景确认暂态开关出现；切换开关后确认预览、拍摄和状态恢复符合规格。"
-    if level1 == "基础算法" and level2 == "后处理算法":
+    if level1 == "算法" and level2 == "后处理算法":
         return "按项目算法规格拍摄典型场景，确认成片效果、耗时、分辨率、功耗和异常恢复符合规格。"
-    if level1 == "基础算法":
+    if level1 == "算法":
         return "按项目算法规格在对应镜头、倍率、分辨率或帧率下测试，确认预览/录制稳定和效果符合规格。"
     return f"按项目 FL 规格确认 `{name}` 的入口、支持范围、默认值和结果表现。"
 
@@ -475,7 +506,7 @@ def repair_legacy_current_row(row: dict[str, str], project: str, source: str) ->
     if row.get("二级分类") == "AE/AF":
         for cam in PROJECTS[project]["cameras"]:
             row[cam] = "TBD"
-    elif weak_validation and (row.get("二级分类") in {"预览框", "Zoom"} or row.get("一级分类") == "基础算法"):
+    elif weak_validation and (row.get("二级分类") in {"预览框", "Zoom"} or row.get("一级分类") == "算法"):
         for cam in PROJECTS[project]["cameras"]:
             if row.get(cam) in {"", "✓", "✗"}:
                 row[cam] = "TBD"
@@ -497,27 +528,15 @@ def repair_legacy_current_row(row: dict[str, str], project: str, source: str) ->
 def owner_for(row: dict[str, str]) -> str:
     level1 = row.get("一级分类", "")
     level2 = row.get("二级分类", "")
-    text = f"{level1} {level2} {row.get('名称','')}"
-    quality_terms = [
-        "HDR", "夜景", "美颜", "滤镜", "Tuning", "Style", "Photo Style", "风格", "调色",
-        "EIS", "OIS", "SAT", "ISZ", "Remosaic", "SR", "FRT", "人脸", "场景检测",
-        "虚化", "清晰度", "降噪", "色彩", "曝光", "白平衡",
-    ]
     if "算法" in level1 or "Algorithm" in level1:
         return "SE"
     if any(term in level2 for term in ["视频规格", "Video Specs", "慢动作规格", "Slow Motion Specs", "延时规格", "Timelapse Specs"]):
-        return "SE / SQA"
-    if any(term in text for term in quality_terms):
-        return "Product / IQA"
-    return "Product / SQA"
+        return "SE"
+    return "Product"
 
 
 def normalize_owner(value: Any, row: dict[str, str]) -> str:
-    """Keep canonical multi-select roles and reclassify legacy owner labels."""
-    order = ["Product", "SE", "SQA", "IQA"]
-    roles = [part.strip() for part in as_text(value).split("/") if part.strip()]
-    if roles and set(roles).issubset(set(order)):
-        return " / ".join(role for role in order if role in roles)
+    """Assign one canonical confirmation role from the row's responsibility."""
     return owner_for(row)
 
 
@@ -540,7 +559,20 @@ def row_key(row: dict[str, str]) -> tuple[str, str, str, str]:
 
 
 def should_prune_row(row: dict[str, str]) -> bool:
-    return as_text(row.get("名称")) in PRUNED_NAMES
+    name = as_text(row.get("名称"))
+    mode = normalize_mode(row.get("模式", ""))
+    level1 = normalize_level1(row.get("一级分类", ""))
+    if name in {"照片影调 / Image Tone", "影像基调 / Image Tone"} and mode != "通用":
+        return True
+    if name == "美颜升级 / Beauty Upgrade" and mode not in {"照片", "人像"}:
+        return True
+    if level1 == "算法" and name in {"人脸检测", "脏污检测"}:
+        return True
+    if level1 == "算法" and name in {"变焦", "变焦 / Zoom"}:
+        return True
+    if mode == "夜景" and name in {"自动夜景", "手动关闭自动夜景"}:
+        return True
+    return name in PRUNED_NAMES
 
 
 def normalize_row(row: dict, project: str, source: str) -> dict[str, str]:
@@ -600,6 +632,132 @@ def apply_canonical_support_overrides(row: dict[str, str], project: str) -> None
         row["Front"] = "✓"
     if mode in {"专业", "专业 / Expert", "高像素", "高像素 / High Resolution"} and "Front" in cameras:
         row["Front"] = "✗"
+    if name == "FRT / 人像清晰度提升":
+        row["一级分类"] = "算法"
+        row["二级分类"] = "自然质感人像 / Natural Texture Portrait"
+        if mode in {"高像素", "高像素 / High Resolution"}:
+            for cam in cameras:
+                row[cam] = "✗"
+            row["Main"] = "✓"
+            if project == "26121":
+                row["Tele"] = "✓"
+        row["说明"] = "自然质感人像能力族中的独立清晰度增强算法。FRT（Face Restoration Technology）在人脸检测成立时恢复和增强人脸细节，重点改善人脸区域清晰度；它不是美颜参数或肤质修饰功能。需逐模式、摄像头和输出规格确认实际生效范围。"
+        row["确认负责人"] = "SE"
+        row["验证方法"] = "逐模式、逐摄像头拍摄单人/多人、远近人脸、侧脸、遮挡和低照样张，结合算法 tag 确认 FRT 生效，并检查细节提升、身份特征保持、伪影和过度锐化。"
+    if name == "美颜升级 / Beauty Upgrade":
+        row["一级分类"] = "算法"
+        row["二级分类"] = "自然质感人像 / Natural Texture Portrait"
+        for cam in cameras:
+            row[cam] = "✓" if cam == "Front" else "✗"
+        unsupported = [cam for cam in cameras if cam != "Front"]
+        row["不支持原因"] = "；".join(f"{cam}: 本期美颜升级仅在照片和人像模式的前置摄像头生效。" for cam in unsupported)
+        row["说明"] = "自然质感人像能力族中的独立美颜效果升级，仅用于照片和人像模式的前置摄像头。升级包括现有磨皮、美白、亮眼和胡须保护的参数与效果优化，并新增匀肤、肤色分层、性别分层、年龄分层和脸型流畅能力；目标是在保留真实肤色、纹理、毛发和个人特征的前提下提升干净度与自然度。"
+        row["状态"] = "已确认"
+        row["确认负责人"] = "SE"
+        row["验证方法"] = "在照片与人像模式使用 Front 验证 Natural/Strong 档位、首次引导、现有参数优化及新增能力；覆盖多肤色、性别、年龄、多人、低光、逆光、遮挡与浓妆，确认不可靠识别回退到中性策略且无假白、塑料感、毛发损失或背景形变。"
+    if name == "OIS":
+        for cam in cameras:
+            row[cam] = "✗"
+        row["Main"] = "✓"
+        if project == "26121":
+            row["Tele"] = "✓"
+            support_scope = "当前项目 Main（IMX896）和 Tele（JN5）支持，UW/Front 不支持。"
+        else:
+            support_scope = "当前项目 Main（HP5）支持，UW/Front 不支持。"
+        row["说明"] = (
+            "光学防抖能力，通过镜组或 Sensor 的物理位移补偿手持抖动，可提升预览、视频和低照长曝光的稳定性。" +
+            support_scope + "需由 SE 确认当前模式正确初始化 OIS，并检查与 EIS 的叠加策略。"
+        )
+        row["确认负责人"] = "SE"
+        row["验证方法"] = "查硬件物料和驱动日志确认 OIS 初始化；在当前模式使用对应摄像头手持拍摄，验证稳定性，并检查 OIS/EIS 叠加与模式切换。"
+    if name == "录影灯 / Recording Light" and PROJECTS[project].get("brand") == "Nothing":
+        for cam in cameras:
+            row[cam] = "✗" if cam == "Front" else "✓"
+        row["说明"] = "录制状态指示能力。开始录制后，通过机身后侧录影灯/Glyph 指示当前正在录像，停止录制后关闭。Nothing 品牌项目默认支持所有后置摄像头录制场景（Main/UW/Tele），Front 不在默认支持范围。需确认常亮/闪烁方式、启停时序、模式切换和异常退出后的灯效状态。"
+        row["确认负责人"] = "Product"
+        row["验证方法"] = "分别使用每个后置摄像头开始、暂停/停止录制，确认录影灯按定义亮起/闪烁并及时关闭；检查切换模式、锁屏、来电或异常退出后无错误残留。"
+    if name == "各项专业模式参数极值范围":
+        for cam in cameras:
+            row[cam] = "✗" if cam == "Front" else "✓"
+        support_scope = "26111 Main/UW" if project == "26111" else "26121 Main/UW/Tele"
+        row["说明"] = (
+            "专业模式手动参数的可调边界定义，覆盖 ISO、快门速度、WB/AWB 色温、EV 和手动对焦。"
+            f"当前支持范围为 {support_scope}，Front 不支持。WB/AWB 色温范围沿用原项目，为 2300K–10000K。"
+            "ISO 上下限不使用跨镜头统一值，必须根据每颗 Sensor、平台与 HAL 实际性能支持范围逐摄像头确认。"
+        )
+        row["状态"] = "待确认"
+        row["确认负责人"] = "SE"
+        row["验证方法"] = "逐个后置摄像头读取并记录 HAL 的 sensitivity/exposure range，验证 ISO 最小值、最大值及边界档位可正常预览和拍摄；验证 WB/AWB 可从 2300K 调至 10000K；同时检查快门、EV、Focus 的首尾值、步进、显示和成片一致性。"
+    if name == "色彩模式 / Color Mode":
+        row["模式"] = "通用"
+        row["一级分类"] = "Settings"
+        row["二级分类"] = "Photo settings"
+        for cam in cameras:
+            row[cam] = "✓"
+        row["说明"] = "Camera Settings 中的全局照片色彩处理设置，用于选择项目定义的成片色彩处理策略。入口仅位于 Settings > Photo，不再出现在任何模式的 Toolbar；修改后应用于支持的拍照类模式和摄像头。需确认选项、默认值、持久化，以及与 Auto Tone、影像基调、滤镜/调色和 Ultra HDR 的优先级。"
+        row["确认负责人"] = "Product"
+        row["验证方法"] = "进入 Settings > Photo 切换色彩模式，确认各拍照类模式 Toolbar 中不存在该入口；逐摄像头拍摄并检查设置生效、默认值、持久化及与 Auto Tone、影像基调、滤镜/调色、Ultra HDR 的关系。"
+    if name in {"照片影调 / Image Tone", "影像基调 / Image Tone"} and mode in {"通用", "通用 / Common"}:
+        row["名称"] = "影像基调 / Image Tone"
+        row["模式"] = "通用"
+        row["一级分类"] = "Settings"
+        row["二级分类"] = "Photo settings"
+        for cam in cameras:
+            row[cam] = "✓"
+        row["说明"] = "Camera Settings 中的全局影像基调设置，作用于支持的静态照片成像 pipeline，不在各模式 Toolbar 中重复提供入口。提供自然与标准两种基调，默认标准：自然强调接近真实的饱和度和对比度，标准提供更鲜明、略高饱和度和对比度的效果；首次开启相机时显示选择提示。"
+        row["状态"] = "已确认"
+        row["确认负责人"] = "Product"
+        row["验证方法"] = "首次启动相机验证影调提示；在 Settings > Photo 切换自然/标准，确认默认值和持久化，并逐摄像头验证预览与成片效果；检查各照片类模式 Toolbar 中不存在重复入口。"
+    if mode in {"视频", "视频 / Video", "前后双录", "前后双录 / Dual View Video"} and name in {"Filter", "风格-滤镜 / Style-Filter"}:
+        row["说明"] = "视频 LUT 滤镜能力。风格/LUT pipeline 仅支持普通 SDR 1080P 30FPS；1080P60、4K30、4K60 及 HLG/HDR 视频规格均不支持。摄像头列只表示该摄像头在 1080P30 下是否具备该能力。"
+        row["验证方法"] = "在 1080P30 下验证预览和成片滤镜一致；切换 1080P60、4K30、4K60、HLG/HDR 时确认入口禁用、隐藏或提示切回 1080P30。"
+    elif mode in {"视频", "视频 / Video", "前后双录", "前后双录 / Dual View Video"} and name in {"Tuning", "Style", "风格-调色 / Style-Tuning"}:
+        row["说明"] = "视频风格调色能力。风格/LUT pipeline 仅支持普通 SDR 1080P 30FPS；1080P60、4K30、4K60 及 HLG/HDR 视频规格均不支持。摄像头列只表示该摄像头在 1080P30 下是否具备该能力。"
+        row["验证方法"] = "在 1080P30 下验证入口、预览、成片和 Preset；切换其他帧率、分辨率或 HLG/HDR 时确认入口禁用、隐藏或提示切回 1080P30。"
+    elif mode in {"视频", "视频 / Video", "前后双录", "前后双录 / Dual View Video"} and name == "风格-调色盘 / Style-Tuning Palette":
+        row["说明"] = "视频风格调色盘子能力，使用同一风格/LUT pipeline，因此仅支持普通 SDR 1080P 30FPS；1080P60、4K30、4K60 及 HLG/HDR 视频规格均不支持。摄像头列只表示该摄像头在 1080P30 下是否具备该能力。"
+        row["验证方法"] = "在 1080P30 下验证调色盘交互、预览和成片；切换其他视频规格时确认入口禁用、隐藏或提示切回 1080P30。"
+    if mode in {"视频", "视频 / Video"} and name == "Video HDR 算法":
+        for cam in cameras:
+            row[cam] = "✗"
+        if project == "26121":
+            row["Main"] = "✓"
+            row["Tele"] = "✓"
+            support_scope = "当前项目支持 Main/Tele，不支持 UW/Front。"
+        else:
+            support_scope = "当前项目所有摄像头均不支持。"
+        row["说明"] = (
+            "视频录制时通过 Sensor HDR 曝光/读出模式与 ISP/算法处理扩展动态范围，保留高光和暗部细节，"
+            "并按支持的 HDR 格式编码输出。" + support_scope +
+            "需由 SE 逐摄像头确认支持的分辨率/帧率、Sensor mode、输出格式，以及与 EIS、变焦、风格/LUT、Log 的兼容关系和功耗温升。"
+        )
+        row["确认负责人"] = "SE"
+        row["验证方法"] = "对支持摄像头逐项验证 1080P30/60、4K30/60，确认 Sensor mode、HDR 编码/元数据、动态范围、EIS/变焦/风格/Log 互斥以及功耗温升；不支持摄像头确认入口不可用。"
+    if mode in {"夜景", "夜景 / Night"} and name == "Flash":
+        for cam in cameras:
+            row[cam] = "✗"
+        row["说明"] = "夜景模式的补光入口能力。当前项目夜景模式所有摄像头均不开放 Flash，后置 LED Flash/Torch 和前置屏幕补光均不进入夜景拍摄链路。夜景依赖环境光下的长曝光与多帧合成，避免补光改变场景光照并与夜景曝光策略冲突。"
+        row["确认负责人"] = "Product"
+        row["验证方法"] = "进入夜景模式确认 Flash 入口隐藏或不可用；从照片模式携带不同 Flash 状态切入夜景，确认状态不继承且拍摄过程不会触发 LED、Torch 或屏幕补光。"
+    if mode in {"照片", "照片 / Photo"} and name == "ISZ / In Sensor Zoom":
+        for cam in cameras:
+            row[cam] = "✗"
+        if project == "26111":
+            row["Main"] = "✓"
+            row["说明"] = "照片模式主摄在亮度满足时，于 2x 切换到 In-Sensor Zoom setting；SM7635 不支持 seamless 切换。4x SR / remosaic 是另一条高倍链路，不作为 ISZ 点描述。"
+            row["验证方法"] = "照片模式使用 Main 在 2x 检查 sensor setting、输出尺寸和切换过程；确认非 seamless 行为，并与 4x SR / remosaic 链路区分。"
+        else:
+            row["Main"] = "✓"
+            row["Tele"] = "✓"
+            row["说明"] = "照片模式主摄和长焦在亮度满足时使用 In-Sensor Zoom；超广角不使用 ISZ。具体触发倍率以项目 Camera 配置为准，不从默认变焦点列表推断。"
+            row["验证方法"] = "照片模式分别使用 Main 和 Tele 检查 ISZ sensor setting、触发条件和输出尺寸；确认 UW 不进入 ISZ。"
+        row["确认负责人"] = "SE"
+    elif mode in {"视频", "视频 / Video"} and name == "ISZ / In Sensor Zoom":
+        for cam in cameras:
+            row[cam] = "✗"
+        row["说明"] = "视频模式不支持 In-Sensor Zoom（ISZ）。切换 ISZ setting 会造成录像效果跳变并增加功耗，因此项目不开放视频 ISZ。"
+        row["确认负责人"] = "SE"
+        row["验证方法"] = "逐个摄像头进入视频模式并跨倍率变焦，确认不进入 ISZ setting，且不提供视频无损变焦点。"
     if name == "SAT / 平滑镜头切换":
         for cam in cameras:
             row[cam] = "✗" if cam == "Front" else "✓"
@@ -649,7 +807,7 @@ def add_algorithm_rows(project: str, rows: dict[tuple[str, str, str, str], dict[
             row.update(
                 {
                     "模式": mode,
-                    "一级分类": "基础算法",
+                    "一级分类": "算法",
                     "二级分类": item["二级分类"],
                     "名称": clean_legacy_text(item["名称"]),
                     "说明": clean_legacy_text(item["说明"]),
@@ -660,6 +818,9 @@ def add_algorithm_rows(project: str, rows: dict[tuple[str, str, str, str], dict[
                     "备注": "算法来源行，需 SE 按项目实测确认。",
                 }
             )
+            row["二级分类"] = normalize_level2(row["二级分类"])
+            normalize_legacy_name(row)
+            normalize_legacy_classification(row)
             for cam in PROJECTS[project]["cameras"]:
                 row[cam] = support_from_algo(item, project, cam)
             merge_row(rows, row)
@@ -861,13 +1022,13 @@ def add_video_toolbar_rows(project: str, rows: dict[tuple[str, str, str, str], d
     definitions = [
         {
             "名称": "Filter",
-            "说明": "视频模式滤镜能力。摄像头列表示该摄像头在视频模式存在可用滤镜链路；前置 4K PRD 明确 4K 前置当前不支持 Filter/Tuning，因为仅 1080P pipeline 支持。",
-            "验证方法": "视频模式选择滤镜后录制 1080P30/1080P60/4K30/4K60 样片，确认预览、成片滤镜、规格互斥和降级提示。",
+            "说明": "视频 LUT 滤镜能力。风格/LUT pipeline 仅支持普通 SDR 1080P 30FPS；1080P60、4K30、4K60 及 HLG/HDR 视频规格均不支持。摄像头列只表示该摄像头在 1080P30 下是否具备该能力。",
+            "验证方法": "在 1080P30 下验证预览和成片滤镜一致；切换 1080P60、4K30、4K60、HLG/HDR 时确认入口禁用、隐藏或提示切回 1080P30。",
         },
         {
             "名称": "Style",
-            "说明": "视频模式风格能力，用于记录视频是否支持类似 Filter/Tuning/Style 的风格化效果。摄像头列表示视频模式存在可用风格链路；4K/60fps 互斥需按规格进一步确认。",
-            "验证方法": "视频模式选择风格或调色效果后录制，确认入口、预览、成片、Preset 保存关系，以及 4K/60fps 互斥策略。",
+            "说明": "视频风格调色能力。风格/LUT pipeline 仅支持普通 SDR 1080P 30FPS；1080P60、4K30、4K60 及 HLG/HDR 视频规格均不支持。摄像头列只表示该摄像头在 1080P30 下是否具备该能力。",
+            "验证方法": "在 1080P30 下验证入口、预览、成片和 Preset；切换其他帧率、分辨率或 HLG/HDR 时确认入口禁用、隐藏或提示切回 1080P30。",
         },
     ]
     for item in definitions:
@@ -1061,7 +1222,7 @@ def add_candidate_rows(project: str, rows: dict[tuple[str, str, str, str], dict[
     for item in json.loads(CANDIDATES.read_text(encoding="utf-8")):
         if item.get("requirement") == "前置 4K 视频":
             continue
-        if item.get("candidate_id") in {"REQ26111-KB-009", "REQ26111-KB-021", "REQ26111-KB-029"}:
+        if item.get("candidate_id") in {"REQ26111-KB-009", "REQ26111-KB-011", "REQ26111-KB-021", "REQ26111-KB-029"}:
             continue
         if item.get("candidate_id") == "REQ26111-KB-007":
             # Tuning Palette is an update to the existing Tuning capability.
@@ -1138,6 +1299,23 @@ def unsupported_reason(row: dict[str, str], project: str, cam: str) -> str:
     if row.get(cam) != "✗":
         return ""
 
+    if name == "Video HDR 算法":
+        if project == "26111":
+            return "26111 当前项目不提供 Video HDR 算法链路。"
+        return "26121 当前 Video HDR 支持范围仅覆盖 Main/Tele，该摄像头不在支持矩阵内。"
+    if name == "OIS":
+        return "该摄像头没有 OIS 硬件。"
+    if name == "录影灯 / Recording Light" and cam == "Front":
+        return "Nothing 品牌项目的录影灯默认支持范围为后置摄像头，Front 不在默认范围。"
+    if name == "美颜升级 / Beauty Upgrade" and cam != "Front":
+        return "本期美颜升级仅在照片和人像模式的前置摄像头生效。"
+    if mode in {"夜景", "夜景 / Night"} and name == "Flash":
+        return "夜景模式依赖环境光长曝光和多帧合成，不开放 LED Flash、Torch 或前置屏幕补光。"
+    if mode in {"视频", "视频 / Video"} and name == "ISZ / In Sensor Zoom":
+        return "视频切换 ISZ setting 会造成效果跳变并增加功耗，因此项目不开放视频 ISZ。"
+    if mode in {"照片", "照片 / Photo"} and name == "ISZ / In Sensor Zoom":
+        return "该摄像头不提供照片模式 In-Sensor Zoom（ISZ）通路。"
+
     if name == "动态照片 - 无效信息截取":
         if mode != "照片":
             return "该子能力属于 Motion Photo 动态照片拍照链路，当前模式不支持动态照片。"
@@ -1183,7 +1361,38 @@ def unsupported_reason(row: dict[str, str], project: str, cam: str) -> str:
     return "按当前项目硬件、PRD 或基线 FL，该摄像头不在支持范围。"
 
 
+def description_for_empty(row: dict[str, str]) -> str:
+    name = as_text(row.get("名称"))
+    mode = normalize_mode(row.get("模式", ""))
+    descriptions = {
+        "动态照片-视频支持录制声音": "动态照片子能力。拍摄 Motion Photo 时为动态视频片段同步录制环境声音，并在动态照片封装和相册播放时保留音频；需确认麦克风权限、静音策略、音画同步和隐私提示。",
+        "长时间无交互息屏以节约电量": "相机长时间没有用户操作时自动关闭或调暗预览显示以降低屏幕与相机链路功耗；触摸、按键或姿态变化后恢复预览，不能影响正在进行的拍摄或保存。",
+        "人脸检测": "检测预览中的单人或多人脸，并向人脸框、Face AE/AF、FRT、美颜和人像算法提供人脸位置、置信度及跟踪结果。",
+        "脏污检测": "检测镜头被指纹、油污或其他污渍遮挡的情况，并在可靠性满足条件时显示清洁镜头提示；需控制误报、重复提示和提示频率。",
+        "1080P@ 120fps": "慢动作模式的 1080P 120fps 录制规格。需逐摄像头确认入口、实际采集帧率、编码帧率、慢放倍率、时长限制、画质和温升。",
+        "4K": "延时摄影模式的 4K 输出规格。需逐摄像头确认采集间隔、最终视频分辨率、编码格式、时长限制、稳定性、功耗和温升。",
+        "顶部快捷保存入口": "Preset 顶部快捷保存入口，用于将当前可保存的相机参数快速写入现有或新建 Preset；需确认可保存参数、覆盖/新建流程、成功反馈和异常处理。",
+        "支持跳转保存到 预设（方案待定）": "从当前拍摄界面跳转到 Preset 保存流程的候选入口，用于将当前支持的参数保存为 Preset；入口位置、支持模式和交互方案尚待 Product 确认。",
+        "Motion Photo cover HDR": "动态照片封面帧的 HDR/Ultra HDR 支持能力。需确认封面帧编码、gain map/元数据、相册显示兼容性，以及动态片段与封面观感的一致性。",
+        "Ultra HDR": "Google 通用 Ultra HDR 照片格式编码能力，输出兼容 SDR 的基础图像和 HDR gain map/元数据；需确认模式与摄像头范围、编码正确性及相册显示兼容性。",
+        "长按快门连拍 / Press and Hold Burst": "当 Settings 中的长按快门行为配置为连拍后，用户长按快门持续拍摄多张照片；松开后停止，并正确处理张数、缓存、保存和中断。",
+        "Watermark": "水印快捷入口。点击切换水印开启/关闭，长按进入 Settings > Photo > Watermark 进行样式和内容设置。",
+        "变焦 / Zoom": "当前模式的变焦能力，支持通过默认倍率点、滑动变焦条或双指缩放改变视角；需按项目确认倍率范围、物理镜头切换方式和画质连续性。",
+    }
+    if name == "Flash":
+        return f"{mode}模式的补光控制入口。根据摄像头硬件和模式策略提供 Off、On、Auto、Torch、屏幕补光或 Glyph 等可用选项；不支持的组合应隐藏或禁用。"
+    if name == "Grid":
+        return "预览构图网格开关，用于显示或隐藏网格辅助线；需确认状态保持、横竖屏适配以及不写入最终成片。"
+    if name == "Ratio":
+        return "画幅比例切换能力，常用选项包括 1:1、4:3、16:9 和 Full；最大像素输出等互斥状态下应禁用或隐藏。"
+    if name == "风格-滤镜 / Style-Filter":
+        return f"{mode}模式的 LUT 滤镜能力，支持选择内置或导入滤镜并调节强度；需确认预览与输出一致、摄像头适用范围，以及与调色、Preset 和输出规格的互斥关系。"
+    return descriptions.get(name, "")
+
+
 def finalize_row(row: dict[str, str], project: str) -> dict[str, str]:
+    if not as_text(row.get("说明")).strip():
+        row["说明"] = description_for_empty(row)
     cameras = PROJECTS[project]["cameras"]
     reasons = []
     for cam in cameras:
@@ -1192,7 +1401,9 @@ def finalize_row(row: dict[str, str], project: str) -> dict[str, str]:
             reasons.append(f"{cam}: {reason}")
     row["不支持原因"] = "；".join(reasons)
     values = [row.get(cam, "") for cam in cameras]
-    if values and all(value in {"✓", "✗"} for value in values):
+    if row.get("名称") == "各项专业模式参数极值范围":
+        row["状态"] = "待确认"
+    elif values and all(value in {"✓", "✗"} for value in values):
         row["状态"] = "已确认"
     elif any(value == "TBD" for value in values):
         row["状态"] = "待确认"
@@ -1201,8 +1412,8 @@ def finalize_row(row: dict[str, str], project: str) -> dict[str, str]:
 
 def sorted_rows(rows: Iterable[dict[str, str]]) -> list[dict[str, str]]:
     mode_order = {m: i for i, m in enumerate(ALL_MODES + ["通用"])}
-    capture_level_order = {"功能": 0, "基础算法": 1, "Preset": 2, "Settings": 3, "Widget": 4, "通用功能": 5}
-    common_level_order = {"Preset": 0, "Settings": 1, "Widget": 2, "功能": 3, "基础算法": 4, "通用功能": 5}
+    capture_level_order = {"功能": 0, "算法": 1, "Preset": 2, "Settings": 3, "Widget": 4, "通用功能": 5}
+    common_level_order = {"Preset": 0, "Settings": 1, "Widget": 2, "功能": 3, "算法": 4, "通用功能": 5}
     level2_order = {
         "Preset": 0,
         "General settings": 10,
@@ -1299,7 +1510,7 @@ def audit(project_rows: dict[str, list[dict[str, str]]]) -> str:
 
 def hardware_rows() -> list[dict[str, str]]:
     return [
-        {"项目代号": "26111", "机型": "Base", "相机位置": "主摄", "Sensor 型号": "HP5", "分辨率": "200MP", "OIS": "NO", "备注": "SM7635; 200MP high-pixel risk/TBD"},
+        {"项目代号": "26111", "机型": "Base", "相机位置": "主摄", "Sensor 型号": "HP5", "分辨率": "200MP", "OIS": "YES", "备注": "HAL 物料表确认 OIS；200MP high-pixel risk/TBD"},
         {"项目代号": "26111", "机型": "Base", "相机位置": "超广角", "Sensor 型号": "IMX355", "分辨率": "8MP", "OIS": "NO", "备注": "FF"},
         {"项目代号": "26111", "机型": "Base", "相机位置": "前置", "Sensor 型号": "OV32D", "分辨率": "32MP", "OIS": "NO", "备注": "front auto-wide depends on orientation"},
         {"项目代号": "26121", "机型": "Pro", "相机位置": "主摄", "Sensor 型号": "IMX896", "分辨率": "50MP", "OIS": "YES", "备注": "same as 25111 Pro"},

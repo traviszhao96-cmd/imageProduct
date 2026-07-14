@@ -33,7 +33,7 @@ Primary ownership and readers:
 - Core readers: Product, SQA, and IQA.
 - Purpose: define which Camera functions the project finally supports, then support project completion and acceptance checks.
 
-`确认负责人` is a multi-select field with four canonical roles only:
+`确认负责人` is logically single-select and uses one of four canonical roles only. If a legacy Base still uses a multi-select field container, each record must still contain exactly one value:
 
 - `Product`: product definition, requirement scope, interaction, and project decisions.
 - `SE`: hardware, algorithm, pipeline, integration feasibility, and project support boundaries.
@@ -44,10 +44,10 @@ Do not use `PM`, `QA`, `影像 SE`, or `Tuning` as owner values. Use `Product` i
 
 Owner assignment rules:
 
-- Algorithm requirements (`一级分类=算法 / Algorithm` or `基础算法 / Base Algorithm`) are confirmed by `SE` only. Do not add Product merely because the algorithm is user-visible.
-- Concrete video, slow-motion, and timelapse specifications use `SE + SQA`.
-- Pure function and interaction requirements use `Product + SQA`.
-- User-facing interaction requirements that also require image/video effect acceptance, such as Style, Filter, Tuning, HDR controls, beauty, and bokeh, use `Product + IQA`.
+- Algorithm requirements (`一级分类=算法 / Algorithm`) are confirmed by `SE` only. Do not add Product merely because the algorithm is user-visible.
+- Concrete video, slow-motion, and timelapse support boundaries are confirmed by `SE`; SQA executes specification acceptance.
+- Pure function and interaction requirements are confirmed by `Product`; SQA executes software acceptance.
+- Image/video effect rows retain one accountable confirmation owner; IQA executes effect acceptance and becomes the owner only when the unresolved decision itself belongs to IQA.
 - Product must not appear on rows that only describe an algorithm, pipeline, hardware dependency, or implementation capability.
 
 Because FL is used for acceptance, it is intentionally verbose: support differences by project, mode, camera, and algorithm path must be visible. This verbosity should be generated from maintained sources instead of manually duplicated.
@@ -244,7 +244,8 @@ Use these canonical names when merging KB, Feature Tree, old FL rows and project
 | `Photo EIS / PZL` | Photo high-zoom stabilization / post-shutter frame capture. PZL differs from ZSL pre-buffer capture. |
 | `Video EIS` | Video electronic stabilization; the user switch lives in Settings > Video as `视频防抖开关`. |
 | `光学畸变矫正` | Merge `镜头畸变矫正` / `光学畸变矫正` / `光学畸变校正`; keep `人脸畸变矫正` separate. |
-| `人脸清晰度增强` | Merge FRT wording into this row; keep `人脸检测` separate. |
+| `FRT / 人像清晰度提升` | 自然质感人像能力族中的独立清晰度增强 feature；合并 `人脸清晰度增强` 等旧称，保留 `人脸检测` 为独立功能。 |
+| `美颜升级 / Beauty Upgrade` | 自然质感人像能力族中的独立参数与效果升级 feature；仅在照片、人像模式的 Front 展开，不与 FRT 合并。 |
 
 ## Dual View Video
 

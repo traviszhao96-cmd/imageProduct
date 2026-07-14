@@ -19,9 +19,9 @@
 - 需做进出平滑，V3 验收锁定阈值
 - 25131 人不做叠加 CFR（体验小组决策）
 
-### SR（Super Resolution / 超分）
-- YUV 方案: zoom >= 4x 启动
-- RAW 方案: zoom >= 2x 启动
+### 超分 / Super Resolution（SR）
+- 核心项目确认项：按模式和物理摄像头给出实际生效焦段，包括起始倍率、结束倍率和分段策略
+- YUV 方案 zoom >= 4x、RAW 方案 zoom >= 2x 仅作旧方案参考，不能直接作为 26111 / 26121 的最终范围
 - 夜景 SR: lux > 320
 - HDSR: 达到 SR 条件 AND 检测到 HDR
 

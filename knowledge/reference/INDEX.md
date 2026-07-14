@@ -7,6 +7,7 @@
 |------|------|
 | [memory-mutex.json](memory-mutex.json) | 记忆规则（5min记忆逻辑，45项功能）× 互斥逻辑（20条规则），v2.0，25111 MP1.5 基线 |
 | [kb-functions-algorithms-schema.md](kb-functions-algorithms-schema.md) | KB Functions Algorithms 总表 schema、去重原则、生成流程 |
+| [feature-list-management-workflow.md](feature-list-management-workflow.md) | FL 管理定位、端到端工作流及整理/确认/验收三阶段完成标准 |
 | [feature-list-layout-common-rules.md](feature-list-layout-common-rules.md) | FL 功能栏布局、通用功能、Preset/Settings 展开规则 |
 | [mode-zoom-transient-rules.md](mode-zoom-transient-rules.md) | 模式栏、变焦栏、左右暂态开关规则 |
 | [photo-top-toolbar-rules.md](photo-top-toolbar-rules.md) | Photo 模式 Toolbar 功能项与判断规则 |

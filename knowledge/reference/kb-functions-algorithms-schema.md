@@ -6,6 +6,8 @@
 
 `kb-functions-algorithms` is a **canonical function / algorithm manual**, not a project Feature List.
 
+Feature Tree is part of this KB model. It is a generated hierarchical projection of KB nodes, not a separately maintained source. The KB owns both taxonomy and node meaning; `feature-tree.md` may remain as a navigation or audit artifact generated from the same nodes.
+
 Project FL is a downstream acceptance checklist: it defines which Camera functions a project finally supports and is mainly read by Product, SQA, and IQA for development completion and acceptance. Therefore repeated rows in FL are useful output, but they should not become manually maintained knowledge.
 
 In this repository, `KB` means **Knowledge Base**. This table explains what each function/algorithm means, which mode scope it belongs to, how to judge support, what it depends on, and how to verify it.
@@ -30,7 +32,9 @@ Rules:
 | Field | Meaning |
 |---|---|
 | 模式 | Supported mode scope, not one expanded row per mode |
-| 一级分类 | `功能`, `基础算法`, `Preset`, `Settings`, or `Widget` |
+| 节点 ID | Stable unique identifier for requirements, relations, and FL provenance |
+| 父节点 ID | Optional parent node for hierarchy; category-only parents may also be generated from classification fields |
+| 一级分类 | `功能`, `算法`, `Preset`, `Settings`, or `Widget` |
 | 二级分类 | Interaction/module area, such as `预览框`, `AE/AF`, `Zoom`, `Toolbar`, `Preset`, `General settings`, `Photo settings`, `Video settings`, `Help & Support`, `Widget`, `右侧暂态开关` |
 | 名称 | Canonical function/algorithm name |
 | 说明 | What the item means in product terms |
@@ -49,7 +53,7 @@ Rules:
 
 Final FL rows are intentionally more repetitive than KB rows because they need to show differences by project, mode, and camera. For example, KB should have one `自动对焦-自动曝光` row with a mode scope; final FL can expand it into rows for Photo, Portrait, Video, Night, etc., with `✓` or `✗` per camera/project.
 
-Do not back-propagate FL duplication into KB or Feature Tree. Use FL as evidence and audit material, but maintain unique taxonomy in Feature Tree and unique function meaning in KB.
+Do not back-propagate FL duplication into the KB. Use FL as evidence and audit material. Maintain taxonomy and function meaning once in canonical KB nodes, then generate the Feature Tree view from those nodes.
 
 ## Generation Flow
 

@@ -24,23 +24,24 @@ Use these rows as `一级分类 = 基础算法`. `✓` means supported by the pr
 | 模式 | 二级分类 | 名称 | 说明 | 26111 Main | 26111 UW | 26111 Front | 26121 Main | 26121 UW | 26121 Tele | 26121 Front | 验证方法 |
 |---|---|---|---|---|---|---|---|---|---|---|---|
 | 拍照 | 实时算法 | Raw HDR / TF HDR | RAW 域 HDR，多帧合成；与夜景通过 luxindex 阈值切分。主摄/前置参考 lux < 320，超广角参考 lux < 300。 | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | 暗光 HDR 场景触发；确认不与夜景同时触发 |
-| 拍照 | 实时算法 | MFNR | 多帧降噪，普通低照场景走轻量化 MFNR。 | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | 低照非夜景场景出图；检查噪声和帧合成耗时 |
+| 拍照 | 后处理算法 | 多帧降噪 / MFNR | 通过多张短曝光帧对齐与融合降低随机噪声；主要用于 HDR 关闭或未进入 HDR / Super Night 的普通拍照链路，尤其是中低照静态场景，运动场景可能切换策略。 | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | 覆盖正常光、中低照、HDR/夜景阈值和运动场景，结合算法 tag 确认 MFNR 生效区间、帧数、互斥关系、噪声、鬼影和耗时 |
 | 夜景 | 实时算法 | TF SN / Super Night | 超级夜景，NZSL/ZSL 多帧链路；与 HDR 互斥。 | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | luxindex 进入夜景阈值后触发；确认 HDR 关闭 |
 | 拍照 | 实时算法 | CFR / 紫边去除 | HDR 内生效；参考触发 lux < 250 且 HDR=True，退出 lux > 280 或 HDR=False。 | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | 高反差边缘场景；验证进出平滑，无跳变 |
-| 拍照 | 后处理算法 | SR / Super Resolution | Zoom 超分；YUV 方案参考 zoom >= 4x，RAW 方案参考 zoom >= 2x。 | ✓ | ✗ | ✗ | ✓ | ✗ | ✓ | ✗ | 2x/4x 以上拍照出图；检查细节提升和耗时 |
+| 拍照 | 后处理算法 | 超分 / Super Resolution（SR） | 高倍率变焦或裁切拍照链路的超分辨率能力；YUV 4x、RAW 2x 仅作旧方案参考，当前项目核心待确认项是每个物理摄像头的实际生效焦段。 | ✓ | ✗ | ✗ | ✓ | ✗ | ✓ | ✗ | 在生效边界前一档、边界点和后一档拍摄并检查算法 tag，确认逐摄像头实际生效焦段、细节、伪影、耗时和功耗 |
 | 拍照 | 后处理算法 | HDSR | HDR + SR 叠加链路，达到 SR 条件且 HDR 检测成立时触发。 | ✓ | ✗ | ✗ | ✓ | ✗ | ✓ | ✗ | 暗光长焦/高倍 zoom 场景；确认 HDR 与 SR 均生效 |
-| 拍照 | 实时算法 | 人脸清晰度增强 | Face Restoration Technology；有人脸时在拍照/夜景/人像/高像素链路叠加。 | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | 有人脸场景出图；确认脸部细节增强 |
-| 拍照 | 实时算法 | Photo EIS / PZL | 拍照高倍 zoom 稳定链路；PZL 是按下快门后再取帧的后取帧策略，区别于 ZSL。26111 Main 与 26121 Main/Tele 均有 OIS，Photo EIS 仍需验收裁切、稳定和时序。 | ✓ | [TBD] | ✗ | ✓ | [TBD] | ✓ | ✗ | 高倍手持拍摄；检查 OIS/EIS 叠加、取景稳定、裁切和后取帧时序 |
+| 拍照/夜景/人像/高像素 | 自然质感人像 | FRT / 人像清晰度提升 | Face Restoration Technology；独立的人脸细节恢复与清晰度增强能力，不等同于美颜。 | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | 逐模式、摄像头和规格确认算法 tag；检查人脸细节、身份特征保持、伪影和过度锐化 |
+| 拍照 | 实时算法 | Photo EIS | 拍照高倍 zoom 电子防抖能力，通过陀螺仪运动信息和画面裁切补偿手持抖动。26111 Main 与 26121 Main/Tele 均有 OIS，仍需验收 OIS/EIS 叠加、裁切和稳定性。 | ✓ | [TBD] | ✗ | ✓ | [TBD] | ✓ | ✗ | 高倍手持拍摄；检查 OIS/EIS 叠加、取景稳定、裁切和成片清晰度 |
+| 拍照 | 取帧策略 | PZL | 按下快门后再开始获取用于成片的帧，区别于 ZSL 从快门前预缓存中选帧；PZL 不是电子防抖算法。原合并行不能证明 PZL 的独立支持范围，需 SE 逐摄像头确认。 | [TBD] | [TBD] | [TBD] | [TBD] | [TBD] | [TBD] | [TBD] | 结合算法 tag 或日志确认快门后的取帧起点、帧数和时序，并检查快门延迟、运动拖影及成片效果 |
 | 视频 | 实时算法 | Video EIS | 录像默认普通防抖。26111 Main 与 26121 Main/Tele 可与 OIS 叠加。 | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | 1080P30 手持录制；确认稳定、视角裁切和 OIS/EIS 叠加 |
 | 拍照/视频/夜景/延时 | 实时算法 | SAT / 平滑镜头切换 | 26111 HAL 为 2SAT，26121 为 SAT；两者均标注无 Fallback。具体模式、规格和镜头组合需要分别确认。 | ✓ | ✓ | ✗ | ✓ | ✓ | ✓ | ✗ | 变焦跨镜头点；确认 SAT/硬切、亮度/色彩/视角过渡，并验证无 Fallback 时的近焦行为 |
 | 人像 | 实时算法 | 人像 HDR | 虚化 + HDR + 美颜 + FRT 链路。 | ✓ | ✗ | ✓ | ✓ | ✗ | ✓ | ✓ | 人像逆光场景；确认虚化和 HDR 同时稳定 |
-| 人像/拍照/夜景 | 后处理算法 | 美颜 / 自然质感人像 | 用户触发且 FD 检测到人脸；5a P0 升级自然质感人像。 | ✓ | ✗ | ✓ | ✓ | ✗ | ✓ | ✓ | 人脸场景开关美颜；检查自然质感效果 |
-| 拍照/人像/夜景 | 后处理算法 | XDR / Ultra HDR | RAW 算法触发后叠加；人像模式可由用户触发。 | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | 支持 Ultra HDR 的查看器中确认动态范围 |
+| 拍照/人像 | 自然质感人像 | 美颜升级 / Beauty Upgrade | 独立的美颜参数与效果升级；本期仅 Front 支持，包含现有参数优化以及匀肤、肤色/性别/年龄分层和脸型流畅。 | ✗ | ✗ | ✓ | ✗ | ✗ | ✗ | ✓ | Front 人脸场景验证 Natural/Strong、参数与效果升级、多肤色/性别/年龄适配及中性回退 |
+| 拍照/人像/夜景 | 后处理算法 | Ultra HDR | 支持 Google 通用 Ultra HDR 照片格式编码，输出兼容 SDR 的基础图像和 HDR gain map / 元数据。 | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | 检查文件编码和 gain map / 元数据，并在支持 Ultra HDR 与仅支持 SDR 的查看器中验证显示兼容性 |
 | 高像素 | 后处理算法 | 高像素场景自适应链路 | 26111 Main 高像素通路已确认，产品选项以高像素 PRD 为准。26121 Main/Tele 按场景选择 50MP 直出+MMF，或 12.5MP binning 后叠加 TF MMF/HDR/SN 再 upscale 到 50MP。 | ✓ | ✗ | ✗ | ✓ | ✗ | ✓ | ✗ | 分亮度和动态范围拍摄，确认实际链路、输出分辨率、耗时、内存和产品选项映射 |
 | 拍照 | 后处理算法 | AI Zoom / AIGC SR | 两项目 HAL 都保留评估项，尚未形成最终量产结论。26111 重点评估 6GB 内存/性能和外部算法数据；26121 替代方案也待定。 | [TBD] | ✗ | ✗ | ✗ | ✗ | [TBD] | ✗ | 高倍场景确认最终算法、入口、触发倍率、内存、性能与伪影；未确认前不得标为已支持 |
 | 拍照 | 实时算法 | ISZ / In Sensor Zoom | 26111 Main 亮度满足时在 2x 切换 in-sensor zoom setting，SM7635 非 seamless；26121 Main/Tele 支持，UW 不使用 ISZ。 | ✓ | ✗ | ✗ | ✓ | ✗ | ✓ | ✗ | 2x/3.5x/高倍 zoom；确认 sensor setting 切换、非 seamless 过渡和成片输入 |
 | 拍照 | 实时算法 | 运动抓拍 | 5a P0 新增；HDR 运动场景升级、影调升级、智能分区。 | ✓ | ✓ | ✗ | ✓ | ✓ | ✓ | ✗ | 运动场景自动提升快门；检查普通模式引导入口 |
-| 视频 | 实时算法 | Video HDR 算法 | HAL 证明两项目存在 HLG、normal/stagger sensor mode 与 HDR10+ 输出通路，但没有给出逐镜头 Video HDR 算法启用矩阵。 | [TBD] | [TBD] | [TBD] | [TBD] | [TBD] | [TBD] | [TBD] | 按规格和摄像头确认 sensor mode、HDR 编码、动态范围、功耗和产品入口 |
+| 视频 | 实时算法 | Video HDR 算法 | 视频录制时通过 Sensor HDR 曝光/读出模式与 ISP/算法处理扩展动态范围，保留高光和暗部细节，并按支持的 HDR 格式编码输出。当前项目范围：26111 不支持；26121 支持 Main/Tele，不支持 UW/Front。需逐摄像头确认分辨率/帧率、Sensor mode、输出格式，以及与 EIS、变焦、风格/LUT、Log 的兼容关系和功耗温升。 | ✗ | ✗ | ✗ | ✓ | ✗ | ✓ | ✗ | 对支持摄像头逐项验证 1080P30/60、4K30/60，确认 Sensor mode、HDR 编码/元数据、动态范围、EIS/变焦/风格/Log 互斥以及功耗温升；不支持摄像头确认入口不可用 |
 | 视频 | 实时算法 | 视频夜景 | 高通夜景/平台降噪链路。 | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | 暗光录像；确认噪声和帧率稳定 |
 | 视频 | 实时算法 | HLG / HDR 规格 | 26111 HAL 覆盖 1080P30/4K30，1080P60 不支持 HLG；26121 HAL 覆盖 1080P30/60 与 4K30/60。当前证据未按摄像头拆分。 | [TBD] | [TBD] | [TBD] | [TBD] | [TBD] | [TBD] | [TBD] | 按摄像头和规格确认 HLG 入口、sensor mode、编码、屏幕提亮、温升和稳定性 |
 
@@ -67,6 +68,7 @@ These are user-visible features (`一级分类 = 功能`) that should stay in th
 |---|---|---|
 | SAT naming | `SAT` and `SAT / 平滑镜头切换` are the same capability. | Use one canonical row `SAT / 平滑镜头切换`; describe whether project zoom uses SAT smooth transition or hard cut in the `变焦` row. |
 | 26111 ISZ | 2026-07-13 HAL 明确 Main 2x in-sensor zoom setting，且 SM7635 非 seamless。 | 26111 Main 标 `✓`；说明非 seamless，并把 4x remosaic/6GB 风险留作 TBD。 |
+| Video ISZ | 2026-07-14 项目口径确认 26111 / 26121 视频模式均不支持 In-Sensor Zoom，原因是切换 ISZ setting 会造成录像效果跳变并增加功耗。 | 两项目视频模式的 `ISZ / In Sensor Zoom` 行所有摄像头均标 `✗`；不支持原因填写效果跳变与功耗问题；照片 ISZ 行保持独立判断。 |
 | 26111 slow motion | HAL 明确 Wide/Main 1080P120、1x-2x。 | 26111 Main 标 `✓`；其他摄像头不推断。 |
 | 26111/26121 dual-view exact spec | 25131 PRD defines 1080P30; 5a notes say exact spec needs separate PRD. | Add feature rows, mark detailed spec as pending PRD. |
 | Front 4K / HLG | HAL 只明确前置 1080P30/60；前置 HLG 写为按产品需求实现，没有前置 4K 通路。 | 前置 1080P60 可确认；前置 HLG/4K 保留 `[TBD]`。 |

@@ -105,8 +105,7 @@ Camera App
 │   ├── 拍照 / Photo                           purpose: 拍摄
 │   ├── 人像 / Portrait                        purpose: 拍摄
 │   │   ├── 虚化 / Bokeh（bokeh style）
-│   │   ├── 光斑 / Lens Flare
-│   │   └── 美颜 / Beauty
+│   │   └── 光斑 / Lens Flare
 │   ├── 夜景 / Night                           purpose: 拍摄
 │   ├── 视频 / Video                           purpose: 拍摄
 │   │   └── 前后双录 / Dual Recording
@@ -142,6 +141,7 @@ Camera App
 │   │   │
 │   │   ├── Photo / 照片
 │   │   │   FL: 二级分类=照片设置 / Photo Settings
+│   │   │   ├── 影像基调 / Image Tone（自然 / 标准；默认标准） purpose: 图像处理
 │   │   │   ├── Watermark                      purpose: 个性化
 │   │   │   ├── Auto Tone                      purpose: 图像处理
 │   │   │   ├── Tap to take a photo            purpose: 拍摄
@@ -169,10 +169,17 @@ Camera App
 │   ├── 三方应用分享 / Share to Apps            purpose: 系统
 │   └── 震动反馈 / Haptic Feedback              purpose: 系统
 │
-└── 10. 相册联动 / Gallery Integration
+├── 10. 相册联动 / Gallery Integration
     ├── Ultra HDR 显示 / Ultra HDR（XDR）Display
     ├── 编辑跳转 / Jump to Edit
     └── 视频播放 / Video Playback
+│
+└── 11. 成像能力族 / Imaging Capability Families（不是独立交互入口）
+    └── 自然质感人像 / Natural Texture Portrait  purpose: 图像处理 / 人像效果
+        ├── FRT / 人像清晰度提升
+        │   └── 独立人脸细节恢复能力；模式范围为照片 / 人像 / 夜景 / 高像素，逐项目确认摄像头与规格
+        └── 美颜升级 / Beauty Upgrade
+            └── 独立美颜参数与效果升级；本期仅照片 / 人像模式 Front 支持
 ```
 
 ---
@@ -187,7 +194,8 @@ Camera App
 | Tuning（7参数调色） | Toolbar          |
 | HDR           | Toolbar          |
 | Auto Tone     | Settings → Photo |
-| 美颜            | Mode Switch → 人像 |
+| FRT / 人像清晰度提升 | 自然质感人像能力族 |
+| 美颜升级          | 自然质感人像能力族；照片 / 人像 Front |
 | 虚化 / 光斑       | Mode Switch → 人像 |
 
 ### 拍摄

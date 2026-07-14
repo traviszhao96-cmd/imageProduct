@@ -27,7 +27,7 @@ Photo mode includes:
 | Exposure | Global photo exposure adjustment. Range: -2 to +2 EV, with 0.3 EV step. |
 | Filter | Built-in filters plus user-imported filters. Do not enumerate all filter names in FL; reference the current filter management document instead. |
 | Tuning | Manual tuning capability. Includes Tuning Palette / Palette Mode / Parameter Mode / Strength / seven-parameter adjustment. Do not create a separate `Style / Tuning Palette / Palette-Parameters` FL row. |
-| Photo Style | Natural / Vivid ISP style switch. This is a distinct user-facing style preset from manual Tuning. Keep it as `Photo Style` when the project exposes the Natural/Vivid entry. |
+| 影像基调 / Image Tone | Natural / Standard ISP 基调切换；最新产品口径将入口放在 Settings > Photo，不在模式 Toolbar 展开。它与手动 Tuning、滤镜保持独立。 |
 | Motion Photo | Dynamic photo. Support scope differs by project/camera; describe differences in notes. `Motion Photo cover HDR` and `动态照片 - 无效信息截取` may be split into separate rows when inherited FLs or QA acceptance need explicit validation. |
 | Quality | Output pixel-count selection. Current common values: 20MP and 50MP; projects with 200MP add 200MP. Decide options based on In-Sensor Zoom and camera output mode. |
 | Grid | On / Off. |
@@ -41,7 +41,7 @@ Photo mode includes:
 - Keep one row per user-facing toolbar item unless a sub-capability is large enough to test independently.
 - Do not expand every filter name into FL rows. Link to the filter management reference.
 - Do not generate `Style / Tuning Palette / Palette-Parameters` as an independent FL row. Treat Tuning Palette PRDs as updates to the existing `Tuning` row, unless PM confirms a new user-facing `Style` entry that replaces existing Filter/Tuning UI.
-- Keep `Photo Style` separate from `Tuning`: `Photo Style` is Natural/Vivid ISP style, while `Tuning` is manual parameter / palette adjustment.
+- Keep `影像基调 / Image Tone` separate from `Tuning`: Image Tone is the Natural/Standard ISP baseline, while Tuning is manual parameter/palette adjustment. Image Tone belongs to Settings > Photo, not Toolbar.
 - Do not expand every Motion Photo implementation detail by default.
 - `Motion Photo cover HDR` may be an independent row because support differs by project/camera.
 - `动态照片 - 无效信息截取` may be an independent row when the baseline FL already tracks it or QA needs to validate invalid clip trimming separately.

@@ -210,11 +210,11 @@
     "proposed_tree_label": "Zoom / ISZ / Video ISZ",
     "proposed_kb_action": "update",
     "kb_name": "ISZ / In Sensor Zoom",
-    "fl_impact": "视频、慢动作及支持变焦的视频类模式；26111 点位 0.6/1/2/4，26121 点位 0.6/1/2/3.5/7。",
+    "fl_impact": "26111 与 26121 的视频模式均不支持 In-Sensor Zoom；切换 ISZ setting 会造成录像效果跳变并增加功耗，项目 FL 的视频 ISZ 行所有摄像头均标记为不支持。",
     "confidence": "high",
-    "dispute_level": "medium",
-    "manual_review_question": "慢动作/所有视频规格都支持的说法需工程确认，ISZ 与 EIS 叠加顺序也待确认。",
-    "notes": "超广、前后双录、最高 ISZ 点位以上画质增强均 out of scope。"
+    "dispute_level": "low",
+    "manual_review_question": "逐个摄像头进入视频模式并跨倍率变焦，确认不进入 ISZ setting，且不提供视频无损变焦点。",
+    "notes": "Travis 2026-07-14 确认：视频 In-Sensor Zoom 因效果跳变和功耗问题全部不支持；照片 ISZ 能力不受此结论影响。"
   },
   {
     "candidate_id": "REQ26111-KB-015",

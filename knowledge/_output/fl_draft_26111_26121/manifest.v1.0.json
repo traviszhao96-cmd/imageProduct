@@ -1,0 +1,24 @@
+{
+  "version": "v1.0",
+  "meaning": "Distribution draft for Product/SE/SQA/IQA fill-in, not final sign-off.",
+  "base_link": "https://nothing-tech.sg.larksuite.com/wiki/RbYFwco6qiFiywklWSKlL3WcgMg?table=tblmjUrlAEUhegjG&view=vew2pV2f4a",
+  "tables": {
+    "26111": {
+      "rows": 224,
+      "json": "26111_fl_draft.v1.0.json",
+      "csv": "26111_fl_draft.v1.0.csv",
+      "markdown": "26111_fl_draft.v1.0.md"
+    },
+    "26121": {
+      "rows": 236,
+      "json": "26121_fl_draft.v1.0.json",
+      "csv": "26121_fl_draft.v1.0.csv",
+      "markdown": "26121_fl_draft.v1.0.md"
+    }
+  },
+  "hardware": {
+    "rows": 7,
+    "json": "hardware_config.v1.0.json",
+    "csv": "hardware_config.v1.0.csv"
+  }
+}

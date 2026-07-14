@@ -44,6 +44,8 @@ Default zoom-point rules:
 2. If a camera supports **In-Sensor Zoom (ISZ)**, also expose the supported ISZ zoom point.
 3. A default zoom point should represent a real capture path, not just a decorative UI stop.
 
+Default zoom points are mode-specific. A Photo-mode ISZ point must not be copied into Video, Slow Motion, or another mode unless that mode has its own confirmed ISZ path. For 26111 and 26121, Video does not support ISZ because switching the ISZ setting causes visible effect jumps and increases power consumption; the Photo ISZ conclusion cannot be used as Video FL evidence.
+
 Example: 25131 has an ultrawide camera and a main camera. The main camera supports ISZ and can output 12MP at 2x. Therefore the default zoom points are:
 
 | Zoom point | Meaning |
