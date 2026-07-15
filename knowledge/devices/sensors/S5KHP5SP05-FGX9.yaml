@@ -1,0 +1,48 @@
+# S5KHP5SP05-FGX9 - Samsung 200MP Mobile Image Sensor
+# Source image: Figure 5-3 to Figure 5-5, supplied by Travis on 2026-07-15.
+# The source image documents output operations only; it does not define project UI zoom support.
+
+sensor:
+  model: S5KHP5SP05-FGX9
+  short_name: S5KHP5
+  vendor: Samsung Semiconductor
+  type: CMOS ISOCELL
+  project_usage: "26111 Main"
+
+optical:
+  optical_format: '1/1.56"'
+  unit_cell_size_um: 0.5
+  resolution:
+    total_mp: 200
+  cfa: "Multi-pixel CFA; exact commercial CFA name not confirmed from the supplied figure"
+
+output_operations:
+  output_200mp:
+    operation: "SW Remosaic"
+    description: "Software remosaic reconstructs the sensor CFA output into a full-resolution Bayer-like color arrangement for 200MP output."
+    evidence: "Figure 5-3 - 200 MP output operation"
+  output_50mp:
+    operation: "4-pixel summation followed by HW Remosaic"
+    description: "Four photosites are summed first, then hardware remosaic produces the 50MP sensor output."
+    evidence: "Figure 5-4 - 50 MP output operation"
+  output_12_5mp:
+    operation: "8-pixel summation plus 2-average binning"
+    description: "The sensor combines the CFA samples into a 12.5MP output without the full-resolution remosaic path shown for 200MP."
+    evidence: "Figure 5-5 - 12.5 MP output operation"
+
+project_mapping:
+  project: "26111"
+  photo_ui_points:
+    "1x": "Main hardware point"
+    "2x": "Main ISZ path; project support is confirmed by HAL, not by output-resolution arithmetic alone"
+    "4x": "Main Hex Zoom path using hex/4x4 RAW and external software remosaic; not Tele and not ISZ"
+  evidence_boundary:
+    - "The sensor output figures confirm 200MP, 50MP and 12.5MP output operations."
+    - "They do not independently confirm which Camera modes expose 2x ISZ or 4x Hex Zoom."
+    - "Mode support, switching conditions, memory, power and performance must come from project HAL/PRD evidence."
+
+source:
+  local_image: "/Users/travis.zhao/Library/Application Support/LarkInternational/sdk_storage/68141ea199c227a0c065f20f84e11fa4/resources/images/img_v3_0213k_959954ce-09da-422b-a358-60ba01919chu.png"
+  figures: ["Figure 5-3", "Figure 5-4", "Figure 5-5"]
+  captured_on: "2026-07-15"
+

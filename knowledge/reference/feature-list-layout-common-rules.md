@@ -33,20 +33,27 @@ Primary ownership and readers:
 - Core readers: Product, SQA, and IQA.
 - Purpose: define which Camera functions the project finally supports, then support project completion and acceptance checks.
 
-`确认负责人` is logically single-select and uses one of four canonical roles only. If a legacy Base still uses a multi-select field container, each record must still contain exactly one value:
+Use separate responsibility fields:
+
+- `主责确认人`: one concrete person name, single-select/person field.
+- `评审角色`: multi-select roles used for review and acceptance participation.
+
+Canonical review roles:
 
 - `Product`: product definition, requirement scope, interaction, and project decisions.
-- `SE`: hardware, algorithm, pipeline, integration feasibility, and project support boundaries.
+- `APP`: application implementation and interaction behavior.
+- `HAL SE`: hardware, HAL, algorithm integration, pipeline feasibility, and project support boundaries.
+- `Tuning SE`: tuning parameters, image style, and effect delivery.
 - `SQA`: software functionality, interaction, state, compatibility, and specification acceptance.
 - `IQA`: image/video quality and algorithm-effect acceptance.
 
-Do not use `PM`, `QA`, `影像 SE`, or `Tuning` as owner values. Use `Product` instead of PM, split QA into SQA or IQA by acceptance type, and use only `SE` for the SE role.
+Do not put role labels or combinations such as `Product / SE / IQA` in `主责确认人`. Resolve a real name from the approved person/scope map. If no unique person matches, keep the row pending and ask for owner assignment.
 
 Owner assignment rules:
 
-- Algorithm requirements (`一级分类=算法 / Algorithm`) are confirmed by `SE` only. Do not add Product merely because the algorithm is user-visible.
-- Concrete video, slow-motion, and timelapse support boundaries are confirmed by `SE`; SQA executes specification acceptance.
-- Pure function and interaction requirements are confirmed by `Product`; SQA executes software acceptance.
+- Algorithm requirements (`一级分类=算法 / Algorithm`) route to a named HAL SE or Tuning SE person. Do not add Product merely because the algorithm is user-visible.
+- Concrete video, slow-motion, and timelapse support boundaries route to a named HAL SE person; SQA executes specification acceptance.
+- Pure function and interaction requirements route to a named Product or APP person; Product, APP, and SQA are review participants.
 - Image/video effect rows retain one accountable confirmation owner; IQA executes effect acceptance and becomes the owner only when the unresolved decision itself belongs to IQA.
 - Product must not appear on rows that only describe an algorithm, pipeline, hardware dependency, or implementation capability.
 
@@ -59,7 +66,7 @@ Use these layers:
 
 Use `通用` only when the function applies to all modes. Do not use it for mode-specific features.
 
-Final FL display values for `模式`, `一级分类`, and `二级分类` should be bilingual in one field, for example `照片 / Photo`, `设置 / Settings`, and `预览框 / Preview`.
+Final FL display values for `模式`, `一级分类`, and `二级分类` should be bilingual in one field, for example `照片 / Photo`, `通用 / Common`, and `预览框 / Preview`.
 
 Final FL sort order should place concrete capture modes first. Rows with `模式=通用 / Common` should be placed at the very bottom of each project table.
 
@@ -96,9 +103,9 @@ KB classification:
 
 | Field | Value |
 |---|---|
-| 模式 | 通用 |
-| 一级分类 | Preset |
-| 二级分类 | Preset |
+| 模式 | 通用 / Common |
+| 一级分类 | 通用 / Common |
+| 二级分类 | 预设 / Preset |
 
 Preset applies across modes. In final FL, keep it in `模式=通用 / Common` unless a specific project requirement adds a mode-specific Preset behavior.
 
@@ -110,9 +117,9 @@ KB classification:
 
 | Field | Value |
 |---|---|
-| 模式 | 通用 |
-| 一级分类 | Settings |
-| 二级分类 | General settings / Photo settings / Video settings / Help & Support |
+| 模式 | 通用 / Common |
+| 一级分类 | 通用 / Common |
+| 二级分类 | 通用设置 / General Settings、照片设置 / Photo Settings、视频设置 / Video Settings、帮助与反馈 / Help & Support |
 
 Do not place Settings rows under capture modes in final FL. If a setting affects only photo or video results, keep it in common settings and describe the affected mode scope in `说明` / `判断依据`.
 
@@ -125,8 +132,8 @@ KB classification:
 | Field | Value |
 |---|---|
 | 模式 | 通用 |
-| 一级分类 | Widget |
-| 二级分类 | Widget |
+| 一级分类 | 通用 / Common |
+| 二级分类 | 小组件 / Widget |
 
 Known reference:
 
@@ -241,11 +248,11 @@ Use these canonical names when merging KB, Feature Tree, old FL rows and project
 |---|---|
 | `ASD / AI场景检测` | AI-model semantic scene detection, e.g. green plants, stage and outdoor sky. Do not keep `普通场景检测` as a standalone row when it only means brightness/DRC/motion judgement. |
 | `SAT / 平滑镜头切换` | Same function as `SAT`. Rear cameras support the lens-switching capability; front camera does not. `变焦` row should explain SAT smooth switch, hard cut and digital zoom. |
-| `Photo EIS / PZL` | Photo high-zoom stabilization / post-shutter frame capture. PZL differs from ZSL pre-buffer capture. |
+| `Photo EIS` | Photo high-zoom electronic stabilization. Frame capture strategy is software-design detail and is not an FL/KB capability row. |
 | `Video EIS` | Video electronic stabilization; the user switch lives in Settings > Video as `视频防抖开关`. |
 | `光学畸变矫正` | Merge `镜头畸变矫正` / `光学畸变矫正` / `光学畸变校正`; keep `人脸畸变矫正` separate. |
-| `FRT / 人像清晰度提升` | 自然质感人像能力族中的独立清晰度增强 feature；合并 `人脸清晰度增强` 等旧称，保留 `人脸检测` 为独立功能。 |
-| `美颜升级 / Beauty Upgrade` | 自然质感人像能力族中的独立参数与效果升级 feature；仅在照片、人像模式的 Front 展开，不与 FRT 合并。 |
+| `FRT / 人像清晰度提升` | 独立的人脸清晰度增强后处理算法；合并 `人脸清晰度增强` 等旧称，保留 `人脸检测` 为独立功能。 |
+| `美颜算法 / Beauty Algorithm` | 独立的美颜后处理算法；仅在照片、人像模式的 Front 展开，不与 FRT 合并。 |
 
 ## Dual View Video
 

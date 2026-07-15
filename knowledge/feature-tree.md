@@ -10,7 +10,8 @@
 - AI 做影响分析时，用 `purpose` 标签找出同类功能
 - 新增功能挂载到正确的交互位置，同时打 purpose 标签
 - 写 Feature List 时，`快门区域` 不展开为功能行；快门按键、相册缩略图、前后摄像头翻转按键是所有相机都有的基础入口
-- 写 Feature List 时，`Preset`、`Settings`、`Widget` 使用 `模式=通用 / Common`，并分别作为 `一级分类=预设 / Preset`、`设置 / Settings`、`小组件 / Widget`；不要在每个拍摄模式下重复写一遍
+- Feature List 只使用三个一级分类：`功能 / Feature`、`算法 / Algorithm`、`通用 / Common`
+- `Preset`、`Settings`、`Widget` 使用 `模式=通用 / Common`、`一级分类=通用 / Common`，具体区域写入二级分类；不要在每个拍摄模式下重复写一遍
 - 写 Feature List 时，模式、一级分类、二级分类都使用双语枚举，例如 `照片 / Photo`、`设置 / Settings`、`预览框 / Preview`
 
 ---
@@ -94,7 +95,7 @@ Camera App
 │   │   └── 更多 / More（进入次级菜单）
 │   └── 视频工具栏 / Video Toolbar
 │       ├── Flash / Flash
-│       ├── 滤镜 / Filters
+│       ├── 风格 / Style（滤镜 + 调色 + 调色盘）
 │       ├── 白平衡 / White Balance
 │       ├── 曝光调节 / Exposure Adjustment
 │       ├── 规格切换 / Resolution Switch
@@ -119,7 +120,7 @@ Camera App
 │
 ├── 8. 通用 / Common（Feature List 使用 模式=通用 / Common）
 │   ├── Preset / 预设
-│   │   FL: 一级分类=预设 / Preset；二级分类=预设 / Preset
+│   │   FL: 一级分类=通用 / Common；二级分类=预设 / Preset
 │   │   ├── Preset 选择器 / Preset Selector（底部栏）
 │   │   ├── 快速保存 / Quick Save（修改后保存）
 │   │   ├── 卡片信息展示 / Card Info            purpose: 个性化
@@ -130,7 +131,7 @@ Camera App
 │   │   └── 默认 Preset 列表 / Default Preset List see: preset.md
 │   │
 │   ├── Settings / Settings（设置页）
-│   │   FL: 一级分类=设置 / Settings；二级分类按设置分组展开
+│   │   FL: 一级分类=通用 / Common；二级分类按设置分组展开
 │   │   ├── General / 通用设置
 │   │   │   FL: 二级分类=通用设置 / General Settings
 │   │   │   ├── Preset / 预设
@@ -160,7 +161,7 @@ Camera App
 │   │       └── Tips and feedback               purpose: 系统
 │   │
 │   └── Widget / 桌面小组件
-│       FL: 一级分类=小组件 / Widget；二级分类=小组件 / Widget
+│       FL: 一级分类=通用 / Common；二级分类=小组件 / Widget
 │       └── Preset Widget                      purpose: 系统 / 个性化
 │
 ├── 9. 系统级交互 / System Interactions
@@ -174,11 +175,11 @@ Camera App
     ├── 编辑跳转 / Jump to Edit
     └── 视频播放 / Video Playback
 │
-└── 11. 成像能力族 / Imaging Capability Families（不是独立交互入口）
-    └── 自然质感人像 / Natural Texture Portrait  purpose: 图像处理 / 人像效果
+└── 11. 算法能力 / Algorithm Capabilities（不是独立交互入口）
+    └── 后处理算法 / Post-processing Algorithm  purpose: 图像处理 / 人像效果
         ├── FRT / 人像清晰度提升
         │   └── 独立人脸细节恢复能力；模式范围为照片 / 人像 / 夜景 / 高像素，逐项目确认摄像头与规格
-        └── 美颜升级 / Beauty Upgrade
+        └── 美颜算法 / Beauty Algorithm
             └── 独立美颜参数与效果升级；本期仅照片 / 人像模式 Front 支持
 ```
 
@@ -190,12 +191,11 @@ Camera App
 
 | 功能            | 交互位置             |
 | ------------- | ---------------- |
-| 滤镜 + 强度       | Toolbar          |
-| Tuning（7参数调色） | Toolbar          |
+| 风格（滤镜 + 调色 + 调色盘） | Toolbar          |
 | HDR           | Toolbar          |
 | Auto Tone     | Settings → Photo |
-| FRT / 人像清晰度提升 | 自然质感人像能力族 |
-| 美颜升级          | 自然质感人像能力族；照片 / 人像 Front |
+| FRT / 人像清晰度提升 | 后处理算法 |
+| 美颜算法          | 后处理算法；照片 / 人像 Front |
 | 虚化 / 光斑       | Mode Switch → 人像 |
 
 ### 拍摄

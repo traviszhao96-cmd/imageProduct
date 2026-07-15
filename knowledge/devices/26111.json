@@ -39,8 +39,8 @@
         "sensor": "HP5",
         "resolution": "200MP",
         "ois": true,
-        "note": "HAL 物料表确认 OIS",
-        "datasheet": null
+        "note": "HAL 物料表确认 OIS；200MP 使用 SW Remosaic，50MP 使用 4-pixel summation + HW Remosaic，12.5MP 使用 8-pixel summation + 2-average binning。26111 照片 UI 点为 0.6x / 1x / 2x ISZ / 4x Hex Zoom。",
+        "datasheet": "devices/sensors/S5KHP5SP05-FGX9.yaml"
       },
       "ultrawide": {
         "sensor": "OV08J10",

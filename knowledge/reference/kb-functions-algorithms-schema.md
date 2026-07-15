@@ -19,7 +19,10 @@ Rules:
 - Do not create a new KB row just because a PRD updates an existing capability. If the requirement changes copy, interaction detail, judgement basis, dependency, or verification method of an existing feature, update that existing row.
 - The `模式` field is a mode scope, such as `通用` (all modes / maximum compatibility), `照片 / 人像 / 视频`, `照片`, or `全部拍摄模式`.
 - Use `通用` only when the function applies to all modes. Mode-specific features should use a concrete mode list.
-- `Settings`, `Preset`, and `Widget` are common features: use `模式=通用`, with `一级分类=Settings`, `Preset`, or `Widget`; do not expand Settings into specific capture modes in final FL.
+- The only first-level categories are `功能 / Feature`, `算法 / Algorithm`, and `通用 / Common`.
+- `Settings`, `Preset`, and `Widget` are common capabilities: use `模式=通用 / Common` and `一级分类=通用 / Common`; express their concrete area in `二级分类`. Do not expand them into capture modes in final FL.
+- `风格 / Style` is one Toolbar feature. Filter, Tuning, and Tuning Palette are sub-capabilities of Style and must not become three separate KB or FL rows.
+- Frame capture strategy and `PZL` are not maintained as KB/FL capability rows.
 - Final FL display values for `模式`, `一级分类`, and `二级分类` should be bilingual in one field, for example `照片 / Photo`, `设置 / Settings`, and `预览框 / Preview`.
 - Unsupported states are not represented in the KB. Support / unsupported differences belong to the final project FL.
 - Source projects for this KB are baseline references only: `25111 / 25131`.
@@ -34,8 +37,8 @@ Rules:
 | 模式 | Supported mode scope, not one expanded row per mode |
 | 节点 ID | Stable unique identifier for requirements, relations, and FL provenance |
 | 父节点 ID | Optional parent node for hierarchy; category-only parents may also be generated from classification fields |
-| 一级分类 | `功能`, `算法`, `Preset`, `Settings`, or `Widget` |
-| 二级分类 | Interaction/module area, such as `预览框`, `AE/AF`, `Zoom`, `Toolbar`, `Preset`, `General settings`, `Photo settings`, `Video settings`, `Help & Support`, `Widget`, `右侧暂态开关` |
+| 一级分类 | `功能 / Feature`, `算法 / Algorithm`, or `通用 / Common` |
+| 二级分类 | Interaction/module area, such as `预览框`, `AE/AF`, `Zoom`, `Toolbar`, `Mode Switch`, `前后翻转 / Camera Switch`, `录制中拍照 / Capture While Recording`, `Preset`, `General settings`, `Photo settings`, `Video settings`, `Help & Support`, `Widget`, `右侧暂态开关` |
 | 名称 | Canonical function/algorithm name |
 | 说明 | What the item means in product terms |
 | 判断依据 | How to decide support when generating project FL |

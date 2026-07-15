@@ -55,7 +55,7 @@ PRD / HAL / algorithm design / baseline FL / project feedback
           AI audit: missing rows, bad support marks, drift
                             |
                             v
-       Product / SE resolve disputed and high-risk items
+       Product / HAL SE / Tuning SE resolve disputed and high-risk items
                             |
                             v
              Publish versioned Base + change record
@@ -73,8 +73,8 @@ Today's 26111 / 26121 work followed this path: consolidate PRDs, algorithm docum
 - 26111 and 26121 are separate project tables under one versioned Base.
 - Each real Camera mode has a filtered view. Views are grouped by mode, not by first-level category.
 - `模式`、`一级分类`、`二级分类` use bilingual values.
-- First-level categories are `功能 / Feature`、`算法 / Algorithm`、`预设 / Preset`、`设置 / Settings`、`小组件 / Widget`.
-- `通用 / Common` is placed at the bottom and contains Settings, Preset, and Widget. Settings are not repeated under capture modes.
+- First-level categories are only `功能 / Feature`、`算法 / Algorithm`、`通用 / Common`.
+- `通用 / Common` is placed at the bottom and contains Settings, Preset, and Widget as second-level areas. They are not repeated under capture modes.
 - A KB capability is expanded into one row per relevant project mode when the mode needs an independent acceptance result.
 - Unsupported capabilities remain visible as `✗`; they are not deleted merely to shorten the table.
 
@@ -88,17 +88,19 @@ Every FL row must contain enough information for another person to judge and tes
 - A concrete reason for each meaningful `✗`.
 - Hardware, platform, mode, focal-range, specification, trigger, performance, power, and mutual-exclusion dependencies when applicable.
 - A verification method that describes how to prove the judgement, not merely a PRD name or check mark.
-- One canonical confirmation role per row: `Product`、`SE`、`SQA`、or `IQA`.
+- One named `主责确认人` per row, resolved from the approved person-to-scope map.
+- Multi-select `评审角色`: `Product`、`APP`、`HAL SE`、`Tuning SE`、`SQA`、or `IQA`.
 - A status consistent with the support columns: any unresolved `TBD` means `待确认`.
 
 ### Ownership
 
 - `Product`: requirement scope, user-visible function, interaction, and product decision.
-- `SE`: hardware, HAL, pipeline, algorithm, integration feasibility, specification boundary, and project support judgement.
+- `HAL SE`: hardware, HAL, pipeline, algorithm, integration feasibility, specification boundary, and project support judgement.
+- `Tuning SE`: image tuning scope, tuning parameters, and tuning delivery judgement.
 - `SQA`: software function, interaction, state, compatibility, and specification acceptance execution.
 - `IQA`: image/video quality and algorithm-effect acceptance execution.
 
-Algorithm rows are confirmed by `SE`. Product is not added to an algorithm row only because the result is user-visible. SQA and IQA are core readers and acceptance executors; they become the confirmation owner only when that row's unresolved decision genuinely belongs to testing.
+Algorithm rows route to a named `HAL SE` or `Tuning SE` person according to ownership. Product visibility does not make Product the accountable person for an algorithm row. SQA and IQA are core readers and acceptance executors; they become accountable only when the unresolved decision genuinely belongs to testing. If the approved owner map cannot produce one unique person, keep the row `待确认` and raise `OWNER_AMBIGUOUS` instead of inventing a name.
 
 ## 4. Three Completion Gates
 
@@ -120,7 +122,7 @@ Gate 1 allows unresolved items, but it does not allow hidden uncertainty or empt
 
 ### Gate 2: FL Confirmation Complete
 
-This means Product and SE can freeze the capability matrix as the project's intended design.
+This means Product, HAL SE, and Tuning SE can freeze the capability matrix as the project's intended design.
 
 For an individual row to be confirmed:
 
@@ -130,14 +132,14 @@ For an individual row to be confirmed:
 - Dependencies and supported mode/spec/focal range are explicit enough for testing.
 - The verification method can prove the row's support boundary.
 - The row has no unresolved conflict with another project document.
-- The single confirmation owner accepts the judgement and the status is `已确认`.
+- The named accountable person accepts the judgement and the status is `已确认`.
 
 For the whole FL to be confirmation-complete:
 
 - No unresolved `TBD` remains.
 - No P0/P1 missing capability or disputed support judgement remains open.
 - Product has confirmed functional and interaction scope.
-- SE has confirmed hardware, algorithm, pipeline, specification, and dependency boundaries.
+- HAL SE has confirmed hardware, HAL, pipeline, algorithm integration, specification, and dependency boundaries; Tuning SE has confirmed tuning-related boundaries.
 - AI audit has been rerun after human changes and no critical inconsistency remains.
 - The frozen version and its changes are recorded in the Base change log.
 
@@ -171,3 +173,14 @@ Humans should focus on decisions that require accountability or project judgemen
 - Whether quality, performance, power, and stability risks are acceptable.
 
 The goal is not to remove human confirmation. It is to stop spending human time maintaining repeated dead information and instead use that time on disputed, high-risk decisions.
+
+## 6. FL And Software Design Boundary
+
+The 2026-07-15 first review clarified the boundary between the project checklist and detailed algorithm design:
+
+- FL records whether a capability is supported for a mode and physical camera, plus the specification or focal range needed for acceptance.
+- Software design records frame timing, ZSL/post-trigger capture strategy, frame counts, decision thresholds, pipeline ordering, algorithm stacking and mutual exclusion.
+- KB keeps canonical terminology and enough meaning for AI and reviewers to understand both artifacts.
+- A detailed design item is not repeated as an FL row unless teams need an independent project support or acceptance conclusion for it.
+
+For example, frame capture strategy belongs to software design and is not maintained as a KB or project FL capability row. HDSR remains in FL because the project needs an explicit support and effective-focal-range conclusion.

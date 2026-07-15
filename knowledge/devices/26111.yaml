@@ -59,14 +59,14 @@ cameras:
       fov: "84.1°"
       equiv_focal: "23.5mm"
       lens_structure: "6P"
-      datasheet: "❌ 待创建 HP5.yaml"
+      datasheet: "✅ devices/sensors/S5KHP5SP05-FGX9.yaml"
       module_house: "盛泰"
       module_size: "15.3×15.3mm"
       module_height: "7.17mm (INF)"
       orientation: "6点钟"
       supplier: ["一供盛泰（旭业镜头）", "二供盛泰（舜宇镜头）"]
       eeprom: "GT24P256HA-5CSLI-TR"
-      note: "200MP 高像素，有 OIS。高像素产品选项以最新版 PRD 为准；HAL 另标注 4x SR 外部软件 remosaic 需评估。"
+      note: "200MP 高像素，有 OIS。Sensor 支持 200MP SW Remosaic、50MP 4-pixel summation + HW Remosaic、12.5MP 8-pixel summation + 2-average binning。26111 照片 UI 点为 0.6x / 1x / 2x ISZ / 4x Hex Zoom；4x 不是 Tele 或 ISZ。"
 
     ultrawide:
       sensor: "OV08J10-GA5A-001A"
@@ -218,8 +218,14 @@ defaults:
     doc_mode: "关"
     fallback_auto: "自动开"
   portrait:
-    focal_length: "3.5x"
-    equivalent_focal: "80mm"
+    base_26111:
+      ui_points: ["1x", "2x", "4x [TBD: Hex Zoom pipeline]"]
+      default_focal: "[TBD]"
+      note: "无 Tele，不得继承 25111 Pro / 26121 的 3.5x 默认入口"
+    pro_26121:
+      ui_points: ["1x", "2x", "3.5x"]
+      default_focal: "3.5x"
+      equivalent_focal: "80mm"
     aperture: "1.4/2.8"
   video:
     hdr: "关"
@@ -236,7 +242,8 @@ defaults:
     raw: "关"
   front:
     flash: "自动"
-    zoom: "1.2x"
+    zoom_ui_points: ["0.8x", "1x"]
+    default_zoom: "1x"
   settings:
     location: "开"
     shutter_sound: "跟随系统"

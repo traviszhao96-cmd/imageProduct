@@ -1,0 +1,62 @@
+version: '1.0'
+skill_id: feature-list-writer
+eval_type: content
+cases:
+- id: case-fl-boundary
+  threshold: 0.8
+  task: "评审 FL 时发现一行叫 PZL，详细记录 ZSL/后取帧时序、帧数和算法叠加顺序。应该保留吗？"
+  rubric:
+  - id: r1
+    check: 明确 PZL/取帧策略不作为 KB 或 FL 能力行
+    weight: 2
+  - id: r2
+    check: 指出帧时序、帧数、阈值和叠加顺序属于软件设计
+    weight: 2
+  - id: r3
+    check: FL 只保留需要独立确认的能力支持结论及模式/摄像头/规格/焦段范围
+    weight: 2
+- id: case-owner-routing
+  threshold: 0.8
+  task: "一行是视频算法支持焦段，当前确认负责人写 Product / SE / IQA。另一个是纯设置交互。请说明主责人与评审角色应该怎么填。"
+  rubric:
+  - id: r1
+    check: 主责确认人必须是一个具体姓名且单选，不能填写角色组合
+    weight: 2
+  - id: r2
+    check: 视频算法支持焦段默认由 HAL SE 对应人员主责，评审角色可包含 HAL SE 和 IQA/SQA 等参与者
+    weight: 2
+  - id: r3
+    check: 纯设置交互默认由 Product 对应人员主责，评审角色包含 Product、APP、SQA
+    weight: 2
+  - id: r4
+    check: 没有人员映射时标记待确认或 OWNER_AMBIGUOUS，不编造姓名
+    weight: 1
+- id: case-description-quality
+  threshold: 0.8
+  task: "FL 的说明是：‘在对应模式打开入口，确认选项、状态保持。26111 支持。’ 请审核并说明如何改。"
+  rubric:
+  - id: r1
+    check: 判定说明机械且把验证步骤、项目支持结论误当成能力说明
+    weight: 2
+  - id: r2
+    check: 要求说明功能或算法是什么、解决什么问题、适用模式/摄像头/规格/焦段或触发边界
+    weight: 2
+  - id: r3
+    check: 不在缺少事实时编造具体范围，而是提出准确的主责人确认问题
+    weight: 2
+- id: case-unsupported-causality
+  threshold: 0.8
+  task: "Quality 的 UW 标记为不支持，原因写‘按当前项目硬件、PRD 或基线 FL，该摄像头不在支持范围。’ 应该如何处理？"
+  rubric:
+  - id: r1
+    check: 明确拒绝把基线或支持范围结论当作不支持原因
+    weight: 2
+  - id: r2
+    check: 说明 Quality 依赖摄像头高像素 Sensor 输出模式和 Remosaic/高像素输出链路
+    weight: 2
+  - id: r3
+    check: 写出缺少对应高像素输出档位所以不能提供 Quality 切换的因果关系
+    weight: 2
+  - id: r4
+    check: 若依赖缺口无法确认，应改为 TBD/待确认而不是保留无证据的已确认叉号
+    weight: 1

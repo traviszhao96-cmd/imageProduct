@@ -336,8 +336,12 @@ def normalize_legacy_name(row: dict[str, str]) -> None:
         row["名称"] = "Tuning"
     elif "50MP" in name and "输出" in name:
         row["名称"] = "Quality"
-    elif name in {"Auto HDR", "HDR关"}:
-        row["名称"] = "HDR"
+    elif name in {"HDR", "Auto HDR", "HDR关", "HDR 开关"} and row.get("一级分类") != "算法":
+        row["名称"] = "HDR 开关 / HDR Switch"
+    elif name in {"AI Zoom", "AI Zoom 控制开关", "AI Zoom 开关"} and row.get("一级分类") != "算法":
+        row["名称"] = "AI Zoom 开关 / AI Zoom Switch"
+    elif name in {"自动夜景", "自动夜景开关"} and row.get("一级分类") != "算法":
+        row["名称"] = "自动夜景开关 / Auto Night Switch"
     elif name == "Auto tone":
         row["名称"] = "Auto Tone"
     elif name == "EV" or re.search(r"-2.*\+2.*曝光", name):
@@ -510,7 +514,7 @@ def repair_legacy_current_row(row: dict[str, str], project: str, source: str) ->
         for cam in PROJECTS[project]["cameras"]:
             if row.get(cam) in {"", "✓", "✗"}:
                 row[cam] = "TBD"
-    if row.get("名称") == "AI Zoom":
+    if row.get("名称") == "AI Zoom 开关 / AI Zoom Switch":
         row["验证方法"] = "在 30x 以上场景确认 AI Zoom 暂态开关是否出现；点击后拍摄高细节目标，检查成片清晰度和生成伪影。"
         row["状态"] = "待确认"
         for cam in PROJECTS[project]["cameras"]:

@@ -9,7 +9,7 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
-SOURCE = ROOT / "knowledge/_output/kb-functions-algorithms.json"
+SOURCE = ROOT / "knowledge/_output/kb-functions-algorithms.v6.json"
 OUTPUT = ROOT / "outputs/kb-visualizer/data.js"
 
 

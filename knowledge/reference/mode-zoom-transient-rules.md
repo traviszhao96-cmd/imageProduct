@@ -1,6 +1,7 @@
 # Camera Mode / Zoom Bar / Transient Switch Rules
 
 > Source: Travis verbal clarification, 2026-07-07.
+> Online PRD sources checked 2026-07-15: `Camera 5.0-变焦圆盘 Zoom dial` (revision 624), `Camera 4.0 交互&视觉体验优化汇总` (revision 1200), `Camera 5.1-前置自动小广角` (revision 12), and mode-specific PRDs.
 > Purpose: help AI understand current Feature List rows without inventing extra FL categories.
 
 ## Scope
@@ -40,19 +41,71 @@ The zoom bar sits above the mode bar. It contains default zoom points.
 
 Default zoom-point rules:
 
-1. Cover every hardware optical zoom point exposed by the device cameras.
-2. If a camera supports **In-Sensor Zoom (ISZ)**, also expose the supported ISZ zoom point.
-3. A default zoom point should represent a real capture path, not just a decorative UI stop.
+1. Start from the project's actual camera selection and configured capture paths. Do not copy another project's UI points merely because the product tier or mode name is similar.
+2. Cover every hardware optical zoom point exposed by the selected cameras.
+3. If a selected camera supports **In-Sensor Zoom (ISZ)**, also expose its configured ISZ point.
+4. If the project configures another recommended quality path, such as **Hex Zoom**, it may also be exposed as a UI point even though it is not a separate physical lens or ISZ point.
+5. A default zoom point must represent a real project capture path, not a decorative UI stop.
+
+Project selection baselines:
+
+| Project | Camera-selection-derived rear Photo UI points | Meaning |
+|---|---|---|
+| 26111 | 0.6x / 1x / 2x / 4x | 0.6x UW; 1x Main; 2x Main 200MP ISZ; 4x Main Hex Zoom. The project has no Tele camera. |
+| 26121 | 0.6x / 1x / 2x / 3.5x | Follows the 25111 Pro camera selection/configuration; 3.5x is the Tele entry. |
+
+These are project-level candidate points. Each mode must still filter them by its own confirmed pipeline. For example, Video must not inherit Photo ISZ or Hex Zoom when the video pipeline does not support those paths.
+
+For the 26111 HP5 Main sensor, the sensor documentation separately defines 200MP software remosaic, 50MP four-pixel summation followed by hardware remosaic, and 12.5MP eight-pixel summation plus two-average binning. These sensor output operations are capability evidence, not UI-zoom evidence. The 2x UI point is classified as ISZ because the 26111 HAL explicitly defines the 2x ISZ path; the 4x UI point is classified as Hex Zoom because the HAL defines hex/4x4 RAW plus external software remosaic. Do not rename 4x as ISZ or Tele.
 
 Default zoom points are mode-specific. A Photo-mode ISZ point must not be copied into Video, Slow Motion, or another mode unless that mode has its own confirmed ISZ path. For 26111 and 26121, Video does not support ISZ because switching the ISZ setting causes visible effect jumps and increases power consumption; the Photo ISZ conclusion cannot be used as Video FL evidence.
 
-Example: 25131 has an ultrawide camera and a main camera. The main camera supports ISZ and can output 12MP at 2x. Therefore the default zoom points are:
+Example: 25131 has an ultrawide camera and a main camera. The main camera supports ISZ and can output 12MP at 2x. Therefore its configured default zoom points are:
 
 | Zoom point | Meaning |
 |---|---|
 | 0.6x | Ultrawide hardware point |
 | 1x | Main camera hardware point |
 | 2x | Main camera ISZ point |
+
+### Zoom Dial Point Types
+
+Do not treat every point shown on the Zoom dial as a default UI zoom point. The online Zoom dial PRD defines four different point types:
+
+| Point type | Display and behavior |
+|---|---|
+| Optical / ISZ zoom point | Hardware quality peak. Permanently shows ratio, tick and equivalent focal length; supports highlight and snapping. |
+| Integer marker | Used mainly at 10x and above. Permanently shows ratio and tick, but no equivalent focal length and no snapping. |
+| Quick zoom point | Intermediate common focal length shown as a dot. Equivalent focal length appears when the dial reaches the point; supports snapping. |
+| Other scale | Reference tick only. The PRD suggests one tick per 5x, adjustable by visual density. |
+
+`UI zoom point` and `Quick zoom point` must remain separate fields in project zoom specifications:
+
+- UI zoom points come from exposed optical points and confirmed ISZ points.
+- Quick zoom points are optional intermediate focal lengths configured by mode and project.
+- Clicking a UI focal button to switch focal length is an interaction on the UI point; it does not make that point a Quick zoom point.
+- A mode without explicit quick-point configuration should not inherit another mode's points automatically.
+
+Online baseline examples:
+
+| Mode / camera | Quick zoom points | Rule |
+|---|---|---|
+| Rear Photo | 1.2x / 28mm; 1.5x / 36mm | Confirmed by the Zoom dial PRD baseline. |
+| Rear Video | None | The Zoom dial PRD explicitly lists no quick zoom point for video. |
+| Front camera | None | Front Auto Wide is removed from the 26111/26121 project scope. Front UI exposes only 1x on the Front camera. UI Spec focal lengths use rounded integers: 23mm on 26111 and 24mm on 26121. |
+| 25111 Pro / 26121 Rear Portrait | None as extra quick dots | 1x / 2x / 3.5x are fixed UI focal entries; continuous zoom is 1x-3.5x. This Tele-derived baseline does not apply to 26111. |
+
+Action mode uses project-specific UI zoom points and supports continuous zoom across the same displayed range. 26111 Rear Action uses `0.6x / 1x / 2x / 4x` with continuous zoom `0.6x-4x`; 26121 Rear Action uses `0.6x / 1x / 2x / 3.5x / 7x` with continuous zoom `0.6x-7x`. These entries are not extra Quick Zoom dots. Preset focal-length support remains independently confirmable.
+
+Rear Night follows Rear Photo for each project. UI zoom points, Quick Zoom points, continuous zoom range, and Preset focal-length candidates must stay aligned between the two rows; do not maintain an independent reduced Night zoom range. Front Night follows the project Front definition: Front 1x only, with no 0.8x entry or orientation-based switching.
+
+Rear Expert also follows Rear Photo for each project. UI zoom points, Quick Zoom points, continuous zoom range, and Preset focal-length candidates must remain aligned with Rear Photo. Photo, Night, and Expert rear rows should be updated together whenever the project zoom configuration changes.
+
+Video-class modes do not support Quick Zoom points. This applies to Video (rear and front), Slow Motion, Timelapse, and Dual View Video. Their fixed UI lens/focal entries are not Quick Zoom dots; write `不支持` rather than `无`, `无额外点`, or `TBD` in the Quick Zoom field.
+
+Motion Photo uses the same focal-length support as Photo and is not maintained as a separate mode row in the Zoom Range Matrix. Any future Motion Photo-specific focal restriction must first be confirmed as a real project difference before a separate row is reintroduced.
+
+26111 Rear Portrait exposes only Main 1x and Main 2x ISZ, with continuous zoom `1x-2x`. It does not support 3.5x Tele because the project has no Tele camera, and it does not support the Main-camera 4x Hex Zoom path.
 
 ## Transient Switches
 
