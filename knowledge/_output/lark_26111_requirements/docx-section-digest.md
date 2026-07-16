@@ -498,6 +498,8 @@ source: J8lkd4KGEobGtuxf3EelmToBg3E | revision: 12 | bytes: 12937
 ```
 
 # 010 【PRD】Camera 5.1 - Tuning Palette 调色板
+> **已过期快照：** 本节固定为 revision 55，仅保留历史审计，不得作为当前 Style/调色需求依据。当前版本请读取 `docx_md/010.md` 或线上文档 AQY0d37afoixBNxovr0l1fwmgDd；调色盘模式已取消复古滑杆，颗粒与暗角仅在参数模式中独立调节。
+
 source: AQY0d37afoixBNxovr0l1fwmgDd | revision: 55 | bytes: 20832
 ## headings
 # Camera Tuning Palette PRD

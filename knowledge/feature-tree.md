@@ -95,7 +95,7 @@ Camera App
 │   │   └── 更多 / More（进入次级菜单）
 │   └── 视频工具栏 / Video Toolbar
 │       ├── Flash / Flash
-│       ├── 风格 / Style（滤镜 + 调色 + 调色盘）
+│       ├── 风格 / Style（工具栏统一入口：滤镜 + 调色；调色包含 Palette / Parameters）
 │       ├── 白平衡 / White Balance
 │       ├── 曝光调节 / Exposure Adjustment
 │       ├── 规格切换 / Resolution Switch

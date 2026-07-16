@@ -21,7 +21,7 @@ Rules:
 - Use `通用` only when the function applies to all modes. Mode-specific features should use a concrete mode list.
 - The only first-level categories are `功能 / Feature`, `算法 / Algorithm`, and `通用 / Common`.
 - `Settings`, `Preset`, and `Widget` are common capabilities: use `模式=通用 / Common` and `一级分类=通用 / Common`; express their concrete area in `二级分类`. Do not expand them into capture modes in final FL.
-- `风格 / Style` is one Toolbar feature. Filter, Tuning, and Tuning Palette are sub-capabilities of Style and must not become three separate KB or FL rows.
+- `风格 / Style` is one Toolbar umbrella feature. Filter and Tuning are its sub-capabilities; Palette Mode and Parameter Mode are two modes inside Tuning, not independent FL features. KB and FL therefore maintain one Style row, while the row description and support state express the available sub-capabilities, camera scope, and specification limits. Final information architecture, effect stacking, and legacy migration may remain `待确认` until the interaction design is finalized.
 - Frame capture strategy and `PZL` are not maintained as KB/FL capability rows.
 - Final FL display values for `模式`, `一级分类`, and `二级分类` should be bilingual in one field, for example `照片 / Photo`, `设置 / Settings`, and `预览框 / Preview`.
 - Unsupported states are not represented in the KB. Support / unsupported differences belong to the final project FL.

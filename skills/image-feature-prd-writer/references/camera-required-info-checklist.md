@@ -23,7 +23,7 @@ Use this checklist before drafting a mobile imaging planning document.
 - Feature name
 - **Interaction area** — 从 `knowledge/feature-tree.md` 确定功能所属交互区，格式 `交互区 | 子模块`。如 `预览框 | 场景检测`、`Mode Switch | 视频 | 防抖`。PRD 的「需求范围」节必须写明交互位置。
 - In-scope capabilities
-- Explicit out-of-scope items
+- Unresolved boundaries that must be listed as pending questions, not `Out of Scope`
 - Trigger conditions or entry path
 - Configuration options or control strategy
 
@@ -88,7 +88,7 @@ When critical fields are missing, ask like this:
 
 2. 功能范围
 - 功能边界：
-- 明确不做的内容：
+- 尚未确认、可能影响交付的边界：
 
 3. 技术依赖
 - 依赖的硬件/算法/平台条件：

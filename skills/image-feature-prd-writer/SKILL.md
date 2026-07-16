@@ -75,7 +75,7 @@ Before drafting, check domain-specific requirements:
 - **产品背景**: product line, target market, release window, project stage
 - **交互位置**: 从 `knowledge/feature-tree.md` 确定功能挂载在哪个交互区（必填）。如 `预览框 | 场景检测`、`Mode Switch | 视频 | 防抖`。PRD 范围节必须写明。
 - **用户价值**: target users, scenario, pain point, expected improvement
-- **功能范围**: feature boundaries, in-scope, out-of-scope, entry path
+- **功能范围**: feature boundaries, supported capabilities, entry path；默认不创建 `Out of Scope / 本期不包含` 章节，尚未确定或容易误读的边界放入“待确认问题”
 - **技术依赖**: algorithm, hardware/sensor, ISP/SoC, platform version, cross-team
 - **交付依赖**: milestone, owner, external dependency, fallback plan
 
@@ -89,7 +89,8 @@ Before drafting, check domain-specific requirements:
 - 上市时间或版本窗口：[TBD]
 
 2. 功能边界
-- 明确不做的内容：[TBD]
+- 已确认的能力范围：[TBD]
+- 尚未确认、可能影响交付的边界：[TBD]
 
 3. 技术依赖
 - 依赖的硬件/算法/平台：[TBD]
@@ -121,11 +122,14 @@ For Gallery PRDs, always follow the current Gallery template. Historical referen
 ### PRD Writing Standards
 
 - 用简洁中文，少用填充词
+- **中文优先**：面向跨职能团队阅读时，组件、模式和交互名称以中文为主；英文只在首次出现时放在括号中，或集中保留在术语表、代码字段和埋点字段中。不要在连续正文中反复堆叠英文组件名。
 - 声明式语句，不用营销语言
 - 术语全文档一致
 - 已确认 vs 待确认明确区分
 - 存在权衡时直接陈述
-- 不重复相同观点
+- **删除重复**：同一产品定义、规则或结论只在最合适的章节完整说明一次；其他章节只引用，不换一种说法重复。更新摘要只保留真实变化，不能复述正文。
+- **不使用 Out of Scope**：默认不创建 `Out of Scope`、`本期不包含` 或“明确不做”章节，避免把尚未确认的范围误读为项目结论。确有争议的内容写入“待确认问题”，确有正式决策的内容写入变更记录或决策说明。
+- **核心能力必须展开**：文档标题、功能名称或范围中出现的每个核心能力，都必须有独立说明，至少覆盖入口、界面变化、用户操作、状态反馈、边界/待确认项和可测试的验收条件。审查时禁止出现“标题写了 A+B，但正文只详细说明 B”的情况。
 - PRD 只呈现最终产品需求状态，不写互相叠加的 addendum、中间决策表或页面清单
 - 不生成独立的中间规则章节或页面/状态清单；设计稿和页面状态写入对应功能点
 - 词条与埋点保持独立章节；功能词条只收录真实 UI 文案、label、icon/tooltip/accessibility 名称，不收录 API 名称或内部技术术语
@@ -208,6 +212,8 @@ Check: 方案可行性、scope 边界、依赖就绪度、接口影响、进度�
 
 ### agent Test Review
 Check: 验收可测试性、场景/设备覆盖、兼容性矩阵、异常路径、回归范围、客观 pass/fail 信号。
+
+额外检查：标题和功能范围中的每个核心能力是否都有独立交互说明与验收条件；中文正文是否依赖大量英文组件名才能理解；是否存在可合并的重复段落。
 
 ### agent Solution Smuggling 检查
 - 问题陈述是否预设了特定方案？是 → 重新表述问题

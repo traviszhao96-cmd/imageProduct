@@ -3332,5 +3332,69 @@
       "备注": "2026-06-25 新增",
       "当前状态": "待开发"
     }
+  },
+  {
+    "fields": {
+      "event_name": "NTCamera",
+      "key": "photo_info",
+      "key_note": "拍照成片时上报参数",
+      "label": "ai_scene",
+      "label_note": "拍照时 AI 场景识别结果",
+      "string_value": "xxx",
+      "value_note": "上报算法识别的场景类型或枚举值",
+      "默认值": "none",
+      "备注": "2026-07-16 新增",
+      "当前状态": "待开发"
+    },
+    "id": "recvpwY23eai1V",
+    "record_id": "recvpwY23eai1V"
+  },
+  {
+    "fields": {
+      "event_name": "NTCamera",
+      "key": "photo_info",
+      "key_note": "拍照成片时上报参数",
+      "label": "gyro_level",
+      "label_note": "拍照时陀螺仪检测到的运动等级",
+      "string_value": "xxx",
+      "value_note": "陀螺仪运动等级的具体数值",
+      "默认值": "0",
+      "备注": "2026-07-16 新增",
+      "当前状态": "待开发"
+    },
+    "id": "recvpwY23elxH0",
+    "record_id": "recvpwY23elxH0"
+  },
+  {
+    "fields": {
+      "event_name": "NTCamera",
+      "key": "photo_info",
+      "key_note": "拍照成片时上报参数",
+      "label": "face_luma_ratio",
+      "label_note": "拍照时人脸区域亮度与画面亮度的比值",
+      "string_value": "xxx",
+      "value_note": "上报实际比值，具体精度以算法输出为准",
+      "默认值": "0",
+      "备注": "2026-07-16 新增",
+      "当前状态": "待开发"
+    },
+    "id": "recvpwY23eA0QO",
+    "record_id": "recvpwY23eA0QO"
+  },
+  {
+    "fields": {
+      "event_name": "NTCamera",
+      "key": "photo_info",
+      "key_note": "拍照成片时上报参数",
+      "label": "ISO",
+      "label_note": "拍照时的感光度（ISO）",
+      "string_value": "xxx",
+      "value_note": "实际 ISO 数值，如 100、400、1600",
+      "默认值": "xxx",
+      "备注": "2026-07-16 新增",
+      "当前状态": "待开发"
+    },
+    "id": "recvpwY23ewvwp",
+    "record_id": "recvpwY23ewvwp"
   }
 ]

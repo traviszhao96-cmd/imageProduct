@@ -2,7 +2,8 @@
 
 > Source: https://nothing-tech.sg.larksuite.com/wiki/NMt0wr2Q2iTWevkSc0hlFcBAgJg
 > 含备注表: https://nothing-tech.sg.larksuite.com/base/N2azb9muvaqqmwsIB7IlPmFGgpg?table=tblh05JLoheZIXfr
-> Records: 204, 历史备注: 13
+> Records: 213, 历史备注: 13
+> 本地增量同步日期: 2026-07-16
 
 ## 历史拼写兼容
 
@@ -109,6 +110,10 @@
 | NTCamera | video_info | 每次停止录制并成功生成一个视频时上报,记录该视频对应参数,包含录制前和录制中的临时必要操作。 | video_mode | 在哪个模式拍摄的视频 | 4 | 前后双录 (Dual Recording) | 无 | 2026-06-25 新增 | 待开发 |
 | NTCamera | video_info | 每次停止录制并成功生成一个视频时上报 | dual_split | 前后双录的拼接方式 | top_bottom / pip | 上下分屏 / 画中画 | 0 | 2026-06-25 新增 | 待开发 |
 | NTCamera | video_info | 每次停止录制并成功生成一个视频时上报 | dual_lens | 前后双录的镜头组合（数字编码，见 camera_id） | 1+0 / 1+2 | 前置+主摄 / 前置+超广角 | 0 | 2026-06-25 新增 | 待开发 |
+| NTCamera | photo_info | 拍照成片时上报参数 | ai_scene | 拍照时 AI 场景识别结果 | xxx | 上报算法识别的场景类型或枚举值 | none | 2026-07-16 新增 | 待开发 |
+| NTCamera | photo_info | 拍照成片时上报参数 | gyro_level | 拍照时陀螺仪检测到的运动等级 | xxx | 陀螺仪运动等级的具体数值 | 0 | 2026-07-16 新增 | 待开发 |
+| NTCamera | photo_info | 拍照成片时上报参数 | face_luma_ratio | 拍照时人脸区域亮度与画面亮度的比值 | xxx | 上报实际比值，具体精度以算法输出为准 | 0 | 2026-07-16 新增 | 待开发 |
+| NTCamera | photo_info | 拍照成片时上报参数 | ISO | 拍照时的感光度（ISO） | xxx | 实际 ISO 数值，如 100、400、1600 | xxx | 2026-07-16 新增 | 待开发 |
 | NTCamera | video_info | 每次停止录制并成功生成一个视频时上报,记录该视频对应参数,包含录制前和录制中的临时必要操作。 | exposure_adjust | 该视频中,用户是否手动调节曝光 可发生在按下快门前 只要曝光调节对成片产生影响就记录 | 0 | 未调节 | 0 |  | 已上线 |
 | NTCamera | video_info | 每次停止录制并成功生成一个视频时上报,记录该视频对应参数,包含录制前和录制中的临时必要操作。 | exposure_adjust | 该视频中,用户是否手动调节曝光 可发生在按下快门前 只要曝光调节对成片产生影响就记录 | 1 | 调节 | 0 |  | 已上线 |
 | NTCamera | video_info | 每次停止录制并成功生成一个视频时上报,记录该视频对应参数,包含录制前和录制中的临时必要操作。 | video_length | 视频拍摄时长 | xx | 以秒为单位 | 无 |  | 已上线 |
@@ -233,3 +238,4 @@
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | 2026-06-17 | v5.2 | 新增 | photo_info 新增 label `flicker_sensor_output` | 无（此前误命名为 flicker_freq，已废弃） | 新增光源频率字段，对应代码变量 m_currentLightFrequency，值为 Flicker sensor 原始数值（如 0, 100, 120, 240） | photo_info | Maico / Travis / Zhongmin |
 | 2026-06-17 | v5.2 | 新增 | photo_info 新增 label `motion_level` | 无（原计划整合到 shot_algo，经讨论改为独立 key） | 新增运动速度等级字段，对应代码变量 m_currentMotionLevel | photo_info | Maico / Travis / Zhongmin |
+| 2026-07-16 | v5.3 | 新增 | photo_info 新增 4 个拍摄参数 | 无 | 新增 `ai_scene`、`gyro_level`、`face_luma_ratio`、`ISO` | photo_info | Travis Zhao |
