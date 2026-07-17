@@ -46,39 +46,50 @@
 
 ### 十一、埋点设计
 
-> 一行一个 parameter。同一次上报涉及多个 label 时拆为多行。不上报经纬度、地点名、media_id、精确照片数量等敏感信息。`map_album_view` 为地图相册专属新增 event。
+> 一行一个 parameter value 组合。不上报经纬度、地点名、media_id、精确照片数量等敏感信息。Bitable 共 10 条（已同步）。
 
-| event_name | key | key_description | parameter_value | 说明 |
-|------------|-----|-----------------|-----------------|------|
-| gallery_view | album_type | 当前进入的相册/视图类型 | map_album | 进入地图相册 |
-| gallery_view | entry_source | 进入来源 | albums / photo_details | 进入地图相册 |
-| gallery_view | has_location_media | 是否有可展示GPS媒体 | true / false | 进入地图相册，不包含数量 |
-| gallery_view | album_type | 当前退出的相册/视图类型 | map_album | 离开地图相册 |
-| gallery_view | duration | 停留时长 | int | 离开地图相册，单位秒 |
-| map_album_view | action | 地图行为类型 | map_load / locate | 地图相册内地图相关行为 |
-| map_album_view | trigger | 触发方式 | click | 点击定位按钮，action=locate 时上报 |
-| map_album_view | result | 执行结果 | success / fail | 地图加载 / 定位完成 |
-| map_album_view | fail_reason | 失败原因 | permission_denied / no_signal / timeout / network / tile_load_failed / other | action=locate/map_load 且 result=fail 时上报 |
-| media_manage | action | 具体管理动作 | favorite / share / delete / edit / hide | 地图相册中操作媒体，复用已有 event |
-| media_manage | source_view | 操作来源 | map_album | 标识操作发生在地图相册 |
-| media_manage | select_count | 本次操作包含的媒体数量 | int | 地图相册中操作媒体 |
-| media_manage | media_type | 本次操作包含的媒体类型 | photo / video / mixed | 地图相册中操作媒体 |
+#### 🆕 `map_album_view` — 新增 event
+
+| event_name | event_note | label | label_note | value | value_note | 操作场景说明 |
+|---|---|---|---|---|---|---|
+| map_album_view | 地图相册内地图相关行为时上报 | action | 地图行为类型 | map_load | 地图加载 | 进入地图相册后加载地图 |
+| | | | | locate | 定位 | 点击定位按钮 |
+| | | result | 执行结果 | success | 成功 | 地图加载 / 定位完成 |
+| | | | | fail | 失败 | 地图加载 / 定位失败 |
+| | | fail_reason | 失败原因 | permission_denied | 无定位权限 | 地图加载 / 定位失败原因 |
+| | | | | timeout | 定位超时 | 地图加载 / 定位失败原因 |
+| | | | | network | 没有网络 | 地图加载 / 定位失败原因 |
+
+#### ➕ `gallery_view` — 已有 event，新增参数
+
+| event_name | event_note | label | label_note | value | value_note | 操作场景说明 |
+|---|---|---|---|---|---|---|
+| gallery_view | 进入地图相册查看时上报 | album_type | 当前进入的相册/视图类型 | map_album | 地图相册 | 进入地图相册 |
+| | | entry_source | 进入来源 | albums | 从 Albums 页面进入 | 进入地图相册 |
+| | | | | photo_details | 从图片详情页进入 | 进入地图相册 |
+
+---
+
+#### 上报示例
 
 ```json
-// 进入地图相册
-{ "event_name": "gallery_view", "album_type": "map_album", "entry_source": "albums", "has_location_media": true }
+// 从 Albums 进入地图相册
+{ "event_name": "gallery_view", "album_type": "map_album", "entry_source": "albums" }
+
+// 从图片详情页地图缩略图进入
+{ "event_name": "gallery_view", "album_type": "map_album", "entry_source": "photo_details" }
 
 // 地图加载成功
 { "event_name": "map_album_view", "action": "map_load", "result": "success" }
 
 // 点击定位成功
-{ "event_name": "map_album_view", "action": "locate", "trigger": "click", "result": "success" }
+{ "event_name": "map_album_view", "action": "locate", "result": "success" }
 
-// 定位失败
-{ "event_name": "map_album_view", "action": "locate", "trigger": "click", "result": "fail", "fail_reason": "permission_denied" }
+// 定位失败 — 无权限
+{ "event_name": "map_album_view", "action": "locate", "result": "fail", "fail_reason": "permission_denied" }
 
-// 媒体操作
-{ "event_name": "media_manage", "action": "favorite", "source_view": "map_album", "select_count": 1, "media_type": "photo" }
+// 定位失败 — 超时
+{ "event_name": "map_album_view", "action": "locate", "result": "fail", "fail_reason": "timeout" }
 ```
 
 ### 十二、干系人
