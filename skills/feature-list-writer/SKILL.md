@@ -60,7 +60,7 @@ Each FL Bitable contains:
 | 一级分类 | select | 仅允许 功能 / Feature、算法 / Algorithm、通用 / Common |
 | 二级分类 | select | 双语枚举：预览框 / Preview、AE/AF、变焦 / Zoom、工具栏 / Toolbar、模式栏 / Mode Switch、前后翻转 / Camera Switch、录制中拍照 / Capture While Recording、预设 / Preset、通用设置 / General Settings、照片设置 / Photo Settings、视频设置 / Video Settings、帮助与反馈 / Help & Support、小组件 / Widget、左侧暂态开关 / Left Transient Switch、右侧暂态开关 / Right Transient Switch、实时算法 / Realtime Algorithm、后处理算法 / Post-processing Algorithm |
 | 名称 | text | 功能名或算法方案名 |
-| 说明 | text | 功能/算法是什么、适用范围、关键边界与需要确认的变量；不得只写“支持该功能”或来源结论 |
+| 说明 | text | 功能/算法是什么、适用范围、关键边界与需要确认的变量；不设最低字数，短而准确可以，不得写成“支持该功能”、机械模板或来源结论 |
 | {camera} | select(✓/✗/TBD) | 每个摄像头独立一列，仅列出该设备实际存在的摄像头；TBD 仅用于分发草稿和待确认项 |
 | 不支持原因 | text | 当摄像头列为 ✗ 时，说明不支持来自硬件限制、PRD 范围、基线 FL 或项目配置的原因 |
 | 状态 | select | 已确认 / 待确认 / Pending |

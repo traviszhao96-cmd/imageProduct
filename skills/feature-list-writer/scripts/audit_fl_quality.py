@@ -23,6 +23,8 @@ MECHANICAL_PHRASES = (
     "按当前项目硬件、PRD 或基线 FL",
     "当前基线 FL 未覆盖",
     "在对应模式打开",
+    "作为新功能进入 FL",
+    "不进入 Camera FL",
 )
 INVALID_UNSUPPORTED_REASON = re.compile(
     r"按当前项目硬件、PRD 或基线 FL|当前基线 FL 未覆盖|该摄像头不在支持范围",
@@ -81,11 +83,8 @@ def audit(rows: list[dict]) -> list[dict]:
         if not description:
             add(issues, index, row, "DESCRIPTION_EMPTY", "critical", "说明为空")
         else:
-            compact = re.sub(r"\s+", "", description)
-            if len(compact) < 20:
-                add(issues, index, row, "DESCRIPTION_TOO_SHORT", "high", "说明过短，无法独立解释能力和范围")
             if GENERIC_DESCRIPTION.match(description):
-                add(issues, index, row, "DESCRIPTION_GENERIC", "high", "说明只有支持/配置结论，没有解释功能或算法")
+                add(issues, index, row, "DESCRIPTION_VACUOUS", "high", "说明言之无物：只有支持/配置/来源结论，没有解释功能或算法")
             if any(phrase in description for phrase in MECHANICAL_PHRASES):
                 add(issues, index, row, "DESCRIPTION_MECHANICAL", "medium", "说明包含机械模板句，需要语义复核")
             if re.search(r"\b26(?:111|121)\b.*(?:支持|不支持)", description):

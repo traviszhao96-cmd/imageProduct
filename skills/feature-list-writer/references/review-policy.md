@@ -67,6 +67,8 @@ A good `说明` lets a reviewer understand the row without opening its source do
 
 Not every row needs four separate sentences, but all relevant information must be present. Do not put source provenance, support conclusions, or test steps in place of the explanation.
 
+Description quality has no minimum character count. A short definition is acceptable when it precisely identifies the capability and its relevant scope; reject a description because it is empty, generic, mechanical, circular, or substitutes a support/source conclusion for meaning, not because it is short.
+
 Reject descriptions such as:
 
 - `支持该功能。`
