@@ -60,3 +60,58 @@ cases:
   - id: r4
     check: 若依赖缺口无法确认，应改为 TBD/待确认而不是保留无证据的已确认叉号
     weight: 1
+- id: case-stateful-feature-description
+  threshold: 0.8
+  task: "一个设置项说明写成：‘省电录制功能，用于节省电量。’ 已知默认关闭，开启后设备静止时关闭预览屏但保持录制，移动或触摸后恢复。请审核并改写。"
+  rubric:
+  - id: r1
+    check: 说明用户收益是降低长时间录像时的屏幕与相机预览功耗
+    weight: 2
+  - id: r2
+    check: 写清开启后的触发条件、预览关闭、录制不中断和恢复行为
+    weight: 2
+  - id: r3
+    check: 写清默认关闭以及关闭时不触发自动息屏
+    weight: 2
+  - id: r4
+    check: 不用来源、继承关系、评审过程或冗长同义句填充说明
+    weight: 1
+- id: case-unknown-default
+  threshold: 0.8
+  task: "某开关的用途和开启效果已知，但默认状态在现有资料中没有写。AI 应该怎样填写说明和评审状态？"
+  rubric:
+  - id: r1
+    check: 保留已知用途和开启/关闭影响，不编造默认值
+    weight: 2
+  - id: r2
+    check: 将默认状态列为明确的主责确认问题
+    weight: 2
+  - id: r3
+    check: 在默认状态影响验收时保持待确认，而不是用继承项目推断为已确认
+    weight: 2
+- id: case-memory-rule
+  threshold: 0.8
+  task: "一个相机开关默认关闭，切换模式和前后置时记忆，进入图库/设置以及 5 分钟内返回时记忆，超过 5 分钟或安全相机恢复默认。FL 说明和详细规则应该分别怎么写？"
+  rubric:
+  - id: r1
+    check: FL 说明简洁写出默认关闭、关键记忆场景和超过 5 分钟/安全相机恢复默认
+    weight: 2
+  - id: r2
+    check: 不把九个场景逐列复制进 FL 说明，完整矩阵保留在 KB 或 memory-mutex 参考数据
+    weight: 2
+  - id: r3
+    check: 指出当前 memory-mutex 是 25111 MP1.5 基线，26111/26121 的差异必须确认，不能静默继承
+    weight: 2
+- id: case-wordy-but-empty
+  threshold: 0.8
+  task: "一段功能说明有四句话，反复说‘提升体验、满足需求、支持该能力、按项目配置’，但没有行为、结果或默认状态。应该因为字数多而通过吗？"
+  rubric:
+  - id: r1
+    check: 明确判定为言之无物，字数不构成质量
+    weight: 2
+  - id: r2
+    check: 要求删除重复和流程性句子，只保留目的、行为、结果、默认/范围等有效信息
+    weight: 2
+  - id: r3
+    check: 事实不足时输出精确澄清问题，不生成看似完整的机器文案
+    weight: 2

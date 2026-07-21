@@ -58,16 +58,32 @@ Select the person whose role and scope best match the row. If no unique match ex
 
 ## 3. Description Quality Gate
 
-A good `说明` lets a reviewer understand the row without opening its source document. It must answer:
+A good `说明` lets a reviewer understand why the capability exists and what changes for the user without opening its source document. It must answer the relevant questions below; it is not a prose expansion exercise.
 
-1. What is the function or algorithm?
-2. What user-visible behavior or imaging problem does it address?
-3. Where does it apply: mode, camera, focal range, specification, or trigger?
-4. What boundary or variable still needs project confirmation?
+For a user-visible function, setting, entry, or control:
 
-Not every row needs four separate sentences, but all relevant information must be present. Do not put source provenance, support conclusions, or test steps in place of the explanation.
+1. **Purpose / benefit:** what user problem it solves or what value it provides.
+2. **Behavior:** how it is triggered or operated, and what options or states exist.
+3. **Result impact:** what changes in preview, capture, output, saved state, or subsequent behavior when it is enabled, disabled, or changed.
+4. **Default and memory:** default state/value, whether the state is remembered or reset, and the important reset boundary when the function has a state or option. Do not invent a default or memory policy for stateless actions.
+5. **Scope:** applicable mode, camera, specification, focal range, or prerequisite when it changes the acceptance conclusion.
+
+For an algorithm:
+
+1. **Problem / benefit:** the imaging problem it addresses and the intended result.
+2. **Trigger and scope:** the scene, mode, camera, specification, or focal range in which it takes effect.
+3. **Observable impact:** the expected image/video change and any important tradeoff that affects acceptance.
+4. **Dependency / variable:** the hardware, platform, upstream detection, input, or project boundary that determines whether it is available.
+
+Not every row needs separate sentences for every item. Include only applicable information, but do not omit a known default, enable/disable impact, or memory/reset rule for a stateful control. Do not put source provenance, inheritance history, support conclusions, FL process narration, or test steps in place of the explanation.
+
+Memory rules use `knowledge/reference/memory-mutex.json` as the structured baseline. It contains 45 stateful features and nine standard scenarios: switching mode, switching front/rear camera, entering Gallery, entering Settings, process kill within five minutes, Home within five minutes, process kill after five minutes, Home after five minutes, and Secure Camera. The source baseline is `Camera 互斥记忆默认值列表 v2.0.xlsx` for 25111 MP1.5; target projects must confirm deltas rather than inherit it silently.
+
+FL descriptions should summarize only the default and the meaningful memory/reset behavior, for example: `默认关闭；切换模式和摄像头时保持，退出超过 5 分钟或进入安全相机后恢复默认。` The full nine-scenario matrix remains in KB/reference data and the verification plan. Do not paste all nine columns into every FL row.
 
 Description quality has no minimum character count. A short definition is acceptable when it precisely identifies the capability and its relevant scope; reject a description because it is empty, generic, mechanical, circular, or substitutes a support/source conclusion for meaning, not because it is short.
+
+Editing rule: every sentence must change the reader's understanding of purpose, behavior, result, default/memory, scope, or dependency. Remove repeated wording and sentences that only say the row exists, needs review, comes from another project, or belongs in FL. More words do not increase quality.
 
 Reject descriptions such as:
 
@@ -79,6 +95,16 @@ Reject descriptions such as:
 - `打开入口，确认选项、状态保持。`
 
 Unsupported reasons must use a causal chain: `required dependency -> missing/limited project capability -> unsupported consequence`. Never use `按当前项目硬件、PRD 或基线 FL，该摄像头不在支持范围` as a reason. A baseline mark is evidence to investigate, not the cause. Example: `Quality depends on a high-pixel Sensor output mode and its Remosaic/output pipeline; this camera does not expose a supported high-pixel output, so Quality switching is unavailable.` If the missing dependency cannot be established, change the support cell to `TBD`, keep the row pending, and ask the accountable person.
+
+An unsupported reason must contain three facts:
+
+1. **Required condition:** the concrete hardware, mode, pipeline, platform, specification, product scope, or upstream capability needed.
+2. **Project fact:** what this camera/project actually lacks or limits.
+3. **Consequence:** why that missing condition makes this feature unavailable in this exact row.
+
+Acceptable: `Quality requires a 50MP-or-higher Sensor output and the matching high-pixel processing path. The UW Sensor only exposes an 8MP output, so the Photo toolbar cannot provide a high-pixel Quality option.`
+
+Reject: `26121 follows the previous project, so it is unsupported.` / `The baseline FL marks it unsupported.` / `This camera is outside the support range.` / `The project does not support it.` These are conclusions or provenance, not causes. If only the conclusion is known, use `TBD`, record the exact missing question, and do not manufacture a causal sentence.
 
 Function descriptions should identify the entry/trigger, behavior/options, and output or state effect. Algorithm descriptions should identify the problem solved, trigger scene, effective mode/camera/focal/spec range, and important dependency or project variable.
 
@@ -103,6 +129,8 @@ For each reviewed row, score five dimensions from 0 to 2:
 | Scope | missing | mode/camera only | relevant mode/camera/spec/focal/trigger boundary |
 | Evidence consistency | conflicts or invented | weak/inherited only | consistent with approved evidence or explicitly TBD |
 | Testability | cannot derive acceptance | partial | verification can prove the stated boundary |
+
+For stateful feature rows, `Meaning=2` additionally requires the known enable/disable or option impact, default state, and meaningful memory/reset behavior. For algorithm rows, `Meaning=2` requires the problem solved and observable result; naming an algorithm or saying it improves quality is insufficient. Length is never scored directly.
 
 Verdicts:
 

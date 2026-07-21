@@ -1,6 +1,6 @@
 # KB Functions Algorithms v6 Audit
 
-- Rows: 77
+- Rows: 81
 - Duplicate names: 0
 - Invalid verification methods: 0
 - Bad source-project mentions: 0

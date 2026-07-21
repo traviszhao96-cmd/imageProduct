@@ -60,9 +60,9 @@ Each FL Bitable contains:
 | 一级分类 | select | 仅允许 功能 / Feature、算法 / Algorithm、通用 / Common |
 | 二级分类 | select | 双语枚举：预览框 / Preview、AE/AF、变焦 / Zoom、工具栏 / Toolbar、模式栏 / Mode Switch、前后翻转 / Camera Switch、录制中拍照 / Capture While Recording、预设 / Preset、通用设置 / General Settings、照片设置 / Photo Settings、视频设置 / Video Settings、帮助与反馈 / Help & Support、小组件 / Widget、左侧暂态开关 / Left Transient Switch、右侧暂态开关 / Right Transient Switch、实时算法 / Realtime Algorithm、后处理算法 / Post-processing Algorithm |
 | 名称 | text | 功能名或算法方案名 |
-| 说明 | text | 功能/算法是什么、适用范围、关键边界与需要确认的变量；不设最低字数，短而准确可以，不得写成“支持该功能”、机械模板或来源结论 |
+| 说明 | text | 功能行写用户收益、行为/选项、结果影响，以及有状态功能的默认值和关键记忆/重置规则；算法行写解决的问题、触发范围、可观察效果和依赖。短而准确可以，禁止来源/继承叙述和为凑字数扩写 |
 | {camera} | select(✓/✗/TBD) | 每个摄像头独立一列，仅列出该设备实际存在的摄像头；TBD 仅用于分发草稿和待确认项 |
-| 不支持原因 | text | 当摄像头列为 ✗ 时，说明不支持来自硬件限制、PRD 范围、基线 FL 或项目配置的原因 |
+| 不支持原因 | text | 当摄像头列为 ✗ 时，写清“所需依赖 → 当前项目缺失/限制 → 无法支持的结果”；继承项目、基线勾叉和“不在范围”不是根因 |
 | 状态 | select | 已确认 / 待确认 / Pending |
 | 主责确认人 | person/single-select | 一个具体姓名，单选；由负责人映射表按模块和能力路由 |
 | 评审角色 | multi-select | Product / APP / HAL SE / Tuning SE / SQA / IQA；表示参与者，不等同主责人 |
@@ -261,7 +261,12 @@ Dual View Video v2 should be split by acceptance surface:
 ### 12. Quality And Ownership Gate
 
 - Do not publish rows with empty, generic, source-only, or mechanically repeated descriptions.
+- Description quality is information coverage, not length. Do not add sentences unless they explain purpose/benefit, behavior, result impact, default/persistence, scope, or dependency.
+- Stateful functions and settings must state the known default and the effect of enabling, disabling, or changing the option. If these facts are unknown, keep the row pending and ask the owner; do not silently omit them or invent them.
+- Stateful functions must also summarize their meaningful memory/reset rule. Use `knowledge/reference/memory-mutex.json` as the 25111 MP1.5 baseline, then confirm project deltas. Keep the full nine-scenario matrix in KB/reference data rather than copying all scenarios into every FL description.
+- Algorithm descriptions must explain the imaging problem, trigger/scope, observable result, and determining dependency. `提升画质` or an algorithm acronym alone is not a sufficient explanation.
 - Do not infer a real unsupported reason from a baseline `✗`; unresolved reasons stay `TBD` for the accountable person.
+- An unsupported reason must state the required dependency, the actual missing/limited project fact, and the resulting unsupported consequence. Project inheritance and source provenance can be evidence links, but never the reason text.
 - `主责确认人` must contain one approved person name. A role such as `Product` or `HAL SE` is not a person name.
 - `评审角色` may contain multiple roles and is generated from the routing matrix.
 - Structural audit passing is necessary but not sufficient. The semantic review Agent must return `PASS`, `NEEDS_REWRITE`, `NEEDS_OWNER_INPUT`, or `BOUNDARY_VIOLATION` for every flagged row.
@@ -275,6 +280,7 @@ Dual View Video v2 should be split by acceptance surface:
 | Rear camera baseline | `knowledge/features/rear-camera.json` |
 | Front camera baseline | `knowledge/features/front-camera.json` |
 | Device configs | `knowledge/devices/{project}.yaml` |
+| Memory and mutual-exclusion baseline | `knowledge/reference/memory-mutex.json` (source: `Camera 互斥记忆默认值列表 v2.0.xlsx`) |
 | FL generator | `knowledge/generate.py` |
 | Wiki parent dir | `AHYRwmHTxiyzSGk7WrJliba2gre` |
 

@@ -1,0 +1,2442 @@
+{
+  "input": "outputs/feature-list-table/data/26121.json",
+  "rows": 208,
+  "issues": [
+    {
+      "row": 1,
+      "mode": "照片 / Photo",
+      "name": "AE / 自动曝光",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 2,
+      "mode": "照片 / Photo",
+      "name": "AF / 自动对焦",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 3,
+      "mode": "照片 / Photo",
+      "name": "识别框视觉动效",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 4,
+      "mode": "照片 / Photo",
+      "name": "前后翻转 / Front-Rear Camera Switch",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 5,
+      "mode": "照片 / Photo",
+      "name": "OIS",
+      "code": "UNSUPPORTED_REASON_CONSEQUENCE_MISSING",
+      "severity": "medium",
+      "message": "不支持原因未说明依赖缺口如何导致该功能不可用"
+    },
+    {
+      "row": 5,
+      "mode": "照片 / Photo",
+      "name": "OIS",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 6,
+      "mode": "照片 / Photo",
+      "name": "变焦",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 7,
+      "mode": "照片 / Photo",
+      "name": "AI Zoom 开关 / AI Zoom Switch",
+      "code": "DESCRIPTION_DEFAULT_UNKNOWN",
+      "severity": "medium",
+      "message": "有状态功能未说明默认值或状态持久化；未知时应形成主责确认问题"
+    },
+    {
+      "row": 7,
+      "mode": "照片 / Photo",
+      "name": "AI Zoom 开关 / AI Zoom Switch",
+      "code": "UNSUPPORTED_REASON_CONSEQUENCE_MISSING",
+      "severity": "medium",
+      "message": "不支持原因未说明依赖缺口如何导致该功能不可用"
+    },
+    {
+      "row": 7,
+      "mode": "照片 / Photo",
+      "name": "AI Zoom 开关 / AI Zoom Switch",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 8,
+      "mode": "照片 / Photo",
+      "name": "Text Mode（文本模式）",
+      "code": "DESCRIPTION_DEFAULT_UNKNOWN",
+      "severity": "medium",
+      "message": "有状态功能未说明默认值或状态持久化；未知时应形成主责确认问题"
+    },
+    {
+      "row": 8,
+      "mode": "照片 / Photo",
+      "name": "Text Mode（文本模式）",
+      "code": "DESCRIPTION_MEMORY_UNKNOWN",
+      "severity": "medium",
+      "message": "有状态功能未说明关键记忆或重置规则；应参考九场景基线并确认项目差异"
+    },
+    {
+      "row": 8,
+      "mode": "照片 / Photo",
+      "name": "Text Mode（文本模式）",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 9,
+      "mode": "照片 / Photo",
+      "name": "自动夜景开关 / Auto Night Switch",
+      "code": "DESCRIPTION_DEFAULT_UNKNOWN",
+      "severity": "medium",
+      "message": "有状态功能未说明默认值或状态持久化；未知时应形成主责确认问题"
+    },
+    {
+      "row": 9,
+      "mode": "照片 / Photo",
+      "name": "自动夜景开关 / Auto Night Switch",
+      "code": "DESCRIPTION_MEMORY_UNKNOWN",
+      "severity": "medium",
+      "message": "有状态功能未说明关键记忆或重置规则；应参考九场景基线并确认项目差异"
+    },
+    {
+      "row": 9,
+      "mode": "照片 / Photo",
+      "name": "自动夜景开关 / Auto Night Switch",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 10,
+      "mode": "照片 / Photo",
+      "name": "Exposure",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 11,
+      "mode": "照片 / Photo",
+      "name": "Flash",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 12,
+      "mode": "照片 / Photo",
+      "name": "Glyph Mirror",
+      "code": "UNSUPPORTED_REASON_CAUSE_MISSING",
+      "severity": "medium",
+      "message": "不支持原因未指出具体依赖或项目限制"
+    },
+    {
+      "row": 12,
+      "mode": "照片 / Photo",
+      "name": "Glyph Mirror",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 13,
+      "mode": "照片 / Photo",
+      "name": "Grid",
+      "code": "DESCRIPTION_DEFAULT_UNKNOWN",
+      "severity": "medium",
+      "message": "有状态功能未说明默认值或状态持久化；未知时应形成主责确认问题"
+    },
+    {
+      "row": 13,
+      "mode": "照片 / Photo",
+      "name": "Grid",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 14,
+      "mode": "照片 / Photo",
+      "name": "HDR 开关 / HDR Switch",
+      "code": "DESCRIPTION_DEFAULT_UNKNOWN",
+      "severity": "medium",
+      "message": "有状态功能未说明默认值或状态持久化；未知时应形成主责确认问题"
+    },
+    {
+      "row": 14,
+      "mode": "照片 / Photo",
+      "name": "HDR 开关 / HDR Switch",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 15,
+      "mode": "照片 / Photo",
+      "name": "More settings",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 16,
+      "mode": "照片 / Photo",
+      "name": "Motion Photo",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 17,
+      "mode": "照片 / Photo",
+      "name": "Motion Photo cover HDR",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 18,
+      "mode": "照片 / Photo",
+      "name": "Ratio",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 19,
+      "mode": "照片 / Photo",
+      "name": "Timer",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 20,
+      "mode": "照片 / Photo",
+      "name": "Watermark",
+      "code": "DESCRIPTION_DEFAULT_UNKNOWN",
+      "severity": "medium",
+      "message": "有状态功能未说明默认值或状态持久化；未知时应形成主责确认问题"
+    },
+    {
+      "row": 20,
+      "mode": "照片 / Photo",
+      "name": "Watermark",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 21,
+      "mode": "照片 / Photo",
+      "name": "动态照片 - 无效信息截取",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 22,
+      "mode": "照片 / Photo",
+      "name": "动态照片-视频支持录制声音",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 23,
+      "mode": "照片 / Photo",
+      "name": "风格 / Style",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 24,
+      "mode": "照片 / Photo",
+      "name": "自动微距控制",
+      "code": "DESCRIPTION_DEFAULT_UNKNOWN",
+      "severity": "medium",
+      "message": "有状态功能未说明默认值或状态持久化；未知时应形成主责确认问题"
+    },
+    {
+      "row": 24,
+      "mode": "照片 / Photo",
+      "name": "自动微距控制",
+      "code": "DESCRIPTION_MEMORY_UNKNOWN",
+      "severity": "medium",
+      "message": "有状态功能未说明关键记忆或重置规则；应参考九场景基线并确认项目差异"
+    },
+    {
+      "row": 24,
+      "mode": "照片 / Photo",
+      "name": "自动微距控制",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 25,
+      "mode": "通用 / Common",
+      "name": "长时间无交互息屏以节约电量",
+      "code": "DESCRIPTION_DEFAULT_UNKNOWN",
+      "severity": "medium",
+      "message": "有状态功能未说明默认值或状态持久化；未知时应形成主责确认问题"
+    },
+    {
+      "row": 25,
+      "mode": "通用 / Common",
+      "name": "长时间无交互息屏以节约电量",
+      "code": "DESCRIPTION_MEMORY_UNKNOWN",
+      "severity": "medium",
+      "message": "有状态功能未说明关键记忆或重置规则；应参考九场景基线并确认项目差异"
+    },
+    {
+      "row": 25,
+      "mode": "通用 / Common",
+      "name": "长时间无交互息屏以节约电量",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 26,
+      "mode": "照片 / Photo",
+      "name": "人脸检测",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 27,
+      "mode": "照片 / Photo",
+      "name": "脏污检测",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 28,
+      "mode": "照片 / Photo",
+      "name": "运动场景引导",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 29,
+      "mode": "照片 / Photo",
+      "name": "镜头脏污检测 / AI 去油污 / 提示引导",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 30,
+      "mode": "照片 / Photo",
+      "name": "AIGC SR",
+      "code": "UNSUPPORTED_REASON_CONSEQUENCE_MISSING",
+      "severity": "medium",
+      "message": "不支持原因未说明依赖缺口如何导致该功能不可用"
+    },
+    {
+      "row": 30,
+      "mode": "照片 / Photo",
+      "name": "AIGC SR",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 31,
+      "mode": "照片 / Photo",
+      "name": "FRT / 人像清晰度提升",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 32,
+      "mode": "照片 / Photo",
+      "name": "HDSR",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 33,
+      "mode": "照片 / Photo",
+      "name": "RAW HDR",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 34,
+      "mode": "照片 / Photo",
+      "name": "Ultra HDR",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 35,
+      "mode": "照片 / Photo",
+      "name": "人脸畸变矫正",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 36,
+      "mode": "照片 / Photo",
+      "name": "多帧降噪 / MFNR",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 37,
+      "mode": "照片 / Photo",
+      "name": "美颜算法 / Beauty Algorithm",
+      "code": "UNSUPPORTED_REASON_CAUSE_MISSING",
+      "severity": "medium",
+      "message": "不支持原因未指出具体依赖或项目限制"
+    },
+    {
+      "row": 37,
+      "mode": "照片 / Photo",
+      "name": "美颜算法 / Beauty Algorithm",
+      "code": "UNSUPPORTED_REASON_CONSEQUENCE_MISSING",
+      "severity": "medium",
+      "message": "不支持原因未说明依赖缺口如何导致该功能不可用"
+    },
+    {
+      "row": 37,
+      "mode": "照片 / Photo",
+      "name": "美颜算法 / Beauty Algorithm",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 38,
+      "mode": "照片 / Photo",
+      "name": "超分 / Super Resolution（SR）",
+      "code": "UNSUPPORTED_REASON_CONSEQUENCE_MISSING",
+      "severity": "medium",
+      "message": "不支持原因未说明依赖缺口如何导致该功能不可用"
+    },
+    {
+      "row": 38,
+      "mode": "照片 / Photo",
+      "name": "超分 / Super Resolution（SR）",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 39,
+      "mode": "照片 / Photo",
+      "name": "超级夜景",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 40,
+      "mode": "照片 / Photo",
+      "name": "ASD / AI场景检测",
+      "code": "UNSUPPORTED_REASON_CONSEQUENCE_MISSING",
+      "severity": "medium",
+      "message": "不支持原因未说明依赖缺口如何导致该功能不可用"
+    },
+    {
+      "row": 40,
+      "mode": "照片 / Photo",
+      "name": "ASD / AI场景检测",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 41,
+      "mode": "照片 / Photo",
+      "name": "CFR / 紫边去除",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 42,
+      "mode": "照片 / Photo",
+      "name": "ISZ / In Sensor Zoom",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 43,
+      "mode": "照片 / Photo",
+      "name": "LDC / 光学畸变矫正",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 44,
+      "mode": "照片 / Photo",
+      "name": "Photo EIS",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 45,
+      "mode": "照片 / Photo",
+      "name": "运动抓拍",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 46,
+      "mode": "人像 / Portrait",
+      "name": "AE / 自动曝光",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 47,
+      "mode": "人像 / Portrait",
+      "name": "AF / 自动对焦",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 48,
+      "mode": "人像 / Portrait",
+      "name": "前后翻转 / Front-Rear Camera Switch",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 49,
+      "mode": "人像 / Portrait",
+      "name": "人像模式 Consistent Zoom",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 50,
+      "mode": "人像 / Portrait",
+      "name": "变焦",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 51,
+      "mode": "人像 / Portrait",
+      "name": "Exposure",
+      "code": "UNSUPPORTED_REASON_EMPTY",
+      "severity": "high",
+      "message": "存在不支持摄像头但不支持原因为空"
+    },
+    {
+      "row": 51,
+      "mode": "人像 / Portrait",
+      "name": "Exposure",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 52,
+      "mode": "人像 / Portrait",
+      "name": "Flash",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 53,
+      "mode": "人像 / Portrait",
+      "name": "Grid",
+      "code": "DESCRIPTION_DEFAULT_UNKNOWN",
+      "severity": "medium",
+      "message": "有状态功能未说明默认值或状态持久化；未知时应形成主责确认问题"
+    },
+    {
+      "row": 53,
+      "mode": "人像 / Portrait",
+      "name": "Grid",
+      "code": "UNSUPPORTED_REASON_EMPTY",
+      "severity": "high",
+      "message": "存在不支持摄像头但不支持原因为空"
+    },
+    {
+      "row": 53,
+      "mode": "人像 / Portrait",
+      "name": "Grid",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 54,
+      "mode": "人像 / Portrait",
+      "name": "HDR 开关 / HDR Switch",
+      "code": "DESCRIPTION_DEFAULT_UNKNOWN",
+      "severity": "medium",
+      "message": "有状态功能未说明默认值或状态持久化；未知时应形成主责确认问题"
+    },
+    {
+      "row": 54,
+      "mode": "人像 / Portrait",
+      "name": "HDR 开关 / HDR Switch",
+      "code": "UNSUPPORTED_REASON_EMPTY",
+      "severity": "high",
+      "message": "存在不支持摄像头但不支持原因为空"
+    },
+    {
+      "row": 54,
+      "mode": "人像 / Portrait",
+      "name": "HDR 开关 / HDR Switch",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 55,
+      "mode": "人像 / Portrait",
+      "name": "More settings",
+      "code": "UNSUPPORTED_REASON_EMPTY",
+      "severity": "high",
+      "message": "存在不支持摄像头但不支持原因为空"
+    },
+    {
+      "row": 55,
+      "mode": "人像 / Portrait",
+      "name": "More settings",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 56,
+      "mode": "人像 / Portrait",
+      "name": "Ratio",
+      "code": "UNSUPPORTED_REASON_EMPTY",
+      "severity": "high",
+      "message": "存在不支持摄像头但不支持原因为空"
+    },
+    {
+      "row": 56,
+      "mode": "人像 / Portrait",
+      "name": "Ratio",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 57,
+      "mode": "人像 / Portrait",
+      "name": "Timer",
+      "code": "UNSUPPORTED_REASON_EMPTY",
+      "severity": "high",
+      "message": "存在不支持摄像头但不支持原因为空"
+    },
+    {
+      "row": 57,
+      "mode": "人像 / Portrait",
+      "name": "Timer",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 58,
+      "mode": "人像 / Portrait",
+      "name": "Watermark",
+      "code": "DESCRIPTION_DEFAULT_UNKNOWN",
+      "severity": "medium",
+      "message": "有状态功能未说明默认值或状态持久化；未知时应形成主责确认问题"
+    },
+    {
+      "row": 58,
+      "mode": "人像 / Portrait",
+      "name": "Watermark",
+      "code": "UNSUPPORTED_REASON_EMPTY",
+      "severity": "high",
+      "message": "存在不支持摄像头但不支持原因为空"
+    },
+    {
+      "row": 58,
+      "mode": "人像 / Portrait",
+      "name": "Watermark",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 59,
+      "mode": "人像 / Portrait",
+      "name": "风格 / Style",
+      "code": "UNSUPPORTED_REASON_EMPTY",
+      "severity": "high",
+      "message": "存在不支持摄像头但不支持原因为空"
+    },
+    {
+      "row": 59,
+      "mode": "人像 / Portrait",
+      "name": "风格 / Style",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 60,
+      "mode": "人像 / Portrait",
+      "name": "人脸检测",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 61,
+      "mode": "人像 / Portrait",
+      "name": "脏污检测",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 62,
+      "mode": "人像 / Portrait",
+      "name": "镜头脏污检测 / AI 去油污 / 提示引导",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 63,
+      "mode": "人像 / Portrait",
+      "name": "FRT / 人像清晰度提升",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 64,
+      "mode": "人像 / Portrait",
+      "name": "Ultra HDR",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 65,
+      "mode": "人像 / Portrait",
+      "name": "美颜算法 / Beauty Algorithm",
+      "code": "UNSUPPORTED_REASON_CONSEQUENCE_MISSING",
+      "severity": "medium",
+      "message": "不支持原因未说明依赖缺口如何导致该功能不可用"
+    },
+    {
+      "row": 65,
+      "mode": "人像 / Portrait",
+      "name": "美颜算法 / Beauty Algorithm",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 66,
+      "mode": "人像 / Portrait",
+      "name": "超级夜景+美颜",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 67,
+      "mode": "人像 / Portrait",
+      "name": "人像 HDR",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 68,
+      "mode": "运动 / Action",
+      "name": "变焦",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 69,
+      "mode": "运动 / Action",
+      "name": "Exposure",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 70,
+      "mode": "运动 / Action",
+      "name": "Flash",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 71,
+      "mode": "运动 / Action",
+      "name": "Grid",
+      "code": "DESCRIPTION_DEFAULT_UNKNOWN",
+      "severity": "medium",
+      "message": "有状态功能未说明默认值或状态持久化；未知时应形成主责确认问题"
+    },
+    {
+      "row": 71,
+      "mode": "运动 / Action",
+      "name": "Grid",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 72,
+      "mode": "运动 / Action",
+      "name": "More settings",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 73,
+      "mode": "运动 / Action",
+      "name": "Ratio",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 74,
+      "mode": "运动 / Action",
+      "name": "Timer",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 75,
+      "mode": "运动 / Action",
+      "name": "风格 / Style",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 76,
+      "mode": "视频 / Video",
+      "name": "AE / 自动曝光",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 77,
+      "mode": "视频 / Video",
+      "name": "AF / 自动对焦",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 78,
+      "mode": "视频 / Video",
+      "name": "前后双录",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 79,
+      "mode": "视频 / Video",
+      "name": "前后双录主副互换 / 小窗大小",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 80,
+      "mode": "视频 / Video",
+      "name": "前后双录后置镜头选择",
+      "code": "DESCRIPTION_SUPPORT_NARRATION",
+      "severity": "medium",
+      "message": "说明写了项目支持结论，应改为能力定义与范围"
+    },
+    {
+      "row": 80,
+      "mode": "视频 / Video",
+      "name": "前后双录后置镜头选择",
+      "code": "UNSUPPORTED_REASON_CAUSE_MISSING",
+      "severity": "medium",
+      "message": "不支持原因未指出具体依赖或项目限制"
+    },
+    {
+      "row": 80,
+      "mode": "视频 / Video",
+      "name": "前后双录后置镜头选择",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 81,
+      "mode": "视频 / Video",
+      "name": "前后翻转 / Front-Rear Camera Switch",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 82,
+      "mode": "视频 / Video",
+      "name": "录制中前后置切换 / Front-Rear Switch While Recording",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 83,
+      "mode": "视频 / Video",
+      "name": "ISZ / In Sensor Zoom",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 84,
+      "mode": "视频 / Video",
+      "name": "OIS",
+      "code": "UNSUPPORTED_REASON_CONSEQUENCE_MISSING",
+      "severity": "medium",
+      "message": "不支持原因未说明依赖缺口如何导致该功能不可用"
+    },
+    {
+      "row": 84,
+      "mode": "视频 / Video",
+      "name": "OIS",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 85,
+      "mode": "视频 / Video",
+      "name": "变焦",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 86,
+      "mode": "视频 / Video",
+      "name": "Log 视频",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 87,
+      "mode": "视频 / Video",
+      "name": "视频曝光调节 / 视频白平衡调节",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 88,
+      "mode": "视频 / Video",
+      "name": "风格 / Style",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 89,
+      "mode": "视频 / Video",
+      "name": "录像中拍照",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 90,
+      "mode": "视频 / Video",
+      "name": "录制中拍摄动态照片 / Motion Photo While Recording",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 91,
+      "mode": "视频 / Video",
+      "name": "1080P 30FPS HLG",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 92,
+      "mode": "视频 / Video",
+      "name": "1080P 60FPS",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 93,
+      "mode": "视频 / Video",
+      "name": "1080P 60FPS HLG",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 94,
+      "mode": "视频 / Video",
+      "name": "4K 30FPS",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 95,
+      "mode": "视频 / Video",
+      "name": "4K 30FPS HLG",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 96,
+      "mode": "视频 / Video",
+      "name": "4K 60FPS",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 97,
+      "mode": "视频 / Video",
+      "name": "4K 60FPS HLG",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 98,
+      "mode": "视频 / Video",
+      "name": "人脸检测",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 99,
+      "mode": "视频 / Video",
+      "name": "Video EIS",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 100,
+      "mode": "视频 / Video",
+      "name": "Video HDR 算法",
+      "code": "UNSUPPORTED_REASON_CAUSE_MISSING",
+      "severity": "medium",
+      "message": "不支持原因未指出具体依赖或项目限制"
+    },
+    {
+      "row": 100,
+      "mode": "视频 / Video",
+      "name": "Video HDR 算法",
+      "code": "UNSUPPORTED_REASON_CONSEQUENCE_MISSING",
+      "severity": "medium",
+      "message": "不支持原因未说明依赖缺口如何导致该功能不可用"
+    },
+    {
+      "row": 100,
+      "mode": "视频 / Video",
+      "name": "Video HDR 算法",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 101,
+      "mode": "视频 / Video",
+      "name": "视频夜景",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 102,
+      "mode": "夜景 / Night",
+      "name": "AE / 自动曝光",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 103,
+      "mode": "夜景 / Night",
+      "name": "AF / 自动对焦",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 104,
+      "mode": "夜景 / Night",
+      "name": "前后翻转 / Front-Rear Camera Switch",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 105,
+      "mode": "夜景 / Night",
+      "name": "OIS",
+      "code": "UNSUPPORTED_REASON_CONSEQUENCE_MISSING",
+      "severity": "medium",
+      "message": "不支持原因未说明依赖缺口如何导致该功能不可用"
+    },
+    {
+      "row": 105,
+      "mode": "夜景 / Night",
+      "name": "OIS",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 106,
+      "mode": "夜景 / Night",
+      "name": "变焦",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 107,
+      "mode": "夜景 / Night",
+      "name": "Exposure",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 108,
+      "mode": "夜景 / Night",
+      "name": "Grid",
+      "code": "DESCRIPTION_DEFAULT_UNKNOWN",
+      "severity": "medium",
+      "message": "有状态功能未说明默认值或状态持久化；未知时应形成主责确认问题"
+    },
+    {
+      "row": 108,
+      "mode": "夜景 / Night",
+      "name": "Grid",
+      "code": "DESCRIPTION_MEMORY_UNKNOWN",
+      "severity": "medium",
+      "message": "有状态功能未说明关键记忆或重置规则；应参考九场景基线并确认项目差异"
+    },
+    {
+      "row": 108,
+      "mode": "夜景 / Night",
+      "name": "Grid",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 109,
+      "mode": "夜景 / Night",
+      "name": "More settings",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 110,
+      "mode": "夜景 / Night",
+      "name": "Ratio",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 111,
+      "mode": "夜景 / Night",
+      "name": "Watermark",
+      "code": "DESCRIPTION_DEFAULT_UNKNOWN",
+      "severity": "medium",
+      "message": "有状态功能未说明默认值或状态持久化；未知时应形成主责确认问题"
+    },
+    {
+      "row": 111,
+      "mode": "夜景 / Night",
+      "name": "Watermark",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 112,
+      "mode": "夜景 / Night",
+      "name": "风格 / Style",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 113,
+      "mode": "夜景 / Night",
+      "name": "人脸检测",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 114,
+      "mode": "夜景 / Night",
+      "name": "FRT / 人像清晰度提升",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 115,
+      "mode": "夜景 / Night",
+      "name": "Remosaic",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 116,
+      "mode": "夜景 / Night",
+      "name": "Ultra HDR",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 117,
+      "mode": "夜景 / Night",
+      "name": "人脸畸变矫正",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 118,
+      "mode": "夜景 / Night",
+      "name": "多帧降噪 / MFNR",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 119,
+      "mode": "夜景 / Night",
+      "name": "极夜",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 120,
+      "mode": "夜景 / Night",
+      "name": "超分 / Super Resolution（SR）",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 121,
+      "mode": "夜景 / Night",
+      "name": "超级夜景",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 122,
+      "mode": "夜景 / Night",
+      "name": "超级夜景+美颜",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 123,
+      "mode": "夜景 / Night",
+      "name": "LDC / 光学畸变矫正",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 124,
+      "mode": "夜景 / Night",
+      "name": "Photo EIS",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 125,
+      "mode": "慢动作 / Slow Motion",
+      "name": "AE / 自动曝光",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 126,
+      "mode": "慢动作 / Slow Motion",
+      "name": "AF / 自动对焦",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 127,
+      "mode": "慢动作 / Slow Motion",
+      "name": "变焦",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 128,
+      "mode": "慢动作 / Slow Motion",
+      "name": "1080P@ 120fps",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 129,
+      "mode": "慢动作 / Slow Motion",
+      "name": "录影灯 / Recording Light",
+      "code": "DESCRIPTION_MEMORY_UNKNOWN",
+      "severity": "medium",
+      "message": "有状态功能未说明关键记忆或重置规则；应参考九场景基线并确认项目差异"
+    },
+    {
+      "row": 129,
+      "mode": "慢动作 / Slow Motion",
+      "name": "录影灯 / Recording Light",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 130,
+      "mode": "慢动作 / Slow Motion",
+      "name": "1080P 120FPS",
+      "code": "UNSUPPORTED_REASON_CAUSE_MISSING",
+      "severity": "medium",
+      "message": "不支持原因未指出具体依赖或项目限制"
+    },
+    {
+      "row": 130,
+      "mode": "慢动作 / Slow Motion",
+      "name": "1080P 120FPS",
+      "code": "UNSUPPORTED_REASON_CONSEQUENCE_MISSING",
+      "severity": "medium",
+      "message": "不支持原因未说明依赖缺口如何导致该功能不可用"
+    },
+    {
+      "row": 130,
+      "mode": "慢动作 / Slow Motion",
+      "name": "1080P 120FPS",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 131,
+      "mode": "慢动作 / Slow Motion",
+      "name": "1080P 240FPS",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 132,
+      "mode": "慢动作 / Slow Motion",
+      "name": "720P 120FPS",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 133,
+      "mode": "慢动作 / Slow Motion",
+      "name": "720P 240FPS",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 134,
+      "mode": "慢动作 / Slow Motion",
+      "name": "人脸检测",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 135,
+      "mode": "慢动作 / Slow Motion",
+      "name": "Video EIS",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 136,
+      "mode": "延时摄影 / Timelapse",
+      "name": "变焦",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 137,
+      "mode": "延时摄影 / Timelapse",
+      "name": "4K",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 138,
+      "mode": "延时摄影 / Timelapse",
+      "name": "Flash",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 139,
+      "mode": "延时摄影 / Timelapse",
+      "name": "录影灯 / Recording Light",
+      "code": "DESCRIPTION_MEMORY_UNKNOWN",
+      "severity": "medium",
+      "message": "有状态功能未说明关键记忆或重置规则；应参考九场景基线并确认项目差异"
+    },
+    {
+      "row": 139,
+      "mode": "延时摄影 / Timelapse",
+      "name": "录影灯 / Recording Light",
+      "code": "UNSUPPORTED_REASON_CAUSE_MISSING",
+      "severity": "medium",
+      "message": "不支持原因未指出具体依赖或项目限制"
+    },
+    {
+      "row": 139,
+      "mode": "延时摄影 / Timelapse",
+      "name": "录影灯 / Recording Light",
+      "code": "UNSUPPORTED_REASON_CONSEQUENCE_MISSING",
+      "severity": "medium",
+      "message": "不支持原因未说明依赖缺口如何导致该功能不可用"
+    },
+    {
+      "row": 139,
+      "mode": "延时摄影 / Timelapse",
+      "name": "录影灯 / Recording Light",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 140,
+      "mode": "延时摄影 / Timelapse",
+      "name": "人脸检测",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 141,
+      "mode": "延时摄影 / Timelapse",
+      "name": "Video EIS",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 142,
+      "mode": "全景 / Panorama",
+      "name": "变焦",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 143,
+      "mode": "专业 / Expert",
+      "name": "AE / 自动曝光",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 144,
+      "mode": "专业 / Expert",
+      "name": "AF / 自动对焦",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 145,
+      "mode": "专业 / Expert",
+      "name": "OIS",
+      "code": "UNSUPPORTED_REASON_CONSEQUENCE_MISSING",
+      "severity": "medium",
+      "message": "不支持原因未说明依赖缺口如何导致该功能不可用"
+    },
+    {
+      "row": 145,
+      "mode": "专业 / Expert",
+      "name": "OIS",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 146,
+      "mode": "专业 / Expert",
+      "name": "变焦",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 147,
+      "mode": "专业 / Expert",
+      "name": "Exposure",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 148,
+      "mode": "专业 / Expert",
+      "name": "Flash",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 149,
+      "mode": "专业 / Expert",
+      "name": "Grid",
+      "code": "DESCRIPTION_DEFAULT_UNKNOWN",
+      "severity": "medium",
+      "message": "有状态功能未说明默认值或状态持久化；未知时应形成主责确认问题"
+    },
+    {
+      "row": 149,
+      "mode": "专业 / Expert",
+      "name": "Grid",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 150,
+      "mode": "专业 / Expert",
+      "name": "More settings",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 151,
+      "mode": "专业 / Expert",
+      "name": "Ratio",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 152,
+      "mode": "专业 / Expert",
+      "name": "Timer",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 153,
+      "mode": "专业 / Expert",
+      "name": "Watermark",
+      "code": "DESCRIPTION_DEFAULT_UNKNOWN",
+      "severity": "medium",
+      "message": "有状态功能未说明默认值或状态持久化；未知时应形成主责确认问题"
+    },
+    {
+      "row": 153,
+      "mode": "专业 / Expert",
+      "name": "Watermark",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 154,
+      "mode": "专业 / Expert",
+      "name": "各项专业模式参数极值范围",
+      "code": "DESCRIPTION_MECHANICAL",
+      "severity": "medium",
+      "message": "说明包含机械模板句，需要语义复核"
+    },
+    {
+      "row": 154,
+      "mode": "专业 / Expert",
+      "name": "各项专业模式参数极值范围",
+      "code": "DESCRIPTION_SUPPORT_NARRATION",
+      "severity": "medium",
+      "message": "说明写了项目支持结论，应改为能力定义与范围"
+    },
+    {
+      "row": 154,
+      "mode": "专业 / Expert",
+      "name": "各项专业模式参数极值范围",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 155,
+      "mode": "专业 / Expert",
+      "name": "峰值对焦",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 156,
+      "mode": "专业 / Expert",
+      "name": "直方图",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 157,
+      "mode": "专业 / Expert",
+      "name": "间隔快门",
+      "code": "DESCRIPTION_DEFAULT_UNKNOWN",
+      "severity": "medium",
+      "message": "有状态功能未说明默认值或状态持久化；未知时应形成主责确认问题"
+    },
+    {
+      "row": 157,
+      "mode": "专业 / Expert",
+      "name": "间隔快门",
+      "code": "DESCRIPTION_MEMORY_UNKNOWN",
+      "severity": "medium",
+      "message": "有状态功能未说明关键记忆或重置规则；应参考九场景基线并确认项目差异"
+    },
+    {
+      "row": 157,
+      "mode": "专业 / Expert",
+      "name": "间隔快门",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 158,
+      "mode": "专业 / Expert",
+      "name": "风格 / Style",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 159,
+      "mode": "专业 / Expert",
+      "name": "人脸检测",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 160,
+      "mode": "专业 / Expert",
+      "name": "LDC / 光学畸变矫正",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 161,
+      "mode": "专业 / Expert",
+      "name": "Photo EIS",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 162,
+      "mode": "高像素 / High Resolution",
+      "name": "AE / 自动曝光",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 163,
+      "mode": "高像素 / High Resolution",
+      "name": "AF / 自动对焦",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 164,
+      "mode": "高像素 / High Resolution",
+      "name": "OIS",
+      "code": "UNSUPPORTED_REASON_CONSEQUENCE_MISSING",
+      "severity": "medium",
+      "message": "不支持原因未说明依赖缺口如何导致该功能不可用"
+    },
+    {
+      "row": 164,
+      "mode": "高像素 / High Resolution",
+      "name": "OIS",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 165,
+      "mode": "高像素 / High Resolution",
+      "name": "变焦",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 166,
+      "mode": "高像素 / High Resolution",
+      "name": "Exposure",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 167,
+      "mode": "高像素 / High Resolution",
+      "name": "Flash",
+      "code": "UNSUPPORTED_REASON_CONSEQUENCE_MISSING",
+      "severity": "medium",
+      "message": "不支持原因未说明依赖缺口如何导致该功能不可用"
+    },
+    {
+      "row": 167,
+      "mode": "高像素 / High Resolution",
+      "name": "Flash",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 168,
+      "mode": "高像素 / High Resolution",
+      "name": "Grid",
+      "code": "DESCRIPTION_DEFAULT_UNKNOWN",
+      "severity": "medium",
+      "message": "有状态功能未说明默认值或状态持久化；未知时应形成主责确认问题"
+    },
+    {
+      "row": 168,
+      "mode": "高像素 / High Resolution",
+      "name": "Grid",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 169,
+      "mode": "高像素 / High Resolution",
+      "name": "More settings",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 170,
+      "mode": "高像素 / High Resolution",
+      "name": "Ratio",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 171,
+      "mode": "高像素 / High Resolution",
+      "name": "Watermark",
+      "code": "DESCRIPTION_DEFAULT_UNKNOWN",
+      "severity": "medium",
+      "message": "有状态功能未说明默认值或状态持久化；未知时应形成主责确认问题"
+    },
+    {
+      "row": 171,
+      "mode": "高像素 / High Resolution",
+      "name": "Watermark",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 172,
+      "mode": "高像素 / High Resolution",
+      "name": "风格 / Style",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 173,
+      "mode": "高像素 / High Resolution",
+      "name": "50MP",
+      "code": "UNSUPPORTED_REASON_CONSEQUENCE_MISSING",
+      "severity": "medium",
+      "message": "不支持原因未说明依赖缺口如何导致该功能不可用"
+    },
+    {
+      "row": 173,
+      "mode": "高像素 / High Resolution",
+      "name": "50MP",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 174,
+      "mode": "高像素 / High Resolution",
+      "name": "50MP Ultra",
+      "code": "UNSUPPORTED_REASON_CONSEQUENCE_MISSING",
+      "severity": "medium",
+      "message": "不支持原因未说明依赖缺口如何导致该功能不可用"
+    },
+    {
+      "row": 174,
+      "mode": "高像素 / High Resolution",
+      "name": "50MP Ultra",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 175,
+      "mode": "高像素 / High Resolution",
+      "name": "人脸检测",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 176,
+      "mode": "高像素 / High Resolution",
+      "name": "FRT / 人像清晰度提升",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 177,
+      "mode": "高像素 / High Resolution",
+      "name": "Remosaic",
+      "code": "UNSUPPORTED_REASON_CONSEQUENCE_MISSING",
+      "severity": "medium",
+      "message": "不支持原因未说明依赖缺口如何导致该功能不可用"
+    },
+    {
+      "row": 177,
+      "mode": "高像素 / High Resolution",
+      "name": "Remosaic",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 178,
+      "mode": "高像素 / High Resolution",
+      "name": "超分 / Super Resolution（SR）",
+      "code": "UNSUPPORTED_REASON_CONSEQUENCE_MISSING",
+      "severity": "medium",
+      "message": "不支持原因未说明依赖缺口如何导致该功能不可用"
+    },
+    {
+      "row": 178,
+      "mode": "高像素 / High Resolution",
+      "name": "超分 / Super Resolution（SR）",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 179,
+      "mode": "高像素 / High Resolution",
+      "name": "Photo EIS",
+      "code": "UNSUPPORTED_REASON_CONSEQUENCE_MISSING",
+      "severity": "medium",
+      "message": "不支持原因未说明依赖缺口如何导致该功能不可用"
+    },
+    {
+      "row": 179,
+      "mode": "高像素 / High Resolution",
+      "name": "Photo EIS",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 180,
+      "mode": "通用 / Common",
+      "name": "快速模式切换 / Quick Mode Switch",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 181,
+      "mode": "通用 / Common",
+      "name": "模式栏",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 182,
+      "mode": "通用 / Common",
+      "name": "Preset Widget",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 183,
+      "mode": "通用 / Common",
+      "name": "Tips and feedback",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 184,
+      "mode": "通用 / Common",
+      "name": "Auto Tone",
+      "code": "DESCRIPTION_DEFAULT_UNKNOWN",
+      "severity": "medium",
+      "message": "有状态功能未说明默认值或状态持久化；未知时应形成主责确认问题"
+    },
+    {
+      "row": 184,
+      "mode": "通用 / Common",
+      "name": "Auto Tone",
+      "code": "DESCRIPTION_MEMORY_UNKNOWN",
+      "severity": "medium",
+      "message": "有状态功能未说明关键记忆或重置规则；应参考九场景基线并确认项目差异"
+    },
+    {
+      "row": 184,
+      "mode": "通用 / Common",
+      "name": "Auto Tone",
+      "code": "UNSUPPORTED_REASON_CAUSE_MISSING",
+      "severity": "medium",
+      "message": "不支持原因未指出具体依赖或项目限制"
+    },
+    {
+      "row": 184,
+      "mode": "通用 / Common",
+      "name": "Auto Tone",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 185,
+      "mode": "通用 / Common",
+      "name": "Press and hold shutter",
+      "code": "DESCRIPTION_DEFAULT_UNKNOWN",
+      "severity": "medium",
+      "message": "有状态功能未说明默认值或状态持久化；未知时应形成主责确认问题"
+    },
+    {
+      "row": 185,
+      "mode": "通用 / Common",
+      "name": "Press and hold shutter",
+      "code": "DESCRIPTION_MEMORY_UNKNOWN",
+      "severity": "medium",
+      "message": "有状态功能未说明关键记忆或重置规则；应参考九场景基线并确认项目差异"
+    },
+    {
+      "row": 185,
+      "mode": "通用 / Common",
+      "name": "Press and hold shutter",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 186,
+      "mode": "通用 / Common",
+      "name": "QR code scanner",
+      "code": "DESCRIPTION_DEFAULT_UNKNOWN",
+      "severity": "medium",
+      "message": "有状态功能未说明默认值或状态持久化；未知时应形成主责确认问题"
+    },
+    {
+      "row": 186,
+      "mode": "通用 / Common",
+      "name": "QR code scanner",
+      "code": "DESCRIPTION_MEMORY_UNKNOWN",
+      "severity": "medium",
+      "message": "有状态功能未说明关键记忆或重置规则；应参考九场景基线并确认项目差异"
+    },
+    {
+      "row": 186,
+      "mode": "通用 / Common",
+      "name": "QR code scanner",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 187,
+      "mode": "通用 / Common",
+      "name": "Tap to take a photo",
+      "code": "DESCRIPTION_DEFAULT_UNKNOWN",
+      "severity": "medium",
+      "message": "有状态功能未说明默认值或状态持久化；未知时应形成主责确认问题"
+    },
+    {
+      "row": 187,
+      "mode": "通用 / Common",
+      "name": "Tap to take a photo",
+      "code": "DESCRIPTION_MEMORY_UNKNOWN",
+      "severity": "medium",
+      "message": "有状态功能未说明关键记忆或重置规则；应参考九场景基线并确认项目差异"
+    },
+    {
+      "row": 187,
+      "mode": "通用 / Common",
+      "name": "Tap to take a photo",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 188,
+      "mode": "通用 / Common",
+      "name": "Ultra XDR",
+      "code": "DESCRIPTION_DEFAULT_UNKNOWN",
+      "severity": "medium",
+      "message": "有状态功能未说明默认值或状态持久化；未知时应形成主责确认问题"
+    },
+    {
+      "row": 188,
+      "mode": "通用 / Common",
+      "name": "Ultra XDR",
+      "code": "DESCRIPTION_MEMORY_UNKNOWN",
+      "severity": "medium",
+      "message": "有状态功能未说明关键记忆或重置规则；应参考九场景基线并确认项目差异"
+    },
+    {
+      "row": 188,
+      "mode": "通用 / Common",
+      "name": "Ultra XDR",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 189,
+      "mode": "通用 / Common",
+      "name": "Watermark settings",
+      "code": "DESCRIPTION_DEFAULT_UNKNOWN",
+      "severity": "medium",
+      "message": "有状态功能未说明默认值或状态持久化；未知时应形成主责确认问题"
+    },
+    {
+      "row": 189,
+      "mode": "通用 / Common",
+      "name": "Watermark settings",
+      "code": "DESCRIPTION_MEMORY_UNKNOWN",
+      "severity": "medium",
+      "message": "有状态功能未说明关键记忆或重置规则；应参考九场景基线并确认项目差异"
+    },
+    {
+      "row": 189,
+      "mode": "通用 / Common",
+      "name": "Watermark settings",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 190,
+      "mode": "通用 / Common",
+      "name": "影像基调 / Image Tone",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 191,
+      "mode": "通用 / Common",
+      "name": "色彩模式 / Color Mode",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 192,
+      "mode": "通用 / Common",
+      "name": "Auto FPS",
+      "code": "DESCRIPTION_DEFAULT_UNKNOWN",
+      "severity": "medium",
+      "message": "有状态功能未说明默认值或状态持久化；未知时应形成主责确认问题"
+    },
+    {
+      "row": 192,
+      "mode": "通用 / Common",
+      "name": "Auto FPS",
+      "code": "DESCRIPTION_MEMORY_UNKNOWN",
+      "severity": "medium",
+      "message": "有状态功能未说明关键记忆或重置规则；应参考九场景基线并确认项目差异"
+    },
+    {
+      "row": 192,
+      "mode": "通用 / Common",
+      "name": "Auto FPS",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 193,
+      "mode": "通用 / Common",
+      "name": "Power saving recording",
+      "code": "DESCRIPTION_DEFAULT_UNKNOWN",
+      "severity": "medium",
+      "message": "有状态功能未说明默认值或状态持久化；未知时应形成主责确认问题"
+    },
+    {
+      "row": 193,
+      "mode": "通用 / Common",
+      "name": "Power saving recording",
+      "code": "DESCRIPTION_MEMORY_UNKNOWN",
+      "severity": "medium",
+      "message": "有状态功能未说明关键记忆或重置规则；应参考九场景基线并确认项目差异"
+    },
+    {
+      "row": 193,
+      "mode": "通用 / Common",
+      "name": "Power saving recording",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 194,
+      "mode": "通用 / Common",
+      "name": "Video encoding",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 195,
+      "mode": "通用 / Common",
+      "name": "前后双录分开保存",
+      "code": "DESCRIPTION_DEFAULT_UNKNOWN",
+      "severity": "medium",
+      "message": "有状态功能未说明默认值或状态持久化；未知时应形成主责确认问题"
+    },
+    {
+      "row": 195,
+      "mode": "通用 / Common",
+      "name": "前后双录分开保存",
+      "code": "DESCRIPTION_MEMORY_UNKNOWN",
+      "severity": "medium",
+      "message": "有状态功能未说明关键记忆或重置规则；应参考九场景基线并确认项目差异"
+    },
+    {
+      "row": 195,
+      "mode": "通用 / Common",
+      "name": "前后双录分开保存",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 196,
+      "mode": "通用 / Common",
+      "name": "视频防抖开关",
+      "code": "DESCRIPTION_MEMORY_UNKNOWN",
+      "severity": "medium",
+      "message": "有状态功能未说明关键记忆或重置规则；应参考九场景基线并确认项目差异"
+    },
+    {
+      "row": 196,
+      "mode": "通用 / Common",
+      "name": "视频防抖开关",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 197,
+      "mode": "通用 / Common",
+      "name": "锁定白平衡",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 198,
+      "mode": "通用 / Common",
+      "name": "锁定镜头",
+      "code": "DESCRIPTION_DEFAULT_UNKNOWN",
+      "severity": "medium",
+      "message": "有状态功能未说明默认值或状态持久化；未知时应形成主责确认问题"
+    },
+    {
+      "row": 198,
+      "mode": "通用 / Common",
+      "name": "锁定镜头",
+      "code": "DESCRIPTION_MEMORY_UNKNOWN",
+      "severity": "medium",
+      "message": "有状态功能未说明关键记忆或重置规则；应参考九场景基线并确认项目差异"
+    },
+    {
+      "row": 198,
+      "mode": "通用 / Common",
+      "name": "锁定镜头",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 199,
+      "mode": "通用 / Common",
+      "name": "Level",
+      "code": "DESCRIPTION_DEFAULT_UNKNOWN",
+      "severity": "medium",
+      "message": "有状态功能未说明默认值或状态持久化；未知时应形成主责确认问题"
+    },
+    {
+      "row": 199,
+      "mode": "通用 / Common",
+      "name": "Level",
+      "code": "DESCRIPTION_MEMORY_UNKNOWN",
+      "severity": "medium",
+      "message": "有状态功能未说明关键记忆或重置规则；应参考九场景基线并确认项目差异"
+    },
+    {
+      "row": 199,
+      "mode": "通用 / Common",
+      "name": "Level",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 200,
+      "mode": "通用 / Common",
+      "name": "Mirror front camera",
+      "code": "DESCRIPTION_DEFAULT_UNKNOWN",
+      "severity": "medium",
+      "message": "有状态功能未说明默认值或状态持久化；未知时应形成主责确认问题"
+    },
+    {
+      "row": 200,
+      "mode": "通用 / Common",
+      "name": "Mirror front camera",
+      "code": "DESCRIPTION_MEMORY_UNKNOWN",
+      "severity": "medium",
+      "message": "有状态功能未说明关键记忆或重置规则；应参考九场景基线并确认项目差异"
+    },
+    {
+      "row": 200,
+      "mode": "通用 / Common",
+      "name": "Mirror front camera",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 201,
+      "mode": "通用 / Common",
+      "name": "Save location",
+      "code": "DESCRIPTION_DEFAULT_UNKNOWN",
+      "severity": "medium",
+      "message": "有状态功能未说明默认值或状态持久化；未知时应形成主责确认问题"
+    },
+    {
+      "row": 201,
+      "mode": "通用 / Common",
+      "name": "Save location",
+      "code": "DESCRIPTION_MEMORY_UNKNOWN",
+      "severity": "medium",
+      "message": "有状态功能未说明关键记忆或重置规则；应参考九场景基线并确认项目差异"
+    },
+    {
+      "row": 201,
+      "mode": "通用 / Common",
+      "name": "Save location",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 202,
+      "mode": "通用 / Common",
+      "name": "Shutter sound",
+      "code": "DESCRIPTION_DEFAULT_UNKNOWN",
+      "severity": "medium",
+      "message": "有状态功能未说明默认值或状态持久化；未知时应形成主责确认问题"
+    },
+    {
+      "row": 202,
+      "mode": "通用 / Common",
+      "name": "Shutter sound",
+      "code": "DESCRIPTION_MEMORY_UNKNOWN",
+      "severity": "medium",
+      "message": "有状态功能未说明关键记忆或重置规则；应参考九场景基线并确认项目差异"
+    },
+    {
+      "row": 202,
+      "mode": "通用 / Common",
+      "name": "Shutter sound",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 203,
+      "mode": "通用 / Common",
+      "name": "AI Preset 预览引导入口 / 场景推荐",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 204,
+      "mode": "通用 / Common",
+      "name": "Preset",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 205,
+      "mode": "通用 / Common",
+      "name": "顶部快捷保存入口",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 206,
+      "mode": "高像素 / High Resolution",
+      "name": "200MP",
+      "code": "VERIFICATION_EMPTY",
+      "severity": "high",
+      "message": "验证方法为空"
+    },
+    {
+      "row": 206,
+      "mode": "高像素 / High Resolution",
+      "name": "200MP",
+      "code": "UNSUPPORTED_REASON_CONSEQUENCE_MISSING",
+      "severity": "medium",
+      "message": "不支持原因未说明依赖缺口如何导致该功能不可用"
+    },
+    {
+      "row": 206,
+      "mode": "高像素 / High Resolution",
+      "name": "200MP",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 207,
+      "mode": "人像 / Portrait",
+      "name": "多帧降噪 / MFNR",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    },
+    {
+      "row": 208,
+      "mode": "人像 / Portrait",
+      "name": "人脸畸变矫正",
+      "code": "OWNER_IS_ROLE",
+      "severity": "high",
+      "message": "主责确认人应为一个具体姓名，不应是角色或组合值"
+    }
+  ],
+  "summary": {
+    "high": 217,
+    "medium": 87
+  }
+}
