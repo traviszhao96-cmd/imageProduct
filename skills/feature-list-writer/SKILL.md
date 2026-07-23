@@ -63,9 +63,14 @@ Each FL Bitable contains:
 | 说明 | text | 功能行写用户收益、行为/选项、结果影响，以及有状态功能的默认值和关键记忆/重置规则；算法行写解决的问题、触发范围、可观察效果和依赖。短而准确可以，禁止来源/继承叙述和为凑字数扩写 |
 | {camera} | select(✓/✗/TBD) | 每个摄像头独立一列，仅列出该设备实际存在的摄像头；TBD 仅用于分发草稿和待确认项 |
 | 不支持原因 | text | 当摄像头列为 ✗ 时，写清“所需依赖 → 当前项目缺失/限制 → 无法支持的结果”；继承项目、基线勾叉和“不在范围”不是根因 |
-| 状态 | select | 已确认 / 待确认 / Pending |
+| 状态（历史） | select | 旧表迁移时保留的手工状态，不再作为模块评审完成度的真值 |
+| 确认状态 | formula | 由 Product / HAL / APP / Tuning 自动计算：任一模块有疑问则为有疑问；全部模块已确认或不相关则为已确认；其余为待确认 |
 | 主责确认人 | person/single-select | 一个具体姓名，单选；由负责人映射表按模块和能力路由 |
 | 评审角色 | multi-select | Product / APP / HAL SE / Tuning SE / SQA / IQA；表示参与者，不等同主责人 |
+| Product | select | 待确认 / 已确认 / 不相关 / 有疑问；当前模块负责人 Travis Zhao |
+| HAL | select | 待确认 / 已确认 / 不相关 / 有疑问；当前模块负责人 Delevin Yao |
+| APP | select | 待确认 / 已确认 / 不相关 / 有疑问；当前模块负责人 Zhongmin Long |
+| Tuning | select | 待确认 / 已确认 / 不相关 / 有疑问；当前模块负责人 John Li |
 | 验证方法 | text | 验收标准 |
 
 **Camera columns**: Only include cameras the device actually has. 26111: Main + UW + Front. 26121: Main + UW + Tele + Front. Never create "无长焦" placeholder columns — just omit.
@@ -151,6 +156,7 @@ KB rules:
 9. Run `python3 skills/feature-list-writer/scripts/audit_fl_quality.py <fl.json>`
 10. Run the semantic review Agent defined in `references/review-policy.md`; send only disputed/high-risk rows to humans
 11. Resolve every row to one named `主责确认人` from the approved owner map before review distribution
+12. Initialize Product / HAL / APP / Tuning module confirmation columns according to routing; reviewers update their own column directly in Base
 ```
 
 ### 2. Project Inheritance
@@ -269,6 +275,11 @@ Dual View Video v2 should be split by acceptance surface:
 - An unsupported reason must state the required dependency, the actual missing/limited project fact, and the resulting unsupported consequence. Project inheritance and source provenance can be evidence links, but never the reason text.
 - `主责确认人` must contain one approved person name. A role such as `Product` or `HAL SE` is not a person name.
 - `评审角色` may contain multiple roles and is generated from the routing matrix.
+- Module confirmation columns do not replace camera support marks, `状态`, `主责确认人`, or `评审角色`. They record whether each module has reviewed the current row.
+- Allowed module states are `待确认`、`已确认`、`不相关`、`有疑问`. `有疑问` requires a concrete note; do not use an empty question state.
+- Never infer row-level confirmation from one module's `已确认`. A row passes the module gate only when all applicable modules are `已确认`, all non-applicable modules are `不相关`, and no module is `待确认` or `有疑问`.
+- `确认状态` is a read-only formula field and is the authoritative module-review result. Keep an existing manual `状态` only as migration history; do not continue updating it as the review source of truth.
+- Current 26111 / 26121 module owner map (2026-07-23): Product = Travis Zhao; HAL = Delevin Yao; APP = Zhongmin Long; Tuning = John Li.
 - Structural audit passing is necessary but not sufficient. The semantic review Agent must return `PASS`, `NEEDS_REWRITE`, `NEEDS_OWNER_INPUT`, or `BOUNDARY_VIOLATION` for every flagged row.
 
 ## Key Resources

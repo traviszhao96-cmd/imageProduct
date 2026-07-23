@@ -90,7 +90,9 @@ Every FL row must contain enough information for another person to judge and tes
 - A verification method that describes how to prove the judgement, not merely a PRD name or check mark.
 - One named `主责确认人` per row, resolved from the approved person-to-scope map.
 - Multi-select `评审角色`: `Product`、`APP`、`HAL SE`、`Tuning SE`、`SQA`、or `IQA`.
-- A status consistent with the support columns: any unresolved `TBD` means `待确认`.
+- Module confirmation columns: `Product`、`HAL`、`APP`、`Tuning`. Each column uses `待确认`、`已确认`、`不相关`、or `有疑问`.
+- A read-only `确认状态` formula: any module `有疑问` means `有疑问`; all four modules `已确认/不相关` means `已确认`; otherwise `待确认`.
+- Existing manual `状态` is retained only as migration history and is no longer the module-review source of truth.
 
 ### Ownership
 
@@ -101,6 +103,28 @@ Every FL row must contain enough information for another person to judge and tes
 - `IQA`: image/video quality and algorithm-effect acceptance execution.
 
 Algorithm rows route to a named `HAL SE` or `Tuning SE` person according to ownership. Product visibility does not make Product the accountable person for an algorithm row. SQA and IQA are core readers and acceptance executors; they become accountable only when the unresolved decision genuinely belongs to testing. If the approved owner map cannot produce one unique person, keep the row `待确认` and raise `OWNER_AMBIGUOUS` instead of inventing a name.
+
+### Module Confirmation Status
+
+The 2026-07-23 review established the current project-level module owner map:
+
+| Module column | Accountable reviewer | Confirmation scope |
+|---|---|---|
+| Product | Travis Zhao | Requirement scope, user benefit, interaction, defaults, and product decisions |
+| HAL | Delevin Yao | Hardware, HAL, pipeline, algorithm integration, supported camera/spec/focal range, performance, and power boundaries |
+| APP | Zhongmin Long | Client implementation, UI behavior, state transition, settings, compatibility, and delivery feasibility |
+| Tuning | John Li | Image/video tuning strategy, parameter delivery, effect scope, and tuning-related limitations |
+
+Each module owner reviews the rows relevant to that module and sets the corresponding column:
+
+- `待确认`: the module has not completed review.
+- `已确认`: the module accepts the row's current scope and judgement.
+- `不相关`: the row does not require a conclusion from this module.
+- `有疑问`: the module found a conflict or unresolved question; the issue must be written in a note for the review meeting.
+
+Module confirmation is independent from camera support marks and the row-level `状态`. A single `已确认` module must never cause AI to mark the whole row confirmed. A row is module-review complete only when every applicable module is `已确认`, every non-applicable module is explicitly `不相关`, and no module remains `待确认` or `有疑问`.
+
+The Base implements this rule with the read-only `确认状态` formula. AI audits and review dashboards must use `确认状态`; the legacy manual `状态` field is not used to determine current review completion.
 
 ## 4. Three Completion Gates
 
@@ -133,12 +157,14 @@ For an individual row to be confirmed:
 - The verification method can prove the row's support boundary.
 - The row has no unresolved conflict with another project document.
 - The named accountable person accepts the judgement and the status is `已确认`.
+- All applicable module confirmation columns are `已确认`; non-applicable modules are `不相关`; none is `待确认` or `有疑问`.
 
 For the whole FL to be confirmation-complete:
 
 - No unresolved `TBD` remains.
 - No P0/P1 missing capability or disputed support judgement remains open.
 - Product has confirmed functional and interaction scope.
+- APP has confirmed client implementation and interaction delivery scope.
 - HAL SE has confirmed hardware, HAL, pipeline, algorithm integration, specification, and dependency boundaries; Tuning SE has confirmed tuning-related boundaries.
 - AI audit has been rerun after human changes and no critical inconsistency remains.
 - The frozen version and its changes are recorded in the Base change log.
