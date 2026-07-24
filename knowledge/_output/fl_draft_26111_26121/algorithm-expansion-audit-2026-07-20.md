@@ -1,6 +1,11 @@
-# Algorithm Expansion Audit
+# Legacy Split FL Algorithm Expansion Audit
 
-- KB algorithm definitions: 23
+- Scope: local legacy `26111_fl_final.json` and `26121_fl_final.json`.
+- The online unified v2.0 FL already contains Portrait Bokeh, Motion Photo
+  Frame Interpolation, and TF 50MP HDR/MMF; the missing items below only
+  describe the older split local artifacts.
+
+- KB algorithm definitions: 26
 - Rule: KB defines the mode universe; project FL keeps the same algorithm identity and varies support by camera/project.
 - Exception: Hex Zoom is a 26111 HP5-specific path and is not expanded into 26121.
 
@@ -8,11 +13,17 @@
 
 - Algorithm rows: 43
 - Unique algorithms: 23
-- Status: {'待确认': 16, '已确认': 27}
+- Status: {'已确认': 41, '待确认': 2}
 - Owners: {('HAL SE', 'Tuning SE'): 3, ('HAL SE',): 29, ('Tuning SE',): 10, ('Tuning SE', 'HAL SE'): 1}
-- Missing KB expansions: 0
+- Missing KB expansions: 3
 - Unexpected expansions: 0
 - All-camera unsupported candidates requiring SE review: 9
+
+### Missing
+
+- 人像 / Portrait / 人像虚化 / Portrait Bokeh
+- 照片 / Photo / 动态照片插帧 / Motion Photo Frame Interpolation
+- 高像素 / High Resolution / TF 50MP HDR/MMF
 
 ### All-camera Unsupported
 
@@ -32,6 +43,12 @@
 - Unique algorithms: 22
 - Status: {'待确认': 31, '已确认': 11}
 - Owners: {('HAL SE', 'Tuning SE'): 2, ('HAL SE',): 29, ('Tuning SE',): 10, ('Tuning SE', 'HAL SE'): 1}
-- Missing KB expansions: 0
+- Missing KB expansions: 3
 - Unexpected expansions: 0
 - All-camera unsupported candidates requiring SE review: 0
+
+### Missing
+
+- 人像 / Portrait / 人像虚化 / Portrait Bokeh
+- 照片 / Photo / 动态照片插帧 / Motion Photo Frame Interpolation
+- 高像素 / High Resolution / TF 50MP HDR/MMF

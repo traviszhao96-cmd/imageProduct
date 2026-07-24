@@ -1,0 +1,5757 @@
+{
+  "merged_at": "2026-07-24",
+  "rule": "Any 有疑问 => 有疑问; both handled (已确认/不相关) => 已确认 or 不相关; otherwise => 待确认.",
+  "rows": [
+    {
+      "record_id": "recvpTDGw0Kdwk",
+      "mode": "照片 / Photo",
+      "name": "AE / 自动曝光",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw0Jucd",
+      "mode": "照片 / Photo",
+      "name": "AF / 自动对焦",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw04NIY",
+      "mode": "照片 / Photo",
+      "name": "识别框视觉动效",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "不相关",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw00CgP",
+      "mode": "照片 / Photo",
+      "name": "前后翻转 / Front-Rear Camera Switch",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw0YSsZ",
+      "mode": "照片 / Photo",
+      "name": "OIS",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw0UcQz",
+      "mode": "照片 / Photo",
+      "name": "变焦",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw05gg3",
+      "mode": "照片 / Photo",
+      "name": "AI Zoom 开关 / AI Zoom Switch",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "不相关",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw0MW5l",
+      "mode": "照片 / Photo",
+      "name": "Text Mode（文本模式）",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "不相关",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw0Fuph",
+      "mode": "照片 / Photo",
+      "name": "自动夜景开关 / Auto Night Switch",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "不相关",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw0k0UN",
+      "mode": "照片 / Photo",
+      "name": "Exposure",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "不相关",
+          "project_26121": "不相关",
+          "merged": "不相关"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw069y0",
+      "mode": "照片 / Photo",
+      "name": "Flash",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw0p8IJ",
+      "mode": "照片 / Photo",
+      "name": "Glyph Mirror",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "不相关",
+          "project_26121": "不相关",
+          "merged": "不相关"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw0D7TH",
+      "mode": "照片 / Photo",
+      "name": "Grid",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "不相关",
+          "project_26121": "不相关",
+          "merged": "不相关"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw0NGtD",
+      "mode": "照片 / Photo",
+      "name": "HDR 开关 / HDR Switch",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "已确认",
+          "project_26121": "不相关",
+          "merged": "已确认"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw0KgFh",
+      "mode": "照片 / Photo",
+      "name": "More settings",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "不相关",
+          "project_26121": "不相关",
+          "merged": "不相关"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw0c0L8",
+      "mode": "照片 / Photo",
+      "name": "Motion Photo",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "不相关",
+          "project_26121": "不相关",
+          "merged": "不相关"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw0jI8h",
+      "mode": "照片 / Photo",
+      "name": "Motion Photo cover HDR",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "不相关",
+          "project_26121": "不相关",
+          "merged": "不相关"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw0hBYp",
+      "mode": "照片 / Photo",
+      "name": "Ratio",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "不相关",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw0swkG",
+      "mode": "照片 / Photo",
+      "name": "Timer",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "不相关",
+          "project_26121": "不相关",
+          "merged": "不相关"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw0sQC3",
+      "mode": "照片 / Photo",
+      "name": "Watermark",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "不相关",
+          "project_26121": "不相关",
+          "merged": "不相关"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw0XRcm",
+      "mode": "照片 / Photo",
+      "name": "动态照片 - 无效信息截取",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "不相关",
+          "project_26121": "不相关",
+          "merged": "不相关"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw0dotY",
+      "mode": "照片 / Photo",
+      "name": "动态照片-视频支持录制声音",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "不相关",
+          "project_26121": "不相关",
+          "merged": "不相关"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw0i74D",
+      "mode": "照片 / Photo",
+      "name": "风格 / Style",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "不相关",
+          "project_26121": "不相关",
+          "merged": "不相关"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw0mr7r",
+      "mode": "照片 / Photo",
+      "name": "自动微距控制",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "有疑问",
+          "project_26121": "不相关",
+          "merged": "有疑问"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw0ARvp",
+      "mode": "通用 / Common",
+      "name": "长时间无交互息屏以节约电量",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "不相关",
+          "project_26121": "不相关",
+          "merged": "不相关"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw088aO",
+      "mode": "照片 / Photo",
+      "name": "人脸检测",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw0OaU8",
+      "mode": "照片 / Photo",
+      "name": "镜头脏污检测 / 提示引导",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "不相关",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw0bpWG",
+      "mode": "照片 / Photo",
+      "name": "AIGC SR",
+      "statuses": {
+        "Product": {
+          "project_26111": "不相关",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw0PBSq",
+      "mode": "照片 / Photo",
+      "name": "FRT / 人像清晰度提升",
+      "statuses": {
+        "Product": {
+          "project_26111": "不相关",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw05ObZ",
+      "mode": "照片 / Photo",
+      "name": "HDSR",
+      "statuses": {
+        "Product": {
+          "project_26111": "不相关",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw06xjv",
+      "mode": "照片 / Photo",
+      "name": "Hex Zoom",
+      "statuses": {
+        "Product": {
+          "project_26111": "不相关",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "HAL": {
+          "project_26111": "有疑问",
+          "project_26121": "待确认",
+          "merged": "有疑问"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw0GXqT",
+      "mode": "照片 / Photo",
+      "name": "RAW HDR",
+      "statuses": {
+        "Product": {
+          "project_26111": "不相关",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw0z3ou",
+      "mode": "照片 / Photo",
+      "name": "Ultra HDR",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw0eIZD",
+      "mode": "照片 / Photo",
+      "name": "多帧降噪 / MFNR",
+      "statuses": {
+        "Product": {
+          "project_26111": "不相关",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw0ACmU",
+      "mode": "照片 / Photo",
+      "name": "美颜算法 / Beauty Algorithm",
+      "statuses": {
+        "Product": {
+          "project_26111": "不相关",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw0Ztuh",
+      "mode": "照片 / Photo",
+      "name": "超分 / Super Resolution（SR）",
+      "statuses": {
+        "Product": {
+          "project_26111": "不相关",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw0IQQW",
+      "mode": "照片 / Photo",
+      "name": "超级夜景",
+      "statuses": {
+        "Product": {
+          "project_26111": "不相关",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw0iDEq",
+      "mode": "照片 / Photo",
+      "name": "ASD / AI场景检测",
+      "statuses": {
+        "Product": {
+          "project_26111": "不相关",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw0VU3c",
+      "mode": "照片 / Photo",
+      "name": "CFR / 紫边去除",
+      "statuses": {
+        "Product": {
+          "project_26111": "不相关",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw0FbmH",
+      "mode": "照片 / Photo",
+      "name": "ISZ / In Sensor Zoom",
+      "statuses": {
+        "Product": {
+          "project_26111": "不相关",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw0lvgm",
+      "mode": "照片 / Photo",
+      "name": "LDC / 光学畸变矫正",
+      "statuses": {
+        "Product": {
+          "project_26111": "不相关",
+          "project_26121": "有疑问",
+          "merged": "有疑问"
+        },
+        "HAL": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw04brX",
+      "mode": "照片 / Photo",
+      "name": "Photo EIS",
+      "statuses": {
+        "Product": {
+          "project_26111": "不相关",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw0Iwpi",
+      "mode": "照片 / Photo",
+      "name": "运动抓拍",
+      "statuses": {
+        "Product": {
+          "project_26111": "有疑问",
+          "project_26121": "已确认",
+          "merged": "有疑问"
+        },
+        "HAL": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw0QiBL",
+      "mode": "人像 / Portrait",
+      "name": "AE / 自动曝光",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw0Hy2L",
+      "mode": "人像 / Portrait",
+      "name": "AF / 自动对焦",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw0pTgC",
+      "mode": "人像 / Portrait",
+      "name": "前后翻转 / Front-Rear Camera Switch",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw0ToL1",
+      "mode": "人像 / Portrait",
+      "name": "人像模式 Consistent Zoom",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw0b0p9",
+      "mode": "人像 / Portrait",
+      "name": "变焦",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw0fK7H",
+      "mode": "人像 / Portrait",
+      "name": "Exposure",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "不相关",
+          "project_26121": "不相关",
+          "merged": "不相关"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw0zEjE",
+      "mode": "人像 / Portrait",
+      "name": "Flash",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw0RiSF",
+      "mode": "人像 / Portrait",
+      "name": "Grid",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "不相关",
+          "project_26121": "不相关",
+          "merged": "不相关"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw0N3hj",
+      "mode": "人像 / Portrait",
+      "name": "HDR 开关 / HDR Switch",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "已确认",
+          "project_26121": "不相关",
+          "merged": "已确认"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw0qbw3",
+      "mode": "人像 / Portrait",
+      "name": "More settings",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "不相关",
+          "project_26121": "不相关",
+          "merged": "不相关"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw0UaL8",
+      "mode": "人像 / Portrait",
+      "name": "Ratio",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "已确认",
+          "project_26121": "不相关",
+          "merged": "已确认"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw09uIt",
+      "mode": "人像 / Portrait",
+      "name": "Timer",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "不相关",
+          "project_26121": "不相关",
+          "merged": "不相关"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw0ZurD",
+      "mode": "人像 / Portrait",
+      "name": "Watermark",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "不相关",
+          "project_26121": "不相关",
+          "merged": "不相关"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw0PWsS",
+      "mode": "人像 / Portrait",
+      "name": "风格 / Style",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "不相关",
+          "project_26121": "不相关",
+          "merged": "不相关"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw0FivA",
+      "mode": "人像 / Portrait",
+      "name": "人脸检测",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw0Ygpw",
+      "mode": "人像 / Portrait",
+      "name": "镜头脏污检测 / 提示引导",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "不相关",
+          "project_26121": "不相关",
+          "merged": "不相关"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw0bxPS",
+      "mode": "人像 / Portrait",
+      "name": "FRT / 人像清晰度提升",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "APP": {
+          "project_26111": "不相关",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw0HEn8",
+      "mode": "人像 / Portrait",
+      "name": "Ultra HDR",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw06HSc",
+      "mode": "人像 / Portrait",
+      "name": "美颜算法 / Beauty Algorithm",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "APP": {
+          "project_26111": "不相关",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw0ekau",
+      "mode": "运动 / Action",
+      "name": "变焦",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw0dMKB",
+      "mode": "运动 / Action",
+      "name": "Exposure",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "不相关",
+          "project_26121": "不相关",
+          "merged": "不相关"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw0IySi",
+      "mode": "运动 / Action",
+      "name": "Flash",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "不相关",
+          "project_26121": "不相关",
+          "merged": "不相关"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw082pO",
+      "mode": "运动 / Action",
+      "name": "Grid",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "不相关",
+          "project_26121": "不相关",
+          "merged": "不相关"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw0SyVr",
+      "mode": "运动 / Action",
+      "name": "More settings",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "不相关",
+          "project_26121": "不相关",
+          "merged": "不相关"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw0eFxJ",
+      "mode": "运动 / Action",
+      "name": "Ratio",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "不相关",
+          "project_26121": "不相关",
+          "merged": "不相关"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw0klnj",
+      "mode": "运动 / Action",
+      "name": "Timer",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "不相关",
+          "project_26121": "不相关",
+          "merged": "不相关"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw0XtmV",
+      "mode": "运动 / Action",
+      "name": "风格 / Style",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "不相关",
+          "project_26121": "不相关",
+          "merged": "不相关"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw0svDw",
+      "mode": "视频 / Video",
+      "name": "AE / 自动曝光",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw0YsAI",
+      "mode": "视频 / Video",
+      "name": "AF / 自动对焦",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "APP": {
+          "project_26111": "有疑问",
+          "project_26121": "有疑问",
+          "merged": "有疑问"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw0YTwS",
+      "mode": "视频 / Video",
+      "name": "前后双录",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw0GS1o",
+      "mode": "视频 / Video",
+      "name": "前后双录主副互换 / 小窗大小",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw06yQ0",
+      "mode": "视频 / Video",
+      "name": "前后双录后置镜头选择",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw0Eowq",
+      "mode": "视频 / Video",
+      "name": "前后翻转 / Front-Rear Camera Switch",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw085qd",
+      "mode": "视频 / Video",
+      "name": "录制中前后置切换 / Front-Rear Switch While Recording",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw0BY5P",
+      "mode": "视频 / Video",
+      "name": "ISZ / In Sensor Zoom",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw03DpV",
+      "mode": "视频 / Video",
+      "name": "OIS",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw0WjI8",
+      "mode": "视频 / Video",
+      "name": "变焦",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "APP": {
+          "project_26111": "有疑问",
+          "project_26121": "有疑问",
+          "merged": "有疑问"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw06WDE",
+      "mode": "视频 / Video",
+      "name": "视频曝光调节 / 视频白平衡调节",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "不相关",
+          "project_26121": "不相关",
+          "merged": "不相关"
+        },
+        "APP": {
+          "project_26111": "有疑问",
+          "project_26121": "已确认",
+          "merged": "有疑问"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw0nGsE",
+      "mode": "视频 / Video",
+      "name": "风格 / Style",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "不相关",
+          "project_26121": "不相关",
+          "merged": "不相关"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "有疑问",
+          "merged": "有疑问"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw0SdkD",
+      "mode": "视频 / Video",
+      "name": "录制中拍摄动态照片 / Motion Photo While Recording",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "不相关",
+          "project_26121": "不相关",
+          "merged": "不相关"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw0yJ0x",
+      "mode": "视频 / Video",
+      "name": "录像中拍照",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "不相关",
+          "project_26121": "不相关",
+          "merged": "不相关"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw0ptux",
+      "mode": "视频 / Video",
+      "name": "1080P 30FPS HLG",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "APP": {
+          "project_26111": "有疑问",
+          "project_26121": "有疑问",
+          "merged": "有疑问"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw0y948",
+      "mode": "视频 / Video",
+      "name": "1080P 60FPS",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "APP": {
+          "project_26111": "有疑问",
+          "project_26121": "有疑问",
+          "merged": "有疑问"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw0PCpV",
+      "mode": "视频 / Video",
+      "name": "1080P 60FPS HLG",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "APP": {
+          "project_26111": "有疑问",
+          "project_26121": "有疑问",
+          "merged": "有疑问"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw0mLMq",
+      "mode": "视频 / Video",
+      "name": "4K 30FPS",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "APP": {
+          "project_26111": "有疑问",
+          "project_26121": "有疑问",
+          "merged": "有疑问"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw00JZ6",
+      "mode": "视频 / Video",
+      "name": "4K 30FPS HLG",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "APP": {
+          "project_26111": "有疑问",
+          "project_26121": "有疑问",
+          "merged": "有疑问"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw05gcH",
+      "mode": "视频 / Video",
+      "name": "4K 60FPS",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "APP": {
+          "project_26111": "有疑问",
+          "project_26121": "有疑问",
+          "merged": "有疑问"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw0fG14",
+      "mode": "视频 / Video",
+      "name": "4K 60FPS HLG",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "APP": {
+          "project_26111": "有疑问",
+          "project_26121": "有疑问",
+          "merged": "有疑问"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw0wrY9",
+      "mode": "视频 / Video",
+      "name": "人脸检测",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw0m5ik",
+      "mode": "视频 / Video",
+      "name": "Video EIS",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "不相关",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw09q5M",
+      "mode": "视频 / Video",
+      "name": "Video HDR 算法",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "不相关",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "有疑问",
+          "project_26121": "已确认",
+          "merged": "有疑问"
+        },
+        "APP": {
+          "project_26111": "有疑问",
+          "project_26121": "有疑问",
+          "merged": "有疑问"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw0atv0",
+      "mode": "视频 / Video",
+      "name": "视频夜景",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "不相关",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "不相关",
+          "project_26121": "不相关",
+          "merged": "不相关"
+        },
+        "APP": {
+          "project_26111": "有疑问",
+          "project_26121": "有疑问",
+          "merged": "有疑问"
+        },
+        "Tuning": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw0IFbF",
+      "mode": "夜景 / Night",
+      "name": "AE / 自动曝光",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw0ICRv",
+      "mode": "夜景 / Night",
+      "name": "AF / 自动对焦",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw0ujTz",
+      "mode": "夜景 / Night",
+      "name": "前后翻转 / Front-Rear Camera Switch",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw0gmDZ",
+      "mode": "夜景 / Night",
+      "name": "OIS",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw03bgS",
+      "mode": "夜景 / Night",
+      "name": "变焦",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw0OBPX",
+      "mode": "夜景 / Night",
+      "name": "Exposure",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "不相关",
+          "project_26121": "不相关",
+          "merged": "不相关"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw0LG0V",
+      "mode": "夜景 / Night",
+      "name": "Grid",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "不相关",
+          "project_26121": "不相关",
+          "merged": "不相关"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw0MinT",
+      "mode": "夜景 / Night",
+      "name": "More settings",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "不相关",
+          "project_26121": "不相关",
+          "merged": "不相关"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw0kHBS",
+      "mode": "夜景 / Night",
+      "name": "Ratio",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw0eweO",
+      "mode": "夜景 / Night",
+      "name": "Watermark",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "不相关",
+          "project_26121": "不相关",
+          "merged": "不相关"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw0Lp3G",
+      "mode": "夜景 / Night",
+      "name": "风格 / Style",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "不相关",
+          "project_26121": "不相关",
+          "merged": "不相关"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw0h4Wh",
+      "mode": "夜景 / Night",
+      "name": "人脸检测",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw0v8h1",
+      "mode": "夜景 / Night",
+      "name": "FRT / 人像清晰度提升",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw0npef",
+      "mode": "夜景 / Night",
+      "name": "Remosaic",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw0QWfW",
+      "mode": "夜景 / Night",
+      "name": "Ultra HDR",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw02Lux",
+      "mode": "夜景 / Night",
+      "name": "人脸畸变矫正",
+      "statuses": {
+        "Product": {
+          "project_26111": "有疑问",
+          "project_26121": "已确认",
+          "merged": "有疑问"
+        },
+        "HAL": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw0QABK",
+      "mode": "夜景 / Night",
+      "name": "多帧降噪 / MFNR",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw0F7rS",
+      "mode": "夜景 / Night",
+      "name": "极夜",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw0Mej3",
+      "mode": "夜景 / Night",
+      "name": "超分 / Super Resolution（SR）",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw0XQgu",
+      "mode": "夜景 / Night",
+      "name": "超级夜景",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw0rzMq",
+      "mode": "夜景 / Night",
+      "name": "LDC / 光学畸变矫正",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw0Rydp",
+      "mode": "夜景 / Night",
+      "name": "Photo EIS",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw0qthq",
+      "mode": "慢动作 / Slow Motion",
+      "name": "AE / 自动曝光",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw1rOvF",
+      "mode": "慢动作 / Slow Motion",
+      "name": "AF / 自动对焦",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw1CeQV",
+      "mode": "慢动作 / Slow Motion",
+      "name": "变焦",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw1G0hu",
+      "mode": "慢动作 / Slow Motion",
+      "name": "录影灯 / Recording Light",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "不相关",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw1alrG",
+      "mode": "慢动作 / Slow Motion",
+      "name": "1080P 120FPS",
+      "statuses": {
+        "Product": {
+          "project_26111": "不相关",
+          "project_26121": "不相关",
+          "merged": "不相关"
+        },
+        "HAL": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw1YSJk",
+      "mode": "慢动作 / Slow Motion",
+      "name": "1080P 240FPS",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "不相关",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw13Jxx",
+      "mode": "慢动作 / Slow Motion",
+      "name": "720P 240FPS",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "不相关",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw11TFW",
+      "mode": "慢动作 / Slow Motion",
+      "name": "人脸检测",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw1nDSn",
+      "mode": "慢动作 / Slow Motion",
+      "name": "Video EIS",
+      "statuses": {
+        "Product": {
+          "project_26111": "不相关",
+          "project_26121": "不相关",
+          "merged": "不相关"
+        },
+        "HAL": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw1ZbZS",
+      "mode": "延时摄影 / Timelapse",
+      "name": "变焦",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw132xk",
+      "mode": "延时摄影 / Timelapse",
+      "name": "4K",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw1npZh",
+      "mode": "延时摄影 / Timelapse",
+      "name": "Flash",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw1Chxd",
+      "mode": "延时摄影 / Timelapse",
+      "name": "录影灯 / Recording Light",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "不相关",
+          "project_26121": "不相关",
+          "merged": "不相关"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw1XVJO",
+      "mode": "延时摄影 / Timelapse",
+      "name": "人脸检测",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw1HTat",
+      "mode": "延时摄影 / Timelapse",
+      "name": "Video EIS",
+      "statuses": {
+        "Product": {
+          "project_26111": "不相关",
+          "project_26121": "不相关",
+          "merged": "不相关"
+        },
+        "HAL": {
+          "project_26111": "有疑问",
+          "project_26121": "已确认",
+          "merged": "有疑问"
+        },
+        "APP": {
+          "project_26111": "不相关",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw1T3CO",
+      "mode": "全景 / Panorama",
+      "name": "变焦",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "已确认",
+          "project_26121": "有疑问",
+          "merged": "有疑问"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw1LVBG",
+      "mode": "专业 / Expert",
+      "name": "AE / 自动曝光",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw15RZl",
+      "mode": "专业 / Expert",
+      "name": "AF / 自动对焦",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw1cnrV",
+      "mode": "专业 / Expert",
+      "name": "OIS",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw19lkY",
+      "mode": "专业 / Expert",
+      "name": "变焦",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw1aq4a",
+      "mode": "专业 / Expert",
+      "name": "Exposure",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "不相关",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw1vr5H",
+      "mode": "专业 / Expert",
+      "name": "Flash",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "不相关",
+          "project_26121": "不相关",
+          "merged": "不相关"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw1MMlr",
+      "mode": "专业 / Expert",
+      "name": "Grid",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "不相关",
+          "project_26121": "不相关",
+          "merged": "不相关"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw1i4V8",
+      "mode": "专业 / Expert",
+      "name": "More settings",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "不相关",
+          "project_26121": "不相关",
+          "merged": "不相关"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw1d2uh",
+      "mode": "专业 / Expert",
+      "name": "Ratio",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "不相关",
+          "project_26121": "不相关",
+          "merged": "不相关"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw10Bd3",
+      "mode": "专业 / Expert",
+      "name": "Timer",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "不相关",
+          "project_26121": "不相关",
+          "merged": "不相关"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw1luGL",
+      "mode": "专业 / Expert",
+      "name": "Watermark",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "不相关",
+          "project_26121": "不相关",
+          "merged": "不相关"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw1oV6q",
+      "mode": "专业 / Expert",
+      "name": "峰值对焦",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "不相关",
+          "project_26121": "不相关",
+          "merged": "不相关"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw12I0U",
+      "mode": "专业 / Expert",
+      "name": "直方图",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "不相关",
+          "project_26121": "不相关",
+          "merged": "不相关"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw103Mr",
+      "mode": "专业 / Expert",
+      "name": "间隔快门",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "不相关",
+          "project_26121": "不相关",
+          "merged": "不相关"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw1vdkX",
+      "mode": "专业 / Expert",
+      "name": "风格 / Style",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "不相关",
+          "project_26121": "不相关",
+          "merged": "不相关"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw1r0GB",
+      "mode": "专业 / Expert",
+      "name": "人脸检测",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw1hoR0",
+      "mode": "专业 / Expert",
+      "name": "LDC / 光学畸变矫正",
+      "statuses": {
+        "Product": {
+          "project_26111": "不相关",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw1pAvp",
+      "mode": "专业 / Expert",
+      "name": "Photo EIS",
+      "statuses": {
+        "Product": {
+          "project_26111": "不相关",
+          "project_26121": "有疑问",
+          "merged": "有疑问"
+        },
+        "HAL": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw1zfu5",
+      "mode": "高像素 / High Resolution",
+      "name": "AE / 自动曝光",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw1JbTZ",
+      "mode": "高像素 / High Resolution",
+      "name": "AF / 自动对焦",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw1cOY3",
+      "mode": "高像素 / High Resolution",
+      "name": "OIS",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw16ZTu",
+      "mode": "高像素 / High Resolution",
+      "name": "变焦",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "有疑问",
+          "project_26121": "已确认",
+          "merged": "有疑问"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw1POzC",
+      "mode": "高像素 / High Resolution",
+      "name": "Exposure",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "不相关",
+          "project_26121": "不相关",
+          "merged": "不相关"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw1GAdq",
+      "mode": "高像素 / High Resolution",
+      "name": "Flash",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "不相关",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw1A2Ui",
+      "mode": "高像素 / High Resolution",
+      "name": "Grid",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "不相关",
+          "project_26121": "不相关",
+          "merged": "不相关"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw18qUQ",
+      "mode": "高像素 / High Resolution",
+      "name": "More settings",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "不相关",
+          "project_26121": "不相关",
+          "merged": "不相关"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw11NLc",
+      "mode": "高像素 / High Resolution",
+      "name": "Ratio",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "不相关",
+          "project_26121": "不相关",
+          "merged": "不相关"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw1zG5h",
+      "mode": "高像素 / High Resolution",
+      "name": "Watermark",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "不相关",
+          "project_26121": "不相关",
+          "merged": "不相关"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw16RVc",
+      "mode": "高像素 / High Resolution",
+      "name": "风格 / Style",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "不相关",
+          "project_26121": "不相关",
+          "merged": "不相关"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw1LRFg",
+      "mode": "高像素 / High Resolution",
+      "name": "200MP",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "不相关",
+          "project_26121": "有疑问",
+          "merged": "有疑问"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw1l7gK",
+      "mode": "高像素 / High Resolution",
+      "name": "200MP Ultra",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "不相关",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw17qAi",
+      "mode": "高像素 / High Resolution",
+      "name": "50MP",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "不相关",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw16EHw",
+      "mode": "高像素 / High Resolution",
+      "name": "人脸检测",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw1gDe9",
+      "mode": "高像素 / High Resolution",
+      "name": "FRT / 人像清晰度提升",
+      "statuses": {
+        "Product": {
+          "project_26111": "不相关",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw1ed5I",
+      "mode": "高像素 / High Resolution",
+      "name": "Remosaic",
+      "statuses": {
+        "Product": {
+          "project_26111": "不相关",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw1ovB3",
+      "mode": "高像素 / High Resolution",
+      "name": "超分 / Super Resolution（SR）",
+      "statuses": {
+        "Product": {
+          "project_26111": "不相关",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw1jr0I",
+      "mode": "高像素 / High Resolution",
+      "name": "Photo EIS",
+      "statuses": {
+        "Product": {
+          "project_26111": "不相关",
+          "project_26121": "有疑问",
+          "merged": "有疑问"
+        },
+        "HAL": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw1jVLC",
+      "mode": "通用 / Common",
+      "name": "快速模式切换 / Quick Mode Switch",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "不相关",
+          "project_26121": "不相关",
+          "merged": "不相关"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw1r9mz",
+      "mode": "通用 / Common",
+      "name": "模式栏",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "不相关",
+          "project_26121": "不相关",
+          "merged": "不相关"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw1O5dU",
+      "mode": "通用 / Common",
+      "name": "Preset Widget",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "不相关",
+          "project_26121": "不相关",
+          "merged": "不相关"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw15ArP",
+      "mode": "通用 / Common",
+      "name": "Tips and feedback",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "不相关",
+          "project_26121": "不相关",
+          "merged": "不相关"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw12PAS",
+      "mode": "通用 / Common",
+      "name": "Auto Tone",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "不相关",
+          "project_26121": "不相关",
+          "merged": "不相关"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw1beKG",
+      "mode": "通用 / Common",
+      "name": "Press and hold shutter",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "不相关",
+          "project_26121": "不相关",
+          "merged": "不相关"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw1ydmP",
+      "mode": "通用 / Common",
+      "name": "QR code scanner",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "不相关",
+          "project_26121": "不相关",
+          "merged": "不相关"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw1kV4O",
+      "mode": "通用 / Common",
+      "name": "Tap to take a photo",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "不相关",
+          "project_26121": "不相关",
+          "merged": "不相关"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw1ot9r",
+      "mode": "通用 / Common",
+      "name": "Ultra XDR",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "不相关",
+          "project_26121": "不相关",
+          "merged": "不相关"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw1qOiq",
+      "mode": "通用 / Common",
+      "name": "Watermark settings",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "不相关",
+          "project_26121": "不相关",
+          "merged": "不相关"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw1p3DK",
+      "mode": "通用 / Common",
+      "name": "影像基调 / Image Tone",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "不相关",
+          "project_26121": "不相关",
+          "merged": "不相关"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw1Eqvq",
+      "mode": "通用 / Common",
+      "name": "色彩模式 / Color Mode",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "不相关",
+          "project_26121": "不相关",
+          "merged": "不相关"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw1cYTC",
+      "mode": "通用 / Common",
+      "name": "Auto FPS",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "不相关",
+          "project_26121": "不相关",
+          "merged": "不相关"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw15xLy",
+      "mode": "通用 / Common",
+      "name": "Power saving recording",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "不相关",
+          "project_26121": "不相关",
+          "merged": "不相关"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw1Io5V",
+      "mode": "通用 / Common",
+      "name": "Video encoding",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "不相关",
+          "project_26121": "不相关",
+          "merged": "不相关"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw11AMN",
+      "mode": "通用 / Common",
+      "name": "前后双录分开保存",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "不相关",
+          "project_26121": "不相关",
+          "merged": "不相关"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw1iXc0",
+      "mode": "通用 / Common",
+      "name": "视频防抖开关",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "不相关",
+          "project_26121": "不相关",
+          "merged": "不相关"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw1tcCc",
+      "mode": "通用 / Common",
+      "name": "锁定白平衡",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "不相关",
+          "project_26121": "不相关",
+          "merged": "不相关"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw1Kcjq",
+      "mode": "通用 / Common",
+      "name": "锁定镜头",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "不相关",
+          "project_26121": "不相关",
+          "merged": "不相关"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw1Sw6j",
+      "mode": "通用 / Common",
+      "name": "Level",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "不相关",
+          "project_26121": "不相关",
+          "merged": "不相关"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDGw1mW2K",
+      "mode": "通用 / Common",
+      "name": "Mirror front camera",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "不相关",
+          "project_26121": "不相关",
+          "merged": "不相关"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDH6tckst",
+      "mode": "通用 / Common",
+      "name": "Save location",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "不相关",
+          "project_26121": "不相关",
+          "merged": "不相关"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDH6tWBN5",
+      "mode": "通用 / Common",
+      "name": "Shutter sound",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "不相关",
+          "project_26121": "不相关",
+          "merged": "不相关"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDH6tAIcc",
+      "mode": "通用 / Common",
+      "name": "AI Preset 预览引导入口 / 场景推荐",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "不相关",
+          "project_26121": "不相关",
+          "merged": "不相关"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDH6tDEfP",
+      "mode": "通用 / Common",
+      "name": "Preset",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "不相关",
+          "project_26121": "不相关",
+          "merged": "不相关"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDH6tzp0x",
+      "mode": "通用 / Common",
+      "name": "顶部快捷保存入口",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "不相关",
+          "project_26121": "不相关",
+          "merged": "不相关"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDH6tfIDZ",
+      "mode": "照片 / Photo",
+      "name": "人脸畸变矫正",
+      "statuses": {
+        "Product": {
+          "project_26111": "不相关",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDH6tddsk",
+      "mode": "专业 / Expert",
+      "name": "各项专业模式参数极值范围",
+      "statuses": {
+        "Product": {
+          "project_26111": "不相关",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDH6t2RNO",
+      "mode": "人像 / Portrait",
+      "name": "多帧降噪 / MFNR",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "APP": {
+          "project_26111": "不相关",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpTDH6tTVQI",
+      "mode": "人像 / Portrait",
+      "name": "人脸畸变矫正",
+      "statuses": {
+        "Product": {
+          "project_26111": "有疑问",
+          "project_26121": "有疑问",
+          "merged": "有疑问"
+        },
+        "HAL": {
+          "project_26111": "有疑问",
+          "project_26121": "有疑问",
+          "merged": "有疑问"
+        },
+        "APP": {
+          "project_26111": "不相关",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvpU3GAC65WD",
+      "mode": "全景 / Panorama",
+      "name": "Grid",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "不相关",
+          "project_26121": "不相关",
+          "merged": "不相关"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvqa4iYhV6SX",
+      "mode": "照片 / Photo",
+      "name": "Auto framing / 自动构图建议",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "不相关",
+          "project_26121": "不相关",
+          "merged": "不相关"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvqb2Vg3Hm6U",
+      "mode": "照片 / Photo",
+      "name": "AI Moon / 月亮清晰度增强",
+      "statuses": {
+        "Product": {
+          "project_26111": "不相关",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "HAL": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "APP": {
+          "project_26111": "不相关",
+          "project_26121": "不相关",
+          "merged": "不相关"
+        },
+        "Tuning": {
+          "project_26111": "待确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvqfWgWfOlKO",
+      "mode": "慢动作 / Slow Motion",
+      "name": "Flash",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "HAL": {
+          "project_26111": "不相关",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvqfWhnEoqrg",
+      "mode": "慢动作 / Slow Motion",
+      "name": "Grid",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "HAL": {
+          "project_26111": "不相关",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvqg9O2O0Iqi",
+      "mode": "视频 / Video",
+      "name": "1080P 30FPS Log",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "有疑问",
+          "project_26121": "有疑问",
+          "merged": "有疑问"
+        },
+        "APP": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvqg9O2OIWdx",
+      "mode": "视频 / Video",
+      "name": "1080P 60FPS Log",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "待确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "APP": {
+          "project_26111": "待确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvqg9O2OoyOe",
+      "mode": "视频 / Video",
+      "name": "4K 30FPS Log",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "待确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "APP": {
+          "project_26111": "待确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvqg9O2OlGW8",
+      "mode": "视频 / Video",
+      "name": "4K 60FPS Log",
+      "statuses": {
+        "Product": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "HAL": {
+          "project_26111": "待确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "APP": {
+          "project_26111": "待确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvqgdtAEbNsY",
+      "mode": "照片 / Photo",
+      "name": "动态照片插帧 / Motion Photo Frame Interpolation",
+      "statuses": {
+        "Product": {
+          "project_26111": "不相关",
+          "project_26121": "不相关",
+          "merged": "不相关"
+        },
+        "HAL": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "APP": {
+          "project_26111": "待确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": "待确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvqgdtAEw4a1",
+      "mode": "高像素 / High Resolution",
+      "name": "TF 50MP HDR/MMF",
+      "statuses": {
+        "Product": {
+          "project_26111": "不相关",
+          "project_26121": "不相关",
+          "merged": "不相关"
+        },
+        "HAL": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "APP": {
+          "project_26111": "待确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": "待确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvqgdtAE3Ygq",
+      "mode": "人像 / Portrait",
+      "name": "人像虚化 / Portrait Bokeh",
+      "statuses": {
+        "Product": {
+          "project_26111": "不相关",
+          "project_26121": "不相关",
+          "merged": "不相关"
+        },
+        "HAL": {
+          "project_26111": "已确认",
+          "project_26121": "已确认",
+          "merged": "已确认"
+        },
+        "APP": {
+          "project_26111": "待确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": "待确认",
+          "project_26121": "待确认",
+          "merged": "待确认"
+        }
+      }
+    },
+    {
+      "record_id": "recvqgIXre15Eq",
+      "mode": "全景 / Panorama",
+      "name": "",
+      "statuses": {
+        "Product": {
+          "project_26111": null,
+          "project_26121": null,
+          "merged": "待确认"
+        },
+        "HAL": {
+          "project_26111": null,
+          "project_26121": null,
+          "merged": "待确认"
+        },
+        "APP": {
+          "project_26111": null,
+          "project_26121": null,
+          "merged": "待确认"
+        },
+        "Tuning": {
+          "project_26111": null,
+          "project_26121": null,
+          "merged": "待确认"
+        }
+      }
+    }
+  ]
+}
