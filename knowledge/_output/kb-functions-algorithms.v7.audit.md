@@ -1,7 +1,3 @@
-# v6 Compatibility Audit
-
-> `kb-functions-algorithms.v6.json` is a migration alias of v7. The canonical audit follows.
-
 # KB Functions Algorithms v7 Audit
 
 - Rows: 142

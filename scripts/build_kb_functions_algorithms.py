@@ -1,16 +1,18 @@
 #!/usr/bin/env python3
-"""Build canonical KB functions/algorithms table.
+"""Build canonical Camera KB and its FL projection metadata.
 
 This script intentionally does not transform the old FL-derived KB because that
 file contains duplicated mode rows, copied support marks, and target-project
 source notes. The canonical table below is the source of truth for the KB stage.
-Project Feature Lists should be generated later by expanding these mode scopes
-against hardware/project configuration.
+Project Feature Lists are downstream projections. Whether a KB node becomes an
+FL row, and which dimensions it expands by, is carried by the node itself.
 """
 
 from __future__ import annotations
 
 import json
+import re
+from hashlib import sha1
 from collections import Counter
 from pathlib import Path
 
@@ -20,10 +22,13 @@ from normalize_kb_catalog_20260715 import normalize
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "knowledge" / "_output"
 OUT_CANONICAL = OUT / "kb-functions-algorithms.json"
-OUT_JSON = OUT / "kb-functions-algorithms.v6.json"
-OUT_AUDIT = OUT / "kb-functions-algorithms.v6.audit.md"
+OUT_JSON = OUT / "kb-functions-algorithms.v7.json"
+OUT_COMPAT = OUT / "kb-functions-algorithms.v6.json"
+OUT_AUDIT = OUT / "kb-functions-algorithms.v7.audit.md"
+OUT_COMPAT_AUDIT = OUT / "kb-functions-algorithms.v6.audit.md"
 
 SOURCE = "25111 / 25131"
+CODE_BASELINE = "CameraApp origin/develop@c97b3137b6 (2026-07-27)"
 
 
 def row(
@@ -36,16 +41,42 @@ def row(
     dependency: str,
     verify: str,
     note: str = "",
+    *,
+    node_id: str = "",
+    parent_id: str = "",
+    node_type: str = "",
+    interaction: str = "",
+    app_binding: str = "",
+    config_gate: str = "",
+    implementation_status: str = "已实现",
+    fl_projection: str = "",
+    fl_dimensions: str = "",
+    fl_condition: str = "",
+    camera_scope: str = "按项目确认",
+    spec_scope: str = "按项目确认",
 ) -> dict[str, str]:
     return {
         "模式": modes,
+        "节点 ID": node_id,
+        "父节点 ID": parent_id,
+        "节点类型": node_type,
         "一级分类": level1,
         "二级分类": level2,
         "名称": name,
+        "交互位置": interaction or level2,
         "说明": desc,
         "判断依据": judgement,
         "依赖": dependency,
         "验证方法": verify,
+        "App 绑定": app_binding,
+        "配置门控": config_gate,
+        "实现状态": implementation_status,
+        "FL 投影": fl_projection,
+        "FL 展开维度": fl_dimensions,
+        "FL 展开条件": fl_condition,
+        "摄像头范围": camera_scope,
+        "规格范围": spec_scope,
+        "代码基线": CODE_BASELINE,
         "来源项目": SOURCE,
         "备注": note,
     }
@@ -632,10 +663,601 @@ ROWS = [
 ]
 
 
+# Nodes present in the current application structure but missing from the old
+# FL-derived catalog. These are knowledge nodes first; their FL behaviour is
+# defined independently through projection metadata.
+CODE_STRUCTURE_ROWS = [
+    row(
+        "通用", "功能", "启动与入口 / Launch & Entry", "相机启动入口 / Camera Launch Entry",
+        "统一描述桌面图标、热启动、锁屏安全相机、快捷方式、语音和 Widget 等进入 Camera 的入口及上下文。",
+        "项目暴露对应入口，且入口会改变启动模式、权限、可访问相册范围或恢复策略时记录。",
+        "依赖 Activity 路由、Intent、权限、安全上下文和模式恢复。",
+        "分别从桌面、锁屏、快捷方式、语音和 Widget 启动，核对模式、权限、返回与相册访问。",
+        node_id="kb.launch.entry", parent_id="kb.launch", node_type="入口",
+        app_binding="CameraActivity; SecureCameraActivity; CameraShortCutActivity; VoiceCameraActivity; WidgetCameraActivity",
+        fl_projection="条件展开", fl_dimensions="项目 / 入口", fl_condition="入口策略、默认模式或安全权限存在项目差异时展开。",
+    ),
+    row(
+        "照片", "功能", "模式栏 / Mode Switch", "照片模式 / Photo Mode",
+        "默认静态拍摄模式，承载普通拍照、工具栏、暂态开关和主要计算摄影链路。",
+        "ModeIndex.PHOTO 在生产模式数组中可见且可进入时支持。",
+        "依赖照片 Mode、摄像头列表、拍照 pipeline、工具栏与后处理算法。",
+        "进入照片模式，逐摄像头验证预览、拍摄、保存和模式恢复。",
+        node_id="kb.mode.photo", parent_id="kb.modes", node_type="模式",
+        app_binding="ModeIndex.PHOTO; NcfPhotoMode", fl_projection="独立行", fl_dimensions="项目 / 摄像头",
+        fl_condition="项目是否保留该模式，或可用摄像头存在差异时展开。",
+    ),
+    row(
+        "视频", "功能", "模式栏 / Mode Switch", "视频模式 / Video Mode",
+        "普通视频录制模式，承载视频规格、HDR、防抖、录制中拍照、暂停和音频控制。",
+        "ModeIndex.VIDEO 在生产模式数组中可见且录制链路可用时支持。",
+        "依赖视频 Mode、编码器、音频、规格、EIS/HDR 和存储。",
+        "逐摄像头及规格录制，检查开始、暂停、恢复、停止、文件与音画同步。",
+        node_id="kb.mode.video", parent_id="kb.modes", node_type="模式",
+        app_binding="ModeIndex.VIDEO; NormalVideoMode; CameraVideoMode", fl_projection="独立行",
+        fl_dimensions="项目 / 摄像头 / 规格", fl_condition="摄像头或可录规格不同即展开。",
+    ),
+    row(
+        "人像", "功能", "模式栏 / Mode Switch", "人像模式 / Portrait Mode",
+        "以人物主体、景深虚化和人像处理为核心的静态拍摄模式。",
+        "ModeIndex.PORTRAIT/BOKEH 在生产模式数组中可见，且输出摄像头具备对应人像链路时支持。",
+        "依赖人像 Mode、单/双摄虚化、人脸与主体分割。",
+        "逐输出摄像头覆盖单人、多人和复杂边缘，验证入口、预览和成片。",
+        node_id="kb.mode.portrait", parent_id="kb.modes", node_type="模式",
+        app_binding="ModeIndex.PORTRAIT; ModeIndex.BOKEH; BokehMode; BokehModeV2",
+        fl_projection="独立行", fl_dimensions="项目 / 摄像头", fl_condition="输出镜头或虚化链路不同即展开。",
+    ),
+    row(
+        "夜景", "功能", "模式栏 / Mode Switch", "夜景模式 / Night Mode",
+        "面向低照和极低照场景的独立拍照模式，不等同于照片模式中的自动夜景暂态开关。",
+        "ModeIndex.NIGHT 在生产模式数组中可见且 Super Night 链路可进入时支持。",
+        "依赖夜景 Mode、低照检测、曝光、多帧与防抖。",
+        "逐摄像头在低照和极低照拍摄，核对模式入口、曝光、算法 tag 和成片。",
+        node_id="kb.mode.night", parent_id="kb.modes", node_type="模式",
+        app_binding="ModeIndex.NIGHT; CameraNightMode", fl_projection="独立行",
+        fl_dimensions="项目 / 摄像头", fl_condition="模式入口或摄像头夜景链路不同即展开。",
+    ),
+    row(
+        "慢动作", "功能", "模式栏 / Mode Switch", "慢动作模式 / Slow Motion Mode",
+        "以高帧率采集并低速播放的独立视频模式。",
+        "ModeIndex.SLOW_MOTION 在生产模式数组中可见，且至少一种高帧率规格可录制时支持。",
+        "依赖 high-speed Sensor mode、带宽、编码封装、曝光与温升。",
+        "逐摄像头和规格录制高速运动并检查采集帧率、播放倍速、掉帧和温升。",
+        node_id="kb.mode.slow_motion", parent_id="kb.modes", node_type="模式",
+        app_binding="ModeIndex.SLOW_MOTION; CameraSlowMotionMode", fl_projection="规格展开",
+        fl_dimensions="项目 / 摄像头 / 规格", fl_condition="始终按摄像头×分辨率×高帧率候选规格展开。",
+    ),
+    row(
+        "延时摄影", "功能", "模式栏 / Mode Switch", "延时摄影模式 / Timelapse Mode",
+        "按采样间隔压缩长时间过程并输出视频的独立模式。",
+        "ModeIndex.TIMELAPSE 在生产模式数组中可见且定时采样及长录链路可用时支持。",
+        "依赖定时采样、编码、倍速、长录稳定、存储、功耗和温升。",
+        "逐摄像头、分辨率和倍速验证采样间隔、输出时长与长录稳定性。",
+        node_id="kb.mode.timelapse", parent_id="kb.modes", node_type="模式",
+        app_binding="ModeIndex.TIMELAPSE; CameraTimeLapseMode", fl_projection="规格展开",
+        fl_dimensions="项目 / 摄像头 / 规格", fl_condition="输出规格或倍速范围不同即展开。",
+    ),
+    row(
+        "全景", "功能", "模式栏 / Mode Switch", "全景模式 / Panorama Mode",
+        "引导用户移动设备并拼接多帧图像，生成宽视场照片的独立模式。",
+        "ModeIndex.PANORAMA 在生产模式数组中可见且拼接 SDK、方向与输出摄像头可用时支持。",
+        "依赖 Panorama Mode、拼接 SDK、陀螺仪、运动引导、曝光锁定和内存。",
+        "按支持方向和摄像头完成全景拍摄，检查引导、拼接缝、运动物体、曝光和输出尺寸。",
+        node_id="kb.mode.panorama", parent_id="kb.modes", node_type="模式",
+        app_binding="ModeIndex.PANORAMA; Morpho Panorama SDK", fl_projection="独立行",
+        fl_dimensions="项目 / 摄像头 / 规格", fl_condition="输出摄像头、方向或夜景全景能力不同即展开。",
+    ),
+    row(
+        "专业", "功能", "模式栏 / Mode Switch", "专业模式 / Expert Mode",
+        "向用户开放 ISO、快门、白平衡、对焦等手动参数，并可承载 RAW、直方图和专业辅助能力。",
+        "ModeIndex.MANUAL 在生产模式数组中可见，且当前摄像头具备可用手动参数时支持。",
+        "依赖 Manual Mode、HAL 手动控制、参数 UI、状态记忆和 RAW pipeline。",
+        "逐摄像头调节每项参数，核对预览、Capture Result、成片、记忆和互斥。",
+        node_id="kb.mode.expert", parent_id="kb.modes", node_type="模式",
+        app_binding="ModeIndex.MANUAL; CameraManualMode", fl_projection="父节点汇总",
+        fl_dimensions="项目 / 摄像头", fl_condition="专业模式本身一行；参数边界由子规格节点按摄像头条件展开。",
+    ),
+    row(
+        "微距", "功能", "模式栏 / Mode Switch", "微距模式 / Macro Mode",
+        "直接使用微距摄像头或近摄链路的独立模式，与照片模式中的自动微距切换是两个不同能力。",
+        "ModeIndex.MACRO 可作为生产模式显示且 MacroMode 可进入时支持；只有 Fallback 自动微距不等同于独立模式。",
+        "依赖微距摄像头、最近对焦距离、Macro Mode、变焦与切镜策略。",
+        "进入微距模式，在不同物距验证对焦、倍率、输出摄像头和模式退出恢复。",
+        node_id="kb.mode.macro", parent_id="kb.modes", node_type="模式",
+        app_binding="ModeIndex.MACRO; MacroMode", config_gate="mode array / ProductConfig",
+        fl_projection="条件展开", fl_dimensions="项目 / 摄像头", fl_condition="仅项目暴露独立微距模式时展开；自动微距保留为独立节点。",
+    ),
+    row(
+        "运动", "功能", "模式栏 / Mode Switch", "运动模式 / Action Mode",
+        "面向运动主体的独立模式入口，与照片模式内部的运动抓拍算法不是同一层级。",
+        "ModeIndex.MOTION 在生产模式数组中可见且 Motion Mode 可进入时支持。",
+        "依赖运动模式、运动检测、快门/曝光策略、对焦与连拍处理。",
+        "进入运动模式拍摄不同速度主体，核对入口、快门、对焦、运动清晰度和保存。",
+        node_id="kb.mode.action", parent_id="kb.modes", node_type="模式",
+        app_binding="ModeIndex.MOTION; MotionCapture", config_gate="mode array / ProductConfig",
+        fl_projection="条件展开", fl_dimensions="项目 / 摄像头", fl_condition="项目暴露独立运动模式时展开；算法能力另行判断。",
+    ),
+    row(
+        "照片 / 人像", "功能", "工具栏 / Toolbar", "美颜控制 / Beauty Control",
+        "用户可见的美颜开关、档位和参数交互；它负责控制美颜算法，但不等同于算法本身。",
+        "当前模式和摄像头显示美颜入口并可改变算法参数时支持。",
+        "依赖 Beauty UI、人脸检测、美颜参数、预览与拍照 pipeline。",
+        "逐模式和摄像头验证入口显隐、默认值、参数变化、记忆与成片一致。",
+        node_id="kb.toolbar.beauty", parent_id="kb.toolbar", node_type="交互",
+        app_binding="BeautyMode; Beauty UI nodes", fl_projection="独立行",
+        fl_dimensions="项目 / 模式 / 摄像头", fl_condition="入口或参数集在模式/摄像头间不同即展开。",
+    ),
+    row(
+        "人像", "功能", "工具栏 / Toolbar", "虚化控制 / Bokeh Control",
+        "用户调节人像虚化强度、光圈或虚化样式的交互控制；与人像虚化算法节点分离。",
+        "人像模式显示可调虚化入口并能改变预览或成片参数时支持。",
+        "依赖 Bokeh UI、虚化算法、深度/分割和参数记忆。",
+        "调整各档位并拍摄，检查预览、成片、默认值、记忆和边缘质量。",
+        node_id="kb.toolbar.bokeh", parent_id="kb.toolbar", node_type="交互",
+        app_binding="BokehMode; Bokeh UI nodes", fl_projection="独立行",
+        fl_dimensions="项目 / 摄像头", fl_condition="输出摄像头或可调范围不同即展开。",
+    ),
+    row(
+        "视频", "功能", "录制控制 / Recording Controls", "视频暂停与恢复 / Video Pause & Resume",
+        "视频录制中暂停写入并在恢复后继续同一文件与时间轴。",
+        "录制 UI 暴露 pause/resume 且编码封装链路支持同文件继续时支持。",
+        "依赖录制状态机、编码器、音频、时间戳和 UI。",
+        "录制中多次暂停恢复，检查文件连续性、音画同步、时长与异常恢复。",
+        node_id="kb.video.pause_resume", parent_id="kb.capture", node_type="交互",
+        app_binding="UiEventProxy.onVideoPause; CameraVideoMode", fl_projection="独立行",
+        fl_dimensions="项目 / 规格", fl_condition="项目禁用或特定规格/HDR 组合受限时展开。",
+    ),
+    row(
+        "视频", "功能", "录制控制 / Recording Controls", "视频静音录制 / Video Mute",
+        "控制视频录制是否写入环境声音轨。",
+        "视频设置提供静音开关，且录制链路按该值启停音频轨时支持。",
+        "依赖音频权限、录音器、编码封装和设置状态。",
+        "分别开启和关闭静音录制，检查文件音轨、播放、记忆和异常恢复。",
+        node_id="kb.video.mute", parent_id="kb.settings.video", node_type="设置",
+        app_binding="SettingKeys.KEY_VIDEO_MUTE; CameraVideoMode", fl_projection="独立行",
+        fl_dimensions="项目", fl_condition="设置入口、默认值或政策存在项目差异时展开。",
+    ),
+    row(
+        "通用", "Settings", "General settings", "Default gallery / 默认相册",
+        "选择 Camera 缩略图和查看动作默认打开的相册应用。",
+        "项目支持默认相册切换，且存在可选相册应用时支持。",
+        "依赖系统包解析、相册 Intent、设置 UI 和产品门控。",
+        "切换默认相册后点击缩略图，确认目标应用、回退和卸载场景。",
+        node_id="kb.settings.general.default_gallery", parent_id="kb.settings.general", node_type="设置",
+        app_binding="SettingKeys.KEY_DEFAULT_GALLERY; ProductConfig.isSupportDefaultGallerySwitch",
+        config_gate="ProductConfig.isSupportDefaultGallerySwitch", fl_projection="独立行",
+        fl_dimensions="项目", fl_condition="产品是否开放该设置或默认相册策略不同即展开。",
+    ),
+    row(
+        "通用", "Settings", "General settings", "Storage location / 存储位置",
+        "选择照片和视频写入手机存储或项目允许的其他存储位置。",
+        "设置项存在且可选存储位置数量大于一时支持。",
+        "依赖 StoragePathManager、可用卷、权限、容量与失败回退。",
+        "切换每个可见位置拍照和录像，检查文件路径、低空间和拔出回退。",
+        node_id="kb.settings.general.storage", parent_id="kb.settings.general", node_type="设置",
+        app_binding="SettingKeys.KEY_CAMERA_SAVE_POS; StoragePathManager", fl_projection="独立行",
+        fl_dimensions="项目", fl_condition="可用存储位置或默认路径不同即展开。",
+    ),
+    row(
+        "通用", "Settings", "Photo settings", "Fallback macro control / 自动微距设置",
+        "控制照片模式是否允许根据物距自动切换到微距链路；不等同于独立微距模式。",
+        "项目为 Fallback 宏方案且设置项可见时支持。",
+        "依赖微距摄像头、距离/清晰度判断、切镜策略、设置与暂态开关。",
+        "切换设置后在近距离场景验证自动切镜、暂态开关和状态记忆。",
+        node_id="kb.settings.photo.fallback_macro", parent_id="kb.settings.photo", node_type="设置",
+        app_binding="SettingKeys.KEY_FALLBACK_MACRO_CONTROL; NcfPhotoMode",
+        config_gate="Fallback macro ProductConfig", fl_projection="独立行",
+        fl_dimensions="项目 / 摄像头", fl_condition="仅 Fallback 宏项目展开，并明确实际微距摄像头。",
+    ),
+    row(
+        "通用", "Settings", "General settings", "重置相机设置 / Reset Camera Settings",
+        "将相机设置、模式状态和需要清除的记忆项恢复到项目默认值。",
+        "Settings 提供重置入口并定义完整重置范围时支持。",
+        "依赖 SettingContext、默认值表、Preset/模式状态和确认 UI。",
+        "修改各组设置和模式状态后执行重置，逐项核对默认值及不应清除的数据。",
+        node_id="kb.settings.reset", parent_id="kb.settings", node_type="设置",
+        app_binding="SettingKeys.KEY_RESET_SETTING; Settings UI", fl_projection="独立行",
+        fl_dimensions="项目", fl_condition="重置范围或项目默认值不同即展开。",
+    ),
+]
+
+
+STRUCTURAL_CHILD_ROWS = [
+    row("照片 / 人像 / 视频 / 夜景 / 高像素 / 专业", "功能", "AE/AF", "Touch AE/AF",
+        "点击预览位置同时驱动该区域的自动对焦和自动曝光。", "模式允许触控测光，且输出摄像头支持 AF 时判断 AF；固定焦摄像头只判断 Touch AE。", "依赖触控坐标映射、AE、AF 马达/固定焦策略和对焦框 UI。", "逐摄像头点击近远、明暗区域，核对焦点、曝光和 UI。",
+        node_id="kb.focus.touch_ae_af", parent_id="kb.focus.auto", node_type="交互", app_binding="UiEventProxy single tap; CameraUIContext AE/AF", fl_projection="条件展开", fl_dimensions="模式 / 摄像头", fl_condition="固定焦或模式禁用 Touch AF 时展开。"),
+    row("照片 / 人像 / 视频 / 夜景 / 高像素 / 专业", "功能", "AE/AF", "Face AE/AF",
+        "以检测到的人脸作为测光和对焦优先区域。", "当前模式消费人脸框驱动 AE/AF 时支持；固定焦摄像头只有 Face AE。", "依赖人脸检测、AE、AF 与多人优先级。", "覆盖单人、多人、逆光和进出画，检查收敛与主体优先。",
+        node_id="kb.focus.face_ae_af", parent_id="kb.focus.auto", node_type="能力", app_binding="face detection result; AE/AF strategy", fl_projection="条件展开", fl_dimensions="模式 / 摄像头", fl_condition="Face AE/AF 消费策略或固定焦差异导致验收不同即展开。"),
+    row("照片 / 人像 / 视频 / 夜景 / 高像素 / 专业", "功能", "AE/AF", "Touch AE/AF Lock",
+        "长按预览锁定当前曝光与对焦，直至用户解除或上下文变化。", "模式提供长按锁定且 AE/AF 状态机实际保持时支持。", "依赖长按手势、AE/AWB/AF Lock、状态提示和重置策略。", "长按后改变距离与亮度，检查锁定、解除及切模式恢复。",
+        node_id="kb.focus.lock", parent_id="kb.focus.auto", node_type="交互", app_binding="UiEventProxy long press focus; AE/AF lock state", fl_projection="条件展开", fl_dimensions="项目 / 模式 / 摄像头", fl_condition="锁定范围、固定焦或重置规则不同即展开。"),
+    row("照片 / 人像 / 视频 / 夜景 / 高像素 / 专业", "功能", "AE/AF", "CAF / 连续自动对焦",
+        "预览和录制过程中持续跟随距离或主体变化进行自动对焦。", "输出摄像头具有 AF 且模式启用连续对焦策略时支持。", "依赖 AF 马达、CAF 算法、主体/运动检测和模式策略。", "让主体连续远近移动，检查跟焦速度、稳定性和抽动。",
+        node_id="kb.focus.caf", parent_id="kb.focus.auto", node_type="能力", app_binding="camera AF mode / continuous focus strategy", fl_projection="条件展开", fl_dimensions="模式 / 摄像头 / 规格", fl_condition="固定焦、视频规格或模式 AF 策略不同即展开。"),
+    row("照片 / 人像 / 视频 / 夜景 / 高像素 / 专业", "功能", "AE/AF", "EV 曝光补偿",
+        "在自动曝光基准上施加用户曝光补偿。", "模式暴露 EV 控制且 HAL compensation range 非零时支持。", "依赖 AE compensation range/step、滑杆 UI 和状态记忆。", "验证最小、0、最大 EV 的预览、Capture Result 与成片。",
+        node_id="kb.focus.ev", parent_id="kb.focus.auto", node_type="规格", app_binding="AE compensation range; exposure UI", fl_projection="条件展开", fl_dimensions="项目 / 模式 / 摄像头 / 规格", fl_condition="范围、步进、入口或记忆不同即展开。"),
+    row(ALL_CAPTURE, "功能", "Zoom", "变焦交互 / Zoom Gestures",
+        "点击倍率点、滑动变焦条和双指缩放三种用户交互。", "项目显示对应控件或手势且可连续改变 zoom ratio 时支持。", "依赖 zoom UI、gesture、ratio controller 与无障碍策略。", "逐模式验证点击、滑动和双指三种入口的一致性。",
+        node_id="kb.zoom.gestures", parent_id="kb.zoom.control", node_type="交互", app_binding="zoom UI/controller; pinch gesture", fl_projection="随父节点", fl_dimensions="模式", fl_condition="默认随 Zoom 父行；只有项目删减某种交互或验收独立时展开。"),
+    row(ALL_CAPTURE, "功能", "Zoom", "变焦倍率范围 / Zoom Range",
+        "定义每个模式与输出摄像头可见的最小、最大倍率和默认光学点。", "从 camera capability、mode camera list 和 zoom configuration 逐组合取得真实范围。", "依赖 Sensor crop、镜头倍率、ISZ、数字变焦和模式限制。", "逐模式和摄像头核对最小/最大/默认点、成片元数据和越界限制。",
+        node_id="kb.zoom.range", parent_id="kb.zoom.control", node_type="规格", app_binding="zoom range config; mode camera capability", fl_projection="规格展开", fl_dimensions="项目 / 模式 / 摄像头 / 规格", fl_condition="倍率范围是摄像头关键差异，按模式×摄像头固定展开。"),
+    row(ALL_CAPTURE, "功能", "Zoom", "镜头切换策略 / Lens Switching Strategy",
+        "描述跨物理镜头倍率点时使用 SAT 平滑切换、硬切还是锁定当前镜头数码变焦。", "按模式、规格、光照、录制状态和锁定镜头设置判断实际策略。", "依赖 SAT 标定、镜头可用性、zoom controller、录制链路和低照策略。", "跨每个镜头点双向变焦，检查 FOV、曝光、色彩、抖动和录制连续性。",
+        node_id="kb.zoom.switch_strategy", parent_id="kb.zoom.control", node_type="能力", app_binding="zoom controller; LockLensZoomController; SAT config", fl_projection="条件展开", fl_dimensions="项目 / 模式 / 摄像头 / 规格", fl_condition="SAT/硬切/锁镜策略不同会直接改变验收结论，必须展开。"),
+    row("专业", "功能", "专业参数 / Expert Parameters", "ISO 范围 / ISO Range",
+        "专业模式每颗摄像头可手动选择的感光度范围与档位。", "读取 Sensor sensitivity range、HAL 限制和产品裁剪。", "依赖 Sensor、HAL manual sensor control 和参数 UI。", "逐摄像头验证最小/最大/中间档的 Capture Result 与成片。",
+        node_id="kb.mode.expert.iso", parent_id="kb.mode.expert.parameter_ranges", node_type="规格", app_binding="CameraManualMode ISO setting", fl_projection="规格展开", fl_dimensions="项目 / 摄像头 / 规格", fl_condition="每颗 Sensor 边界不同，固定展开。"),
+    row("专业", "功能", "专业参数 / Expert Parameters", "快门范围 / Shutter Range",
+        "专业模式手动曝光时间范围与档位。", "读取 exposure time range，并结合防抖、暗电流和产品限制裁剪。", "依赖 Sensor/HAL manual exposure、OIS 和 UI。", "逐摄像头验证最短、最长和中间档曝光时间。",
+        node_id="kb.mode.expert.shutter", parent_id="kb.mode.expert.parameter_ranges", node_type="规格", app_binding="CameraManualMode shutter setting", fl_projection="规格展开", fl_dimensions="项目 / 摄像头 / 规格", fl_condition="每颗 Sensor 边界不同，固定展开。"),
+    row("专业", "功能", "专业参数 / Expert Parameters", "白平衡范围 / WB Range",
+        "专业模式 AWB 与手动色温范围、档位和锁定行为。", "项目提供手动色温控制且 HAL/算法可应用时支持。", "依赖 AWB、manual color temperature、UI 和 preset state。", "逐摄像头覆盖最低/最高色温与 AWB，核对预览和成片。",
+        node_id="kb.mode.expert.wb", parent_id="kb.mode.expert.parameter_ranges", node_type="规格", app_binding="CameraManualMode WB setting", fl_projection="条件展开", fl_dimensions="项目 / 摄像头 / 规格", fl_condition="范围或手动 WB 支持不同即展开。"),
+    row("专业", "功能", "专业参数 / Expert Parameters", "手动对焦范围 / Manual Focus Range",
+        "专业模式从近焦到无穷远的手动对焦控制。", "摄像头具备 AF 马达且 HAL 支持 lens focus distance 时支持；固定焦摄像头不支持。", "依赖 AF actuator、minimum focus distance、focus UI。", "逐摄像头验证近焦、远焦、无穷远和峰值/放大辅助。",
+        node_id="kb.mode.expert.focus", parent_id="kb.mode.expert.parameter_ranges", node_type="规格", app_binding="CameraManualMode manual focus setting", fl_projection="规格展开", fl_dimensions="项目 / 摄像头 / 规格", fl_condition="固定焦与最近对焦距离是关键摄像头差异，固定展开。"),
+    row("专业", "功能", "专业参数 / Expert Parameters", "RAW / DNG 输出",
+        "专业模式保存 Bayer RAW/DNG，并可与 JPEG 同时输出。", "当前摄像头支持 RAW capability、对应 stream combination 与 DNG 写入时支持。", "依赖 RAW Sensor capability、capture session、DNG creator、存储和耗时。", "逐摄像头拍摄 RAW/JPEG，核对 DNG 元数据、可打开性、配对和保存耗时。",
+        node_id="kb.mode.expert.raw", parent_id="kb.mode.expert", node_type="能力", app_binding="CameraManualMode RAW capture; DNG pipeline", fl_projection="条件展开", fl_dimensions="项目 / 摄像头 / 规格", fl_condition="RAW capability 和输出组合逐摄像头不同，支持时展开。"),
+    row("专业", "功能", "专业辅助 / Expert Assist", "直方图 / Histogram",
+        "在专业模式实时显示画面亮度分布，辅助曝光判断。", "项目显示直方图 UI 且统计数据随预览实时更新时支持。", "依赖预览统计、histogram UI、性能和刷新策略。", "在黑白灰及高反差场景检查分布、刷新、显隐和性能。",
+        node_id="kb.mode.expert.histogram", parent_id="kb.mode.expert", node_type="交互", app_binding="CameraManualMode histogram UI (code presence to confirm)", implementation_status="待确认", fl_projection="独立行", fl_dimensions="项目 / 摄像头", fl_condition="项目是否提供入口或部分摄像头/规格禁用时展开。"),
+]
+
+
+DIRECTORY_NODES = [
+    ("kb.root", "", "Camera Knowledge Base"),
+    ("kb.launch", "kb.root", "启动与入口 / Launch & Entry"),
+    ("kb.preview", "kb.root", "预览与场景感知 / Preview & Scene"),
+    ("kb.focus", "kb.root", "对焦与曝光 / Focus & Exposure"),
+    ("kb.zoom", "kb.root", "变焦与镜头切换 / Zoom & Lens"),
+    ("kb.transient", "kb.root", "暂态开关 / Transient Switches"),
+    ("kb.capture", "kb.root", "拍摄与录制交互 / Capture & Recording"),
+    ("kb.toolbar", "kb.root", "工具栏 / Toolbar"),
+    ("kb.modes", "kb.root", "模式 / Modes"),
+    ("kb.common", "kb.root", "通用能力 / Common"),
+    ("kb.common.preset", "kb.common", "预设 / Preset"),
+    ("kb.common.widget", "kb.common", "小组件 / Widget"),
+    ("kb.settings", "kb.common", "设置 / Settings"),
+    ("kb.settings.general", "kb.settings", "通用设置 / General Settings"),
+    ("kb.settings.photo", "kb.settings", "照片设置 / Photo Settings"),
+    ("kb.settings.video", "kb.settings", "视频设置 / Video Settings"),
+    ("kb.settings.help", "kb.settings", "帮助与反馈 / Help & Support"),
+    ("kb.system", "kb.root", "系统交互 / System Interactions"),
+    ("kb.gallery", "kb.root", "相册联动 / Gallery Integration"),
+    ("kb.algorithms", "kb.root", "算法能力 / Algorithms"),
+]
+
+
+NODE_ID_OVERRIDES = {
+    "模式栏": "kb.modes.switcher",
+    "快速模式切换 / Quick Mode Switch": "kb.modes.quick_switch",
+    "前后翻转 / Front-Rear Camera Switch": "kb.capture.camera_switch",
+    "人脸检测": "kb.preview.face_detection",
+    "FRT / 人像清晰度提升": "kb.algorithms.frt",
+    "美颜算法 / Beauty Algorithm": "kb.algorithms.beauty",
+    "人像虚化 / Portrait Bokeh": "kb.algorithms.portrait_bokeh",
+    "ASD / AI场景检测": "kb.preview.asd",
+    "脏污检测": "kb.preview.dirt_detection",
+    "自动对焦-自动曝光": "kb.focus.auto",
+    "变焦": "kb.zoom.control",
+    "Photo EIS": "kb.algorithms.photo_eis",
+    "Video EIS": "kb.algorithms.video_eis",
+    "Video HDR 算法": "kb.algorithms.video_hdr",
+    "OIS": "kb.zoom.ois",
+    "各项专业模式参数极值范围": "kb.mode.expert.parameter_ranges",
+    "ISZ / In Sensor Zoom": "kb.zoom.isz",
+    "超分 / Super Resolution（SR）": "kb.zoom.super_resolution",
+    "AI Zoom 开关 / AI Zoom Switch": "kb.transient.ai_zoom",
+    "自动微距控制": "kb.transient.auto_macro",
+    "自动夜景开关 / Auto Night Switch": "kb.transient.auto_night",
+    "Text Mode（文本模式）": "kb.transient.text",
+    "风格 / Style": "kb.toolbar.style",
+    "Filter": "kb.toolbar.style.filter.photo",
+    "Tuning": "kb.toolbar.style.tuning.photo",
+    "风格-滤镜 / Style-Filter": "kb.toolbar.style.filter.video",
+    "风格-调色 / Style-Tuning": "kb.toolbar.style.tuning.video",
+    "风格-调色盘 / Style-Tuning Palette": "kb.toolbar.style.palette.video",
+    "Motion Photo": "kb.toolbar.motion_photo",
+    "动态照片 - 无效信息截取": "kb.toolbar.motion_photo.trim",
+    "动态照片-视频支持录制声音": "kb.toolbar.motion_photo.audio",
+    "Motion Photo cover HDR": "kb.toolbar.motion_photo.cover_hdr",
+    "动态照片插帧 / Motion Photo Frame Interpolation": "kb.algorithms.motion_photo_interpolation",
+    "Preset": "kb.common.preset.capability",
+    "Preset Widget": "kb.common.widget.preset",
+    "录制中前后置切换 / Front-Rear Switch While Recording": "kb.capture.camera_switch_recording",
+    "视频规格 / Video Specs": "kb.mode.video.specs",
+    "慢动作规格 / Slow Motion Specs": "kb.mode.slow_motion.specs",
+    "延时摄影规格 / Timelapse Specs": "kb.mode.timelapse.specs",
+    "高像素输出规格 / High Resolution Specs": "kb.mode.high_resolution.specs",
+    "录制中拍照 / Video Snapshot": "kb.capture.video_snapshot",
+    "录制中拍摄动态照片 / Motion Photo While Recording": "kb.capture.motion_photo_while_recording",
+}
+
+
+PARENT_BY_LEVEL2 = {
+    "模式栏 / Mode Switch": "kb.modes",
+    "前后翻转 / Camera Switch": "kb.capture",
+    "预览框": "kb.preview",
+    "AE/AF": "kb.focus",
+    "Zoom": "kb.zoom",
+    "左侧暂态开关": "kb.transient",
+    "右侧暂态开关": "kb.transient",
+    "工具栏 / Toolbar": "kb.toolbar",
+    "Toolbar": "kb.toolbar",
+    "Preset": "kb.common.preset",
+    "Widget": "kb.common.widget",
+    "General settings": "kb.settings.general",
+    "Photo settings": "kb.settings.photo",
+    "Video settings": "kb.settings.video",
+    "Help & Support": "kb.settings.help",
+    "系统 / System": "kb.system",
+    "实时算法 / Realtime Algorithm": "kb.algorithms",
+    "后处理算法 / Post-processing Algorithm": "kb.algorithms",
+    "录制中拍照 / Capture While Recording": "kb.capture",
+    "录制控制 / Recording Controls": "kb.capture",
+    "视频规格 / Video Specs": "kb.mode.video",
+    "慢动作规格 / Slow Motion Specs": "kb.mode.slow_motion",
+    "高像素规格 / High Resolution Specs": "kb.modes",
+    "启动与入口 / Launch & Entry": "kb.launch",
+}
+
+PARENT_BY_NAME = {
+    "ASD / AI场景检测": "kb.preview",
+    "人脸畸变矫正": "kb.preview",
+    "ISZ / In Sensor Zoom": "kb.zoom",
+    "超分 / Super Resolution（SR）": "kb.zoom",
+    "各项专业模式参数极值范围": "kb.mode.expert",
+    "Filter": "kb.toolbar.style",
+    "Tuning": "kb.toolbar.style",
+    "风格-滤镜 / Style-Filter": "kb.toolbar.style",
+    "风格-调色 / Style-Tuning": "kb.toolbar.style",
+    "风格-调色盘 / Style-Tuning Palette": "kb.toolbar.style",
+    "动态照片 - 无效信息截取": "kb.toolbar.motion_photo",
+    "动态照片-视频支持录制声音": "kb.toolbar.motion_photo",
+    "Motion Photo cover HDR": "kb.toolbar.motion_photo",
+    "动态照片插帧 / Motion Photo Frame Interpolation": "kb.toolbar.motion_photo.cover_hdr",
+    "延时摄影规格 / Timelapse Specs": "kb.mode.timelapse",
+}
+
+
+PROJECTION_OVERRIDES = {
+    "模式栏": ("父节点汇总", "项目", "FL 用一行描述模式集合；各模式能力由模式子节点独立判断。"),
+    "快速模式切换 / Quick Mode Switch": ("条件展开", "项目", "只有项目定义专门快捷手势、切换时延或状态继承验收时独立展开。"),
+    "风格 / Style": ("父节点汇总", "项目 / 模式 / 摄像头 / 规格", "FL 只投影 Style 父行；Filter/Tuning/Palette 留在 KB 说明，除非其支持范围导致独立验收结论。"),
+    "Preset": ("父节点汇总", "项目", "选择、保存、导入、分享等知识子能力默认汇总为一条 Preset FL 行。"),
+    "Motion Photo": ("父节点汇总", "项目 / 摄像头", "Motion Photo 主能力投影一行；关键封装差异按子节点条件展开。"),
+    "动态照片 - 无效信息截取": ("条件展开", "项目", "裁剪策略有独立需求或验收结论时展开。"),
+    "动态照片-视频支持录制声音": ("条件展开", "项目 / 摄像头", "声音能力在项目或摄像头范围存在差异时展开。"),
+    "Motion Photo cover HDR": ("条件展开", "项目 / 摄像头 / 规格", "封面 HDR 支持或显示链路存在差异时展开。"),
+    "动态照片插帧 / Motion Photo Frame Interpolation": ("随父节点", "项目 / 摄像头", "算法只在导致 Motion Photo 支持/画质验收差异时独立展开。"),
+    "自动对焦-自动曝光": ("父节点汇总", "项目 / 模式 / 摄像头", "FL 保留 AE/AF 父行；Touch、Face、Lock、CAF、EV 在支持或验收结论不同时条件展开。"),
+    "变焦": ("条件展开", "项目 / 模式 / 摄像头 / 规格", "倍率范围、光学点、SAT/硬切或录制限制不同即展开。"),
+    "各项专业模式参数极值范围": ("规格展开", "项目 / 摄像头 / 规格", "ISO、快门、WB、对焦等边界必须按输出摄像头展开。"),
+    "视频规格 / Video Specs": ("规格展开", "项目 / 摄像头 / 规格", "始终按摄像头×分辨率×帧率×HDR/HLG 组合展开。"),
+    "慢动作规格 / Slow Motion Specs": ("规格展开", "项目 / 摄像头 / 规格", "始终按摄像头×分辨率×采集帧率展开。"),
+    "延时摄影规格 / Timelapse Specs": ("规格展开", "项目 / 摄像头 / 规格", "按摄像头×输出规格展开；倍速在支持范围不同或需单独验收时再拆。"),
+    "高像素输出规格 / High Resolution Specs": ("规格展开", "项目 / 摄像头 / 规格", "始终按摄像头×输出像素档×质量路径展开。"),
+    "Filter": ("随父节点", "项目 / 模式 / 摄像头", "照片滤镜默认随 Style 父行；与 Tuning 支持结论不同时提升为独立行。"),
+    "Tuning": ("随父节点", "项目 / 模式 / 摄像头", "照片调色默认随 Style 父行；与 Filter 支持结论不同时提升为独立行。"),
+    "风格-滤镜 / Style-Filter": ("条件展开", "项目 / 模式 / 摄像头 / 规格", "视频滤镜的摄像头或 1080P30 等规格限制与父行结论不同时展开。"),
+    "风格-调色 / Style-Tuning": ("条件展开", "项目 / 模式 / 摄像头 / 规格", "视频调色的摄像头或规格限制与滤镜不同即展开。"),
+    "风格-调色盘 / Style-Tuning Palette": ("随父节点", "项目 / 模式 / 摄像头 / 规格", "默认随视频 Tuning；Palette 有独立支持差异时才展开。"),
+}
+
+
+STATUS_OVERRIDES = {
+    "快速模式切换 / Quick Mode Switch": "待确认",
+    "锁定白平衡": "规划中",
+    "录制中拍摄动态照片 / Motion Photo While Recording": "规划中",
+}
+
+
+APP_BINDING_OVERRIDES = {
+    "模式栏": "ModeIndex; mode_arrays.xml; CustomSubModeFactory",
+    "快速模式切换 / Quick Mode Switch": "CameraBottomFunctionUINode; UiEventProxy.onModeChanged",
+    "前后翻转 / Front-Rear Camera Switch": "UiEventProxy camera switch; CameraUIContext",
+    "人脸检测": "pipeline face detection nodes; CameraUIContext",
+    "FRT / 人像清晰度提升": "PortraitRepair/FRT pipeline node",
+    "美颜算法 / Beauty Algorithm": "Beauty pipeline node; algoLib BeautyShot V1/V2/V3",
+    "人像虚化 / Portrait Bokeh": "Bokeh pipeline node; SingleCamBokeh/DualCamBokeh",
+    "ASD / AI场景检测": "NcfPhotoMode scene detection strategy",
+    "脏污检测": "preview dirt detection strategy; CameraUIContext prompt",
+    "自动对焦-自动曝光": "UiEventProxy single/long press focus; CameraUIContext AE/AF",
+    "变焦": "zoom controller; CameraUIContext; mode camera list",
+    "Photo EIS": "ProductConfig photo stabilization gate; photo pipeline",
+    "Video EIS": "video stabilization setting; video pipeline",
+    "Video HDR 算法": "CameraVideoMode HDR state; HDR video pipeline",
+    "OIS": "camera characteristics / HAL stabilization modes",
+    "各项专业模式参数极值范围": "CameraManualMode; manual ISO/shutter/WB/focus settings",
+    "AIGC SR": "SuperResolution pipeline node",
+    "HDSR": "SuperResolution pipeline node",
+    "运动抓拍": "NcfPhotoMode MotionCapture",
+    "RAW HDR": "RawHdrCapture/STRawHDR pipeline nodes",
+    "CFR / 紫边去除": "RemovePurpleEdge pipeline node",
+    "ISZ / In Sensor Zoom": "sensor crop/ISZ configuration; zoom controller",
+    "Hex Zoom": "zoom controller; SuperResolution pipeline",
+    "视频夜景": "CameraVideoMode low-light strategy; Night pipeline",
+    "人像 HDR": "BokehMode HDR strategy; portrait HDR pipeline",
+    "超分 / Super Resolution（SR）": "SuperResolution pipeline node",
+    "多帧降噪 / MFNR": "RawDeepDenoise pipeline node",
+    "Ultra HDR": "SettingKeys.KEY_ULTRA_HDR; UltraHdr pipeline node",
+    "人脸畸变矫正": "DistortionCorrection pipeline node",
+    "LDC / 光学畸变矫正": "DistortionCorrection pipeline node",
+    "自动微距控制": "SettingKeys.KEY_FALLBACK_MACRO_CONTROL; NcfPhotoMode",
+    "AI Zoom 开关 / AI Zoom Switch": "NcfPhotoMode AI zoom strategy; transient switch UI",
+    "自动夜景开关 / Auto Night Switch": "NcfPhotoMode auto-night strategy; transient switch UI",
+    "Text Mode（文本模式）": "NcfPhotoMode NoteDetect; NoteDetect pipeline node",
+    "Flash": "flash setting; camera flash capability; toolbar UI",
+    "录影灯 / Recording Light": "SettingKeys.KEY_CAMERA_VIDEO_RED_LIGHT; recording state",
+    "Timer": "SettingKeys.KEY_SELF_TIMER; shutter countdown UI",
+    "HDR 开关 / HDR Switch": "photo HDR setting; NcfPhotoMode HDR strategy",
+    "Exposure": "AE compensation setting; exposure toolbar UI",
+    "风格 / Style": "SettingKeys style/tuning keys; PresetDataParser; style UI nodes",
+    "Filter": "style/filter setting keys; LUT renderer; PresetDataParser",
+    "Tuning": "style/tuning setting keys; tuning renderer; PresetDataParser",
+    "风格-滤镜 / Style-Filter": "CameraVideoMode style/LUT pipeline",
+    "风格-调色 / Style-Tuning": "CameraVideoMode tuning/LUT pipeline; PresetDataParser",
+    "风格-调色盘 / Style-Tuning Palette": "CameraVideoMode palette/LUT pipeline",
+    "Motion Photo": "motion photo setting; NcfPhotoMode motion-photo pipeline",
+    "动态照片 - 无效信息截取": "motion-photo trim/packaging pipeline",
+    "动态照片-视频支持录制声音": "motion-photo audio capture/packaging pipeline",
+    "Motion Photo cover HDR": "motion-photo cover; UltraHdr pipeline",
+    "动态照片插帧 / Motion Photo Frame Interpolation": "motion-photo interpolation pipeline",
+    "Quality": "high-resolution setting; mode camera capability",
+    "Grid": "grid setting; preview overlay UI",
+    "Ratio": "SettingKeys.KEY_PICTURE_ASPECT_RATIO; preview/capture crop",
+    "Watermark": "SettingKeys.KEY_CAMERA_SHUTTER_WATERMARK; Watermark pipeline node",
+    "More settings": "toolbar navigation to Settings",
+    "Glyph Mirror": "SettingKeys.KEY_GLYPH_MIRROR; glyph hardware controller",
+    "Preset": "SettingKeys.KEY_PRESET_SETTING; PresetDataParser",
+    "Preset Widget": "WidgetCameraActivity",
+    "Save location": "SettingKeys.KEY_RECORD_LOCATION",
+    "Shutter sound": "SettingKeys.KEY_CAMERA_SHUTTER_SOUND",
+    "Mirror front camera": "SettingKeys.KEY_CAPTURE_MIRROR",
+    "Level": "SettingKeys.KEY_LEVEL_METER",
+    "Auto Tone": "NcfPhotoMode ASD/automatic tone strategy",
+    "影像基调 / Image Tone": "SettingKeys.KEY_CAMERA_COLOR_CONTROL_MODE",
+    "色彩模式 / Color Mode": "SettingKeys.KEY_CAMERA_COLOR_MODE",
+    "Watermark settings": "SettingKeys.KEY_CAMERA_SHUTTER_WATERMARK; Watermark pipeline node",
+    "Tap to take a photo": "SettingKeys.KEY_SHUTTER_TOUCH; UiEventProxy",
+    "QR code scanner": "SettingKeys.KEY_QRCODE",
+    "Press and hold shutter": "SettingKeys.KEY_HOLD_SHUTTER_KEY; UiEventProxy",
+    "Ultra XDR": "SettingKeys.KEY_ULTRA_HDR; UltraHdr pipeline node",
+    "Video encoding": "SettingKeys.KEY_VIDEO_ENCODER; CameraVideoMode",
+    "Power saving recording": "SettingKeys.KEY_VIDEO_COVER_SETTING; CameraVideoMode",
+    "Auto FPS": "SettingKeys.KEY_VIDEO_AUTO_FPS; CameraVideoMode",
+    "视频防抖开关": "video stabilization setting; CameraVideoMode",
+    "锁定镜头": "SettingKeys.KEY_VIDEO_LOCK_LENS; LockLensZoomController",
+    "锁定白平衡": "No matching production SettingKey found on code baseline",
+    "Tips and feedback": "Settings UI external intent",
+    "超级夜景": "Night pipeline node; NcfPhotoMode auto-night strategy",
+    "极夜": "Night pipeline extreme-low-light branch",
+    "超级夜景+美颜": "Night pipeline + Beauty pipeline",
+    "Remosaic": "sensor mode / remosaic pipeline configuration",
+    "TF 50MP HDR/MMF": "high-resolution HDR/MMF pipeline",
+    "录制中前后置切换 / Front-Rear Switch While Recording": "CameraVideoMode; UiEventProxy camera switch",
+    "视频规格 / Video Specs": "CameraVideoMode; ProductConfig video size/fps capability",
+    "慢动作规格 / Slow Motion Specs": "CameraSlowMotionMode; high-speed profiles",
+    "延时摄影规格 / Timelapse Specs": "timelapse mode; size/speed settings",
+    "高像素输出规格 / High Resolution Specs": "high-resolution mode; sensor output configuration",
+    "录制中拍照 / Video Snapshot": "UiEventProxy video snapshot; CameraVideoMode",
+    "录制中拍摄动态照片 / Motion Photo While Recording": "planned CameraVideoMode + motion-photo parallel pipeline",
+}
+
+
+def automatic_node_id(row_data: dict[str, str]) -> str:
+    """Create a deterministic fallback; important public nodes use overrides."""
+    raw = f"{row_data.get('一级分类', '')}|{row_data.get('二级分类', '')}|{row_data.get('名称', '')}"
+    ascii_hint = re.sub(r"[^a-z0-9]+", ".", row_data.get("名称", "").lower()).strip(".")
+    suffix = ascii_hint[:36] if ascii_hint else sha1(raw.encode("utf-8")).hexdigest()[:12]
+    return f"kb.capability.{suffix}"
+
+
+def default_projection(row_data: dict[str, str]) -> tuple[str, str, str]:
+    if row_data["一级分类"] == "算法 / Algorithm":
+        return (
+            "条件展开",
+            "项目 / 模式 / 摄像头 / 规格",
+            "算法路径改变项目支持结论、摄像头范围、规格范围或形成独立验收结果时展开；纯实现细节留在 KB。",
+        )
+    if row_data["一级分类"] == "通用 / Common":
+        return ("独立行", "项目", "设置入口、默认值、选项、记忆或产品政策存在差异时展开。")
+    return (
+        "独立行",
+        "项目 / 模式 / 摄像头",
+        "用户入口、行为、模式范围或输出摄像头支持存在差异时展开。",
+    )
+
+
+def enrich(rows: list[dict[str, str]]) -> list[dict[str, str]]:
+    enriched: list[dict[str, str]] = []
+    for item in rows:
+        row_data = dict(item)
+        row_data["节点 ID"] = row_data.get("节点 ID") or NODE_ID_OVERRIDES.get(row_data["名称"]) or automatic_node_id(row_data)
+        row_data["父节点 ID"] = (
+            row_data.get("父节点 ID")
+            or PARENT_BY_NAME.get(row_data["名称"])
+            or PARENT_BY_LEVEL2.get(row_data["二级分类"], "kb.root")
+        )
+        row_data["节点类型"] = row_data.get("节点类型") or (
+            "算法" if row_data["一级分类"] == "算法 / Algorithm"
+            else "设置" if row_data["一级分类"] == "通用 / Common"
+            else "能力"
+        )
+        row_data["交互位置"] = row_data.get("交互位置") or row_data["二级分类"]
+        projection, dimensions, condition = PROJECTION_OVERRIDES.get(row_data["名称"], default_projection(row_data))
+        row_data["FL 投影"] = row_data.get("FL 投影") or projection
+        row_data["FL 展开维度"] = row_data.get("FL 展开维度") or dimensions
+        row_data["FL 展开条件"] = row_data.get("FL 展开条件") or condition
+        row_data["实现状态"] = STATUS_OVERRIDES.get(row_data["名称"], row_data.get("实现状态") or "已实现")
+        row_data["代码基线"] = row_data.get("代码基线") or CODE_BASELINE
+        row_data["App 绑定"] = row_data.get("App 绑定") or APP_BINDING_OVERRIDES.get(
+            row_data["名称"], "待补充具体 Mode / SettingKey / UI node / pipeline node"
+        )
+        row_data["配置门控"] = row_data.get("配置门控") or "按 ProductConfig、模式配置和硬件能力确认"
+        row_data["摄像头范围"] = row_data.get("摄像头范围") or "按项目确认"
+        row_data["规格范围"] = row_data.get("规格范围") or "按项目确认"
+        enriched.append(row_data)
+
+    directory_rows = []
+    for node_id, parent_id, name in DIRECTORY_NODES:
+        directory_rows.append({
+            "模式": "不适用",
+            "节点 ID": node_id,
+            "父节点 ID": parent_id,
+            "节点类型": "目录",
+            "一级分类": "目录 / Taxonomy",
+            "二级分类": "目录 / Taxonomy",
+            "名称": name,
+            "交互位置": name,
+            "说明": "用于组织 Camera 知识节点和生成 Feature Tree；不直接表达项目支持。",
+            "判断依据": "不直接判断支持。",
+            "依赖": "无。",
+            "验证方法": "校验子节点父引用和 Tree 生成结果。",
+            "App 绑定": "",
+            "配置门控": "",
+            "实现状态": "分类节点",
+            "FL 投影": "不进入 FL",
+            "FL 展开维度": "",
+            "FL 展开条件": "目录节点永不进入项目 FL。",
+            "摄像头范围": "不适用",
+            "规格范围": "不适用",
+            "代码基线": CODE_BASELINE,
+            "来源项目": SOURCE,
+            "备注": "",
+        })
+    return directory_rows + enriched
+
+
 def audit(rows: list[dict[str, str]]) -> list[str]:
-    lines = ["# KB Functions Algorithms v6 Audit", ""]
+    lines = ["# KB Functions Algorithms v7 Audit", ""]
     names = Counter(r["名称"] for r in rows)
     duplicates = [name for name, count in names.items() if count > 1]
+    node_ids = Counter(r["节点 ID"] for r in rows)
+    duplicate_node_ids = [node_id for node_id, count in node_ids.items() if count > 1]
+    known_node_ids = set(node_ids)
+    orphan_rows = [
+        r for r in rows
+        if r.get("父节点 ID") and r["父节点 ID"] not in known_node_ids
+    ]
+    allowed_projections = {"不进入 FL", "独立行", "父节点汇总", "随父节点", "条件展开", "规格展开"}
+    bad_projections = [r for r in rows if r.get("FL 投影") not in allowed_projections]
+    missing_projection_rule = [
+        r for r in rows
+        if r.get("FL 投影") != "不进入 FL" and not r.get("FL 展开条件", "").strip()
+    ]
+    missing_app_binding = [
+        r for r in rows
+        if r.get("节点类型") != "目录"
+        and (
+            not r.get("App 绑定", "").strip()
+            or r.get("App 绑定", "").startswith("待补充")
+        )
+    ]
     bad_verify = [
         r for r in rows
         if r["验证方法"].strip() in {"✓", "✗", "✅", "❌"} or not r["验证方法"].strip()
@@ -652,12 +1274,37 @@ def audit(rows: list[dict[str, str]]) -> list[str]:
 
     lines.append(f"- Rows: {len(rows)}")
     lines.append(f"- Duplicate names: {len(duplicates)}")
+    lines.append(f"- Duplicate node IDs: {len(duplicate_node_ids)}")
+    lines.append(f"- Orphan parent references: {len(orphan_rows)}")
+    lines.append(f"- Invalid FL projections: {len(bad_projections)}")
+    lines.append(f"- Missing FL projection rules: {len(missing_projection_rule)}")
+    lines.append(f"- Missing App bindings: {len(missing_app_binding)}")
     lines.append(f"- Invalid verification methods: {len(bad_verify)}")
     lines.append(f"- Bad source-project mentions: {len(bad_source)}")
     lines.append(f"- Bad legacy terms: {len(bad_terms)}")
     lines.append("")
 
+    status_counts = Counter(r.get("实现状态", "") for r in rows)
+    lines.append("## 实现状态")
+    lines.append("")
+    for status, count in sorted(status_counts.items()):
+        lines.append(f"- {status or '空'}: {count}")
+
+    non_confirmed = [
+        r for r in rows
+        if r.get("实现状态") in {"规划中", "待确认", "内部", "调试"}
+    ]
+    lines.append("")
+    lines.append("## 非已实现节点")
+    lines.append("")
+    if non_confirmed:
+        for r in non_confirmed:
+            lines.append(f"- {r['名称']}: {r['实现状态']} / {r.get('App 绑定', '')}")
+    else:
+        lines.append("- None")
+
     todo_rows = [r for r in rows if "待确认" in r.get("备注", "")]
+    lines.append("")
     lines.append("## 待确认项")
     lines.append("")
     if todo_rows:
@@ -670,6 +1317,31 @@ def audit(rows: list[dict[str, str]]) -> list[str]:
         lines.append("")
         lines.append("## Duplicate Names")
         lines.extend(f"- {name}" for name in duplicates)
+
+    if duplicate_node_ids:
+        lines.append("")
+        lines.append("## Duplicate Node IDs")
+        lines.extend(f"- {node_id}" for node_id in duplicate_node_ids)
+
+    if orphan_rows:
+        lines.append("")
+        lines.append("## Orphan Parent References")
+        lines.extend(f"- {r['节点 ID']} -> {r['父节点 ID']}" for r in orphan_rows)
+
+    if bad_projections:
+        lines.append("")
+        lines.append("## Invalid FL Projections")
+        lines.extend(f"- {r['名称']}: {r.get('FL 投影', '')}" for r in bad_projections)
+
+    if missing_projection_rule:
+        lines.append("")
+        lines.append("## Missing FL Projection Rules")
+        lines.extend(f"- {r['名称']}" for r in missing_projection_rule)
+
+    if missing_app_binding:
+        lines.append("")
+        lines.append("## Missing App Bindings")
+        lines.extend(f"- {r['名称']}" for r in missing_app_binding)
 
     if bad_verify:
         lines.append("")
@@ -691,14 +1363,32 @@ def audit(rows: list[dict[str, str]]) -> list[str]:
 
 def main() -> None:
     OUT.mkdir(parents=True, exist_ok=True)
-    normalized = normalize(ROWS)
-    payload = json.dumps(normalized, ensure_ascii=False, indent=2) + "\n"
+    normalized = normalize(ROWS + CODE_STRUCTURE_ROWS + STRUCTURAL_CHILD_ROWS)
+    enriched = enrich(normalized)
+    payload = json.dumps(enriched, ensure_ascii=False, indent=2) + "\n"
     OUT_CANONICAL.write_text(payload, encoding="utf-8")
     OUT_JSON.write_text(payload, encoding="utf-8")
-    OUT_AUDIT.write_text("\n".join(audit(normalized)) + "\n", encoding="utf-8")
-    print(f"wrote {OUT_CANONICAL} ({len(normalized)} rows)")
-    print(f"wrote {OUT_JSON} ({len(normalized)} rows)")
+    # v6 remains a compatibility alias while downstream scripts migrate to v7.
+    OUT_COMPAT.write_text(payload, encoding="utf-8")
+    audit_payload = "\n".join(audit(enriched)) + "\n"
+    OUT_AUDIT.write_text(audit_payload, encoding="utf-8")
+    OUT_COMPAT_AUDIT.write_text(
+        "# v6 Compatibility Audit\n\n"
+        "> `kb-functions-algorithms.v6.json` is a migration alias of v7. "
+        "The canonical audit follows.\n\n"
+        + audit_payload,
+        encoding="utf-8",
+    )
+    print(f"wrote {OUT_CANONICAL} ({len(enriched)} rows)")
+    print(f"wrote {OUT_JSON} ({len(enriched)} rows)")
+    print(f"wrote {OUT_COMPAT} (compatibility alias)")
     print(f"wrote {OUT_AUDIT}")
+    print(f"wrote {OUT_COMPAT_AUDIT} (compatibility notice)")
+
+    # Feature Tree is a generated KB view, never a second source of truth.
+    from build_feature_tree import main as build_feature_tree
+
+    build_feature_tree()
 
 
 if __name__ == "__main__":

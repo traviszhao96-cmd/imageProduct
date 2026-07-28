@@ -3,12 +3,6 @@
 
 from __future__ import annotations
 
-import json
-from pathlib import Path
-
-
-ROOT = Path(__file__).resolve().parents[1]
-KB = ROOT / "knowledge" / "_output" / "kb-functions-algorithms.v6.json"
 STYLE_NAMES = {
     "Filter", "Tuning", "风格 / Style", "风格-滤镜 / Style-Filter",
     "风格-调色 / Style-Tuning", "风格-调色盘 / Style-Tuning Palette",
@@ -22,10 +16,12 @@ def normalize(rows: list[dict]) -> list[dict]:
         name = str(row.get("名称") or "").strip()
         if name == "PZL" or row.get("二级分类") in {"取帧策略", "取帧策略 / Frame Capture Strategy"}:
             continue
-        if name in STYLE_NAMES:
+        if name == "风格 / Style":
             if style_index is None:
                 style_index = len(normalized)
             continue
+        if name in STYLE_NAMES and style_index is None:
+            style_index = len(normalized)
 
         item = dict(row)
         mode = str(item.get("模式") or "")
@@ -79,10 +75,11 @@ def normalize(rows: list[dict]) -> list[dict]:
 
 
 def main() -> None:
-    rows = json.loads(KB.read_text(encoding="utf-8"))
-    normalized = normalize(rows)
-    KB.write_text(json.dumps(normalized, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-    print(f"KB: {len(rows)} -> {len(normalized)} rows")
+    # The v7 builder owns schema enrichment and compatibility output. Running
+    # this legacy entry point must not strip node IDs or FL projection metadata.
+    from build_kb_functions_algorithms import main as build
+
+    build()
 
 
 if __name__ == "__main__":

@@ -1,67 +1,158 @@
-# KB Functions Algorithms Schema
+# Camera KB Schema v7
 
-> Purpose: define the canonical KB table used before generating 26111/26121 Feature Lists.
+> Canonical output: `knowledge/_output/kb-functions-algorithms.v7.json`
 
-## Table Meaning
+## 1. 定义
 
-`kb-functions-algorithms` is a **canonical function / algorithm manual**, not a project Feature List.
+KB 是 Camera 的**知识库**，不是某个项目的 Feature List。
 
-Feature Tree is part of this KB model. It is a generated hierarchical projection of KB nodes, not a separately maintained source. The KB owns both taxonomy and node meaning; `feature-tree.md` may remain as a navigation or audit artifact generated from the same nodes.
+- KB 可以充分拆解：模式、入口、交互、设置、规格族、算法、依赖、互斥、代码绑定都可以成为知识节点。
+- Tree 是 KB 节点的层级投影，由 `节点 ID / 父节点 ID` 生成，不再独立手工维护另一套分类。
+- FL 是下游项目验收表。一个 KB 节点是否进入 FL、是否按项目/模式/摄像头/规格拆行，由节点的 FL 投影属性决定。
+- KB 中不写项目支持勾叉；FL 才写每个项目和摄像头的 `✓ / ✗ / N/A / TBD`。
 
-Project FL is a downstream acceptance checklist: it defines which Camera functions a project finally supports and is mainly read by Product, SQA, and IQA for development completion and acceptance. Therefore repeated rows in FL are useful output, but they should not become manually maintained knowledge.
+核心原则：
 
-In this repository, `KB` means **Knowledge Base**. This table explains what each function/algorithm means, which mode scope it belongs to, how to judge support, what it depends on, and how to verify it.
+> **知识拆分粒度与 FL 展开粒度解耦。KB 可以细；只有会改变项目支持结论或验收结论的差异才在 FL 展开。**
 
-Rules:
+## 2. 节点模型
 
-- One row = one unique user-facing function or one unique algorithm capability.
-- Do not repeat the same function once per mode.
-- Do not create a new KB row just because a PRD updates an existing capability. If the requirement changes copy, interaction detail, judgement basis, dependency, or verification method of an existing feature, update that existing row.
-- The `模式` field is a mode scope, such as `通用` (all modes / maximum compatibility), `照片 / 人像 / 视频`, `照片`, or `全部拍摄模式`.
-- Use `通用` only when the function applies to all modes. Mode-specific features should use a concrete mode list.
-- The only first-level categories are `功能 / Feature`, `算法 / Algorithm`, and `通用 / Common`.
-- `Settings`, `Preset`, and `Widget` are common capabilities: use `模式=通用 / Common` and `一级分类=通用 / Common`; express their concrete area in `二级分类`. Do not expand them into capture modes in final FL.
-- `风格 / Style` is one Toolbar umbrella feature. Filter and Tuning are its sub-capabilities; Palette Mode and Parameter Mode are two modes inside Tuning, not independent FL features. KB and FL therefore maintain one Style row, while the row description and support state express the available sub-capabilities, camera scope, and specification limits. Final information architecture, effect stacking, and legacy migration may remain `待确认` until the interaction design is finalized.
-- Frame capture strategy and `PZL` are not maintained as KB/FL capability rows.
-- Final FL display values for `模式`, `一级分类`, and `二级分类` should be bilingual in one field, for example `照片 / Photo`, `设置 / Settings`, and `预览框 / Preview`.
-- Unsupported states are not represented in the KB. Support / unsupported differences belong to the final project FL.
-- Source projects for this KB are baseline references only: `25111 / 25131`.
-- Do not write future target projects such as `26111 / 26121` as source projects.
-- `验证方法` must be an actual verification method, not `✓`, `✗`, a PRD title, or an ownership note.
-- If an item is uncertain, put it in `备注` as `待确认`, with the exact question.
+每行是一个稳定知识节点，节点可以是：
 
-## Fields
+| 节点类型 | 含义 | 默认 FL 行为 |
+|---|---|---|
+| 目录 | 只组织层级 | 不进入 FL |
+| 模式 | Photo、Video、Night、Panorama 等模式能力 | 独立或规格展开 |
+| 入口 | 桌面、锁屏、快捷方式、Widget 等启动入口 | 条件展开 |
+| 交互 | 用户直接操作的控件或流程 | 独立或条件展开 |
+| 设置 | Settings 中的用户设置 | 独立行 |
+| 规格 | 分辨率、帧率、像素档、参数范围 | 规格展开 |
+| 算法 | 实时/后处理能力 | 条件展开 |
+| 能力 | 其他产品能力 | 按节点规则 |
 
-| Field | Meaning |
+`节点 ID` 是外部引用和 FL 溯源的主键。名称修改时不得顺便修改节点 ID；若必须替换 ID，需要保留迁移映射。
+
+## 3. 字段
+
+### 3.1 身份与层级
+
+| 字段 | 含义 |
 |---|---|
-| 模式 | Supported mode scope, not one expanded row per mode |
-| 节点 ID | Stable unique identifier for requirements, relations, and FL provenance |
-| 父节点 ID | Optional parent node for hierarchy; category-only parents may also be generated from classification fields |
-| 一级分类 | `功能 / Feature`, `算法 / Algorithm`, or `通用 / Common` |
-| 二级分类 | Interaction/module area, such as `预览框`, `AE/AF`, `Zoom`, `Toolbar`, `Mode Switch`, `前后翻转 / Camera Switch`, `录制中拍照 / Capture While Recording`, `Preset`, `General settings`, `Photo settings`, `Video settings`, `Help & Support`, `Widget`, `右侧暂态开关` |
-| 名称 | Canonical function/algorithm name |
-| 说明 | What the item means in product terms |
-| 判断依据 | How to decide support when generating project FL |
-| 依赖 | Hardware, algorithm, UI, project policy, or mode dependency |
-| 验证方法 | Concrete validation method |
-| 来源项目 | Baseline source, usually `25111 / 25131` |
-| 备注 | Useful caveats only; do not write meaningless terminology-change notes |
+| 节点 ID | 稳定唯一 ID |
+| 父节点 ID | 上级目录或父能力；空值只允许根节点 |
+| 节点类型 | 目录 / 模式 / 入口 / 交互 / 设置 / 规格 / 算法 / 能力 |
+| 名称 | Canonical 中英文名称 |
+| 模式 | 最大适用模式范围，不按模式复制 KB 行 |
+| 一级分类 | FL 兼容分类：功能 / Feature、算法 / Algorithm、通用 / Common；目录使用目录 / Taxonomy |
+| 二级分类 | FL 兼容交互区域 |
+| 交互位置 | 面向 PRD 和影响分析的真实入口/模块位置 |
 
-## KB Versus Final FL
+### 3.2 知识内容
 
-| Table | Purpose | Mode handling | Support handling |
-|---|---|---|---|
-| KB functions algorithms | Function/algorithm manual | One row with a mode scope, such as `照片 / 人像 / 视频` | No `✓` / `✗`; write judgement rules |
-| Project Feature List | Project capability matrix | Expand KB mode scope into one row per real mode | Keep rows even when unsupported; write `✗` in camera/project support columns |
+| 字段 | 含义 |
+|---|---|
+| 说明 | 产品含义、边界和与相邻能力的区别 |
+| 判断依据 | 生成项目支持结论时要检查的事实 |
+| 依赖 | 硬件、HAL、pipeline、算法、UI、系统或产品策略 |
+| 验证方法 | 可实际执行的验收方法 |
+| 摄像头范围 | 最大或已知的输出摄像头范围；辅助摄像头不等于输出支持 |
+| 规格范围 | 最大或已知的分辨率、帧率、像素档、参数档位范围 |
+| 备注 | 精确的 TBD、迁移或兼容说明 |
 
-Final FL rows are intentionally more repetitive than KB rows because they need to show differences by project, mode, and camera. For example, KB should have one `自动对焦-自动曝光` row with a mode scope; final FL can expand it into rows for Photo, Portrait, Video, Night, etc., with `✓` or `✗` per camera/project.
+### 3.3 代码与生命周期
 
-Do not back-propagate FL duplication into the KB. Use FL as evidence and audit material. Maintain taxonomy and function meaning once in canonical KB nodes, then generate the Feature Tree view from those nodes.
+| 字段 | 含义 |
+|---|---|
+| App 绑定 | `ModeIndex`、`SettingKey`、Activity、UI node、controller 或 pipeline node |
+| 配置门控 | `ProductConfig`、模式数组、HAL capability 或硬件条件 |
+| 实现状态 | 已实现 / 规划中 / 待确认 / 内部 / 调试 / 分类节点 |
+| 代码基线 | 用于判断实现状态的代码 ref 与 commit |
+| 来源项目 | 形成知识定义的基线项目；不得把未来目标项目写成来源 |
 
-## Generation Flow
+代码里存在不等于产品必须对外：
 
-1. Maintain canonical KB rows with the schema above.
-2. Run the KB builder script to generate `knowledge/_output/kb-functions-algorithms.v6.json`.
-3. Audit the generated KB for duplicates, bad source projects, invalid verification methods, and unsupported mode values.
-4. Generate project Feature Lists from the canonical KB by expanding mode scopes into real mode rows and applying hardware/config judgement.
-5. Use AI review only for the audit and ambiguous support judgement, not for free-form row generation.
+- 生产模式数组、ProductConfig 和真实入口共同决定是否对用户可见。
+- debug/internal Mode 或离线算法测试程序可进入 KB，但必须标成内部/调试且 `FL 投影=不进入 FL`。
+- 代码只有类或 key、没有实际生产入口时，状态应为规划中或待确认。
+
+## 4. FL 投影属性
+
+### 4.1 `FL 投影`
+
+允许值：
+
+| 值 | 生成行为 |
+|---|---|
+| 不进入 FL | 永不生成项目 FL 行 |
+| 父节点汇总 | 只生成父节点行，子能力保留为知识说明 |
+| 随父节点 | 默认不单独生成；只有它改变父节点验收结论时才提升为独立行 |
+| 独立行 | 默认生成一条项目验收行 |
+| 条件展开 | 命中展开条件才生成一条或多条行 |
+| 规格展开 | 按规格候选集生成多行，支持与不支持都保留 |
+
+### 4.2 `FL 展开维度`
+
+允许组合：
+
+- `项目`：项目开关、地区政策、默认值或入口不同。
+- `模式`：同一能力在 Photo / Video / Night 等模式支持或行为不同。
+- `摄像头`：Main / UW / Tele / Front 的硬件或 pipeline 结论不同。
+- `规格`：分辨率、帧率、HDR/HLG、像素档、倍速或参数边界不同。
+- `入口`：普通、锁屏安全相机、快捷方式、Widget 等上下文不同。
+
+### 4.3 何时必须展开
+
+满足任一项就展开：
+
+1. 支持状态会不同，例如 Main 支持但 Front 不支持。
+2. 验收预期会不同，例如 OIS、AF 类型、最大变焦、ISO 上限因摄像头不同。
+3. 互斥或兼容结论会不同，例如 Video HDR × EIS × 分辨率/帧率。
+4. 默认值、记忆、重置或安全策略会因项目不同。
+5. 同名能力背后是不同用户入口或不同输出资产。
+
+以下情况通常不展开：
+
+1. 只是实现类、算法供应商或 pipeline 内部阶段不同，但用户支持与验收结论相同。
+2. 子参数只用于解释一个父功能，FL 仍由同一入口、同一支持状态验收。
+3. 辅助摄像头只参与 Depth/融合，用户不能选择它作为输出摄像头。
+4. debug/internal 能力没有产品入口。
+
+## 5. 典型节点的投影结论
+
+| KB 节点 | 推荐投影 | 原因 |
+|---|---|---|
+| Style | 父节点汇总 | Filter/Tuning/Palette 可在 KB 充分解释，FL 默认一个 Style 入口 |
+| Preset | 父节点汇总 | 选择、保存、卡片、导入分享通常共用一个项目支持结论 |
+| Motion Photo | 父节点汇总 + 子节点条件展开 | 声音、封面 HDR、裁剪可能形成独立项目/摄像头差异 |
+| AE/AF | 条件展开：模式 × 摄像头 | 固定焦、AF 类型、Lock、EV 行为会不同 |
+| Zoom | 条件展开：模式 × 摄像头 × 规格 | 倍率、光学点、SAT/硬切、录制限制不同 |
+| OIS/EIS | 条件展开：摄像头 × 规格 | 硬件与视频规格直接改变验收结论 |
+| Video Specs | 规格展开 | 每颗摄像头的分辨率 × FPS × HDR/HLG 都要保留候选行 |
+| Slow Motion | 规格展开 | Sensor high-speed mode 逐摄像头不同 |
+| High Resolution | 规格展开 | 50MP/200MP、Remosaic/HDR 路径逐摄像头不同 |
+| 专业参数范围 | 规格展开：摄像头 × 参数 | ISO、快门、WB、对焦边界不能跨摄像头合并 |
+| 纯 pipeline 子算法 | 随父节点或条件展开 | 只在改变支持或独立 IQ 验收时形成 FL 行 |
+
+## 6. 生成与兼容
+
+```bash
+python3 scripts/build_kb_functions_algorithms.py
+```
+
+该命令同时生成 KB、审计和 Feature Tree。`feature-tree.md` 是生成物，禁止手工修改。
+
+输出：
+
+- `knowledge/_output/kb-functions-algorithms.json`：无版本 canonical 路径。
+- `knowledge/_output/kb-functions-algorithms.v7.json`：当前 schema 版本。
+- `knowledge/_output/kb-functions-algorithms.v6.json`：迁移期兼容别名，内容与 v7 相同。
+- `knowledge/_output/kb-functions-algorithms.v7.audit.md`：结构审计。
+- `knowledge/feature-tree.md`：由父子关系生成的 Tree。
+
+生成必须保证：
+
+- 名称、节点 ID 无重复。
+- 所有父节点引用存在。
+- FL 投影枚举合法且每个可投影节点都有展开条件。
+- `验证方法` 不是勾叉或空值。
+- 来源项目与备注不混入未来目标项目。
