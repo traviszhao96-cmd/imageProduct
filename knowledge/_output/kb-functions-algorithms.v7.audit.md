@@ -7,6 +7,7 @@
 - Invalid FL projections: 0
 - Missing FL projection rules: 0
 - Missing App bindings: 0
+- Incomplete structured descriptions: 0
 - Invalid verification methods: 0
 - Bad source-project mentions: 0
 - Bad legacy terms: 0

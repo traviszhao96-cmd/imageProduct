@@ -29,6 +29,12 @@ OUT_COMPAT_AUDIT = OUT / "kb-functions-algorithms.v6.audit.md"
 
 SOURCE = "25111 / 25131"
 CODE_BASELINE = "CameraApp origin/develop@c97b3137b6 (2026-07-27)"
+KB_FIELDS = [
+    "模式", "节点 ID", "父节点 ID", "节点类型", "一级分类", "二级分类",
+    "名称", "交互位置", "说明", "判断依据", "依赖", "验证方法",
+    "App 绑定", "配置门控", "实现状态", "FL 投影", "FL 展开维度",
+    "FL 展开条件", "摄像头范围", "规格范围", "代码基线", "来源项目", "备注",
+]
 
 
 def row(
@@ -1173,6 +1179,326 @@ def default_projection(row_data: dict[str, str]) -> tuple[str, str, str]:
     )
 
 
+# Purpose fields answer product questions before implementation questions:
+# What user problem exists, what value is delivered, what outcome is expected,
+# and where the capability stops. Exact overrides cover high-impact concepts;
+# the branch defaults keep every long-tail KB node complete and reviewable.
+PURPOSE_OVERRIDES: dict[str, tuple[str, str, str, str]] = {
+    "模式栏": (
+        "用户面对不同拍摄任务时，需要快速找到与任务匹配的拍摄方式，而不是在一个模式中理解大量互斥参数。",
+        "用清晰、稳定的入口在照片、视频、夜景、人像、专业等拍摄意图之间切换。",
+        "降低模式寻找和切换成本，并保证进入任一模式后立即具备可拍摄状态。",
+        "只定义模式的组织、可见性和切换，不代表每个模式内部的摄像头、算法或规格都支持。",
+    ),
+    "快速模式切换 / Quick Mode Switch": (
+        "连续拍摄时，逐个滑动或等待完整模式重建可能错过瞬间。",
+        "让用户以更少操作、更短等待时间切到目标模式，同时保留合理的拍摄状态。",
+        "缩短模式切换时延，减少黑屏、卡顿和参数丢失造成的拍摄中断。",
+        "不等同于前后摄像头翻转，也不自动承诺所有模式之间均可无缝切换。",
+    ),
+    "前后翻转 / Front-Rear Camera Switch": (
+        "用户需要在拍摄自己和拍摄外部场景之间切换，但不希望退出当前拍摄模式。",
+        "在当前模式中直接切换前后摄，并尽可能保持用户已选择的拍摄意图。",
+        "让前后摄切换快速、可预期，切换后预览、焦段和参数处于有效状态。",
+        "描述录制开始前的摄像头翻转；录制中的前后切换是另一个能力。",
+    ),
+    "人脸检测": (
+        "相机如果不知道画面中的人脸位置，就难以稳定优化人物的对焦、曝光、肤色和人像效果。",
+        "自动识别人脸并把位置、大小和置信度提供给 AE/AF、美颜、人像等能力。",
+        "提升人物作为主体时的清晰度、亮度和后续算法稳定性。",
+        "检测到人脸不等于自动美颜或虚化；它只提供人脸信息和必要的预览反馈。",
+    ),
+    "ASD / AI场景检测": (
+        "同一套成像参数无法同时适合天空、绿植、舞台、食物等语义差异明显的场景。",
+        "识别场景语义，让相机选择更匹配的调试或算法策略。",
+        "在无需用户手动调参的前提下，提高特定场景的色彩、曝光和细节表现。",
+        "不包含仅基于亮度或动态范围的普通场景判断，也不等于独立拍摄模式。",
+    ),
+    "脏污检测": (
+        "镜头指纹或污渍会造成雾化、炫光和清晰度下降，用户通常拍完后才发现。",
+        "在拍摄前提醒用户清洁镜头，避免不可逆的画质损失。",
+        "降低因镜头脏污产生的废片率，同时控制误提醒和打扰频率。",
+        "只负责检测和提示，不负责通过算法恢复被污渍遮挡的真实细节。",
+    ),
+    "自动对焦-自动曝光": (
+        "用户需要主体清晰且亮度正确，但移动主体、逆光和构图变化会持续改变最佳焦点与曝光。",
+        "让相机根据触控、人脸和场景自动确定焦点与曝光，并提供锁定或补偿能力。",
+        "减少失焦、过曝和欠曝，使用户在多数场景下无需理解底层相机参数即可拍到可用画面。",
+        "这是 AE/AF 父能力；Touch、Face、Lock、CAF 和 EV 的具体差异由子节点描述。",
+    ),
+    "Touch AE/AF": (
+        "自动策略可能无法知道用户真正想拍画面中的哪一个主体。",
+        "用户点击目标区域即可明确指定对焦和测光意图。",
+        "让用户以一次点击纠正主体选择，并获得及时、可理解的视觉反馈。",
+        "固定焦摄像头只能响应 Touch AE，不能因此标记为支持 Touch AF。",
+    ),
+    "Face AE/AF": (
+        "人物位于逆光、画面边缘或多人场景时，普通中心测光和对焦可能忽略真正主体。",
+        "优先保证人脸的曝光和清晰度，让人物在复杂光线中仍然可用。",
+        "提高人物拍摄成功率，并为美颜、人像和人脸修复提供稳定输入。",
+        "固定焦摄像头只有 Face AE；多人优先级由策略定义，不保证所有人脸完全相同。",
+    ),
+    "Touch AE/AF Lock": (
+        "重新构图或光线变化时，自动 AE/AF 持续收敛会让用户已经确定的画面发生漂移。",
+        "锁住用户确认的焦点和曝光，便于重新构图或保持录制画面一致。",
+        "在用户主动解除前保持稳定，避免亮度抽动和焦点跳变。",
+        "锁定范围和自动解除条件由模式定义，不代表永久锁定所有 3A 状态。",
+    ),
+    "CAF / 连续自动对焦": (
+        "主体或设备持续移动时，单次对焦很快会失效。",
+        "持续跟随距离变化更新焦点，使运动主体保持清晰。",
+        "提高移动人物、宠物和视频录制中的连续清晰度，同时减少来回抽焦。",
+        "固定焦摄像头不支持 CAF；跟焦不等于主体追踪或运动抓拍。",
+    ),
+    "EV 曝光补偿": (
+        "自动曝光给出的平均亮度不一定符合用户对雪景、舞台或剪影的创作意图。",
+        "允许用户在自动曝光基础上主动调亮或调暗画面。",
+        "在保留自动曝光便利性的同时提供可控的创作偏好。",
+        "EV 是相对补偿，不等同于专业模式的固定 ISO 或快门。",
+    ),
+    "变焦": (
+        "用户无法总是靠近或远离主体，需要在同一拍摄位置改变构图和主体大小。",
+        "通过光学镜头、Sensor crop 和数码处理覆盖从广角到长焦的构图范围。",
+        "让用户在连续取景中快速得到目标构图，并尽量保持切镜前后的画质、曝光和色彩一致。",
+        "变焦能力不等于所有倍率均为光学画质；倍率范围和切镜策略由子节点定义。",
+    ),
+    "变焦倍率范围 / Zoom Range": (
+        "界面如果展示硬件或算法无法可靠输出的倍率，会造成画质骤降或不可用组合。",
+        "明确每个模式、摄像头和规格真正可用的最小、最大倍率与关键倍率点。",
+        "保证 UI、实际镜头路径、成片元数据和项目验收使用同一范围定义。",
+        "倍率数字只描述可用范围，不代表范围内所有倍率具有相同画质。",
+    ),
+    "镜头切换策略 / Lens Switching Strategy": (
+        "跨镜头变焦时，视场、曝光、色彩或画面位置突变会破坏连续取景和视频。",
+        "在 SAT、硬切和锁定当前镜头之间选择合适路径，使跨镜头行为可预期。",
+        "减少切镜跳变、黑帧和录制中断，并在画质与连续性之间取得项目定义的平衡。",
+        "策略会受光照、规格和录制状态限制；支持多摄不等于所有场景都使用 SAT。",
+    ),
+    "OIS": (
+        "手持抖动会在低照、长曝光和长焦场景中造成模糊。",
+        "通过镜组或 Sensor 的物理位移抵消角度抖动，保留更多真实成像区域。",
+        "提升低照照片清晰度和长焦预览稳定性，并为算法提供更稳定的输入。",
+        "OIS 是摄像头硬件能力，不等于 EIS，也不能消除主体自身运动。",
+    ),
+    "Photo EIS": (
+        "高倍率或弱光手持拍照时，预览抖动和帧间错位会降低构图与合成成功率。",
+        "利用陀螺仪和裁切补偿稳定照片预览或拍照链路。",
+        "提升手持构图稳定性和多帧成片清晰度。",
+        "会消耗部分视场，不替代 OIS，也不能冻结运动主体。",
+    ),
+    "Video EIS": (
+        "走动或手持录制会产生连续抖动，直接影响视频可观看性。",
+        "通过陀螺仪、运动估计和动态裁切稳定视频画面。",
+        "降低高频抖动和步行晃动，在清晰度、视场和稳定度之间满足规格目标。",
+        "不同分辨率和帧率可能不支持；EIS 不等于云台级稳定。",
+    ),
+    "风格 / Style": (
+        "默认成像无法覆盖所有用户的审美偏好，逐项调色又需要较高学习成本。",
+        "通过滤镜、调色盘和参数调节快速形成可预览、可复用的视觉风格。",
+        "让用户在拍摄前获得稳定的个性化效果，并可通过 Preset 保存和复用。",
+        "Style 负责视觉表达，不改变拍摄模式本身；不同视频规格可能限制其可用范围。",
+    ),
+    "Motion Photo": (
+        "单张照片只能保留一个瞬间，容易错过动作前后、表情变化和现场氛围。",
+        "在静态封面之外保留快门前后的短视频片段，允许用户回看完整瞬间。",
+        "提高人物、宠物和运动场景的可选帧与回忆价值，同时保持普通照片的分享入口。",
+        "不等同于普通视频；声音、封面 HDR、片段长度和相册播放能力需分别确认。",
+    ),
+    "视频规格 / Video Specs": (
+        "清晰度、流畅度、动态范围、功耗和文件大小无法由单一视频规格同时最优。",
+        "让项目和用户在分辨率、帧率、HDR/HLG 与稳定能力之间选择。",
+        "为每颗摄像头给出真实可录、可长期稳定并可正确播放的规格组合。",
+        "项目支持某个规格不代表所有摄像头、HDR、EIS 或 Style 组合都支持。",
+    ),
+    "慢动作规格 / Slow Motion Specs": (
+        "普通帧率无法清楚呈现快速动作的细节过程。",
+        "以高采集帧率记录动作，再以较低播放速度呈现。",
+        "在可接受的清晰度、曝光、掉帧和温升下获得稳定慢动作效果。",
+        "高帧率会缩短单帧曝光并提高光照要求；标称规格必须由 Sensor 与 pipeline 共同支持。",
+    ),
+    "高像素输出规格 / High Resolution Specs": (
+        "普通像素合并输出无法满足裁切、放大或大尺寸输出对细节的需求。",
+        "提供 50MP、200MP 等高像素档，让用户在细节、动态范围、耗时和文件大小之间选择。",
+        "确保每个像素档具有真实输出路径、可接受的画质收益和稳定保存能力。",
+        "高像素档不等同于简单放大；不同档位可能使用 Remosaic、HDR 或 upscale。",
+    ),
+    "专业模式 / Expert Mode": (
+        "自动相机为了成功率会持续改变参数，无法满足长曝光、固定色温或一致性创作。",
+        "把 ISO、快门、白平衡、对焦和 RAW 等关键控制交给有经验的用户。",
+        "提供可预测、可复现的手动拍摄结果，并明确每颗摄像头的真实参数边界。",
+        "专业模式不承诺突破 Sensor/HAL 极限；参数可用范围必须逐摄像头定义。",
+    ),
+    "全景模式 / Panorama Mode": (
+        "单张照片视场不足以容纳宽阔风景、建筑或多人合影。",
+        "引导用户移动设备并拼接多帧，生成超出单镜头瞬时视场的宽幅照片。",
+        "在易操作的引导下获得连续、少拼接缝且曝光一致的宽视场成片。",
+        "不等同于超广角单张拍摄；运动物体、距离过近和移动不稳定会影响拼接。",
+    ),
+    "夜景模式 / Night Mode": (
+        "弱光下单帧照片容易过暗、噪声高、细节少，延长曝光又容易手抖。",
+        "通过低照曝光策略和多帧计算摄影提升亮度、噪声和细节。",
+        "在手持条件下得到更明亮、清晰且不过度失真的夜景照片。",
+        "不能恢复完全无光场景，也不能消除运动主体在长曝光中的拖影。",
+    ),
+    "美颜算法 / Beauty Algorithm": (
+        "默认成像可能放大肤质瑕疵，但统一强处理又容易损失身份特征和真实质感。",
+        "针对人脸做可控的肤质、肤色和局部特征优化。",
+        "在保留真实肤色、纹理、毛发和个人特征的前提下提升人物观感。",
+        "只处理满足检测置信度的人脸，不应改变背景结构或替代 FRT 清晰度修复。",
+    ),
+    "人像虚化 / Portrait Bokeh": (
+        "普通手机小底成像难以获得自然浅景深，复杂背景会分散对人物主体的注意力。",
+        "分离人物与背景并模拟景深虚化，突出主体。",
+        "获得自然的景深层次、稳定的发丝边缘和接近光学虚化的背景表现。",
+        "辅助摄像头参与 Depth 不等于它是输出摄像头；透明物体和复杂边缘存在算法上限。",
+    ),
+    "FRT / 人像清晰度提升": (
+        "远距离、低照或压缩场景中的人脸细节容易损失，普通锐化又会产生伪影。",
+        "在检测到人脸时针对性恢复眼睛、五官和纹理细节。",
+        "提升人脸可辨识度和清晰感，同时保持身份特征自然。",
+        "FRT 不是美颜，不负责改变肤色、脸型或隐藏瑕疵。",
+    ),
+    "Preset": (
+        "复杂的模式、焦段、滤镜和曝光组合难以重复设置，也难以分享给其他用户。",
+        "把一组拍摄设置保存为可识别、可复用和可分享的拍摄配方。",
+        "缩短重复创作的准备时间，并保证恢复后的参数与原 Preset 意图一致。",
+        "Preset 只保存允许持久化的配置，不保证跨项目、跨版本或不兼容硬件完全复现。",
+    ),
+    "Ultra HDR": (
+        "普通 SDR JPEG 无法在高亮屏幕上同时呈现强高光和暗部层次。",
+        "通过 gain map 等信息保存并显示更高动态范围的照片。",
+        "在兼容设备和相册中获得更真实的亮度层次，同时保留 SDR 兼容显示。",
+        "拍摄支持不等于所有查看器都能 HDR 显示；它也不等同于 HDR 场景检测开关。",
+    ),
+    "超级夜景": (
+        "弱光场景中单帧曝光无法同时满足亮度、噪声和手持清晰度。",
+        "对齐并融合多帧低照图像，改善暗部、噪声和细节。",
+        "提升手持低照成片的可用率，同时控制鬼影、过曝灯牌和处理耗时。",
+        "不能消除快速运动主体造成的所有错位，也不代表极夜分支必然启用。",
+    ),
+    "Remosaic": (
+        "多像素合一 Sensor 的常规输出牺牲了标称全分辨率细节。",
+        "重建完整 CFA 排列以输出原生高像素图像。",
+        "在足够光照下提供真实的高分辨率细节收益，并控制摩尔纹、伪色和耗时。",
+        "Remosaic 不等于对低分辨率图片做 upscale；是否启用取决于 Sensor mode 和 pipeline。",
+    ),
+}
+
+
+BRANCH_PURPOSE: dict[str, tuple[str, str, str, str]] = {
+    "launch": (
+        "用户从不同系统入口进入相机时，权限、默认模式和可访问内容可能不一致。",
+        "让相机从目标入口快速、正确且安全地进入可拍摄状态。",
+        "减少启动等待和入口失败，并确保安全相机等上下文不泄露受限内容。",
+        "只描述进入和退出上下文，不代表入口后的全部模式与摄像头均支持。",
+    ),
+    "preview": (
+        "用户在按下快门前需要知道相机看到了什么、识别了什么以及是否存在画质风险。",
+        "通过实时预览、检测和提示帮助用户在拍摄前修正构图或环境问题。",
+        "提高所见即所得程度，降低拍完后才发现问题的废片率。",
+        "预览反馈不等同于最终成片算法，预览与成片允许存在受控差异。",
+    ),
+    "focus": (
+        "主体位置、距离和光线持续变化，容易造成失焦或曝光不符合意图。",
+        "让用户或自动策略明确主体，并稳定控制清晰度与亮度。",
+        "在最少操作下提高主体清晰、曝光正确的拍摄成功率。",
+        "具体能力受固定焦、HAL 3A 和模式策略限制。",
+    ),
+    "zoom": (
+        "用户需要在不改变站位的情况下调整构图，但多镜头和数码变焦会带来画质与连续性差异。",
+        "提供可理解、可控制的倍率和镜头路径。",
+        "覆盖项目目标焦段，同时降低切镜跳变和高倍率画质下降。",
+        "可选择某倍率不代表它是光学倍率或具有相同画质。",
+    ),
+    "capture": (
+        "拍摄和录制过程中，用户需要可靠地触发、暂停、切换或并行生成内容。",
+        "让关键拍摄动作有明确入口、即时反馈且不破坏当前媒体文件。",
+        "减少误操作、内容丢失、音画中断和状态不可恢复。",
+        "是否支持取决于模式、摄像头、规格和并行 pipeline 能力。",
+    ),
+    "toolbar": (
+        "高频拍摄参数如果藏在深层设置中，用户无法在取景时快速调整。",
+        "把当前模式最常用的控制放在拍摄界面，允许即时预览和修改。",
+        "缩短调节路径，并保证入口显隐、默认值、记忆和互斥行为可预测。",
+        "工具栏入口不等同于底层算法本身，具体效果和规格限制由关联节点定义。",
+    ),
+    "modes": (
+        "不同拍摄目标需要不同采集、交互和算法策略，单一自动模式无法覆盖全部需求。",
+        "为明确的拍摄意图提供一组协调好的默认能力。",
+        "让用户进入模式后无需重新搭建参数组合即可完成目标拍摄。",
+        "模式存在不代表其中所有摄像头、工具栏和算法都支持。",
+    ),
+    "settings": (
+        "用户偏好、隐私要求和使用环境不同，统一默认配置无法适合所有人。",
+        "允许用户长期控制相机行为、默认值和系统集成方式。",
+        "让设置结果可理解、可记忆、可重置，并在相关模式中一致生效。",
+        "设置入口只控制产品行为，不自动证明底层硬件或算法具备能力。",
+    ),
+    "algorithms": (
+        "受限于手机光学、Sensor、算力和拍摄环境，基础单帧成像无法稳定达到目标画质。",
+        "利用检测、对齐、融合、重建或增强处理弥补物理成像限制。",
+        "在明确场景中改善清晰度、噪声、动态范围、色彩或主体表现，并控制伪影与耗时。",
+        "代码中存在算法模块不等于生产链路实际启用；只有改变产品或独立 IQ 结论时才进入 FL。",
+    ),
+    "common": (
+        "跨模式的能力如果分别设置和管理，会增加重复操作和状态不一致。",
+        "提供可跨模式复用的配置、内容和系统入口。",
+        "降低重复设置成本，并保持跨模式、前后台和重启后的状态一致。",
+        "跨模式复用不代表所有模式都接受相同参数。",
+    ),
+    "system": (
+        "相机需要与系统、相册和硬件服务协作，单独完成拍摄链路不足以形成完整体验。",
+        "连接系统入口、权限、存储、显示和内容消费链路。",
+        "保证从启动、拍摄、保存到查看的端到端体验连续可靠。",
+        "系统能力可能受地区、应用版本、硬件和默认应用政策限制。",
+    ),
+}
+
+
+def purpose_branch(row_data: dict[str, str]) -> str:
+    node_id = row_data.get("节点 ID", "")
+    level1 = row_data.get("一级分类", "")
+    if node_id.startswith("kb.launch"):
+        return "launch"
+    if node_id.startswith("kb.preview"):
+        return "preview"
+    if node_id.startswith("kb.focus"):
+        return "focus"
+    if node_id.startswith("kb.zoom"):
+        return "zoom"
+    if node_id.startswith(("kb.capture", "kb.video")):
+        return "capture"
+    if node_id.startswith("kb.toolbar"):
+        return "toolbar"
+    if node_id.startswith("kb.mode"):
+        return "modes"
+    if node_id.startswith("kb.settings"):
+        return "settings"
+    if node_id.startswith(("kb.common", "kb.gallery", "kb.system")):
+        return "common" if node_id.startswith("kb.common") else "system"
+    if node_id.startswith("kb.algorithms") or level1 == "算法 / Algorithm":
+        return "algorithms"
+    if row_data.get("二级分类") in {"Toolbar", "工具栏 / Toolbar"}:
+        return "toolbar"
+    if level1 == "通用 / Common":
+        return "settings"
+    return "system"
+
+
+def purpose_fields(row_data: dict[str, str]) -> tuple[str, str, str, str]:
+    if row_data["名称"] in PURPOSE_OVERRIDES:
+        return PURPOSE_OVERRIDES[row_data["名称"]]
+    branch = purpose_branch(row_data)
+    problem, value, goal, boundary = BRANCH_PURPOSE[branch]
+    name = row_data["名称"]
+    return (
+        problem,
+        f"{value}“{name}”是该目标下的具体能力或控制点。",
+        goal,
+        boundary,
+    )
+
+
 def enrich(rows: list[dict[str, str]]) -> list[dict[str, str]]:
     enriched: list[dict[str, str]] = []
     for item in rows:
@@ -1201,6 +1527,15 @@ def enrich(rows: list[dict[str, str]]) -> list[dict[str, str]]:
         row_data["配置门控"] = row_data.get("配置门控") or "按 ProductConfig、模式配置和硬件能力确认"
         row_data["摄像头范围"] = row_data.get("摄像头范围") or "按项目确认"
         row_data["规格范围"] = row_data.get("规格范围") or "按项目确认"
+        problem, user_value, product_goal, capability_boundary = purpose_fields(row_data)
+        base_description = row_data["说明"].strip()
+        row_data["说明"] = (
+            f"【能力定义】{base_description}\n"
+            f"【解决的问题】{problem}\n"
+            f"【用户价值】{user_value}\n"
+            f"【产品目标】{product_goal}\n"
+            f"【能力边界】{capability_boundary}"
+        )
         enriched.append(row_data)
 
     directory_rows = []
@@ -1214,7 +1549,13 @@ def enrich(rows: list[dict[str, str]]) -> list[dict[str, str]]:
             "二级分类": "目录 / Taxonomy",
             "名称": name,
             "交互位置": name,
-            "说明": "用于组织 Camera 知识节点和生成 Feature Tree；不直接表达项目支持。",
+            "说明": (
+                "【能力定义】用于组织 Camera 知识节点和生成 Feature Tree。\n"
+                "【解决的问题】当知识节点数量较多时，需要稳定层级帮助用户定位能力和理解上下文。\n"
+                "【用户价值】通过统一导航快速找到相关能力，并沿父子关系理解功能归属。\n"
+                "【产品目标】保证 Tree 与 KB 使用同一套节点关系，避免维护两份分类产生漂移。\n"
+                "【能力边界】目录只组织知识，不代表 Camera 产品功能，也不进入项目 FL。"
+            ),
             "判断依据": "不直接判断支持。",
             "依赖": "无。",
             "验证方法": "校验子节点父引用和 Tree 生成结果。",
@@ -1230,7 +1571,10 @@ def enrich(rows: list[dict[str, str]]) -> list[dict[str, str]]:
             "来源项目": SOURCE,
             "备注": "",
         })
-    return directory_rows + enriched
+    return [
+        {field: row_data.get(field, "") for field in KB_FIELDS}
+        for row_data in directory_rows + enriched
+    ]
 
 
 def audit(rows: list[dict[str, str]]) -> list[str]:
@@ -1258,6 +1602,17 @@ def audit(rows: list[dict[str, str]]) -> list[str]:
             or r.get("App 绑定", "").startswith("待补充")
         )
     ]
+    required_description_sections = [
+        "【能力定义】",
+        "【解决的问题】",
+        "【用户价值】",
+        "【产品目标】",
+        "【能力边界】",
+    ]
+    incomplete_descriptions = [
+        r for r in rows
+        if any(section not in r.get("说明", "") for section in required_description_sections)
+    ]
     bad_verify = [
         r for r in rows
         if r["验证方法"].strip() in {"✓", "✗", "✅", "❌"} or not r["验证方法"].strip()
@@ -1279,6 +1634,7 @@ def audit(rows: list[dict[str, str]]) -> list[str]:
     lines.append(f"- Invalid FL projections: {len(bad_projections)}")
     lines.append(f"- Missing FL projection rules: {len(missing_projection_rule)}")
     lines.append(f"- Missing App bindings: {len(missing_app_binding)}")
+    lines.append(f"- Incomplete structured descriptions: {len(incomplete_descriptions)}")
     lines.append(f"- Invalid verification methods: {len(bad_verify)}")
     lines.append(f"- Bad source-project mentions: {len(bad_source)}")
     lines.append(f"- Bad legacy terms: {len(bad_terms)}")
@@ -1342,6 +1698,11 @@ def audit(rows: list[dict[str, str]]) -> list[str]:
         lines.append("")
         lines.append("## Missing App Bindings")
         lines.extend(f"- {r['名称']}" for r in missing_app_binding)
+
+    if incomplete_descriptions:
+        lines.append("")
+        lines.append("## Incomplete Structured Descriptions")
+        lines.extend(f"- {r['名称']}" for r in incomplete_descriptions)
 
     if bad_verify:
         lines.append("")
