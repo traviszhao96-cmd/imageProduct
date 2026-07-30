@@ -1,6 +1,6 @@
 # KB Functions Algorithms v7 Audit
 
-- Rows: 142
+- Rows: 143
 - Duplicate names: 0
 - Duplicate node IDs: 0
 - Orphan parent references: 0
@@ -16,12 +16,13 @@
 
 - 分类节点: 20
 - 已实现: 118
-- 待确认: 2
+- 待确认: 3
 - 规划中: 2
 
 ## 非已实现节点
 
 - 快速模式切换 / Quick Mode Switch: 待确认 / CameraBottomFunctionUINode; UiEventProxy.onModeChanged
+- 高倍率导航框: 待确认 / 当前 CameraApp 代码基线未检出明确 UI node / config key，待 APP 补充
 - 锁定白平衡: 规划中 / No matching production SettingKey found on code baseline
 - 录制中拍摄动态照片 / Motion Photo While Recording: 规划中 / planned CameraVideoMode + motion-photo parallel pipeline
 - 直方图 / Histogram: 待确认 / CameraManualMode histogram UI (code presence to confirm)

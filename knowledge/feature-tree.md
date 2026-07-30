@@ -18,10 +18,10 @@
 
 ## 统计
 
-- KB 节点总数：142
-- 知识/能力节点：122
+- KB 节点总数：143
+- 知识/能力节点：123
 - 目录节点：20
-- 独立行：57
+- 独立行：58
 - 条件展开：43
 - 规格展开：11
 - 父节点汇总/随父节点：11
@@ -34,6 +34,7 @@ Camera Knowledge Base  `kb.root`
 │   └── 相机启动入口 / Camera Launch Entry  `kb.launch.entry` 〔入口｜FL: 条件展开｜维度: 项目 / 入口〕
 ├── 预览与场景感知 / Preview & Scene  `kb.preview`
 │   ├── 人脸检测  `kb.preview.face_detection` 〔能力｜FL: 独立行｜维度: 项目 / 模式 / 摄像头〕
+│   ├── 高倍率导航框  `kb.preview.high_zoom_navigation` 〔能力｜FL: 独立行｜维度: 项目 / 模式 / 摄像头〕
 │   ├── ASD / AI场景检测  `kb.preview.asd` 〔算法｜FL: 条件展开｜维度: 项目 / 模式 / 摄像头 / 规格〕
 │   ├── 脏污检测  `kb.preview.dirt_detection` 〔能力｜FL: 独立行｜维度: 项目 / 模式 / 摄像头〕
 │   └── 人脸畸变矫正  `kb.capability.57d411015e88` 〔算法｜FL: 条件展开｜维度: 项目 / 模式 / 摄像头 / 规格〕
