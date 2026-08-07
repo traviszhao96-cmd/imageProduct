@@ -1,129 +1,121 @@
 ---
 name: knowledge-base-manage
-description: Use when the user asks to generate camera feature lists, manage device configs, update sensor datasheets, or maintain knowledge base references. Covers feature list generation (parameterized by project), device YAML management, Bitable FL creation, and knowledge base consistency checks.
+description: Maintain the Nothing Camera capability knowledge base, including KB schema v7 nodes, hierarchy/Tree projection, structured descriptions, code and requirement evidence, FL projection metadata, audits, and the local KB visualizer. Use when the user asks to inspect, add, update, reorganize, validate, or visualize Camera KB/知识库/KB表格/feature tree nodes, or to judge how KB content should project into a project Feature List. Do not use as the primary workflow for editing a live project FL; use feature-list-writer plus lark-base for that.
 ---
 
-# Knowledge Base Manager
+# Camera Knowledge Base Manager
 
-## Overview
+## Responsibility boundary
 
-Manages the Nothing Camera knowledge base (`knowledge/` directory) and Lark Bitable Feature Lists. Covers: generating feature lists, managing device configs, creating/maintaining Bitable FLs, and cross-referencing consistency.
+Treat the three artifacts as one pipeline with distinct roles:
 
-## Core Capabilities
+- **KB** is the canonical capability manual. Keep rich explanations, hierarchy, dependencies, code bindings, lifecycle state, verification, and FL projection rules here.
+- **Tree** is a generated hierarchical view of KB nodes. Never maintain a second manual Tree.
+- **FL** is a downstream project acceptance matrix. It contains project/camera/spec support and review conclusions, not the canonical knowledge definition.
 
-### 1. Bitable Feature List Creation (primary workflow)
+Use [`../feature-list-writer/SKILL.md`](../feature-list-writer/SKILL.md) for creating or maintaining project FLs. Use `lark-base` for live Base record operations. This skill owns the KB definition and the projection decision supplied to that workflow.
 
-The authoritative Feature List is now a **Lark Bitable** per device, not a local markdown file. Format:
+## Canonical sources and generated artifacts
 
-| 列 | 类型 | 说明 |
-|---|---|---|
-| 模式 | Select | 通用/拍照/录像/人像/夜景/专业/高像素/慢动作/延时摄影/全景/文档矫正 |
-| 一级分类 | Select | 功能 / 基础算法 / 预设 / 设置 / 小组件 |
-| 二级分类 | Select | 功能→交互区(预览框/AE·AF/Zoom/Toolbar/Mode Switch/暂态开关/系统); 设置→通用设置/照片设置/视频设置/帮助与反馈; 算法→实时算法/后处理算法 |
-| 名称 | Text | 功能名或算法方案名 |
-| 说明 | Text | 功能基本描述 |
-| {camera} | Select(✓/✗) | 每个摄像头独立一列。仅列出该设备实际存在的摄像头。无长焦的设备不设长焦列。 |
-| 验证方法 | Text | 验收标准 |
+Edit:
 
-**Two devices = two separate tables.** 26111 has Main/UW/Front. 26121 has Main/UW/Tele/Front.
+- `scripts/build_kb_functions_algorithms.py` — canonical node definitions, hierarchy metadata, code bindings, and FL projection attributes.
+- `knowledge/reference/kb-functions-algorithms-schema.md` — schema and policy. Read it completely before changing KB structure or projection rules.
+- `knowledge/devices/*.yaml` and `knowledge/devices/sensors/*.yaml` — project and hardware evidence when support boundaries depend on them.
 
-**Bitable location**: `26111 & 26121 Camera Feature List` under `Camera feature list` wiki directory.
-Base token: `YJSObjrqmamennsGWE5lqYdogFh`
+Generate; do not hand-edit:
 
-### 2. Feature List Generation (legacy — markdown output)
+- `knowledge/_output/kb-functions-algorithms.json` — unversioned canonical output.
+- `knowledge/_output/kb-functions-algorithms.v7.json` — current schema output.
+- `knowledge/_output/kb-functions-algorithms.v6.json` — migration compatibility alias.
+- `knowledge/_output/kb-functions-algorithms.v7.audit.md` — canonical audit.
+- `knowledge/feature-tree.md` — Tree projected from `节点 ID / 父节点 ID`.
+- `outputs/kb-visualizer/data.js` — browser payload for the local visualizer.
 
-Generate markdown feature list from JSON data:
+The visualizer entry point is `outputs/kb-visualizer/index.html`.
 
-```bash
-python3 knowledge/generate.py --project 26111
-python3 knowledge/generate.py --project 25131 --format markdown
-```
+## Required workflow
 
-**How it works:**
-1. Reads `knowledge/devices/{project}.yaml` for device config
-2. If the project has `inheritance.baseline`, loads baseline features
-3. Applies `removed_features` and `new_features_p0`
-4. Outputs to `knowledge/_output/features-{project}.md`
+1. Read `knowledge/reference/kb-functions-algorithms-schema.md` completely.
+2. Read the relevant current nodes from `knowledge/_output/kb-functions-algorithms.v7.json` and inspect nearby parent/child nodes.
+3. Gather only the evidence needed for the change:
+   - current approved requirement list or PRD for product scope;
+   - CameraApp code/config for implementation and entry visibility;
+   - device/sensor configuration for hardware bounds;
+   - current FL only for drift detection, never as the KB source of truth.
+4. Decide whether to update an existing node, add a child, or add a new capability. Prefer stable identity and avoid synonym duplicates.
+5. Edit `scripts/build_kb_functions_algorithms.py`. Preserve an existing `节点 ID` when renaming a node. Add an explicit ID or migration mapping when automatic identity would change.
+6. Run the canonical builder:
 
-The generated markdown is used as **input data** for populating the Bitable FL.
+   ```bash
+   python3 scripts/build_kb_functions_algorithms.py
+   ```
 
-### 3. Hardware Config Table
+7. Inspect `knowledge/_output/kb-functions-algorithms.v7.audit.md`. Do not accept duplicate names/IDs, orphan parents, invalid projections, missing projection rules, invalid verification methods, or bad source-project references.
+8. Rebuild the local browser payload:
 
-Each Feature List Bitable includes a **硬件配置** table:
+   ```bash
+   python3 scripts/build_kb_visualizer.py
+   ```
 
-| 列 | 说明 |
-|---|---|
-| 项目代号 | 25111, 26111... |
-| 机型 | Base / Pro |
-| 相机位置 | 主摄 / 超广角 / 长焦 / 前置 |
-| Sensor 型号 | HP5, IMX896... |
-| 分辨率 | 200MP, 50MP... |
-| Sensor 尺寸 | 1/1.4"... |
-| 像素大小 | 0.64um... |
-| OIS | YES/NO |
-| 光圈 | f/1.8... |
-| 等效焦距 | 24mm... |
-| 对焦类型 | PDAF/FF |
-| Fallback支持 | YES/NO |
-| 备注 | 26111: 200MP→50MP HDR upscale |
+9. Verify the affected node in both v7 JSON and `outputs/kb-visualizer/data.js`. When visual behavior changed, open `outputs/kb-visualizer/index.html` and inspect it.
+10. If the change affects a live FL, hand the projection result to `feature-list-writer`; update Base only after comparing against the current requirement list and project evidence.
 
-### 4. Project Inheritance Convention
+## Node content rules
 
-| 新项目 | 基线项目 | 说明 |
-|---|---|---|
-| 26111 Base | 25131 | JN1 → HP5 升级，新增 200MP |
-| 26121 Pro | 25111 Pro | IMX896 同配置，直接复用 |
+- Keep one stable `节点 ID`; use `父节点 ID` for hierarchy.
+- Treat `一级分类 / 二级分类` as FL-compatible taxonomy, not a second Tree.
+- Keep KB mode scope at the maximum meaningful scope; do not duplicate KB rows for every mode or camera.
+- Write `说明` to answer what the capability is, what problem it solves, user value, product goal, and its boundary. Follow the five-part requirement in the schema.
+- Put implementation facts in `App 绑定 / 配置门控 / 代码基线`, not in the user-facing definition.
+- Mark code-only/debug/internal capabilities accurately. Code existence alone does not prove a production entry.
+- Keep project support marks out of KB. Put `✓ / ✗ / TBD` only in FL.
+- Use the current or historical project that established the definition as `来源项目`; do not use a future target project as the canonical source merely because its requirement triggered the review.
 
-**How to create a new project FL:**
-1. Identify the baseline project (hardware-closest predecessor)
-2. Create device YAML at `knowledge/devices/{project}.yaml`
-3. Generate baseline feature list: `python3 knowledge/generate.py --project {project}`
-4. Create Bitable in `Camera feature list` wiki directory
-5. Add 硬件配置 table with camera specs
-6. Add device table(s) with the standard FL format
-7. Populate from baseline, remove inapplicable features, add new ones
-8. Mark algorithm-dependent features pending until algorithm doc confirmed
+## FL projection decision
 
-### 5. Device Config Management
+Project a KB node into FL when it is in the current project scope and at least one condition is true:
 
-Device YAML files at `knowledge/devices/{project}.yaml`:
+1. it is a new functional requirement;
+2. project, mode, camera, entry, or specification support differs;
+3. it produces an independent review or acceptance conclusion.
 
-```yaml
-project:           # code, name, market, SoC
-cameras:           # base/pro -> main, ultrawide, tele, front
-inheritance:       # baseline project, rules, deltas
-defaults:          # per-mode default values
-new_features_p0:   # new feature names
-removed_features:  # removed feature names
-```
+Update an existing FL row when it can express the new requirement and verification target. Add a new row only when the existing row cannot express an independent user-facing function or acceptance result.
 
-### 6. Sensor Datasheet Management
+Use these projection values exactly:
 
-Sensor datasheets at `knowledge/devices/sensors/{model}.yaml`. Standard `capability_summary`:
-`4k_30fps`, `4k_60fps`, `1080p_60fps`, `1080p_120fps`, `1080p_240fps`, `hdr_photo`, `hdr_video`, `pdaf`, `ois`
+- `不进入 FL`
+- `父节点汇总`
+- `随父节点`
+- `独立行`
+- `条件展开`
+- `规格展开`
 
-### 7. FL Format Design Rules
+Use projection dimensions only from `项目 / 模式 / 摄像头 / 规格 / 入口`, in combinations allowed by the schema.
 
-- ✅ Each device has its own table — don't mix devices in one table
-- ✅ Only include cameras that exist on the device (no "无长焦" placeholder columns)
-- ✅ ✓/✗ only — don't write resolution values (e.g., "200MP") in support columns; put details in 说明
-- ✅ 一级分类 = 功能/基础算法/预设/设置/小组件; 二级分类 maps to feature-tree for 功能, Settings group for 设置, 实时/后处理 for 算法
-- ✅ Mode is specific for capture features; use `通用 / Common` only for Preset / Settings / Widget and true all-mode common rows
+## Evidence and review rules
 
-## Reference Files
+- Treat the approved requirement list as the formal scope input for new or changed functions.
+- Treat KB as the capability definition and projection policy.
+- Treat device/sensor/code evidence as support-boundary inputs.
+- Do not infer camera support from a class name, sensor presence, or an old FL row alone.
+- Do not guess unsupported reasons or final module confirmation states.
+- Preserve unresolved facts as explicit `待确认` with the missing evidence named.
+- Use Product/HAL/APP/Tuning review columns in FL; do not invent a single accountable owner when the project uses distributed review.
 
-- `knowledge/feature-tree.md` — 11 interaction zones + purpose tags + 暂态开关
-- `knowledge/devices/{project}.yaml` — device config
-- `knowledge/features/rear-camera.json` — rear feature matrix (25131 baseline)
-- `knowledge/features/front-camera.json` — front feature matrix (25131 baseline)
-- `knowledge/devices/project-mapping.yaml` — all devices mapping
-- `knowledge/devices/sensors/` — sensor datasheets
-- `knowledge/_output/features-{project}.md` — generated markdown (input for Bitable)
+## Validation checklist
 
-## Quick Lookup
+Before finishing, confirm:
 
-- "生成 26111 功能列表" → `python3 knowledge/generate.py --project 26111` → populate Bitable
-- "创建 26111 FL Bitable" → Create table in `YJSObjrqmamennsGWE5lqYdogFh` with standard format
-- "26111 硬件能力" → Read 硬件配置 table or `knowledge/devices/26111.yaml`
-- "26111 和 25131 差异" → Compare device YAMLs, check `key_deltas_from_25131`
-- "更新 FL 硬件配置" → Edit 硬件配置 table in Bitable
+- the builder exits successfully;
+- v7 and unversioned canonical outputs contain the same node set;
+- v6 is only a compatibility alias;
+- the Tree was regenerated and has no independent manual edits;
+- the audit reports zero structural errors;
+- every changed non-directory node has a complete description and executable verification method;
+- the visualizer payload points to v7 and contains the changed node;
+- any live FL change was handled through `feature-list-writer` and read back after writing.
+
+## Legacy paths
+
+`knowledge/generate.py`, `knowledge/_output/features-{project}.md`, and old FL-derived audits are legacy inputs or comparison tools. Do not use them as the canonical KB v7 authoring path.

@@ -1,110 +1,62 @@
-version: '1.0'
+version: "1.0"
 skill_id: knowledge-base-manage
 eval_type: content
 cases:
-- id: case-device-config
-  threshold: 0.75
-  task: "以下是项目 26111 的设备配置文件部分内容。请根据 SKILL.md 的流程，回答：(1) 26111 Base 的主摄 sensor 是什么？有没有\
-    \ OIS？(2) 26121 Pro 各摄像头的 sensor 和焦段信息（主摄、超广角、长焦分别列出）。(3) 这个项目的软件基线是什么。\n\n```\n\
-    project:\n  code: \"26111\"\n  name: \"Phone 5a\"\n  soc:\n    base: \"SM7635\"\
-    \n    pro: \"SM7750\"\ninheritance:\n  baseline: \"25131\"\n  rules:\n    - \"\
-    26111 Base: 200M HP5 主摄，无长焦，继承 25131 功能并移除不适用项\"\n    - \"26121 Pro: 与 25111 Pro\
-    \ 配置完全一致，全功能继承\"\ncameras:\n  base:\n    main:\n      sensor: \"HP5\"\n      resolution:\
-    \ \"200MP\"\n      ois: NO\n    ultrawide:\n      sensor: \"IMX355\"\n      resolution:\
-    \ \"8MP\"\n    tele: null\n  pro:\n    main:\n      sensor: \"IMX896\"\n     \
-    \ resolution: \"50MP\"\n      ois: YES\n    ultrawide:\n      sensor: \"IMX355\"\
-    \n      resolution: \"8MP\"\n    tele:\n      sensor: \"JN5\"\n      resolution:\
-    \ \"50MP\"\n      zoom: \"3.5x\"\n      ois: YES\n```\n"
-  rubric:
-  - id: r1
-    check: 回答 26111 Base 主摄是 HP5 200MP，无 OIS
-    weight: 2
-  - id: r2
-    check: 回答 26121 Pro 主摄 IMX896 50MP、超广角 IMX355 8MP、长焦 JN5 50MP 3.5x，三个摄像头的信息都覆盖到
-    weight: 2
-  - id: r3
-    check: 回答软件基线是 25131
-    weight: 2
-  - id: r4
-    check: 回答 Pro 配置继承自 25111 Pro
-    weight: 1
-- id: case-default-focal
-  threshold: 0.75
-  task: "以下是两个项目的默认值配置。请根据 SKILL.md 的知识库结构，回答：(1) 项目 24111 和 24111 Plus 的人像模式默认焦段分别是多少（同时给出倍率和等效焦距）？(2)\
-    \ 项目 25111 的人像模式默认焦段是多少？(3) 为什么不同项目的人像默认焦段不一样——这个值取决于什么？\n\n```\n项目 24111 defaults:\n\
-    \  portrait:\n    focal_length: \"2x\"\n    equivalent_focal: \"50mm\"\n项目 24111\
-    \ Plus defaults:\n  portrait:\n    focal_length: \"3x\"\n    equivalent_focal:\
-    \ \"72mm\"\n项目 25111 defaults:\n  portrait:\n    focal_length: \"3.5x\"\n    equivalent_focal:\
-    \ \"80mm\"\n```\n"
-  rubric:
-  - id: r1
-    check: 回答 24111 是 2x (50mm)，24111 Plus 是 3x (72mm)，同时给出倍率和等效焦距
-    weight: 2
-  - id: r2
-    check: 回答 25111 是 3.5x (80mm)
-    weight: 2
-  - id: r3
-    check: 回答默认焦段取决于项目的硬件配置（如是否有长焦、长焦倍数），不同项目不同
-    weight: 1
-- id: case-preset-focal-inference
-  threshold: 0.75
-  task: "以下是项目 25111 和 24111 的默认值配置，以及预设列表。预设中标记\"使用默认值\"的，表示需要根据所在模式和项目查表确定焦段。请回答：(1)\
-    \ Soft Focus 是 Portrait 模式，在项目 25111 上应该用哪个焦段（同时给出倍率和等效焦距）？(2) Amber 是 Photo 模式，在项目\
-    \ 25111 上应该用哪个焦段？(3) 如果换到项目 24111，Soft Focus 的焦段会变成多少？\n\n```\n项目 25111 defaults:\n\
-    \  portrait:\n    focal_length: \"3.5x\"\n    equivalent_focal: \"80mm\"\n  photo:\n\
-    \    focal_length: \"1x\"\n    equivalent_focal: \"24mm\"\n项目 24111 defaults:\n\
-    \  portrait:\n    focal_length: \"2x\"\n    equivalent_focal: \"50mm\"\n  photo:\n\
-    \    focal_length: \"1x\"\n    equivalent_focal: \"26mm\"\npresets:\n  - Soft\
-    \ Focus | Mode=Portrait | Focal=使用默认值\n  - Amber | Mode=Photo | Focal=使用默认值\n\
-    \  - Cine Amber | Mode=Video | Focal=24mm\n  - Urban | Mode=Photo | Focal=28mm\
-    \ (覆盖默认值)\n```\n"
-  rubric:
-  - id: r1
-    check: 回答 Soft Focus 在 25111 上用 3.5x (80mm)，因为它是 Portrait 模式，取 25111 的 portrait
-      默认值，同时输出倍率和等效焦距
-    weight: 2
-  - id: r2
-    check: 回答 Amber 在 25111 上用 1x (24mm)，因为它是 Photo 模式，取 25111 的 photo 默认值
-    weight: 2
-  - id: r3
-    check: 回答换到 24111 后 Soft Focus 变成 2x (50mm)
-    weight: 2
-metadata:
-  source_skill_md_sha256: 2361ed67d648f68e8acbaad183f04d6d7cd5447547fa02d35f28cf4cca8ebb96
-  generated_at: '2026-06-24T15:36:59+08:00'
-  generator_version: eval-generate/v3.2
-  source_skill_md_sections:
-  - heading: (preface)
-    content_sha256: 2a9b9afb54f9fbe390b977a06865c1643a55229bb35612c60370b800daac42b0
-    content_snippet: '# Knowledge Base Manager'
-    case_ids: []
-  - heading: '## Overview'
-    content_sha256: 830228ad9e6e0bbb89c3e21c25edc9922500b994a3e8824192f4e10dc45eacb5
-    content_snippet: This skill manages the Nothing Camera knowledge base (`knowledge/`
-      directory). It covers generating feature lists for any project, managing device
-      configuration files, and maintaining reference docume
-    case_ids: []
-  - heading: '## Core Capabilities'
-    content_sha256: 9e3170d3e960021451e04e2978b25ce03cedd2d4c9dc1649fabf6171fc89f476
-    content_snippet: '### 1. Feature List Generation Generate a camera feature list
-      for any project: ```bash # Generate markdown for 26111 python3 knowledge/generate.py
-      --project 26111 # Generate markdown only python3 know'
-    case_ids: []
-  - heading: '## Project Inheritance Convention'
-    content_sha256: 391c440554a518b5d4332a96abb2eb8b55adc428ba93ed41adde1679cbaa4573
-    content_snippet: 'Projects follow a baseline + delta model: | Project | Baseline
-      | Feature Source | |---------|----------|---------------| | 25131 | — (reference)
-      | `features/rear-camera.json` | | 26111 | 25131 | 25131'
-    case_ids: []
-  - heading: '## Reference Files'
-    content_sha256: 1d1f101efe6eaf5f65404092cc1cac6a6dd2130c99c0cf096ee413b6b5dbfa93
-    content_snippet: '- `knowledge/devices/{project}.yaml` — device config per project
-      - `knowledge/features/rear-camera.json` — canonical rear camera feature matrix
-      (25131) - `knowledge/features/front-camera.json` — canon'
-    case_ids: []
-  - heading: '## Quick Lookup'
-    content_sha256: 2cc784ade6c84505e65f01d3f5847d608f8d4b67c3ce27b13f29dfff9826ba86
-    content_snippet: '- "生成 26111 功能列表" → `python3 knowledge/generate.py --project
-      26111` - "更新 26111 设备配置" → Edit `knowledge/devices/26111.yaml` - "26111 硬件能力"
-      → Read `knowledge/devices/26111.yaml` + sensor YAMLs - "26111'
-    case_ids: []
+  - id: case-kb-v7-update-path
+    threshold: 0.8
+    task: "用户要求给 Camera KB 新增一个能力，并让本地 KB HTML 能看到。根据 SKILL.md，说明应修改哪些源文件、执行哪些命令，以及哪些生成文件不能手工编辑。"
+    rubric:
+      - id: source
+        check: "把 scripts/build_kb_functions_algorithms.py 识别为 KB 节点定义的编辑入口，并要求先读取 knowledge/reference/kb-functions-algorithms-schema.md"
+        weight: 3
+      - id: build
+        check: "执行 python3 scripts/build_kb_functions_algorithms.py，并检查 v7 audit"
+        weight: 2
+      - id: visualizer
+        check: "执行 python3 scripts/build_kb_visualizer.py，并验证 outputs/kb-visualizer/data.js 或页面"
+        weight: 2
+      - id: generated
+        check: "明确禁止手工编辑生成的 KB JSON、knowledge/feature-tree.md 和 outputs/kb-visualizer/data.js"
+        weight: 2
+
+  - id: case-tree-single-source
+    threshold: 0.8
+    task: "用户说需要调整 Camera Feature Tree 的层级，但不想维护 Tree 和 KB 两套数据。根据 SKILL.md 应如何处理？"
+    rubric:
+      - id: hierarchy
+        check: "通过 KB 节点的 节点 ID / 父节点 ID 调整层级"
+        weight: 3
+      - id: no-manual-tree
+        check: "明确 Tree 是生成视图，不手工修改 knowledge/feature-tree.md"
+        weight: 3
+      - id: regenerate
+        check: "运行 KB builder 重新生成 Tree 并检查孤儿父节点、重复 ID 等审计"
+        weight: 2
+
+  - id: case-fl-projection
+    threshold: 0.8
+    task: "需求列表新增一个用户可感知功能，但 26111 和 26121 的支持状态完全一样。KB 已经有相邻能力，当前 FL 也有一条可以承载新验收目标的行。判断是否进入 FL、应该新增还是更新，以及由哪个 skill 执行线上写入。"
+    rubric:
+      - id: enter
+        check: "认为新功能类需求属于 FL 输入，即使两个项目支持相同也需要在 FL 体现"
+        weight: 3
+      - id: update
+        check: "优先更新能承载新需求和验收目标的现有 FL 行，而不是重复新增"
+        weight: 3
+      - id: routing
+        check: "使用 feature-list-writer 处理 FL 规则，并使用 lark-base 执行线上 Base 读写与回读验证"
+        weight: 2
+
+  - id: case-code-is-not-product-support
+    threshold: 0.8
+    task: "CameraApp 中发现一个 UI Node 类和一个 SettingKey，但生产模式数组与 ProductConfig 中没有入口。应该如何写入 KB，能否直接在 FL 标记支持？"
+    rubric:
+      - id: status
+        check: "不能仅凭类或 key 判断生产支持，应记录代码绑定并将实现状态标为规划中、待确认、内部或调试中的合适值"
+        weight: 3
+      - id: projection
+        check: "没有生产入口时不应直接投影为支持的 FL 功能行"
+        weight: 3
+      - id: evidence
+        check: "要求继续检查 ProductConfig、模式数组、真实入口或项目需求证据"
+        weight: 2

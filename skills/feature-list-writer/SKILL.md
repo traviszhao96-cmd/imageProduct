@@ -1,6 +1,6 @@
 ---
 name: feature-list-writer
-description: Create, review, and maintain Camera Feature List Bitables for any project. Covers FL/software-design boundaries, KB-to-project expansion, hardware judgement, accountable-person routing, reviewer assignment, and description-quality audit. Use when creating, migrating, reviewing, or updating a Camera FL.
+description: Create, review, and maintain Camera Feature List Bitables for any project. Covers requirement-list input, KB-to-project expansion, hardware judgement, distributed Product/HAL/APP/Tuning review, FL/software-design boundaries, and description-quality audit. Use when creating, migrating, reviewing, or updating a Camera FL.
 ---
 
 # Feature List Writer
@@ -11,7 +11,7 @@ Creates and maintains Camera Feature Lists as Lark Bitables. Each project gets i
 
 FL is a shared project capability and acceptance matrix, not a requirement list or detailed software design. It tells Product, APP, HAL SE, Tuning SE, SQA, and IQA whether a function/algorithm is supported for a project, mode, physical camera, specification, or focal range. Repeated rows are generated from KB, requirements, hardware/config, and reviewed design rather than manually maintained as dead information.
 
-Before editing an FL, read [references/review-policy.md](references/review-policy.md). It defines the FL boundary, accountable-person routing, review participants, description quality gate, and AI dispute logic.
+Before editing an FL, read [references/review-policy.md](references/review-policy.md). It defines the FL boundary, distributed module review, description quality gate, and AI dispute logic.
 
 ## When to Use
 
@@ -65,12 +65,11 @@ Each FL Bitable contains:
 | 不支持原因 | text | 当摄像头列为 ✗ 时，写清“所需依赖 → 当前项目缺失/限制 → 无法支持的结果”；继承项目、基线勾叉和“不在范围”不是根因 |
 | 状态（历史） | select | 旧表迁移时保留的手工状态，不再作为模块评审完成度的真值 |
 | 确认状态 | formula | 由 Product / HAL / APP / Tuning 自动计算：任一模块有疑问则为有疑问；全部模块已确认或不相关则为已确认；其余为待确认 |
-| 主责确认人 | person/single-select | 一个具体姓名，单选；由负责人映射表按模块和能力路由 |
-| 评审角色 | multi-select | Product / APP / HAL SE / Tuning SE / SQA / IQA；表示参与者，不等同主责人 |
-| Product | select | 待确认 / 已确认 / 不相关 / 有疑问；当前模块负责人 Travis Zhao |
-| HAL | select | 待确认 / 已确认 / 不相关 / 有疑问；当前模块负责人 Delevin Yao |
-| APP | select | 待确认 / 已确认 / 不相关 / 有疑问；当前模块负责人 Zhongmin Long |
-| Tuning | select | 待确认 / 已确认 / 不相关 / 有疑问；当前模块负责人 John Li |
+| 确认负责人（历史） | person/single-select | 旧表兼容字段；不再作为新行必填或评审真值，不为新行指定单一责任人 |
+| Product | select | 待确认 / 已确认 / 不相关 / 有疑问；Product 参与范围、入口和验收目标评审 |
+| HAL | select | 待确认 / 已确认 / 不相关 / 有疑问；HAL 参与硬件、pipeline、规格和摄像头边界评审 |
+| APP | select | 待确认 / 已确认 / 不相关 / 有疑问；APP 参与入口、交互、状态和实现行为评审 |
+| Tuning | select | 待确认 / 已确认 / 不相关 / 有疑问；Tuning 参与算法效果、参数和画质边界评审 |
 | 验证方法 | text | 验收标准 |
 
 **Camera columns**: Only include cameras the device actually has. 26111: Main + UW + Front. 26121: Main + UW + Tele + Front. Never create "无长焦" placeholder columns — just omit.
@@ -129,8 +128,10 @@ python3 scripts/build_kb_functions_algorithms.py
 
 Outputs:
 
-- `knowledge/_output/kb-functions-algorithms.v6.json`
-- `knowledge/_output/kb-functions-algorithms.v6.audit.md`
+- `knowledge/_output/kb-functions-algorithms.json`
+- `knowledge/_output/kb-functions-algorithms.v7.json`
+- `knowledge/_output/kb-functions-algorithms.v7.audit.md`
+- `knowledge/feature-tree.md`
 
 KB rules:
 
@@ -146,7 +147,7 @@ KB rules:
 
 ```
 1. Identify baseline project (hardware-closest predecessor)
-2. Load canonical KB: knowledge/_output/kb-functions-algorithms.v6.json
+2. Load canonical KB: knowledge/_output/kb-functions-algorithms.v7.json
 3. Expand each KB row's mode scope into real project mode rows
 4. Apply project/camera hardware judgement and fill each camera column with ✓ / ✗
 5. Keep unsupported rows with ✗ when the feature is in that mode scope; this is how FL shows differences
@@ -155,8 +156,8 @@ KB rules:
 8. Add per-device tables → populate expanded FL rows
 9. Run `python3 skills/feature-list-writer/scripts/audit_fl_quality.py <fl.json>`
 10. Run the semantic review Agent defined in `references/review-policy.md`; send only disputed/high-risk rows to humans
-11. Resolve every row to one named `主责确认人` from the approved owner map before review distribution
-12. Initialize Product / HAL / APP / Tuning module confirmation columns according to routing; reviewers update their own column directly in Base
+11. Initialize Product / HAL / APP / Tuning columns according to the row's affected modules; every applicable module reviews its own conclusion directly in Base
+12. Leave the historical `确认负责人` field empty for new rows unless the user explicitly requests legacy compatibility; do not invent one accountable person
 ```
 
 ### 2. Project Inheritance
@@ -201,7 +202,7 @@ When inheriting from baseline:
 
 - `✓` = supported (tested and confirmed)
 - `✗` = not supported (hardware limitation or not applicable)
-- `TBD` = draft-only unresolved judgement, requiring the named accountable person to resolve before final sign-off
+- `TBD` = draft-only unresolved judgement, requiring all relevant modules to review the missing evidence before final sign-off
 - For final sign-off, resolve `TBD` to `✓` or `✗`.
 - For every inferred `✗`, fill `不支持原因` when possible. Put behavior details in `说明` and acceptance steps in `验证方法`.
 
@@ -264,23 +265,21 @@ Dual View Video v2 should be split by acceptance surface:
 - Filter, Tuning, and Tuning Palette are sub-capabilities described inside Style, not separate KB/FL rows.
 - Video Style/LUT is limited to ordinary SDR 1080P30 when the current pipeline has that restriction; write the specification boundary in the description and verification method.
 
-### 12. Quality And Ownership Gate
+### 12. Quality And Distributed Review Gate
 
 - Do not publish rows with empty, generic, source-only, or mechanically repeated descriptions.
 - Description quality is information coverage, not length. Do not add sentences unless they explain purpose/benefit, behavior, result impact, default/persistence, scope, or dependency.
-- Stateful functions and settings must state the known default and the effect of enabling, disabling, or changing the option. If these facts are unknown, keep the row pending and ask the owner; do not silently omit them or invent them.
+- Stateful functions and settings must state the known default and the effect of enabling, disabling, or changing the option. If these facts are unknown, keep the row pending and ask the relevant review modules; do not silently omit them or invent them.
 - Stateful functions must also summarize their meaningful memory/reset rule. Use `knowledge/reference/memory-mutex.json` as the 25111 MP1.5 baseline, then confirm project deltas. Keep the full nine-scenario matrix in KB/reference data rather than copying all scenarios into every FL description.
 - Algorithm descriptions must explain the imaging problem, trigger/scope, observable result, and determining dependency. `提升画质` or an algorithm acronym alone is not a sufficient explanation.
-- Do not infer a real unsupported reason from a baseline `✗`; unresolved reasons stay `TBD` for the accountable person.
+- Do not infer a real unsupported reason from a baseline `✗`; unresolved reasons stay `TBD` for the relevant modules.
 - An unsupported reason must state the required dependency, the actual missing/limited project fact, and the resulting unsupported consequence. Project inheritance and source provenance can be evidence links, but never the reason text.
-- `主责确认人` must contain one approved person name. A role such as `Product` or `HAL SE` is not a person name.
-- `评审角色` may contain multiple roles and is generated from the routing matrix.
-- Module confirmation columns do not replace camera support marks, `状态`, `主责确认人`, or `评审角色`. They record whether each module has reviewed the current row.
+- Do not require or synthesize `主责确认人` / `确认负责人` for new rows. The Product / HAL / APP / Tuning columns are the review truth.
+- Module confirmation columns do not replace camera support marks. They record whether each relevant module has reviewed the current row.
 - Allowed module states are `待确认`、`已确认`、`不相关`、`有疑问`. `有疑问` requires a concrete note; do not use an empty question state.
 - Never infer row-level confirmation from one module's `已确认`. A row passes the module gate only when all applicable modules are `已确认`, all non-applicable modules are `不相关`, and no module is `待确认` or `有疑问`.
 - `确认状态` is a read-only formula field and is the authoritative module-review result. Keep an existing manual `状态` only as migration history; do not continue updating it as the review source of truth.
-- Current 26111 / 26121 module owner map (2026-07-23): Product = Travis Zhao; HAL = Delevin Yao; APP = Zhongmin Long; Tuning = John Li.
-- Structural audit passing is necessary but not sufficient. The semantic review Agent must return `PASS`, `NEEDS_REWRITE`, `NEEDS_OWNER_INPUT`, or `BOUNDARY_VIOLATION` for every flagged row.
+- Structural audit passing is necessary but not sufficient. The semantic review Agent must return `PASS`, `NEEDS_REWRITE`, `NEEDS_REVIEW_INPUT`, or `BOUNDARY_VIOLATION` for every flagged row.
 
 ## Key Resources
 

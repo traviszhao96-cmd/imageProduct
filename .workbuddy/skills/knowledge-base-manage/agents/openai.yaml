@@ -1,0 +1,7 @@
+interface:
+  display_name: "Camera Knowledge Base Manager"
+  short_description: "Maintain Camera KB v7, Tree, projections, and visualizer"
+  default_prompt: "Use $knowledge-base-manage to update and validate the Camera capability knowledge base."
+
+policy:
+  allow_implicit_invocation: true

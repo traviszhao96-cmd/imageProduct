@@ -1,4 +1,4 @@
 interface:
   display_name: "Feature List Writer"
   short_description: "Create, audit, and route Camera Feature Lists"
-  default_prompt: "Use $feature-list-writer to review this Camera FL, enforce its boundary, audit description quality, and assign accountable owners."
+  default_prompt: "Use $feature-list-writer to review this Camera FL, enforce its boundary, audit description quality, and route distributed module review."

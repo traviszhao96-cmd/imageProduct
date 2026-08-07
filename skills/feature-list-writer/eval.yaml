@@ -15,21 +15,21 @@ cases:
   - id: r3
     check: FL 只保留需要独立确认的能力支持结论及模式/摄像头/规格/焦段范围
     weight: 2
-- id: case-owner-routing
+- id: case-distributed-review
   threshold: 0.8
-  task: "一行是视频算法支持焦段，当前确认负责人写 Product / SE / IQA。另一个是纯设置交互。请说明主责人与评审角色应该怎么填。"
+  task: "一行是视频算法支持焦段，另一个是纯设置交互。项目不再设置单一确认负责人，请说明 Product/HAL/APP/Tuning 四列应该如何参与评审。"
   rubric:
   - id: r1
-    check: 主责确认人必须是一个具体姓名且单选，不能填写角色组合
+    check: 明确不要求或编造单一确认负责人，四个模块列是评审真值
     weight: 2
   - id: r2
-    check: 视频算法支持焦段默认由 HAL SE 对应人员主责，评审角色可包含 HAL SE 和 IQA/SQA 等参与者
+    check: 视频算法支持焦段至少需要 Product、HAL、Tuning 评审，有用户入口或 APP 集成时 APP 也参与
     weight: 2
   - id: r3
-    check: 纯设置交互默认由 Product 对应人员主责，评审角色包含 Product、APP、SQA
+    check: 纯设置交互由 Product 和 APP 评审，HAL/Tuning 无依赖时标记不相关
     weight: 2
   - id: r4
-    check: 没有人员映射时标记待确认或 OWNER_AMBIGUOUS，不编造姓名
+    check: 所有适用模块已确认且非适用模块为不相关时才算确认；待确认或有疑问不能通过
     weight: 1
 - id: case-description-quality
   threshold: 0.8
@@ -42,7 +42,7 @@ cases:
     check: 要求说明功能或算法是什么、解决什么问题、适用模式/摄像头/规格/焦段或触发边界
     weight: 2
   - id: r3
-    check: 不在缺少事实时编造具体范围，而是提出准确的主责人确认问题
+    check: 不在缺少事实时编造具体范围，而是提出准确的模块评审问题
     weight: 2
 - id: case-unsupported-causality
   threshold: 0.8
@@ -84,7 +84,7 @@ cases:
     check: 保留已知用途和开启/关闭影响，不编造默认值
     weight: 2
   - id: r2
-    check: 将默认状态列为明确的主责确认问题
+    check: 将默认状态列为明确的 Product/APP 模块评审问题
     weight: 2
   - id: r3
     check: 在默认状态影响验收时保持待确认，而不是用继承项目推断为已确认

@@ -22,39 +22,27 @@ Detailed design belongs in reviewed HAL/algorithm/software design. KB owns the c
 
 Boundary test: if a reviewer can answer the row with one project support conclusion plus a meaningful range, keep it. If the answer requires a decision tree, pipeline diagram, frame sequence, or threshold table, put those details in software design and keep only the resulting capability/range in FL.
 
-## 2. Responsibility Model
+## 2. Distributed Review Model
 
-Use two separate fields:
+Do not route a row to one accountable person. Use the four module columns as the review truth:
 
-- `主责确认人`: exactly one approved person name. This person resolves the row and is accountable for `已确认`.
-- `评审角色`: one or more roles that must review or execute acceptance.
+- `Product`: scope, user entry, options, defaults, and acceptance intent.
+- `APP`: UI, state, lifecycle, configuration, and application behavior.
+- `HAL`: hardware, pipeline, camera, focal, and specification feasibility.
+- `Tuning`: algorithm effect, tuning parameters, and image/video quality boundary.
 
-Default routing:
+Initialize each module as `待确认`, `已确认`, `不相关`, or `有疑问`. Every applicable module updates its own column directly. A row is confirmed only when every applicable module is `已确认`, every non-applicable module is `不相关`, and none is `待确认` or `有疑问`.
 
-| Row scope | Default accountable role | Review roles |
+Suggested applicability:
+
+| Row scope | Applicable modules |
 |---|---|---|
-| Pure function, setting, entry, interaction, or product scope | Product | Product, APP, SQA |
-| APP implementation behavior with no product-scope dispute | APP | Product, APP, SQA |
-| Hardware, HAL, pipeline feasibility, algorithm support, camera/spec/focal boundary | HAL SE | HAL SE, relevant algorithm owner, SQA or IQA |
-| Tuning parameters, image style, or effect-delivery boundary | Tuning SE | Effect Product, Tuning SE, IQA |
-| Software acceptance conclusion itself is disputed | SQA | Product, APP, SQA |
-| Image/video effect acceptance conclusion itself is disputed | IQA | Effect Product, Tuning SE, IQA |
+| Pure function, setting, entry, or interaction | Product, APP; add HAL/Tuning only when the behavior depends on them |
+| Hardware, pipeline, camera/spec/focal boundary | Product, HAL; add APP/Tuning when the entry or effect changes |
+| Algorithm or effect capability | Product, HAL, Tuning; add APP when there is a user control or application integration |
+| Pure application lifecycle or state behavior | Product, APP |
 
-Product visibility does not make Product the owner of an algorithm row. SQA/IQA normally execute acceptance and become accountable only when the unresolved decision belongs to testing.
-
-When an owner list is supplied, create `references/owner-map.yaml` with this shape:
-
-```yaml
-people:
-  - name: Full Name
-    roles: [Product]
-    scopes: [Toolbar, Settings]
-  - name: Full Name
-    roles: [HAL SE]
-    scopes: [Realtime Algorithm, Post-processing Algorithm, Video Specs]
-```
-
-Select the person whose role and scope best match the row. If no unique match exists, leave `主责确认人` empty, set the row to `待确认`, and emit `OWNER_AMBIGUOUS`; never invent a name. If several people match, prefer the narrowest scope, then project-specific assignment. Do not round-robin accountability.
+Keep an existing `确认负责人` / `主责确认人` field only as migration history. Do not populate it for new rows unless the user explicitly requires legacy compatibility.
 
 ## 3. Description Quality Gate
 
@@ -94,7 +82,7 @@ Reject descriptions such as:
 - `来自基线 FL。`
 - `打开入口，确认选项、状态保持。`
 
-Unsupported reasons must use a causal chain: `required dependency -> missing/limited project capability -> unsupported consequence`. Never use `按当前项目硬件、PRD 或基线 FL，该摄像头不在支持范围` as a reason. A baseline mark is evidence to investigate, not the cause. Example: `Quality depends on a high-pixel Sensor output mode and its Remosaic/output pipeline; this camera does not expose a supported high-pixel output, so Quality switching is unavailable.` If the missing dependency cannot be established, change the support cell to `TBD`, keep the row pending, and ask the accountable person.
+Unsupported reasons must use a causal chain: `required dependency -> missing/limited project capability -> unsupported consequence`. Never use `按当前项目硬件、PRD 或基线 FL，该摄像头不在支持范围` as a reason. A baseline mark is evidence to investigate, not the cause. Example: `Quality depends on a high-pixel Sensor output mode and its Remosaic/output pipeline; this camera does not expose a supported high-pixel output, so Quality switching is unavailable.` If the missing dependency cannot be established, change the support cell to `TBD`, keep the row pending, and ask the relevant modules.
 
 An unsupported reason must contain three facts:
 
@@ -136,9 +124,9 @@ Verdicts:
 
 - `PASS`: score >= 8, no dimension is 0, no evidence conflict.
 - `NEEDS_REWRITE`: meaning is known but wording is generic, mechanical, duplicated, or misplaced.
-- `NEEDS_OWNER_INPUT`: support, range, reason, or accountable person cannot be resolved from approved evidence.
+- `NEEDS_REVIEW_INPUT`: support, range, reason, or module conclusion cannot be resolved from approved evidence.
 - `BOUNDARY_VIOLATION`: row is detailed design/optimization rather than an independently accepted capability.
 
 The Agent may propose a rewrite only from existing evidence. It must not invent a focal range, specification, trigger, unsupported reason, or person. It must group the same KB capability across modes and flag inconsistent descriptions instead of rewriting each row independently.
 
-Output a review queue with: project, mode, feature name, issue code, verdict, current text, evidence used, proposed text or exact owner question, and severity. Humans review critical conflicts and disputed rows; AI can directly apply low-risk wording normalization after preserving meaning.
+Output a review queue with: project, mode, feature name, issue code, verdict, current text, evidence used, proposed text or exact module-review question, and severity. Humans review critical conflicts and disputed rows; AI can directly apply low-risk wording normalization after preserving meaning.
