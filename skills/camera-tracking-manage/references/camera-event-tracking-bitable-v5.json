@@ -3396,5 +3396,69 @@
     },
     "id": "recvpwY23ewvwp",
     "record_id": "recvpwY23ewvwp"
+  },
+  {
+    "fields": {
+      "event_name": "NTCamera",
+      "key": "video_info",
+      "key_note": "每次停止录制并成功生成一个视频时上报",
+      "label": "camera_id",
+      "label_note": "视频由哪颗镜头录制",
+      "string_value": "0",
+      "value_note": "主摄，后置广角",
+      "默认值": "无",
+      "备注": "2026-08-18 补充文档；代码已通过 video_record_info 上报 CameraId",
+      "当前状态": "已上线"
+    },
+    "id": "recvsCgQrSeSVd",
+    "record_id": "recvsCgQrSeSVd"
+  },
+  {
+    "fields": {
+      "event_name": "NTCamera",
+      "key": "video_info",
+      "key_note": "每次停止录制并成功生成一个视频时上报",
+      "label": "camera_id",
+      "label_note": "视频由哪颗镜头录制",
+      "string_value": "1",
+      "value_note": "前置镜头",
+      "默认值": "无",
+      "备注": "2026-08-18 补充文档；代码已通过 video_record_info 上报 CameraId",
+      "当前状态": "已上线"
+    },
+    "id": "recvsCgQrSTgO9",
+    "record_id": "recvsCgQrSTgO9"
+  },
+  {
+    "fields": {
+      "event_name": "NTCamera",
+      "key": "video_info",
+      "key_note": "每次停止录制并成功生成一个视频时上报",
+      "label": "camera_id",
+      "label_note": "视频由哪颗镜头录制",
+      "string_value": "2",
+      "value_note": "后置超广",
+      "默认值": "无",
+      "备注": "2026-08-18 补充文档；代码已通过 video_record_info 上报 CameraId",
+      "当前状态": "已上线"
+    },
+    "id": "recvsCgQrSS8Qm",
+    "record_id": "recvsCgQrSS8Qm"
+  },
+  {
+    "fields": {
+      "event_name": "NTCamera",
+      "key": "video_info",
+      "key_note": "每次停止录制并成功生成一个视频时上报",
+      "label": "camera_id",
+      "label_note": "视频由哪颗镜头录制",
+      "string_value": "3",
+      "value_note": "后置长焦",
+      "默认值": "无",
+      "备注": "2026-08-18 补充文档；代码已通过 video_record_info 上报 CameraId",
+      "当前状态": "已上线"
+    },
+    "id": "recvsCgQrSbO4K",
+    "record_id": "recvsCgQrSbO4K"
   }
 ]
