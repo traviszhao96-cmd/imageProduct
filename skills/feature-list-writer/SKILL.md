@@ -13,6 +13,8 @@ FL is a shared project capability and acceptance matrix, not a requirement list 
 
 Before editing an FL, read [references/review-policy.md](references/review-policy.md). It defines the FL boundary, distributed module review, description quality gate, and AI dispute logic.
 
+When maintaining the `26111 UI Spec` / `26121 UI Spec` tables in the same Base, also read [`../../knowledge/reference/mode-zoom-transient-rules.md`](../../knowledge/reference/mode-zoom-transient-rules.md). It is the source of truth for UI zoom points, Quick Zoom points, continuous zoom, and Preset focal-length candidates. Do not derive one of these fields by copying another field without applying its projection rule.
+
 ## When to Use
 
 - "创建 26111 功能列表"
@@ -280,6 +282,15 @@ Dual View Video v2 should be split by acceptance surface:
 - Never infer row-level confirmation from one module's `已确认`. A row passes the module gate only when all applicable modules are `已确认`, all non-applicable modules are `不相关`, and no module is `待确认` or `有疑问`.
 - `确认状态` is a read-only formula field and is the authoritative module-review result. Keep an existing manual `状态` only as migration history; do not continue updating it as the review source of truth.
 - Structural audit passing is necessary but not sufficient. The semantic review Agent must return `PASS`, `NEEDS_REWRITE`, `NEEDS_REVIEW_INPUT`, or `BOUNDARY_VIOLATION` for every flagged row.
+
+### 13. UI Spec Zoom And Preset Rules
+
+- Keep `UI 变焦点`, `快速变焦点`, `连续变焦范围`, and `Preset 支持焦段` as four distinct conclusions. A point may appear in more than one field, but the fields are not aliases.
+- Build a mode's Preset focal candidates from the union of its confirmed UI zoom-point focal lengths and confirmed Quick Zoom-point focal lengths, then add only project-approved extension focal lengths. Finally filter the result by that mode's camera, continuous range, specification, and quality path.
+- A Quick Zoom point is defined by the configured Zoom-dial ratio and the calibrated equivalent focal length of its source physical camera. The `mm` label is derived for display and must land on the actual dial point. Never choose a traditional photography focal length first and then invent a ratio to match it.
+- Do not recompute Quick Zoom ratios from rounded UI labels such as `24mm`. Use the project's calibrated focal-length/ratio mapping; store or describe the tuple as `ratio · displayed mm · source camera` when the ratio is known.
+- Keep Preset focal lists ordered from wide to tele, one `Nmm` value per line. Project-level candidate sets may be reused, but every mode row must remove points that its pipeline cannot restore.
+- `常用焦段` is not evidence. Call these `扩展焦段 / Extension focal points` and record their approved product purpose and capture-path/quality basis in `判断依据`; unresolved extensions stay out of confirmed rows.
 
 ## Key Resources
 

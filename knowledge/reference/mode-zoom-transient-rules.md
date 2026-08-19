@@ -86,6 +86,8 @@ Do not treat every point shown on the Zoom dial as a default UI zoom point. The 
 - Clicking a UI focal button to switch focal length is an interaction on the UI point; it does not make that point a Quick zoom point.
 - A mode without explicit quick-point configuration should not inherit another mode's points automatically.
 
+Quick Zoom points are ratio-led, not label-led. Define the point from the configured Zoom-dial ratio and the calibrated equivalent focal length of the physical camera that supplies the point, then derive the integer `mm` label used by the UI. The rounded project label (for example `24mm` for Main) is a display value and must not be used to reverse-calculate the ratio. This is why a Quick Zoom point must be maintained as a mapping such as `ratio · displayed focal length · source camera`, not as a free-standing traditional photography focal length.
+
 Online baseline examples:
 
 | Mode / camera | Quick zoom points | Rule |
@@ -107,6 +109,29 @@ Video, Dual View, Front Video, Slow Motion, and Timelapse do not support Quick Z
 Motion Photo uses the same focal-length support as Photo and is not maintained as a separate mode row in the Zoom Range Matrix. Any future Motion Photo-specific focal restriction must first be confirmed as a real project difference before a separate row is reintroduced.
 
 26111 Rear Portrait exposes only Main 1x and Main 2x ISZ, with continuous zoom `1x-2x`. It does not support 3.5x Tele because the project has no Tele camera, and it does not support the Main-camera 4x Hex Zoom path.
+
+### Preset Focal-Length Projection
+
+`Preset 支持焦段` is a discrete restoration list, not another name for the continuous zoom range.
+
+For each project/mode/position row:
+
+1. Include the equivalent focal lengths of every confirmed `UI 变焦点` in that row.
+2. Include every confirmed `快速变焦点` in that row.
+3. Add only explicitly approved `扩展焦段 / Extension focal points`. An extension needs a product framing purpose, a real capture path, acceptable output quality, and a position on the configured Zoom dial. “Common photography focal length” by itself is not evidence.
+4. Intersect the result with the mode's supported camera, continuous range, output specification, and restoration capability.
+5. Sort from wide to tele and store one `Nmm` value per line. Do not copy a project-wide superset into a restricted mode.
+
+The stable identity of a point is its project capture path and Zoom-dial position. The displayed `mm` is presentation metadata. UI Spec should preserve the ratio-to-focal mapping in `UI 变焦点`, `快速变焦点`, or `判断依据` whenever it is known.
+
+Current 26121 product conclusions used by the UI Spec:
+
+- Rear Photo-class UI points: `15mm / 24mm / 48mm / 80mm / 160mm`.
+- Rear Photo-class Quick Zoom points: `28mm / 36mm`, using the calibrated Main-camera ratio mapping from the Zoom-dial baseline rather than reverse-calculation from the rounded `24mm` label.
+- `100mm` is a project-approved Preset extension point where the mode's range and pipeline allow it.
+- Rear Photo, Night, Expert, and Action therefore use the ordered candidate list `15 / 24 / 28 / 36 / 48 / 80 / 100 / 160mm` when their mode pipeline exposes the same UI and Quick points.
+- Rear Video and Timelapse do not expose Quick Zoom points. Their confirmed Preset list is `15 / 24 / 36 / 48 / 80 / 100 / 160mm`; `36mm` and `100mm` are extensions rather than Quick Zoom points in those modes.
+- Portrait, Slow Motion, Panorama, High Resolution, Front, and other restricted rows keep only their independently confirmed subset; they must not inherit the full Rear Photo list.
 
 ## Transient Switches
 
