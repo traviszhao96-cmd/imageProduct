@@ -1,6 +1,6 @@
 ---
 name: camera-product-gerrit-sync
-description: Use when the user wants to sync, package, submit, update, review, rerun CI, or merge Camera/Gallery product skills to the internal Nothing Gerrit repository `Nothing/AIAgent/Skills` on branch `cameraProduct`, especially under `skills/camera_product_skills/`.
+description: Use when the user wants to access internal Camera/Gallery Gerrit repositories or sync, package, submit, update, review, rerun CI, or merge product skills to `Nothing/AIAgent/Skills` on branch `cameraProduct`.
 ---
 
 # Camera Product Gerrit Sync
@@ -48,6 +48,36 @@ ssh -p 29418 dev.nothing.local
 ```
 
 Expected success text includes `Welcome to Gerrit Code Review`.
+
+Do not copy passwords, private-key contents, access tokens, or browser cookies into this skill. The SSH host alias and identity-file path are connection metadata only; authentication remains local to the user's machine.
+
+The in-app browser does not automatically inherit the local Git/SSH session. If an internal Gerrit page shows a sign-in screen or 404, verify access through SSH before concluding that the repository or branch is unavailable.
+
+## CameraApp Source Access
+
+Use the local Gerrit SSH identity for read-only CameraApp source and branch checks:
+
+- Gerrit project: `Nothing/app/CameraApp`
+- SSH URL: `ssh://travis.zhao@dev.nothing.local:29418/Nothing/app/CameraApp`
+- Primary development branch for current product checks: `develop2`
+- Gerrit web URL: `http://dev.nothing.local:8282/admin/repos/Nothing/app/CameraApp`
+
+Verify authentication and resolve the canonical project name with:
+
+```bash
+ssh -o BatchMode=yes -p 29418 travis.zhao@dev.nothing.local gerrit version
+ssh -o BatchMode=yes -p 29418 travis.zhao@dev.nothing.local gerrit ls-projects --match CameraApp
+```
+
+Check the current `develop2` ref without cloning:
+
+```bash
+git ls-remote --heads \
+  ssh://travis.zhao@dev.nothing.local:29418/Nothing/app/CameraApp \
+  refs/heads/develop2
+```
+
+This access was verified on 2026-08-21. Treat the returned commit SHA as live state and query it again when current branch state matters.
 
 ## Sync Workflow
 
