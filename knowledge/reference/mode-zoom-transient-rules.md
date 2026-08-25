@@ -95,12 +95,14 @@ Online baseline examples:
 | Rear Photo | 1.2x / 28mm; 1.5x / 36mm | Confirmed by the Zoom dial PRD baseline. |
 | 26111 Rear Video / Dual View Rear Stream | None | UI zoom points are 0.6x / 1x / 2x / 4x. Continuous zoom is 0.6x-8x. |
 | 26121 Rear Video / Dual View Rear Stream | None | UI zoom points are 0.6x / 1x / 2x / 3.5x / 7x. Continuous zoom is 0.6x-20x. |
-| Front camera | None | Front Auto Wide is removed from the 26111/26121 project scope. Front UI exposes only 1x on the Front camera. UI Spec focal lengths use rounded integers: 23mm on 26111 and 24mm on 26121. |
+| Front camera | None | Front Auto Wide is removed from the 26111/26121 project scope. Front UI exposes only 1x on the Front camera. Both projects use the product UI label `24mm`; the 26111 hardware equivalent focal length `23.21mm` remains hardware evidence and must not be rounded into a separate `23mm` UI label. |
 | 25111 Pro / 26121 Rear Portrait | None as extra quick dots | 1x / 2x / 3.5x are fixed UI focal entries; continuous zoom is 1x-3.5x. This Tele-derived baseline does not apply to 26111. |
 
 Action mode is a photo-class mode and inherits Rear Photo Quick Zoom points `1.2x / 28mm` and `1.5x / 36mm`. It also uses project-specific UI zoom points and supports continuous zoom across the same displayed range. 26111 Rear Action uses `0.6x / 1x / 2x / 4x` with continuous zoom `0.6x-4x`; 26121 Rear Action uses `0.6x / 1x / 2x / 3.5x / 7x` with continuous zoom `0.6x-7x`. Preset focal-length support remains independently confirmable.
 
 Rear Night follows Rear Photo for each project. UI zoom points, Quick Zoom points, continuous zoom range, and Preset focal-length candidates must stay aligned between the two rows; do not maintain an independent reduced Night zoom range. Front Night follows the project Front definition: Front 1x only, with no 0.8x entry or orientation-based switching.
+
+UI Spec focal-length labels are product display contracts, not calculated hardware fields. Keep the physical/equivalent focal length in Hardware Config and cite it in `判断依据`, but use a confirmed product/UI label in `UI 变焦点` and `Preset 支持焦段`. Never mechanically round a hardware equivalent focal length to manufacture a UI label.
 
 Rear Expert also follows Rear Photo for each project. UI zoom points, Quick Zoom points, continuous zoom range, and Preset focal-length candidates must remain aligned with Rear Photo. Photo, Night, and Expert rear rows should be updated together whenever the project zoom configuration changes.
 
