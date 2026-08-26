@@ -163,3 +163,13 @@ When a user asks for one of the mapped feature points:
    - the requested metric is clearly defined in the tracking spec
    - but the current database does not yet contain the corresponding field
    - and the export / parsing step needs to be refreshed
+
+## 6. NPS refid and Camera device identifier
+
+- Athena `device.device_id` and `user_pseudo_id` are observed as 32-character hexadecimal strings; in a 100-row `NTCamera` sample they were identical.
+- NPS `refid` examples are 36-character UUID strings with four hyphens. A verified `ContactLedger` row maps one such refid to a separate 16-character hexadecimal NPS `device_id`.
+- Removing hyphens (`REPLACE(refid, '-', '')`) produces a 32-character hexadecimal candidate, but this normalization is not defined in the NPS API document and did not match the five provided examples on the screenshot date.
+- For the verified India sample, neither the raw 16-character NPS `device_id` nor its ordinary MD5 value matched Athena `user_pseudo_id`, `user_id`, `device.device_id`, or `device.device_id_2` during the activation-to-push window. Do not assume a local 16→32 conversion without confirmation from the Experience/data platform.
+- Prefer `/push/nps/survey/lookup` for `refid → NPS device_id`; a separate confirmed mapping to Athena's pseudonymous identifier is still required.
+- India builds (for example build suffix `IND`) must be queried in Athena region `ap-south-1`; global excluding India uses `eu-north-1`.
+- Observed field normalization for the NPS SuperContra sample: NPS model `SuperContra` → Athena `project_name='SuperContra'` / `device.model_name='A009P'`; NPS language `en-GB` → Athena `device.language='en'`; NPS RAM/storage `8`/`128` → Athena `8GB`/`128GB`; NPS build `SuperContra-B4.1-260811-1606-IND` → Athena `B4.1-260811-1606`; NPS OS version `4.1` → Athena `device.operating_system_version='4.1'`.
