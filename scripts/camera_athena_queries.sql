@@ -245,6 +245,33 @@ GROUP BY event_date
 ORDER BY event_date
 
 
+-- ── 12. NPS 用户对应的相机行为 ─────────────────────────────────────────
+
+-- NPS deviceId = Android ID = Athena items 数组中的 aid。
+-- refid 需先由 NPS 服务查询 ContactLedger 得到 deviceId；不需要做 MD5 或 16→32 位转换。
+-- 印度数据使用 ap-south-1，其他全球数据使用 eu-north-1。
+WITH target_events AS (
+  SELECT event_date,
+         event_name,
+         project_name,
+         device.model_name AS model_name,
+         device.sw_build_info AS sw_build_info
+  FROM dc_database.data_mobile_behavior
+  WHERE event_date BETWEEN '2026-08-14' AND '2026-08-21'
+    AND lower(element_at(filter(items, x -> lower(x.key) = 'aid'), 1).string_value) = lower('<NPS_DEVICE_ID>')
+)
+SELECT event_date,
+       event_name,
+       project_name,
+       model_name,
+       sw_build_info,
+       count(*) AS events
+FROM target_events
+WHERE event_name = 'NTCamera'
+GROUP BY 1,2,3,4,5
+ORDER BY event_date, events DESC
+
+
 -- ── 附录 A: Athena 语法要点 ────────────────────────────────────────────
 --
 -- ✅ 正确: element_at(filter(...), 1) 缺参数返回 NULL

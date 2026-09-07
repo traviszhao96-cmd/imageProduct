@@ -1859,10 +1859,10 @@
       "key_note": "录像成片时上报参数",
       "label": "quality",
       "label_note": "清晰度&帧率 | 延时摄影",
-      "string_value": "1080",
-      "value_note": "1080（延时摄影规格）",
-      "默认值": "video=1080p-60\nslo-mo=1080p-120\ntime-lapse=1080",
-      "备注": "@Zhongmin Long 已处理：sv改为实际规格。原索引值=9",
+      "string_value": "1080p-30",
+      "value_note": "1080p-30（延时摄影最终成片帧率固定 30fps）",
+      "默认值": "video=1080p-60\nslo-mo=1080p-120\ntime-lapse=1080p-30",
+      "备注": "@Zhongmin Long 已处理：sv改为实际规格。原索引值=9；2026-08-27 NOS-12023 补充延时摄影最终成片帧率 30fps",
       "当前状态": null,
       "软件版本": "Camera 2.5"
     },
@@ -1876,10 +1876,10 @@
       "key_note": "录像成片时上报参数",
       "label": "quality",
       "label_note": "清晰度&帧率 | 延时摄影",
-      "string_value": "4k",
-      "value_note": "4k（延时摄影规格）",
-      "默认值": "video=1080p-60\nslo-mo=1080p-120\ntime-lapse=1080",
-      "备注": "@Zhongmin Long 已处理：sv改为实际规格。原索引值=10",
+      "string_value": "4k-30",
+      "value_note": "4k-30（延时摄影最终成片帧率固定 30fps）",
+      "默认值": "video=1080p-60\nslo-mo=1080p-120\ntime-lapse=4k-30",
+      "备注": "@Zhongmin Long 已处理：sv改为实际规格。原索引值=10；2026-08-27 NOS-12023 补充延时摄影最终成片帧率 30fps",
       "当前状态": null,
       "软件版本": "Camera 2.5"
     },
@@ -4316,6 +4316,39 @@
     },
     "id": "recvsCmrAsLuPp",
     "record_id": "recvsCmrAsLuPp"
+  },
+  {
+    "fields": {
+      "event_name": "NTCamera",
+      "key": "video_info",
+      "key_note": "每次停止录制并成功生成一个视频时上报",
+      "label": "quality",
+      "label_note": "清晰度&帧率 | 延时摄影",
+      "string_value": "1080p-30",
+      "value_note": "1080p-30（延时摄影最终成片帧率固定 30fps）",
+      "默认值": null,
+      "备注": "2026-08-27 NOS-12023；Camera 5.1（26111）延时摄影 quality 补充固定帧率",
+      "当前状态": "待开发",
+      "软件版本": "Camera 5.1"
+    },
+    "id": "recvtu7rOyD3Se",
+    "record_id": "recvtu7rOyD3Se"
+  },
+  {
+    "fields": {
+      "event_name": "NTCamera",
+      "key": "video_info",
+      "key_note": "每次停止录制并成功生成一个视频时上报",
+      "label": "quality",
+      "label_note": "清晰度&帧率 | 延时摄影",
+      "string_value": "4k-30",
+      "value_note": "4k-30（延时摄影最终成片帧率固定 30fps）",
+      "默认值": null,
+      "备注": "2026-08-27 NOS-12023；Camera 5.1（26111）延时摄影 quality 补充固定帧率",
+      "当前状态": "待开发",
+      "软件版本": "Camera 5.1"
+    },
+    "id": "recvtu7rOyOPDK",
+    "record_id": "recvtu7rOyOPDK"
   }
 ]
-

@@ -1,8 +1,8 @@
 # Camera App SW 埋点（在线快照）
 
 > Source: https://nothing-tech.sg.larksuite.com/base/N2azb9muvaqqmwsIB7IlPmFGgpg?table=tblh05JLoheZIXfr
-> 拉取日期: 2026-08-19
-> Records: 254
+> 拉取日期: 2026-08-27
+> Records: 256
 
 | event_name | key | key_note | label | label_note | string_value | value_note | 默认值 | 备注 | 当前状态 | 软件版本 |
 |---|---|---|---|---|---|---|---|---|---|---|
@@ -115,8 +115,8 @@
 | NTCamera | video_info | 录像成片时上报参数 | quality | 清晰度&帧率 | 1080p-240 | 1080p-240 | video=1080p-60<br>slo-mo=1080p-120<br>time-lapse=1080 | @Zhongmin Long 已处理：sv改为实际规格。原索引值=6 |  | Camera 2.5 |
 | NTCamera | video_info | 录像成片时上报参数 | quality | 清晰度&帧率 | 1080p-480 | 1080p-480 | video=1080p-60<br>slo-mo=1080p-120<br>time-lapse=1080 | @Zhongmin Long 已处理：sv改为实际规格。原索引值=7 |  | Camera 2.5 |
 | NTCamera | video_info | 录像成片时上报参数 | quality | 清晰度&帧率 | 4k-120 | 4k-120 | video=1080p-60<br>slo-mo=1080p-120<br>time-lapse=1080 | @Zhongmin Long 已处理：sv改为实际规格。原索引值=8 |  | Camera 2.5 |
-| NTCamera | video_info | 录像成片时上报参数 | quality | 清晰度&帧率 \| 延时摄影 | 1080 | 1080（延时摄影规格） | video=1080p-60<br>slo-mo=1080p-120<br>time-lapse=1080 | @Zhongmin Long 已处理：sv改为实际规格。原索引值=9 |  | Camera 2.5 |
-| NTCamera | video_info | 录像成片时上报参数 | quality | 清晰度&帧率 \| 延时摄影 | 4k | 4k（延时摄影规格） | video=1080p-60<br>slo-mo=1080p-120<br>time-lapse=1080 | @Zhongmin Long 已处理：sv改为实际规格。原索引值=10 |  | Camera 2.5 |
+| NTCamera | video_info | 录像成片时上报参数 | quality | 清晰度&帧率 \| 延时摄影 | 1080p-30 | 1080p-30（延时摄影最终成片帧率固定 30fps） | video=1080p-60<br>slo-mo=1080p-120<br>time-lapse=1080p-30 | @Zhongmin Long 已处理：sv改为实际规格。原索引值=9；2026-08-27 NOS-12023 补充延时摄影最终成片帧率 30fps |  | Camera 2.5 |
+| NTCamera | video_info | 录像成片时上报参数 | quality | 清晰度&帧率 \| 延时摄影 | 4k-30 | 4k-30（延时摄影最终成片帧率固定 30fps） | video=1080p-60<br>slo-mo=1080p-120<br>time-lapse=4k-30 | @Zhongmin Long 已处理：sv改为实际规格。原索引值=10；2026-08-27 NOS-12023 补充延时摄影最终成片帧率 30fps |  | Camera 2.5 |
 | NTCamera | video_info | 录像成片时上报参数 | if_HLG | 是否使用HDR规格录制,以及录制时使用的HDR格式 | 0 | 未使用HDR录制 | 0 |  |  | Camera 3.5 |
 | NTCamera | video_info | 录像成片时上报参数 | if_HLG | 是否使用HDR规格录制,以及录制时使用的HDR格式 | 1 | 使用HDR录制，且为HLG格式 | 0 |  |  | Camera 3.5 |
 | NTCamera | video_info | 录像成片时上报参数 | Rec_light | 在录制时是否开启了录影灯 | 0 | 关闭录影灯 | 1 |  |  | Camera 3.5 |
@@ -260,4 +260,5 @@
 | NTCamera | beauty_guide | 美颜首次开启引导 | beauty_level | 用户选择后的美颜等级 | off / natural / strong | 关闭 / 自然 / 强 | off | 2026-08-18 Camera 5.1（26111）需求补充，按 PRD 最小化设计；完成选择时记录 | 待开发 | Camera 5.1 |
 | NTCamera | tips_feedback | Tips and feedback——跳转结果 |  |  | success / failed | 跳转成功 / 跳转失败 | 无 | 2026-08-18 Camera 5.1（26111）需求补充，按 PRD 最小化设计；点击入口后记录最终结果 | 待开发 | Camera 5.1 |
 | NTCamera | ai_preset | AI Preset——关键操作 | action | 用户行为 | show / apply | 推荐展示 / 应用推荐 | 无 | 2026-08-18 Camera 5.1（26111）需求补充，按 PRD 最小化设计；仅记录推荐展示和应用 | 待开发 | Camera 5.1 |
-
+| NTCamera | video_info | 每次停止录制并成功生成一个视频时上报 | quality | 清晰度&帧率 \| 延时摄影 | 1080p-30 | 1080p-30（延时摄影最终成片帧率固定 30fps） |  | 2026-08-27 NOS-12023；Camera 5.1（26111）延时摄影 quality 补充固定帧率 | 待开发 | Camera 5.1 |
+| NTCamera | video_info | 每次停止录制并成功生成一个视频时上报 | quality | 清晰度&帧率 \| 延时摄影 | 4k-30 | 4k-30（延时摄影最终成片帧率固定 30fps） |  | 2026-08-27 NOS-12023；Camera 5.1（26111）延时摄影 quality 补充固定帧率 | 待开发 | Camera 5.1 |

@@ -1,6 +1,6 @@
 ---
 name: camera-data-insight
-description: Use when the user wants to query camera telemetry data — either via Athena/Presto SQL on data_mobile_behavior, or via the remote SQLite server for photo_events_parsed. Covers SQL generation, business reports, field mapping, and data-retention rules. For Bitable management and event tracking design, use camera-tracking-manage instead.
+description: Use when the user wants to query camera telemetry data, including NPS refid/deviceId user-behavior lookup, Athena/Presto SQL on data_mobile_behavior, or the remote SQLite camera dataset. Covers SQL generation, local query execution, business reports, field mapping, and data-retention rules. For Bitable management and event tracking design, use camera-tracking-manage instead.
 ---
 
 # Camera Analytics
@@ -8,6 +8,8 @@ description: Use when the user wants to query camera telemetry data — either v
 ## Overview
 
 This skill handles all camera telemetry queries — both Athena (data_mobile_behavior) and the shared remote SQLite database. For埋点 table management, event tracking design, and PRD writing, see `camera-tracking-manage`.
+
+For NPS user-level behavior queries, read [references/nps-user-query.md](references/nps-user-query.md). The confirmed mapping is `NPS deviceId (Android ID) → Athena items.aid`; `refid → deviceId` belongs to the NPS service.
 
 ## ⚡ Query Execution Protocol（必走流程）
 
@@ -71,6 +73,18 @@ SELECT '分滤镜', model, filter_val, COUNT(*) ... FROM base GROUP BY model, fi
 1. 结果保存到 `~/imageProduct/outputs/athena_results/{主题}/{YYYY-MM-DD}.csv`
 2. 更新 `memory/data-report-index.md` 追加新条目
 3. 如果查询中发现文档未记录的模式 → 反哺到知识库（Step 0a 的规则同样适用）
+
+## NPS User Query
+
+When the request mentions NPS, Typeform, `refid`, `deviceId`, Android ID, or `aid`:
+
+1. Read [references/nps-user-query.md](references/nps-user-query.md).
+2. If only `refid` is available, require the NPS lookup service to return the real 16-character `deviceId`; do not invent a local conversion.
+3. Query the returned `deviceId` directly against `items[key='aid'].string_value`.
+4. Use `ap-south-1` for India builds and `eu-north-1` for other global data.
+5. For a reproducible local query, run [scripts/nps_camera_query.py](scripts/nps_camera_query.py). Do not place AWS credentials in commands, documentation, results, or the packaged skill.
+
+The NPS lookup API's encryption and `refid → ContactLedger.deviceId` implementation are upstream responsibilities. This skill verifies and queries only the returned `deviceId` unless the user explicitly provides an implemented lookup client and authorizes integration.
 
 ---
 
@@ -272,3 +286,5 @@ WHERE photo_mode = 'protrait';
 ## Reference Files
 
 - [references/field-mapping.md](references/field-mapping.md) — 产品语言 → 数据库字段映射
+- [references/nps-user-query.md](references/nps-user-query.md) — NPS refid/deviceId → Athena aid 查询方案与联调验收
+- [scripts/nps_camera_query.py](scripts/nps_camera_query.py) — 不含凭证的本地 Athena 查询脚本

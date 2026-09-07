@@ -112,6 +112,21 @@ Motion Photo uses the same focal-length support as Photo and is not maintained a
 
 26111 Rear Portrait exposes only Main 1x and Main 2x ISZ, with continuous zoom `1x-2x`. It does not support 3.5x Tele because the project has no Tele camera, and it does not support the Main-camera 4x Hex Zoom path.
 
+### Portrait Default Entry Focal Length
+
+`Default entry focal length` is the focal point selected when the user first enters Portrait or when Portrait zoom state is reset. It is not the same field as the list of visible `UI zoom points`.
+
+Portrait should default to a focal length that provides suitable portrait perspective and a confirmed high-quality capture path. The default candidate must be either:
+
+- a confirmed ISZ quality point; or
+- a project-exposed optical Tele point whose displayed equivalent focal length is no longer than 80mm.
+
+Do not choose an arbitrary digital-zoom point as the Portrait default only because its displayed focal length is common in photography. The project must still confirm that Portrait bokeh, HDR/night, beauty, FRT and tuning remain available on the selected path.
+
+For 26111 Rear Portrait, the default entry focal length is `2x · 48mm · Main ISZ`. The project has no Tele camera, so 2x is supplied by the HP5 Main ISZ path rather than a physical Tele lens. The visible points remain `1x · 24mm · Main` and `2x · 48mm · Main ISZ`, with continuous zoom `1x-2x`.
+
+The current CameraApp baseline initializes and resets rear zoom to 1x. Therefore 26111 requires an APP implementation delta so first entry and reset use 2x in Rear Portrait. Zoom-memory behavior after mode switching or app relaunch must be specified separately; default entry does not by itself define every memory scenario.
+
 ### Preset Focal-Length Projection
 
 `Preset 支持焦段` is a discrete restoration list, not another name for the continuous zoom range.

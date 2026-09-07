@@ -97,6 +97,28 @@ python3 outputs/skills/jira-automation/scripts/jira_cli.py comment \
   --body "Spec draft is ready for engineering review."
 ```
 
+## Comment Write And Readback Rules
+
+- Read the issue before commenting. Confirm the issue key, summary, current status, and that the proposed reply addresses the actual ticket rather than a similarly named issue.
+- Pass real line breaks in `--body`. Never pass escaped text such as `\\n` or `\\n\\n`; Jira will store those characters literally instead of creating paragraphs. The CLI converts real newlines and lightweight Markdown headings/lists into ADF rich-text blocks.
+- For a decision or scope reply, lead with the conclusion, then explain the reason and affected scope, and finally state the requested handling. Distinguish automatic/internal capability from a user-facing control when the ticket could confuse them.
+- Permission to comment does not authorize assignment, field edits, transitions, resolution, or closing the issue. Perform those only when the user asks for them explicitly.
+- Treat the comment creation response as the first readback. Verify the returned comment ID, author, issue, and ADF body; inspect the text for literal `\\n` and confirm intended paragraphs/lists were created.
+- If the new comment is malformed, edit that same comment in place with `PUT /rest/api/3/issue/{issueKey}/comment/{commentId}` and a corrected ADF body. Do not post a second correction comment unless in-place editing is unavailable and the user authorizes a duplicate follow-up.
+- Report completion only after the final stored body has been read back. Include the issue link and state separately whether the ticket status was changed.
+
+Use a multiline argument when the reply needs paragraphs:
+
+```bash
+python3 outputs/skills/jira-automation/scripts/jira_cli.py comment \
+  --issue IMGP-123 \
+  --body "结论：本问题无需修改实现。
+
+原因与范围：当前行为符合已确认的产品范围。
+
+请按无需修改处理；本次不变更工单状态。"
+```
+
 Assign an issue:
 
 ```bash

@@ -11,7 +11,7 @@ description: 制定 Camera 需求列表（Bitable）。从多来源（JIRA/Sheet
 - "回落需求评估"、"跨项目需求合并"
 - 给出多个需求来源，要求合并为一张表
 
-若仅需操作已有的单个需求表（如添加字段、更新记录），直接用 `lark-base` skill 操作。
+若是把一条或少量新需求追加到已有需求列表，并同时处理群聊共识、JIRA 和群内同步，改用 `skills/requirement-list-manager/SKILL.md`。底层按资源类型分别使用 `lark-base` 或 `lark-sheets`，不要默认现有列表一定是 Base。
 
 ---
 
