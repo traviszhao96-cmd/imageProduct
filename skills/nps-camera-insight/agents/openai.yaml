@@ -1,0 +1,4 @@
+interface:
+  display_name: "NPS Camera Insight"
+  short_description: "将 NPS refid 映射为设备并分析相机埋点行为"
+  default_prompt: "Use $nps-camera-insight to map NPS refids to deviceIds and analyze the matching Camera telemetry cohorts."
