@@ -21,6 +21,14 @@ Do not store its credentials in this skill. Obtain them from the user or an appr
 7. Verify the result summary and rows.
 8. Export the mapping using **Export Device ID CSV** or the equivalent visible export action.
 
+## Batch script
+
+For a local CSV containing a `refid` column, use `scripts/nps_refid_lookup.py`. It calls the same authenticated lookup endpoint used by the UI, preserves not-found rows, validates response ordering, and writes `refid,device_id,mapping_status`.
+
+Supply the username and password only at runtime through `NPS_USERNAME` / `NPS_PASSWORD` or the password prompt. Never add credentials to the script, shell history, output file, Skill, or Git.
+
+Keep any returned non-empty value that fails the 16-character rule in `device_id_raw` and mark it `device_id_invalid`. In particular, do not silently left-pad shorter hexadecimal values without upstream or Athena evidence.
+
 The Ref IDs mode states that campaign, survey, model, completion, and date filters do not apply.
 
 ## Result interpretation

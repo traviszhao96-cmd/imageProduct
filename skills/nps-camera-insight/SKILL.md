@@ -21,6 +21,8 @@ The mapping has been verified end to end. There is no MD5, UUID normalization, o
 ## Route by task
 
 - To convert one or more `refid` values, read [references/nps-system.md](references/nps-system.md).
+- To create an access-controlled respondent-level file for another agent, read [references/handoff-schema.md](references/handoff-schema.md).
+- For the dated Phone (4b) Activation +7 coverage and current short-ID limitation, read [references/phone-4b-activation7-validation.md](references/phone-4b-activation7-validation.md).
 - To query Athena with returned deviceIds, read [references/athena-query.md](references/athena-query.md) and use [scripts/nps_camera_query.py](scripts/nps_camera_query.py).
 - To prepare a Friday review or compare promoters/passives/detractors, also read [references/insight-playbook.md](references/insight-playbook.md).
 - For ownership, confirmed evidence, and unresolved boundaries, read [references/end-to-end-workflow.md](references/end-to-end-workflow.md).
@@ -31,6 +33,7 @@ The mapping has been verified end to end. There is no MD5, UUID normalization, o
 2. Use the NPS Push System's **Survey Recipients → Ref IDs** query. Process at most 500 entries per batch.
 3. Accept a mapping only when the UI returns `Found` and a 16-character hexadecimal `deviceId`.
 4. Export the mapping CSV. Keep unmatched refids in the quality report; never silently drop them.
+   For batch API lookup, use [scripts/nps_refid_lookup.py](scripts/nps_refid_lookup.py); provide credentials only at runtime.
 5. Query Camera telemetry by matching the returned deviceId against Athena `items.aid`.
 6. Report mapping coverage before behavioral insight: input refids, valid refids, found refids, unique deviceIds, Athena-matched devices, and NTCamera-matched devices.
 7. Produce cohort-level results. Do not publish identifiable per-device behavior unless the user explicitly requests it and is authorized.
@@ -59,5 +62,7 @@ Return or archive:
 - aggregated Camera metrics by requested NPS cohort;
 - the analysis time window, region, project filters, and data limitations;
 - output file paths and query IDs when available.
+
+For an agent handoff, also return a PII-minimized analysis CSV and a quality JSON created with [scripts/prepare_nps_handoff.py](scripts/prepare_nps_handoff.py). Keep both local and out of Git.
 
 If only refids are available and the NPS system cannot be accessed, stop at a prepared refid batch and state that the database mapping cannot be computed locally.
