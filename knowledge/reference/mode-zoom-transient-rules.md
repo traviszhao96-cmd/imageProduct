@@ -98,7 +98,7 @@ Online baseline examples:
 | Front camera | None | Front Auto Wide is removed from the 26111/26121 project scope. Front UI exposes only 1x on the Front camera. Both projects use the product UI label `24mm`; the 26111 hardware equivalent focal length `23.21mm` remains hardware evidence and must not be rounded into a separate `23mm` UI label. |
 | 25111 Pro / 26121 Rear Portrait | None as extra quick dots | 1x / 2x / 3.5x are fixed UI focal entries; continuous zoom is 1x-3.5x. This Tele-derived baseline does not apply to 26111. |
 
-Action mode is a photo-class mode and inherits Rear Photo Quick Zoom points `1.2x / 28mm` and `1.5x / 36mm`. It also uses project-specific UI zoom points and supports continuous zoom across the same displayed range. 26111 Rear Action uses `0.6x / 1x / 2x / 4x` with continuous zoom `0.6x-4x`; 26121 Rear Action uses `0.6x / 1x / 2x / 3.5x / 7x` with continuous zoom `0.6x-7x`. Preset focal-length support remains independently confirmable.
+Action mode is photo-class for navigation and capture semantics, but its capture input differs from Photo. Therefore its Zoom points must be confirmed independently and must not automatically inherit Photo ISZ or Quick Zoom points. 26111 Rear Action uses `0.6x / 1x / 2x / 4x`, supports Quick Zoom points `1.2x / 28mm` and `1.5x / 36mm`, and has continuous zoom `0.6x-4x`. 26121 Rear Action uses `0.6x / 1x / 3.5x / 7x`, does not expose the Photo-mode `2x` UI point, does not support Quick Zoom points, and has continuous zoom `0.6x-7x`. Preset focal-length support remains independently confirmable and must be filtered by the Action input path.
 
 Rear Night follows Rear Photo for each project. UI zoom points, Quick Zoom points, continuous zoom range, and Preset focal-length candidates must stay aligned between the two rows; do not maintain an independent reduced Night zoom range. Front Night follows the project Front definition: Front 1x only, with no 0.8x entry or orientation-based switching.
 
@@ -146,7 +146,7 @@ Current 26121 product conclusions used by the UI Spec:
 - Rear Photo-class UI points: `15mm / 24mm / 48mm / 80mm / 160mm`.
 - Rear Photo-class Quick Zoom points: `28mm / 36mm`, using the calibrated Main-camera ratio mapping from the Zoom-dial baseline rather than reverse-calculation from the rounded `24mm` label.
 - `100mm` is a project-approved Preset extension point where the mode's range and pipeline allow it.
-- Rear Photo, Night, Expert, and Action therefore use the ordered candidate list `15 / 24 / 28 / 36 / 48 / 80 / 100 / 160mm` when their mode pipeline exposes the same UI and Quick points.
+- Rear Photo, Night, and Expert therefore use the ordered candidate list `15 / 24 / 28 / 36 / 48 / 80 / 100 / 160mm` when their mode pipeline exposes the same UI and Quick points. Action must not reuse this list because its capture input and Zoom-point set are independently defined.
 - Rear Video and Timelapse do not expose Quick Zoom points. Their confirmed Preset list is `15 / 24 / 36 / 48 / 80 / 100 / 160mm`; `36mm` and `100mm` are extensions rather than Quick Zoom points in those modes.
 - Portrait, Slow Motion, Panorama, High Resolution, Front, and other restricted rows keep only their independently confirmed subset; they must not inherit the full Rear Photo list.
 
