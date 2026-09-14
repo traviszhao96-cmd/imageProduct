@@ -100,6 +100,8 @@ Online baseline examples:
 
 Action mode is photo-class for navigation and capture semantics, but its capture input differs from Photo. Therefore its Zoom points must be confirmed independently and must not automatically inherit Photo ISZ or Quick Zoom points. 26111 Rear Action uses `0.6x / 1x / 2x / 4x`, supports Quick Zoom points `1.2x / 28mm` and `1.5x / 36mm`, and has continuous zoom `0.6x-4x`. 26121 Rear Action uses `0.6x / 1x / 3.5x / 7x`, does not expose the Photo-mode `2x` UI point, does not support Quick Zoom points, and has continuous zoom `0.6x-7x`. Preset focal-length support remains independently confirmable and must be filtered by the Action input path.
 
+For 26111 Rear Action, the confirmed Preset restoration list is `15mm / 24mm / 48mm / 96mm`. These correspond to its four confirmed UI points. The `28mm / 36mm` Quick Zoom points remain available for live framing but are not Action Preset restoration values. Do not add them to the Preset list merely because they are present on the Zoom dial.
+
 Rear Night follows Rear Photo for each project. UI zoom points, Quick Zoom points, continuous zoom range, and Preset focal-length candidates must stay aligned between the two rows; do not maintain an independent reduced Night zoom range. Front Night follows the project Front definition: Front 1x only, with no 0.8x entry or orientation-based switching.
 
 UI Spec focal-length labels are product display contracts, not calculated hardware fields. Keep the physical/equivalent focal length in Hardware Config and cite it in `判断依据`, but use a confirmed product/UI label in `UI 变焦点` and `Preset 支持焦段`. Never mechanically round a hardware equivalent focal length to manufacture a UI label.
