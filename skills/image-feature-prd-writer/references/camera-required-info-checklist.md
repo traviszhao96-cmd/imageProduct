@@ -10,6 +10,19 @@ Use this checklist before drafting a mobile imaging planning document.
 - Product stage: concept, pre-study, planning, implementation, or release refinement
 - Related hardware platform, if already fixed
 
+## Device Applicability and Upgrade Support（机型适配与升级支持）
+
+必填。**不允许只给一个项目代号**。每个 Camera PRD 必须回答：
+
+- 首发机型：项目代号 + 市场名（如 `26111 / Phone (5a)`）
+- 受限机型与具体差异：哪些机型支持但不完整，缺的是什么能力（如无对应 sensor，仅支持部分档位）
+- 不适用机型及原因：给因果链「依赖 X → 该机型缺 Y → 因此不支持 Z」，**不允许**写「按当前项目硬件不在支持范围」
+- 后续机型继承规则：默认继承 / 按硬件能力逐项目确认
+- 老项目回落计划：是否回落到已发布项目、回落排期
+- 升级项目是否纳入：Android 大版本升级项目（如 17C：23112 / 23111 / 23113 / 24111 / 24121）纳入与否及原因
+
+落点：Camera 模板 §3「机型适配与升级支持」。其他章节只引用，不重复维护。
+
 ## User and Scenario
 
 - Core user group
@@ -83,7 +96,11 @@ When critical fields are missing, ask like this:
 以下信息缺失，当前无法可靠定稿，请先补充：
 
 1. 产品与版本信息
-- 机型/项目代号：
+- 首发机型 / 项目代号（含市场名）：
+- 各机型能力差异（如某机型无对应 sensor，仅支持部分档位）：
+- 不适用机型及原因：
+- 后续机型继承规则：
+- 老项目回落 / 升级项目（如 17C）是否纳入：
 - 上市时间或版本窗口：
 
 2. 功能范围

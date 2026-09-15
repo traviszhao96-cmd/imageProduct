@@ -186,6 +186,26 @@ cases:
   - id: r3
     check: 单元格用 PATCH update_text_elements 更新已有文本块，不能用 DELETE+POST
     weight: 1
+- id: case-device-applicability
+  threshold: 0.75
+  task: 'PM 写 Camera PRD，文档信息里只写了「项目 / 机型 / 代号：26111」。这样够吗？还缺什么？
+
+
+    ```
+    已写: 项目 / 机型 / 代号：26111
+    实际情况: 26121 无 200MP sensor，仅支持 50MP；后续 200MP 项目默认继承
+    ```
+    '
+  rubric:
+  - id: r1
+    check: 指出不够，不能只给单一项目代号
+    weight: 2
+  - id: r2
+    check: 要求补首发机型、机型间能力差异（如 26121 仅 50MP）、不适用机型、继承规则、老项目回落与升级项目（如 17C）
+    weight: 2
+  - id: r3
+    check: 指明落点为 §3「机型适配与升级支持」小节，且不适用机型必须给因果链而非「不在支持范围」
+    weight: 1
 metadata:
   source_skill_md_sha256: 67e52608c0dff8434c09384a0af8bc23192a648970479f8d47234cc2918d186c
   generated_at: '2026-06-25T17:02:34+08:00'

@@ -9,7 +9,7 @@
 |------|------|------|------------|
 | 2亿拍摄玩法 | 相册 | [Pending - 【PRD】Camera 5.1-200MP 自动裁切](https://nothing-tech.sg.larksuite.com/wiki/DlOTwUuE0ioCJ1kee8klpB8xgQf) | DlOTwUuE0ioCJ1kee8klpB8xgQf |
 | 高像素支持 | 相机 | [【PRD】Camera 5.1-200MP 高像素](https://nothing-tech.sg.larksuite.com/wiki/Wr1VwHGm6igzjtk3OZslJ7oAgnd) | Wr1VwHGm6igzjtk3OZslJ7oAgnd |
-| 2 built-in photo style | 相机 | [【PRD】Camera 照片风格推荐](https://nothing-tech.sg.larksuite.com/wiki/XlJrw4m2eiF91GkEX0ylpaQRgjd) | XlJrw4m2eiF91GkEX0ylpaQRgjd |
+| 2 built-in photo style | 相机 | [【PRD】Camera 5.1 - 影像基调（Image Tone）— 自然 & 标准风格](https://nothing-tech.sg.larksuite.com/docx/OmaEd4Re8oKF5WxHd5glNVjGgbd) | OmaEd4Re8oKF5WxHd5glNVjGgbd |
 | 专业模式优化 | 相机 | [【PRD】Camera 5.1 - 照片专业模式 2.0](https://nothing-tech.sg.larksuite.com/wiki/UkbtwxItwiQYBLko8r9lidTig1b) | UkbtwxItwiQYBLko8r9lidTig1b |
 | 前置4K | 相机 | [【PRD】Camera 5.1 - 前置 4K 视频](https://nothing-tech.sg.larksuite.com/wiki/EBDYwdO7si66qHk12jUlOIeIgWd) | EBDYwdO7si66qHk12jUlOIeIgWd |
 | 双摄同录v2 | 相机 | [【PRD】Camera 5.1 - 前后双录 v2](https://nothing-tech.sg.larksuite.com/wiki/FnyiwsqEiiBb05kBUeTleArOgTe) | FnyiwsqEiiBb05kBUeTleArOgTe |

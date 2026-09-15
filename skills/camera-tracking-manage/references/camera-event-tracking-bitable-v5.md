@@ -1,8 +1,8 @@
 # Camera App SW 埋点（在线快照）
 
 > Source: https://nothing-tech.sg.larksuite.com/base/N2azb9muvaqqmwsIB7IlPmFGgpg?table=tblh05JLoheZIXfr
-> 拉取日期: 2026-08-27
-> Records: 256
+> 拉取日期: 2026-09-15
+> Records: 273
 
 | event_name | key | key_note | label | label_note | string_value | value_note | 默认值 | 备注 | 当前状态 | 软件版本 |
 |---|---|---|---|---|---|---|---|---|---|---|
@@ -233,18 +233,18 @@
 | NTCamera | photo_info | 拍照成片时上报参数 | gyro_level | 拍照时陀螺仪检测到的运动等级 | xxx | 陀螺仪运动等级的具体数值 | 0 | 2026-07-16 新增 | 待开发 | Camera 4.1 |
 | NTCamera | photo_info | 拍照成片时上报参数 | face_luma_ratio | 拍照时人脸区域亮度与画面亮度的比值 | xxx | 上报实际比值，具体精度以算法输出为准 | 0 | 2026-07-16 新增 | 待开发 | Camera 4.1 |
 | NTCamera | photo_info | 拍照成片时上报参数 | ISO | 拍照时的感光度（ISO） | xxx | 实际 ISO 数值，如 100、400、1600 | xxx | 2026-07-16 新增 | 待开发 | Camera 4.1 |
-| NTCamera | video_info | 每次停止录制并成功生成一个视频时上报 | camera_id | 视频由哪颗镜头录制 | 0 | 主摄，后置广角 | 无 | 2026-08-18 补充文档；代码已通过 video_record_info 上报 CameraId | 已上线 |  |
-| NTCamera | video_info | 每次停止录制并成功生成一个视频时上报 | camera_id | 视频由哪颗镜头录制 | 1 | 前置镜头 | 无 | 2026-08-18 补充文档；代码已通过 video_record_info 上报 CameraId | 已上线 |  |
-| NTCamera | video_info | 每次停止录制并成功生成一个视频时上报 | camera_id | 视频由哪颗镜头录制 | 2 | 后置超广 | 无 | 2026-08-18 补充文档；代码已通过 video_record_info 上报 CameraId | 已上线 |  |
-| NTCamera | video_info | 每次停止录制并成功生成一个视频时上报 | camera_id | 视频由哪颗镜头录制 | 3 | 后置长焦 | 无 | 2026-08-18 补充文档；代码已通过 video_record_info 上报 CameraId | 已上线 |  |
+| NTCamera | video_info | 每次停止录制并成功生成一个视频时上报 | camera_id | 视频由哪颗镜头录制 | 0 | 主摄，后置广角 | 无 | 2026-08-18 补充文档；代码已通过 video_record_info 上报 CameraId。软件版本留空为有意为之：属证据不足的历史已上线能力，无法定位首次提交的项目代号（见 2026-08-19 变更记录）。2026-09-15 Camera 5.1 前置 4K 复用该字段区分前置与后置。 | 已上线 |  |
+| NTCamera | video_info | 每次停止录制并成功生成一个视频时上报 | camera_id | 视频由哪颗镜头录制 | 1 | 前置镜头 | 无 | 2026-08-18 补充文档；代码已通过 video_record_info 上报 CameraId。软件版本留空为有意为之：属证据不足的历史已上线能力，无法定位首次提交的项目代号（见 2026-08-19 变更记录）。2026-09-15 Camera 5.1 前置 4K 复用该字段区分前置与后置。 | 已上线 |  |
+| NTCamera | video_info | 每次停止录制并成功生成一个视频时上报 | camera_id | 视频由哪颗镜头录制 | 2 | 后置超广 | 无 | 2026-08-18 补充文档；代码已通过 video_record_info 上报 CameraId。软件版本留空为有意为之：属证据不足的历史已上线能力，无法定位首次提交的项目代号（见 2026-08-19 变更记录）。2026-09-15 Camera 5.1 前置 4K 复用该字段区分前置与后置。 | 已上线 |  |
+| NTCamera | video_info | 每次停止录制并成功生成一个视频时上报 | camera_id | 视频由哪颗镜头录制 | 3 | 后置长焦 | 无 | 2026-08-18 补充文档；代码已通过 video_record_info 上报 CameraId。软件版本留空为有意为之：属证据不足的历史已上线能力，无法定位首次提交的项目代号（见 2026-08-19 变更记录）。2026-09-15 Camera 5.1 前置 4K 复用该字段区分前置与后置。 | 已上线 |  |
 | NTCamera | front_auto_wide_switch | 前置自动小广角——自动焦段切换 | from_zoom | 切换前焦段 | 1x / 0.8x | 切换前的前置焦段 | 无 | 2026-08-18 Camera 5.1（26111）需求补充，按 PRD 最小化设计；自动切换时记录 | 待开发 | Camera 5.1 |
 | NTCamera | front_auto_wide_switch | 前置自动小广角——自动焦段切换 | to_zoom | 切换后焦段 | 0.8x / 1x | 切换后的前置焦段 | 无 | 2026-08-18 Camera 5.1（26111）需求补充，按 PRD 最小化设计；自动切换时记录 | 待开发 | Camera 5.1 |
 | NTCamera | tuning_panel | Tuning Palette——面板操作 | action | 面板操作 | open / collapse / reset | 打开 / 收起 / 重置 | 无 | 2026-08-18 Camera 5.1（26111）需求补充，按 PRD 最小化设计；操作完成时记录 | 待开发 | Camera 5.1 |
-| NTCamera | pro_mode_metering_mode | 照片专业模式——测光模式 |  |  | spot / center_weighted / matrix | 点测光 / 中央重点 / 矩阵测光 | 无 | 2026-08-18 Camera 5.1（26111）需求补充，按 PRD 最小化设计；切换时记录 | 待开发 | Camera 5.1 |
-| NTCamera | pro_mode_interval_shots | 照片专业模式——间隔拍摄张数 |  |  | 5-600 | 本次间隔拍摄设定张数 | 无 | 2026-08-18 Camera 5.1（26111）需求补充，按 PRD 最小化设计；开始间隔拍摄时记录 | 待开发 | Camera 5.1 |
-| NTCamera | pro_mode_interval_seconds | 照片专业模式——间隔拍摄间隔 |  |  | 1-60 | 间隔秒数 | 无 | 2026-08-18 Camera 5.1（26111）需求补充，按 PRD 最小化设计；开始间隔拍摄时记录 | 待开发 | Camera 5.1 |
-| NTCamera | pro_mode_peaking_toggle | 照片专业模式——峰值对焦开关 |  |  | on / off | 开启 / 关闭 | 无 | 2026-08-18 Camera 5.1（26111）需求补充，按 PRD 最小化设计；切换时记录 | 待开发 | Camera 5.1 |
-| NTCamera | photo_info | 拍照成片时上报参数 | photo_style | 拍摄时照片风格 | natural / vivid | 自然 / 鲜明 | 无 | 2026-08-18 Camera 5.1（26111）需求补充，按 PRD 最小化设计；每次拍摄成片时记录 | 待开发 | Camera 5.1 |
+| NTCamera | pro_mode_metering_mode | 照片专业模式——测光模式 |  |  | spot / center_weighted / matrix | 点测光 / 中央重点 / 矩阵测光 | 无 | 2026-08-18 Camera 5.1（26111）需求补充，按 PRD 最小化设计；切换时记录。所有机型适配，首发 26111 / 26121，后续升级支持。 | 待开发 | Camera 5.1 |
+| NTCamera | pro_mode_interval_shots | 照片专业模式——间隔拍摄张数 |  |  | 5-600 | 本次间隔拍摄设定张数 | 无 | 2026-08-18 Camera 5.1（26111）需求补充，按 PRD 最小化设计；开始间隔拍摄时记录。所有机型适配，首发 26111 / 26121，后续升级支持。 | 待开发 | Camera 5.1 |
+| NTCamera | pro_mode_interval_seconds | 照片专业模式——间隔拍摄间隔 |  |  | 1-60 | 间隔秒数 | 无 | 2026-08-18 Camera 5.1（26111）需求补充，按 PRD 最小化设计；开始间隔拍摄时记录。所有机型适配，首发 26111 / 26121，后续升级支持。 | 待开发 | Camera 5.1 |
+| NTCamera | pro_mode_peaking_toggle | 照片专业模式——峰值对焦开关 |  |  | on / off | 开启 / 关闭 | 无 | 2026-08-18 Camera 5.1（26111）需求补充，按 PRD 最小化设计；切换时记录。所有机型适配，首发 26111 / 26121，后续升级支持。 | 待开发 | Camera 5.1 |
+| NTCamera | photo_info | 拍照成片时上报参数 | image_tone | 成片使用的 Image Tone | natural / standard | 自然 / 标准 | standard | 2026-09-15 Camera 5.1（26111）埋点 Review；修正旧稿 photo_style natural/vivid，成片时记录。仅后置主摄与广角的 Photo / Portrait 模式上报；Night、Macro、Pano、视频中拍照、前置等其他镜头和模式维持默认调校、不上报，字段为空即表示不适用。26111 与 26121 均适用 | 待开发 | Camera 5.1 |
 | NTCamera | video_info | 每次停止录制并成功生成一个视频时上报 | isz_used | 本次录像是否使用 ISZ | 0 / 1 | 未使用 / 使用 | 0 | 2026-08-18 Camera 5.1（26111）需求补充，按 PRD 最小化设计；录像成片时记录 | 待开发 | Camera 5.1 |
 | NTCamera | eis_switch | 视频防抖——功能开关 |  |  | 0 / 1 | 关闭 / 打开 | 1 | 2026-08-18 Camera 5.1（26111）需求补充，按 PRD 最小化设计；点击开关时记录 | 待开发 | Camera 5.1 |
 | NTCamera | lock_wb | 视频锁定白平衡——功能开关 |  |  | 0 / 1 | 关闭 / 打开 | 0 | 2026-08-18 Camera 5.1（26111）需求补充，按 PRD 最小化设计；点击开关时记录 | 待开发 | Camera 5.1 |
@@ -258,7 +258,24 @@
 | NTCamera | motion_guide | 运动场景引导——胶囊结果 | action | 引导结果 | show / click / close / auto_dismiss | 展示 / 点击 / 关闭 / 自动消失 | 无 | 2026-08-18 Camera 5.1（26111）需求补充，按 PRD 最小化设计；不记录检测中间过程 | 待开发 | Camera 5.1 |
 | NTCamera | beauty_guide | 美颜首次开启引导 | action | 用户行为 | show / select | 引导曝光 / 完成选择 | 无 | 2026-08-18 Camera 5.1（26111）需求补充，按 PRD 最小化设计；仅记录曝光和选择 | 待开发 | Camera 5.1 |
 | NTCamera | beauty_guide | 美颜首次开启引导 | beauty_level | 用户选择后的美颜等级 | off / natural / strong | 关闭 / 自然 / 强 | off | 2026-08-18 Camera 5.1（26111）需求补充，按 PRD 最小化设计；完成选择时记录 | 待开发 | Camera 5.1 |
-| NTCamera | tips_feedback | Tips and feedback——跳转结果 |  |  | success / failed | 跳转成功 / 跳转失败 | 无 | 2026-08-18 Camera 5.1（26111）需求补充，按 PRD 最小化设计；点击入口后记录最终结果 | 待开发 | Camera 5.1 |
-| NTCamera | ai_preset | AI Preset——关键操作 | action | 用户行为 | show / apply | 推荐展示 / 应用推荐 | 无 | 2026-08-18 Camera 5.1（26111）需求补充，按 PRD 最小化设计；仅记录推荐展示和应用 | 待开发 | Camera 5.1 |
+| NTCamera | tips_feedback | Tips and feedback——跳转结果 | result | 最终跳转结果 | success / failed | 跳转成功 / 跳转失败 | 无 | 2026-09-15 Camera 5.1（26111）埋点 Review；事件出现即代表点击，固定入口不重复上报 | 待开发 | Camera 5.1 |
+| NTCamera | ai_preset | AI Preset——关键操作 | action | 用户行为 | show / apply / save | 推荐展示 / 应用推荐 / 保存结果 | 无 | 2026-09-15 Camera 5.1（26111）埋点 Review；仅记录推荐展示、应用与保存 | 待开发 | Camera 5.1 |
 | NTCamera | video_info | 每次停止录制并成功生成一个视频时上报 | quality | 清晰度&帧率 \| 延时摄影 | 1080p-30 | 1080p-30（延时摄影最终成片帧率固定 30fps） |  | 2026-08-27 NOS-12023；Camera 5.1（26111）延时摄影 quality 补充固定帧率 | 待开发 | Camera 5.1 |
 | NTCamera | video_info | 每次停止录制并成功生成一个视频时上报 | quality | 清晰度&帧率 \| 延时摄影 | 4k-30 | 4k-30（延时摄影最终成片帧率固定 30fps） |  | 2026-08-27 NOS-12023；Camera 5.1（26111）延时摄影 quality 补充固定帧率 | 待开发 | Camera 5.1 |
+| NTCamera | tuning_panel | Tuning Palette 面板操作 | entry | 进入来源 | toolbar / preset_edit | 工具栏 / Preset 编辑页 | 无 | 2026-09-15 Camera 5.1（26111）埋点 Review；从工具栏或 Preset 编辑页进入时记录 | 待开发 | Camera 5.1 |
+| NTCamera | tuning_mode | Tuning Palette 模式切换 | from | 切换前模式 | palette / parameter | 调色板 / 参数页 | 无 | 2026-09-15 Camera 5.1（26111）埋点 Review；模式切换完成时记录 | 待开发 | Camera 5.1 |
+| NTCamera | tuning_mode | Tuning Palette 模式切换 | to | 切换后模式 | palette / parameter | 调色板 / 参数页 | 无 | 2026-09-15 Camera 5.1（26111）埋点 Review；模式切换完成时记录 | 待开发 | Camera 5.1 |
+| NTCamera | tuning_palette | Tuning Palette 调色板最终值 | palette_x | 调色板横轴 | -100 ~ +100 | 最终横轴值 | 0 | 2026-09-15 Camera 5.1（26111）埋点 Review；松手或应用时记录最终值，不记录拖动中间态 | 待开发 | Camera 5.1 |
+| NTCamera | tuning_palette | Tuning Palette 调色板最终值 | palette_y | 调色板纵轴 | -100 ~ +100 | 最终纵轴值 | 0 | 2026-09-15 Camera 5.1（26111）埋点 Review；松手或应用时记录最终值，不记录拖动中间态 | 待开发 | Camera 5.1 |
+| NTCamera | tuning_palette | Tuning Palette 调色板最终值 | strength | 调色强度 | 0 ~ 100 | 最终强度值 | 100 | 2026-09-15 Camera 5.1（26111）埋点 Review；松手或应用时记录最终值，不记录拖动中间态 | 待开发 | Camera 5.1 |
+| NTCamera | tuning_parameter | Tuning Palette 参数调节 | parameter | 参数名称 | contrast / saturation / warmth / tint / sharpen / grain / vignette | 对比度 / 饱和度 / 色温 / 色调 / 锐化 / 颗粒 / 暗角 | 无 | 2026-09-15 Camera 5.1（26111）埋点 Review；打开参数或完成调节时记录 | 待开发 | Camera 5.1 |
+| NTCamera | tuning_parameter | Tuning Palette 参数调节 | value | 参数值 | 参数最终值 | 按对应参数定义上报最终值 | 无 | 2026-09-15 Camera 5.1（26111）埋点 Review；调节结束时记录最终值 | 待开发 | Camera 5.1 |
+| NTCamera | tuning_parameter | Tuning Palette 参数调节 | action | 用户操作 | open / adjust | 打开参数 / 完成调节 | 无 | 2026-09-15 Camera 5.1（26111）埋点 Review；仅记录打开与完成调节 | 待开发 | Camera 5.1 |
+| NTCamera | image_tone_select | Image Tone 选择 | image_tone | 选择结果 | natural / standard | 自然 / 标准 | standard | 2026-09-15 Camera 5.1（26111）埋点 Review；用户点击 Natural 或 Standard 且选择值发生变化时上报，与来源 source 同时记录。26111 与 26121 均适用 | 待开发 | Camera 5.1 |
+| NTCamera | image_tone_select | Image Tone 选择 | source | 选择来源 | onboarding / settings | 首次引导 / 设置页 | 无 | 2026-09-15 Camera 5.1（26111）埋点 Review；与选择结果同时记录 | 待开发 | Camera 5.1 |
+| NTCamera | video_info | 录像成片时上报参数 | dual_save_mode | 前后双录保存方式 | merged / separate | 合并保存 / 分开保存 | merged | 2026-09-15 Camera 5.1（26111）埋点 Review；双录成功生成视频时记录保存方式 | 待开发 | Camera 5.1 |
+| NTCamera | photo_info | 拍照成片时上报参数 | high_res_spec | 高像素模式的像素档位 | 50MP / 200MP / 200MP Ultra | 26111 支持三档，默认 200MP Ultra；26121 仅 50MP | 200MP Ultra（26111）/ 50MP（26121） | 2026-09-15 Camera 5.1（26111）埋点 Review；photo_info.image_quality 为 Camera 2.5 的 0/1 flag（0=12MP，1=高像素），保持原语义不变，高像素规格另立本字段。25MP 属独立需求（25MP 超清模式），不在本条范围。 | 待开发 | Camera 5.1 |
+| NTCamera | photo_info | 拍照成片时上报参数 | photoMode | 拍摄模式 | high_res | 高像素独立模式 / High-res | 无 | 2026-09-15 Camera 5.1（26111）埋点 Review；高像素从拍照子功能独立为模式，沿用 photoMode 枚举新增 high_res，与 PRD 词条 High-res 一致；26111 与 26121 均适用 | 待开发 | Camera 5.1 |
+| NTCamera | high_res_guide | 高像素模式首次引导——关键行为 | action | 用户行为 | show / try_now | 引导展示 / 点击立即体验 | 无 | 2026-09-15 Camera 5.1（26111）埋点 Review；高像素独立模式首次进入弹出的 onboarding，仅记录展示与点击立即体验 | 待开发 | Camera 5.1 |
+| NTCamera | image_tone_guide | Image Tone 首次引导——关键行为 | action | 用户行为 | show / ok | 引导展示 / 点击 OK 保存 | 无 | 2026-09-15 Camera 5.1（26111）埋点 Review；仅记录引导展示与点击 OK，保持默认 Standard 直接点 OK 的用户也能被统计；26111 与 26121 均适用 | 待开发 | Camera 5.1 |
+| NTCamera | pro_mode_interval_result | 照片专业模式——间隔拍摄结果 |  |  | completed / interrupted | 按设定张数拍完 / 用户中途停止 | 无 | 2026-09-15 Camera 5.1（26111）埋点 Review；间隔拍摄结束时上报一次，用于算完成率与中断率。PRD 5.4 明确「可随时中断拍摄」，中断属设计内行为，仅记开始会看不到结果。所有机型适配，首发 26111 / 26121，后续升级支持。 | 待开发 | Camera 5.1 |

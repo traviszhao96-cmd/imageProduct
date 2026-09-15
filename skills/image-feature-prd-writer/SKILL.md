@@ -73,6 +73,7 @@ Before drafting, check domain-specific requirements:
 ### Shared Critical Dependencies — Do Not Invent
 
 - **产品背景**: product line, target market, release window, project stage
+- **机型适配与升级支持**: 首发机型（项目代号 + 市场名）、机型之间的能力差异、后续机型继承规则、不适用机型及原因、老项目回落计划、Android 升级项目（如 17C）是否纳入。**PRD 必须有独立小节承载（Camera 模板 §3「机型适配与升级支持」/ Gallery 模板 §3.3），不允许只写「机型/项目代号：[TBD]」这一行。**
 - **交互位置**: 从 `knowledge/feature-tree.md` 确定功能挂载在哪个交互区（必填）。如 `预览框 | 场景检测`、`Mode Switch | 视频 | 防抖`。PRD 范围节必须写明。
 - **用户价值**: target users, scenario, pain point, expected improvement
 - **功能范围**: feature boundaries, supported capabilities, entry path；默认不创建 `Out of Scope / 本期不包含` 章节，尚未确定或容易误读的边界放入“待确认问题”
@@ -85,7 +86,11 @@ Before drafting, check domain-specific requirements:
 以下信息缺失，当前无法可靠定稿，请先补充：
 
 1. 产品与版本
-- 机型/项目代号：[TBD]
+- 首发机型 / 项目代号（含市场名）：[TBD]
+- 各机型能力差异（如某机型无对应 sensor，仅支持部分档位）：[TBD]
+- 不适用机型及原因（依赖 X → 缺 Y → 无法支持 Z）：[TBD]
+- 后续机型继承规则：[TBD]
+- 老项目回落 / 升级项目（如 17C）是否纳入：[TBD]
 - 上市时间或版本窗口：[TBD]
 
 2. 功能边界
@@ -208,10 +213,10 @@ Camera 用单一 `NTCamera`，Gallery 用多个 `event_name`（`gallery_view`、
 所有评审子章节统一加 `agent` 前缀，表明为 AI 辅助评审，非人工评审结论。
 
 ### agent Development Review
-Check: 方案可行性、scope 边界、依赖就绪度、接口影响、进度风险、回退策略。
+Check: 方案可行性、scope 边界、**机型适配与升级支持（首发/受限/不支持机型、继承规则、回落与升级项目）**、依赖就绪度、接口影响、进度风险、回退策略。
 
 ### agent Test Review
-Check: 验收可测试性、场景/设备覆盖、兼容性矩阵、异常路径、回归范围、客观 pass/fail 信号。
+Check: 验收可测试性、场景/设备覆盖（含受限机型与升级项目）、兼容性矩阵、异常路径、回归范围、客观 pass/fail 信号。
 
 额外检查：标题和功能范围中的每个核心能力是否都有独立交互说明与验收条件；中文正文是否依赖大量英文组件名才能理解；是否存在可合并的重复段落。
 
@@ -333,6 +338,8 @@ PRD 撰写完成后创建 Jira Story 关联父 Epic：
 | 10 | 埋点设计过于复杂 | 参数过多/事件过多 | 精简为一个事件，参数自解释 |
 | 11 | 护栏指标放在 PRD | 手机厂商无意义 | 出厂质量门控不放 PRD 指标 |
 | 12 | 代码块降低可读性 | 需求难以扫读 | 叙事格式，正常/边界用自然语言 |
+| 13 | 机型范围只写一个项目代号 | 机型差异、继承规则、回落/升级支持全部缺失；开发按单一机型实现，测试无适配边界 | 用「机型适配与升级支持」表写清首发 / 受限 / 不支持三类机型，不适用机型给因果链 |
+| 14 | 机型范围散落在兼容性或范围节 | 两处口径不一致，后续更新漏改 | 机型统一放 §3「机型适配与升级支持」，其他章节只引用 |
 
 ## Reference Files
 

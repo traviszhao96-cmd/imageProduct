@@ -11,6 +11,19 @@ Use this checklist before drafting a Gallery software feature document.
 - Applicable module
   Examples: edit page, photo viewer, album detail page
 
+## 1.1 Device Applicability and Release Version（适用机型与发布版本）
+
+必填。**不允许只给一个机型名**。
+
+- 首发机型：项目代号 + 市场名
+- 受限机型与具体差异：支持但不完整，缺的是什么能力
+- 不适用机型及原因：给因果链「依赖 X → 该机型缺 Y → 因此不支持 Z」，不写「不在支持范围」
+- 发布版本：如 Gallery v3.2
+- 后续机型继承规则
+- 老项目回落 / 升级项目（如 17C）是否纳入
+
+落点：Gallery 模板 §3.3「适用机型与发布版本」。
+
 ## 2. User Value
 
 - What user problem does it solve

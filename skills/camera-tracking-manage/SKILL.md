@@ -72,6 +72,25 @@ Bitable → PRD 映射：`event_name` → `event_name`，`label` → `key`，`La
 - **优先** — 提供可复制粘贴的 9 列表格给用户，让用户手动粘贴到 PRD 对应位置
 - **API 写入** — 仅当用户明确要求时尝试；先用 `insert_text_md` 写标题和描述文字，再用 `create_table` + 逐 cell 填充
 
+### 给已存在的 PRD 表格加行（2026-09-15 验证）
+
+以下两条路**都走不通**，不要浪费轮次：
+
+| 做法 | 结果 |
+|------|------|
+| `POST /blocks/{table_id}/children` 或 `/descendant` 传 `table_cell` | `1770028 block not support create children` —— 表格块创建后不接受新子块 |
+| `PATCH /blocks/{table_id}` 带 `update_table_property.row_size` | 返回 `code=0 success`，但 row_size **不变**，属静默无效 |
+
+可行做法是**整表重建**：
+
+1. `GET /documents/{doc}/blocks/{doc}` 取根块 `children`，记下旧表的 `index`；
+2. `POST /documents/{doc}/blocks/{doc}/descendant`，`children_id=["tbl"]`，在旧表 index 位置创建新表格块 —— **所有 `table_cell` 必须在同一次请求里随表格一起创建**，每个 cell 至少含一个空 Text 块。响应里 `block_id_relations[0]` 不一定返回表格本身，新建后的表格 ID 要从根块 children 里按 index 取；
+3. 回读新表内容确认无误；
+4. `DELETE /documents/{doc}/blocks/{doc}/children/batch_delete`，`{start_index: i+1, end_index: i+2}` 删掉旧表（新表插在前面，旧表后移一位）。
+
+先插新表、验证、再删旧表，避免中途失败丢内容。可在一次性测试文档上先跑一遍再动真实 PRD。
+
+
 ## 新参数命名原则
 
 **优先使用可读字符串，不用数字编码。**
@@ -106,7 +125,7 @@ Bitable → PRD 映射：`event_name` → `event_name`，`label` → `key`，`La
 
 | 表 | ID | 说明 |
 | --- | --- | --- |
-| 埋点数据 | `tblh05JLoheZIXfr` | Camera 埋点 v5.0(含备注)，219 条记录 |
+| 埋点数据 | `tblh05JLoheZIXfr` | Camera 埋点 v5.0(含备注)，273 条记录 |
 | 埋点修改记录 | `tblgkCxH1lGuxP0r` | 每次改动记录（日期/类型/变更项/前后/范围） |
 
 Base token: `N2azb9muvaqqmwsIB7IlPmFGgpg`
@@ -116,22 +135,25 @@ Wiki: `https://nothing-tech.sg.larksuite.com/wiki/NMt0wr2Q2iTWevkSc0hlFcBAgJg`
 
 | 状态 | 数量 |
 |------|------|
-| 已上线 | 196 |
-| 待开发 | 15 |
+| 待开发 | 64（含 Camera 5.1 的 42 条） |
+| 已上线 | 4 |
 | 已废弃 | 8 (mode_ps/bokeh_ps/filter_ps/50mp_ps) |
+| 未标注 | 197（Camera 5.1 之前的历史记录，多已完成上线，原表未回填状态） |
+
+版本分布：Camera 2.5 = 122，3.0 = 12，3.5 = 15，4.0 = 60，4.1 = 6，5.1 = 42，未标注 = 16。
 
 ### Key 分布
 
 | key | 数量 |
 |-----|------|
-| photo_info | 93 |
-| video_info | 48 |
+| photo_info | 100 |
+| video_info | 59 |
 | enter_method | 10 |
-| pef_info | 10 |
+| pef_info | 9 |
 | brightness_adjust | 4 |
-| preset_* / auto_fps / activate_type 等 | 54 |
+| preset_* / auto_fps / tuning_* 等 | 91 |
 
-最新本地快照: `references/camera-event-tracking-bitable-v6.json`
+最新本地快照: `references/camera-event-tracking-bitable-v5.json`（273 条，2026-09-15）
 
 ### 视图配置
 
@@ -198,8 +220,9 @@ headers = {'Authorization': f'Bearer {token}', 'Content-Type': 'application/json
 
 ## Reference Files
 
-- `camera-event-tracking-bitable-v6.json` — 完整 217 条埋点记录 + 统计（2026-06-15）
-- `camera-event-tracking-bitable-v5.md` — 完整埋点参考表格（含备注列）
+- `camera-event-tracking-bitable-v5.json` — 完整埋点记录快照（270 条，2026-09-15）
+- `camera-event-tracking-bitable-v5.md` — 完整埋点参考表格（含备注列，同上快照）
+- `camera-event-tracking-bitable-v6.json` — 仅字段定义 + 统计摘要（222 条，2026-06-25），不含逐条记录
 - `lark-docs/` — 已保存的飞书文档本地副本
 
 ## Quick Lookup
