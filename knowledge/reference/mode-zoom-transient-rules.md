@@ -102,6 +102,8 @@ Action mode is photo-class for navigation and capture semantics, but its capture
 
 For 26111 Rear Action, the confirmed Preset restoration list is `15mm / 24mm / 48mm / 96mm`. These correspond to its four confirmed UI points. The `28mm / 36mm` Quick Zoom points remain available for live framing but are not Action Preset restoration values. Do not add them to the Preset list merely because they are present on the Zoom dial.
 
+For 26121 Rear Action, the confirmed Preset restoration list is `15mm / 24mm / 80mm / 160mm`, again matching its four confirmed UI points. The mode exposes no `2x` point and no Quick Zoom point, so `28mm / 36mm / 48mm / 100mm` are not Action Preset values.
+
 Rear Night follows Rear Photo for each project. UI zoom points, Quick Zoom points, continuous zoom range, and Preset focal-length candidates must stay aligned between the two rows; do not maintain an independent reduced Night zoom range. Front Night follows the project Front definition: Front 1x only, with no 0.8x entry or orientation-based switching.
 
 UI Spec focal-length labels are product display contracts, not calculated hardware fields. Keep the physical/equivalent focal length in Hardware Config and cite it in `判断依据`, but use a confirmed product/UI label in `UI 变焦点` and `Preset 支持焦段`. Never mechanically round a hardware equivalent focal length to manufacture a UI label.
@@ -149,7 +151,9 @@ Current 26121 product conclusions used by the UI Spec:
 - Rear Photo-class Quick Zoom points: `28mm / 36mm`, using the calibrated Main-camera ratio mapping from the Zoom-dial baseline rather than reverse-calculation from the rounded `24mm` label.
 - `100mm` is a project-approved Preset extension point where the mode's range and pipeline allow it.
 - Rear Photo, Night, and Expert therefore use the ordered candidate list `15 / 24 / 28 / 36 / 48 / 80 / 100 / 160mm` when their mode pipeline exposes the same UI and Quick points. Action must not reuse this list because its capture input and Zoom-point set are independently defined.
-- Rear Video and Timelapse do not expose Quick Zoom points. Their confirmed Preset list is `15 / 24 / 36 / 48 / 80 / 100 / 160mm`; `36mm` and `100mm` are extensions rather than Quick Zoom points in those modes.
+- Rear Video and Timelapse do not expose Quick Zoom points. 26111 keeps `15 / 24 / 48mm` for both modes. 26121 Rear Video is split by output specification and follows the implementation: `15 / 24 / 80mm` at 1080P30 (the only spec that exposes the UW point) and `24 / 80mm` at 1080P60 and 4K. `36mm / 100mm` are not video Preset values. 26121 Timelapse (1080P) keeps `15 / 24 / 36 / 48 / 80 / 100 / 160mm`, where `36mm` and `100mm` are extensions rather than Quick Zoom points; its 4K path is `24 / 80mm`.
+- Rear Action Preset is fixed to that project's four confirmed UI points: `15 / 24 / 48 / 96mm` on 26111 and `15 / 24 / 80 / 160mm` on 26121. Do not expand an Action Preset list with Photo Quick Zoom points or extension points, and do not add a point merely because it exists on another project's dial.
+- A `Preset 支持焦段` cell may contain only labels that the project's own hardware and calibration actually produce. Never inherit a product-wide legacy list. 26111 has no Tele camera, so `80mm / 100mm / 160mm` must not appear in any 26111 row. Neither project may inherit the legacy default lists `24 / 70mm` (Action) or `24 / 36 / 50 / 70 / 100 / 140mm` (Video with Action switch or HDR).
 - Portrait, Slow Motion, Panorama, High Resolution, Front, and other restricted rows keep only their independently confirmed subset; they must not inherit the full Rear Photo list.
 
 ## Transient Switches
