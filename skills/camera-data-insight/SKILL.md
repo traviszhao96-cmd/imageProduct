@@ -205,18 +205,21 @@ filter vs preset 是两个不同概念。查滤镜用 `filter` 字段，不要�
 
 以下是在实际查询 25111base 人像模式多条件组合时发现的坑，**写 SQL 前务必回顾**。
 
-### 1. 表没有 `dt` 列
+### 1. 表没有 `dt` 列；优先用 `event_date` 下推
 
-`data_mobile_behavior` **没有** `dt` 分区列。日期过滤用 `event_timestamp`（bigint, epoch 毫秒）：
+`data_mobile_behavior` **没有** `dt` 分区列。当前原始表已有字符串列 `event_date`。它不是 Glue 分区列，但对 Parquet 文件能产生明显的谓词下推效果；大区查询应先用 `event_date` 限定扫描范围，再用 `event_timestamp`（bigint, epoch 毫秒）精确限定时间：
 
 ```sql
--- ❌ 错
+-- ❌ 错：不存在 dt
 dt >= '2026-06-19'
 
--- ✅ 对
+-- ✅ 对：日期下推 + 精确时间范围
+AND event_date BETWEEN '2026-06-19' AND '2026-06-26'
 AND from_unixtime(event_timestamp / 1000) >= TIMESTAMP '2026-06-19 00:00:00'
 AND from_unixtime(event_timestamp / 1000) < TIMESTAMP '2026-06-26 00:00:00'
 ```
+
+只按 `event_timestamp` 过滤在印度区等大表可能超过工作组扫描上限。
 
 ### 2. photo_info 打包字符串的分隔符是 `;`（分号），不是 `,`（逗号）
 

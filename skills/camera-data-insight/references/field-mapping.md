@@ -175,3 +175,34 @@ When a user asks for one of the mapped feature points:
 - Use `/push/nps/survey/lookup` (after its real database lookup is implemented) for `refid → NPS device_id`, then use that value directly as Athena `items.aid`.
 - India builds (for example build suffix `IND`) must be queried in Athena region `ap-south-1`; global excluding India uses `eu-north-1`.
 - Observed field normalization for the NPS SuperContra sample: NPS model `SuperContra` → Athena `project_name='SuperContra'` / `device.model_name='A009P'`; NPS language `en-GB` → Athena `device.language='en'`; NPS RAM/storage `8`/`128` → Athena `8GB`/`128GB`; NPS build `SuperContra-B4.1-260811-1606-IND` → Athena `B4.1-260811-1606`; NPS OS version `4.1` → Athena `device.operating_system_version='4.1'`.
+
+## 7. Flicker output and motion level
+
+Product request:
+
+- Flicker output / 防闪烁算法输出
+- Motion level / 运动等级
+
+Raw location and keys:
+
+- Both values are packed in `event_params[key='photo_info'].string_value`.
+- Flicker key: `flicker_sensor_output`
+- Motion key: `motion_level`
+- Extract by name with the `;` delimiter; field order is not stable.
+
+```sql
+TRY_CAST(REGEXP_EXTRACT(photo_info, '(?i)(?:^|;)flicker_sensor_output:([^;]+)', 1) AS DOUBLE)
+TRY_CAST(REGEXP_EXTRACT(photo_info, '(?i)(?:^|;)motion_level:([^;]+)', 1) AS DOUBLE)
+```
+
+Observed values:
+
+- `motion_level` is observed as integer-like levels `0`–`4`.
+- `flicker_sensor_output` is numeric; common values include `0`, `60`, `100`, and `120`, with a long tail of other numeric outputs.
+- Treat both as raw algorithm outputs. Do not assign additional product semantics without an algorithm-side definition.
+
+Phone (4b) mapping:
+
+- `project_name = 'SuperContra'`
+- `device.model_name = 'A009P'`
+- Query both `eu-north-1` (global) and `ap-south-1` (India).

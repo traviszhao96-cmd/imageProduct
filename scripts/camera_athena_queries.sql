@@ -272,6 +272,53 @@ GROUP BY 1,2,3,4,5
 ORDER BY event_date, events DESC
 
 
+-- ── 13. Phone (4b): Flicker output + Motion level ─────────────────────
+
+-- Phone (4b): SuperContra / A009P。全球区和印度区需要分别执行。
+-- 两个字段均打包在 photo_info 字符串中，不是独立 label。
+-- event_date 用于缩小扫描，event_timestamp 用于精确限定滚动 72 小时。
+WITH raw AS (
+  SELECT
+    date(from_unixtime(event_timestamp / 1000)) AS event_day,
+    user_pseudo_id,
+    TRY_CAST(
+      REGEXP_EXTRACT(param.string_value, '(?i)(?:^|;)flicker_sensor_output:([^;]+)', 1)
+      AS DOUBLE
+    ) AS flicker_output,
+    TRY_CAST(
+      REGEXP_EXTRACT(param.string_value, '(?i)(?:^|;)motion_level:([^;]+)', 1)
+      AS DOUBLE
+    ) AS motion_level
+  FROM dc_database.data_mobile_behavior
+  CROSS JOIN UNNEST(event_params) AS t(param)
+  WHERE event_name = 'NTCamera'
+    AND project_name = 'SuperContra'
+    AND device.model_name = 'A009P'
+    AND event_date BETWEEN date_format(current_date - INTERVAL '3' DAY, '%Y-%m-%d')
+                       AND date_format(current_date, '%Y-%m-%d')
+    AND param.key = 'photo_info'
+    AND param.string_value IS NOT NULL
+    AND event_timestamp >= CAST(to_unixtime(current_timestamp - INTERVAL '3' DAY) * 1000 AS BIGINT)
+)
+SELECT
+  event_day,
+  count(*) AS photo_events,
+  approx_distinct(user_pseudo_id) AS devices,
+  count(flicker_output) AS flicker_present,
+  count_if(flicker_output > 0) AS flicker_nonzero,
+  avg(flicker_output) AS flicker_avg,
+  approx_percentile(flicker_output, 0.5) AS flicker_p50,
+  approx_percentile(flicker_output, 0.9) AS flicker_p90,
+  count(motion_level) AS motion_present,
+  count_if(motion_level > 0) AS motion_nonzero,
+  avg(motion_level) AS motion_avg,
+  approx_percentile(motion_level, 0.5) AS motion_p50,
+  approx_percentile(motion_level, 0.9) AS motion_p90
+FROM raw
+GROUP BY event_day
+ORDER BY event_day
+
+
 -- ── 附录 A: Athena 语法要点 ────────────────────────────────────────────
 --
 -- ✅ 正确: element_at(filter(...), 1) 缺参数返回 NULL
