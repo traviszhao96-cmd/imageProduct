@@ -19,7 +19,7 @@ Match the response to how much context the user provides:
 
 | 输入状态 | 策略 |
 |---------|------|
-| 需求清晰 | 直接出活，标注假设 |
+| 需求清晰 | 直接出活，正文仅保留确认内容 |
 | 部分上下文 | 先出骨架草稿，再定向追问缺失项 |
 | 探索性/模糊 | 引导模式，一次一个问题，逐步收窄 |
 
@@ -29,16 +29,16 @@ Match the response to how much context the user provides:
 2. **Locate in feature tree** — 读 `knowledge/feature-tree.md`，确定功能属于哪个交互区（预览框 / AE/AF Box / Zoom / Toolbar / Mode Switch / Preset / Settings 等）。功能范围说明中以 `交互位置：xxx` 标注。
 3. **Braindump first** — 不让用户对空白模板。先问："关于这个功能，你目前想到的、确定的、不确定的、纠结的，全部倒出来。" 混乱的原始想法先被外化，再结构化。
 4. **Check completeness** — 对照对应领域的 critical dependencies 检查
-5. **Draft** — 用对应领域模板，所有未确认值就地写 `[TBD — 需XXX确认]`
-6. **Review** — agent 开发 + agent 测试 + agent solution smuggling 检查 + agent 全文打分
+5. **Draft** — 用对应领域模板，正文只写已确认内容；疑问、缺失项和建议参数集中放文档底部“待确认/待补充”
+6. **Review** — 核对事实、重复和验收可测试性；用户要求正式评审时再展开 agent 开发、测试及评分，不默认把评审过程堆入正文
 7. **Publish** — 如果要求
 
 ## Anti-Hallucination: [TBD] Rule
 
-**绝对不编造。** 任何用户没说清楚的值，就地标记 `[TBD]`，不写看起来合理的假数字。
+**绝对不编造。** 正文只呈现有来源、已确认的规则。用户未确认的值、疑问、假设及调试建议不铺在功能正文中，集中备注在文档底部“待确认/待补充”；可在该处用 `[TBD — 需XXX确认]` 标记。不要用空表、占位章节或假数字补齐模板。
 
 ```
-# 正确
+# 正确：放在文档底部待确认表
 性能目标：[TBD — 需算法侧给出预览延迟基线]
 上市时间：[TBD — 需产品经理确认版本窗口]
 
@@ -51,7 +51,7 @@ Match the response to how much context the user provides:
 - `[TBD — 待数据验证]` — 需要埋点/实验数据
 - `[TBD — 待法务确认]` — 合规相关
 
-全文中所有 [TBD] 汇总到"待确认/待补充"章节。
+待确认内容只维护一处，并注明对应功能点，避免正文与底部重复。信息缺失且妨碍当前任务正确执行时才向用户追问；不影响已确认部分撰写时继续整理，不能宣称缺口已解决。
 
 ## Request Modes
 
@@ -73,7 +73,7 @@ Before drafting, check domain-specific requirements:
 ### Shared Critical Dependencies — Do Not Invent
 
 - **产品背景**: product line, target market, release window, project stage
-- **机型适配与升级支持**: 首发机型（项目代号 + 市场名）、机型之间的能力差异、后续机型继承规则、不适用机型及原因、老项目回落计划、Android 升级项目（如 17C）是否纳入。**PRD 必须有独立小节承载（Camera 模板 §3「机型适配与升级支持」/ Gallery 模板 §3.3），不允许只写「机型/项目代号：[TBD]」这一行。**
+- **机型适配与升级支持**: 核查首发机型、能力差异、继承、不适用原因、回落及升级范围。已确认的结论集中写入机型适配小节；未确认项放底部，不生成充满 TBD 的机型表，也不据此猜测支持。
 - **交互位置**: 从 `knowledge/feature-tree.md` 确定功能挂载在哪个交互区（必填）。如 `预览框 | 场景检测`、`Mode Switch | 视频 | 防抖`。PRD 范围节必须写明。
 - **用户价值**: target users, scenario, pain point, expected improvement
 - **功能范围**: feature boundaries, supported capabilities, entry path；默认不创建 `Out of Scope / 本期不包含` 章节，尚未确定或容易误读的边界放入“待确认问题”
@@ -127,14 +127,16 @@ For Gallery PRDs, always follow the current Gallery template. Historical referen
 ### PRD Writing Standards
 
 - 用简洁中文，少用填充词
+- **背景从简**：默认一个短段落，用 2–3 句话说明场景、痛点和目标。用户未要求时，不拆“证据与数据/目标用户/预期收益”子章节；没有确定的数据、收益或假设不要写，放底部备注。
+- **模板不是填空任务**：保留实际有内容的章节并连续编号；没有确定内容时省略可选章节，不写空指标、空依赖表、假设置信度或待确认协议示例。
 - **中文优先**：面向跨职能团队阅读时，组件、模式和交互名称以中文为主；英文只在首次出现时放在括号中，或集中保留在术语表、代码字段和埋点字段中。不要在连续正文中反复堆叠英文组件名。
 - 声明式语句，不用营销语言
 - 术语全文档一致
-- 已确认 vs 待确认明确区分
+- 已确认写正文，待确认集中于底部；不把原文“建议值”提升为已定需求
 - 存在权衡时直接陈述
 - **删除重复**：同一产品定义、规则或结论只在最合适的章节完整说明一次；其他章节只引用，不换一种说法重复。更新摘要只保留真实变化，不能复述正文。
 - **不使用 Out of Scope**：默认不创建 `Out of Scope`、`本期不包含` 或“明确不做”章节，避免把尚未确认的范围误读为项目结论。确有争议的内容写入“待确认问题”，确有正式决策的内容写入变更记录或决策说明。
-- **核心能力必须展开**：文档标题、功能名称或范围中出现的每个核心能力，都必须有独立说明，至少覆盖入口、界面变化、用户操作、状态反馈、边界/待确认项和可测试的验收条件。审查时禁止出现“标题写了 A+B，但正文只详细说明 B”的情况。
+- **核心能力必须展开**：每个确认的核心功能点需写清入口、操作、反馈、已确认边界及可测试验收；未确认边界放底部并标明所关联的功能点。
 - PRD 只呈现最终产品需求状态，不写互相叠加的 addendum、中间决策表或页面清单
 - 不生成独立的中间规则章节或页面/状态清单；设计稿和页面状态写入对应功能点
 - 词条与埋点保持独立章节；功能词条只收录真实 UI 文案、label、icon/tooltip/accessibility 名称，不收录 API 名称或内部技术术语
@@ -160,7 +162,7 @@ Gallery PRD 默认使用精简结构：
 2. 待 Google Review 项（仅外部 review 需要时）
 3. 内部待确认项（仅产品/设计/研发仍未定时）
 
-### §4 需求章节写作规范
+### 需求章节写作规范
 
 需求描述用 **叙事格式**，不用代码块和僵硬的属性表。每条需求包含功能名、一句话定义、优先级、行为描述、正常路径和边界情况。若是 Gallery API / Google 协作类 PRD，优先使用「Nothing 方案 / 待 Google Review 项 / 内部待确认项」结构。
 
@@ -181,7 +183,7 @@ Gallery PRD 默认使用精简结构：
 - **只报最终状态，不报中间过程** — 不上报拖拽中间态、取消等
 - **隐私保护** — Gallery: 系统相册报名，用户相册报数不报名
 - **精简** — 能用一个事件说清的不用两个，参数从值对即可推断方向的不额外加 direction 参数
-- **必须附 JSON 代码块示例** — 方便开发直接参考上报格式
+- **协议已确认时附 JSON 示例**；未确认 key/枚举不在正文写占位表或伪协议，将核对任务备注在底部
 
 #### 埋点表格格式（Camera & Gallery 统一）
 
@@ -319,8 +321,8 @@ PRD 撰写完成后创建 Jira Story 关联父 Epic：
 1. Preserve confirmed facts
 2. Normalize structure to template
 3. Mark contradictions with `待确认`
-4. Add [TBD] for missing values
-5. Append review without rewriting confirmed facts
+4. Move missing values and questions to the bottom pending section
+5. Keep review concise and separate; do not rewrite confirmed facts or add scores unless requested
 
 ## 已知陷阱速查
 
@@ -343,7 +345,7 @@ PRD 撰写完成后创建 Jira Story 关联父 Epic：
 
 ## Reference Files
 
-- [assets/camera-prd-template.md](assets/camera-prd-template.md) — Camera PRD template (11 sections)
+- [assets/camera-prd-template.md](assets/camera-prd-template.md) — Camera PRD 精简模板；只保留有确认内容的章节
 - [assets/gallery-feature-template.md](assets/gallery-feature-template.md) — Gallery PRD template (10 sections)
 - [references/camera-required-info-checklist.md](references/camera-required-info-checklist.md) — Camera completeness checklist
 - [references/gallery-required-info-checklist.md](references/gallery-required-info-checklist.md) — Gallery completeness checklist

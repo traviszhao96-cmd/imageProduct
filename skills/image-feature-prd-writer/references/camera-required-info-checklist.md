@@ -2,6 +2,8 @@
 
 Use this checklist before drafting a mobile imaging planning document.
 
+本清单用于内部核查，不要求把每项都展开进正文。已确认内容写入对应功能点；疑问、建议值或缺失项只在文档底部备注，不生成空章节或充满 TBD 的表格。
+
 ## Product Context
 
 - Product name or project code
@@ -21,7 +23,7 @@ Use this checklist before drafting a mobile imaging planning document.
 - 老项目回落计划：是否回落到已发布项目、回落排期
 - 升级项目是否纳入：Android 大版本升级项目（如 17C：23112 / 23111 / 23113 / 24111 / 24121）纳入与否及原因
 
-落点：Camera 模板 §3「机型适配与升级支持」。其他章节只引用，不重复维护。
+落点：功能定义中的「机型适配与升级支持」。仅写已确认结论，未确认范围放文档底部；其他章节不重复维护。
 
 ## User and Scenario
 
